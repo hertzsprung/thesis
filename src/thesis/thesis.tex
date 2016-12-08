@@ -1,0 +1,73 @@
+\documentclass[a4paper,oneside]{memoir}
+\usepackage{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{csquotes}
+\usepackage[T1]{fontenc}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[final,babel]{microtype}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\PassOptionsToPackage{final}{graphicx}
+\usepackage{tikz}
+\usepackage{blindtext}
+\usepackage{xpatch}
+\usepackage{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
+\usepackage{pifont}
+
+% http://tex.stackexchange.com/q/135352/23339
+\makeatletter
+\def\hrulefill{\leavevmode\leaders \hrule height \rulethickness \hfill\kern\z@}
+\makeatletter
+
+\setlrmarginsandblock{\spinemargin}{1in}{*}
+\setmarginnotes{0in}{0in}{0in}
+\checkandfixthelayout
+
+\title{Numerical Representation of Mountains in Atmospheric Models}
+\author{James Shaw}
+\date{TODO}
+
+\makeatletter
+\AtBeginDocument{
+  \hypersetup{
+    pdftitle = {\@title},
+    pdfauthor = {\@author}
+  }
+}
+\makeatother
+
+\OnehalfSpacing
+\input{mysouthall}
+\chapterstyle{mysouthall}
+
+\begin{document}
+\newcommand{\TODO}[1]{\textcolor{purple}{TODO: \emph{#1}}}
+\include{title}
+
+\frontmatter
+\thispagestyle{plain}
+\null\vfil
+\begin{abstract}
+\blindtext
+\end{abstract}
+\vfil
+
+\cleardoublepage
+\tableofcontents*
+
+\mainmatter
+
+\backmatter
+\bibliographystyle{ametsoc2014}
+\bibliography{references}
+
+\end{document}

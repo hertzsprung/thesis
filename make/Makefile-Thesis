@@ -1,0 +1,6 @@
+$(eval $(call LaTeXWithBibTeX,src/thesis,build,thesis))
+
+build/thesis/thesis.pdf: \
+  src/thesis/mysouthall.tex \
+  src/thesis/ametsoc2014.bst \
+  src/thesis/references.bib

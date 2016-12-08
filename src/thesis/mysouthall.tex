@@ -1,0 +1,23 @@
+\makechapterstyle{mysouthall}{%
+\setlength{\afterchapskip}{5\baselineskip}
+\setlength{\beforechapskip}{36pt}
+\setlength{\midchapskip}{\textwidth}
+\addtolength{\midchapskip}{-\beforechapskip}
+\renewcommand*{\chapterheadstart}{\vspace*{2\baselineskip}}
+\renewcommand*{\chaptitlefont}{\huge\rmfamily\raggedright}
+\renewcommand*{\chapnumfont}{\chaptitlefont}
+\renewcommand*{\printchaptername}{}
+\renewcommand*{\chapternamenum}{}
+\renewcommand*{\afterchapternum}{}
+\renewcommand*{\printchapternum}{%
+\begin{minipage}[b]{\beforechapskip}
+{\vspace{0pt}\chapnumfont%%%\figureversion{lining}
+\thechapter}
+\end{minipage}}
+\renewcommand*{\printchaptertitle}[1]{%
+\hfill\begin{minipage}[b]{\midchapskip}
+{\vspace{0pt}\chaptitlefont ##1\par}\end{minipage}}
+\renewcommand*{\afterchaptertitle}{%
+\par\vspace{\baselineskip}%
+\hrulefill \par\nobreak\noindent \vskip\afterchapskip}}
+\chapterstyle{mysouthall}
