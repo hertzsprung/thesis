@@ -1,0 +1,41 @@
+\section{Spherical corrections}
+The Cartesian position vector $\bm{x} = (x,y,z)$ is related to the spherical coordinates $(\lon, \lat)$ by
+\begin{align}
+	(x,y,z) = (\Rearth \cos \lat \cos \lon, \Rearth \cos \lat \sin \lon, \Rearth \sin \lat) \label{eqn:spherical:cartesian}
+\end{align}
+
+\subsection{Velocity field specification}
+The divergent velocity field in section~\ref{sec:deformationSphere:divergent} is specified as
+\begin{align}
+	\bm{u}(\lon, \lat, \Rearth) = \left[ 
+	u(\lon, \lat, \Rearth),
+	v(\lon, \lat, \Rearth),
+	w(\lon, \lat, \Rearth)
+	\right]^\transpose
+\end{align}
+given in local Cartesian coordinates on a plane tangent to the sphere at position $\bm{p} = \left[ \lon, \lat, \Rearth \right]^\transpose$.  Position $\bm{p}$ can be expressed in global Cartesian coordinates using equation~\eqref{eqn:spherical:cartesian}.
+The velocity vector can be expressed in global Cartesian coordinates using the unit vectors of the tangent plane,
+\begin{align}
+	\unitlon = \left[ \hat{\lon}_x, \hat{\lon}_y, \hat{\lon}_z \right]^\transpose \\
+	\unitlat = \left[ \hat{\lat}_x, \hat{\lat}_y, \hat{\lat}_z \right]^\transpose \\
+	\unitradius = \left[ \hat{r}_x, \hat{r}_y, \hat{r}_z \right]^\transpose
+\end{align}
+which are themselves expressed in global Cartesian coordinates.
+The radial unit vector $\unitradius$ is calculated first and is simply $\unitradius = \bm{p} / \Mag{\bm{p}}$.
+The latitudinal unit vector $\unitlat$ is calculated next.  If $\unitradius$ points towards one of the Earth's poles then $\Mag{\unitk \times \unitradius} = 0$ where $\unitk = \left[0, 0, 1\right]^\transpose$ is the unit vector pointing to the North pole.
+In this case, $\bm{\hat{\lat}} = \sign(\unitk \cdot \unitradius) \left[1, 0, 0\right]^\transpose$.  Otherwise, when $\unitradius$ does not point to a pole then
+\begin{align}
+	\bm{\hat{\lat}} = \frac{\unitradius \times \left( \unitk \times \unitradius \right)}{\Mag{\unitradius \times \left( \unitk \times \unitradius \right)}}
+\end{align}
+The longitudinal unit vector $\unitlon = \unitlat \times \unitradius$.
+Finally, the velocity vector expressed in global Cartesian coordinates is
+\begin{align}
+	\bm{u}(x, y, z) = 
+	\begin{bmatrix}
+		\unitlon &
+		\unitlat &
+		\unitradius
+	\end{bmatrix}^{-1}
+	\bm{u}(\lon, \lat, \Rearth)
+\end{align}
+

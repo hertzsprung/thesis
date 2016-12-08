@@ -17,9 +17,9 @@
 \PassOptionsToPackage{final}{graphicx}
 \usepackage{tikz}
 \usepackage{blindtext}
-\usepackage{xpatch}
 \usepackage{natbib}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{doi}
 \usepackage{bookmark}
 \usepackage{pifont}
 
@@ -51,6 +51,7 @@
 
 \begin{document}
 \newcommand{\TODO}[1]{\textcolor{purple}{TODO: \emph{#1}}}
+\input{mathmacros}
 \include{title}
 
 \frontmatter
@@ -65,6 +66,8 @@
 \tableofcontents*
 
 \mainmatter
+\input{deformationSphere}
+\input{spherical}
 
 \backmatter
 \bibliographystyle{ametsoc2014}
