@@ -1,11 +1,11 @@
-$(eval $(call LaTeXWithBibTeX,src/thesis,build,thesis))
+$(eval $(call LaTeXWithBibTeX,src/thesis,$(BUILD_DIR),thesis))
 
-build/thesis/thesis.pdf: \
+$(BUILD_DIR)/thesis/thesis.pdf: \
   src/thesis/mysouthall.tex \
   src/thesis/mathmacros.tex \
   src/thesis/ametsoc2014.bst \
   src/thesis/references.bib
 
-build/thesis/thesis.pdf: \
+$(BUILD_DIR)/thesis/thesis.pdf: \
   src/thesis/deformationSphere.tex \
   src/thesis/spherical.tex

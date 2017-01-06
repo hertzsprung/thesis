@@ -4,12 +4,14 @@ MAKEFLAGS += --no-builtin-rules
 .SUFFIXES:
 .PHONY: all dist clean clean-dist
 
+BUILD_DIR := build
+
 all::
 
 dist:: all
 
 clean:: clean-dist
-	rm -rf build
+	rm -rf $(BUILD_DIR)
 
 clean-dist::
 
