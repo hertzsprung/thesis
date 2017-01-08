@@ -26,4 +26,4 @@ RUN git clone --branch master https://github.com/hertzsprung/make-common.git /ho
     && git clone --branch master https://github.com/hertzsprung/thesis.git /home/phd/src/thesis
 
 WORKDIR /home/phd/src/thesis
-CMD ["make", "BUILD_DIR=/home/phd/build", "/home/phd/build/thesis/thesis.pdf"]
+CMD ["make", "BUILD_DIR=/home/phd/build/thesis", "/home/phd/build/thesis/thesis/thesis.pdf"]
