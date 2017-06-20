@@ -13,4 +13,4 @@ build $builddir/thesis/thesis.pdf: pdflatex src/thesis/thesis.tex
 
 build thesis.pdf: cp $builddir/thesis/thesis.pdf
 
-build clean: rm $builddir
+#build clean: rm $builddir
