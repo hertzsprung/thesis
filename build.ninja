@@ -1,0 +1,16 @@
+builddir = build
+
+rule cp
+  command = cp $in $out
+
+rule rm
+  command = rm -rf $in
+
+rule pdflatex
+  command = pdflatex -interaction=nonstopmode -halt-on-error -output-directory=$builddir/thesis $in
+
+build $builddir/thesis/thesis.pdf: pdflatex src/thesis/thesis.tex
+
+build thesis.pdf: cp $builddir/thesis/thesis.pdf
+
+build clean: rm $builddir
