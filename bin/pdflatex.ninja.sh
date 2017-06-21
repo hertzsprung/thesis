@@ -14,7 +14,7 @@ fi
 srcdir=$(dirname $1)
 builddir=$(dirname $2)
 document=$(basename $1 .tex)
-pdflatex="pdflatex -interaction=batchmode -halt-on-error -output-directory=$builddir"
+pdflatex="pdflatex -interaction=nonstopmode -halt-on-error -output-directory=$builddir"
 
 $pdflatex -draft $1
 bibtex $builddir/$document
