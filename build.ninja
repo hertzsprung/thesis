@@ -7,9 +7,13 @@ rule rm
   command = rm -rf $in
 
 rule pdflatex
-  command = pdflatex -interaction=nonstopmode -halt-on-error -output-directory=$builddir/thesis $in
+  command = bin/pdflatex.ninja.sh $in $out
 
-build $builddir/thesis/thesis.pdf: pdflatex src/thesis/thesis.tex
+build $builddir/thesis/thesis.pdf: $
+  pdflatex src/thesis/thesis.tex $
+| src/thesis/title.tex $
+  src/thesis/mysouthall.tex $
+  src/thesis/thesis.bib
 
 build thesis.pdf: cp $builddir/thesis/thesis.pdf
 

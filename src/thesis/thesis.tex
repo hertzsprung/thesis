@@ -23,18 +23,28 @@
 \usepackage{bookmark}
 \usepackage{pifont}
 
+% https://tex.stackexchange.com/q/139401/23339
+\graphicspath{{src/thesis/img/}}
+
+% https://tex.stackexchange.com/a/79060/23339
+\makeatletter
+\def\input@path{{src/thesis/}}
+\makeatother
+
 % http://tex.stackexchange.com/q/135352/23339
 \makeatletter
 \def\hrulefill{\leavevmode\leaders \hrule height \rulethickness \hfill\kern\z@}
 \makeatletter
 
+\newcommand{\TODO}[1]{\textcolor{purple}{TODO: \emph{#1}}}
+
 \setlrmarginsandblock{\spinemargin}{1in}{*}
 \setmarginnotes{0in}{0in}{0in}
 \checkandfixthelayout
 
-\title{Numerical Representation of Mountains in Atmospheric Models}
+\title{Numerical representation of mountains in atmospheric models}
 \author{James Shaw}
-\date{TODO}
+\date{\TODO{date}}
 
 \makeatletter
 \AtBeginDocument{
@@ -46,13 +56,12 @@
 \makeatother
 
 \OnehalfSpacing
-%\input{mysouthall}
-%\chapterstyle{mysouthall}
+\input{mysouthall}
+\chapterstyle{mysouthall}
 
 \begin{document}
-\newcommand{\TODO}[1]{\textcolor{purple}{TODO: \emph{#1}}}
 %\input{mathmacros}
-\include{title}
+\input{title}
 
 \frontmatter
 \thispagestyle{plain}
@@ -66,11 +75,12 @@
 \tableofcontents*
 
 \mainmatter
+\citep{schaer2002}
 %\input{deformationSphere}
 %\input{spherical}
 
 \backmatter
-%\bibliographystyle{ametsoc2014}
-%\bibliography{references}
+\bibliographystyle{ametsoc2014}
+\bibliography{src/thesis/thesis}
 
 \end{document}
