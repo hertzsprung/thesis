@@ -9,6 +9,7 @@ From:ubuntu:17.04
 	export DEBIAN_FRONTEND
 
 %post
+	sudo dpkg-reconfigure locales
 	apt-get update
 	apt-get install -y --no-install-recommends \
 		git \
@@ -23,5 +24,5 @@ From:ubuntu:17.04
 	rm -rf /var/lib/apt/lists/*
 	git clone --branch master https://github.com/hertzsprung/thesis.git /opt/thesis
 
-%test
-	/bin/true
+%runscript
+	cd /opt/thesis && build.ninja.sh $HOME/thesis/build
