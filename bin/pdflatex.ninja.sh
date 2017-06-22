@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-set -x
 
 display_usage() {
 	echo -e "Usage: pdflatex.ninja.sh <in> <out>\n"

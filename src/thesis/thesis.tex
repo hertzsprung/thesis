@@ -28,7 +28,7 @@
 
 % https://tex.stackexchange.com/a/79060/23339
 \makeatletter
-\def\input@path{{src/thesis/}}
+\def\input@path{{src/thesis/}{build/thesis/}}
 \makeatother
 
 % http://tex.stackexchange.com/q/135352/23339
@@ -76,6 +76,20 @@
 \mainmatter
 \chapter{Introduction}
 \citep{schaer2002}
+
+\begin{figure}
+\centering
+\input{tikz-figure}
+\caption{\TODO{caption}}
+\end{figure}
+
+\begin{figure}
+\centering
+\input{gnuplot-figure}
+\caption{\TODO{caption}}
+\end{figure}
+
+
 \chapter{Existing methodologies}
 \chapter{A new mesh for representing the atmosphere above terrain}
 \chapter{A stable transport scheme for atmospheric flows over steep slopes}

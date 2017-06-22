@@ -11,6 +11,9 @@ From:ubuntu:17.04
 		texlive-latex-extra \
 		texlive-fonts-recommended \
 		texlive-fonts-extra \
+		texlive-font-utils \
 		texlive-science \
-		texlive-publishers
+		texlive-publishers \
+		ghostscript \
+		gnuplot
 	rm -rf /var/lib/apt/lists/*

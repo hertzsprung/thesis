@@ -9,11 +9,20 @@ rule rm
 rule pdflatex
   command = bin/pdflatex.ninja.sh $in $out
 
+rule gnuplot
+  command = bin/gnuplot.ninja.sh $in $out
+
 build $builddir/thesis/thesis.pdf: $
   pdflatex src/thesis/thesis.tex $
 | src/thesis/title.tex $
   src/thesis/mysouthall.tex $
-  src/thesis/thesis.bib
+  src/thesis/thesis.bib $
+  src/thesis/tikz-figure.tex $
+  $builddir/thesis/gnuplot-figure.tex $builddir/thesis/gnuplot-figure.eps
+
+build $builddir/thesis/gnuplot-figure.tex $
+| $builddir/thesis/gnuplot-figure.eps: $
+  gnuplot src/thesis/gnuplot-figure.plt
 
 build thesis.pdf: cp $builddir/thesis/thesis.pdf
 
