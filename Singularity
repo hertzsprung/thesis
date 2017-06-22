@@ -1,17 +1,9 @@
 Bootstrap:docker
 From:ubuntu:17.04
 
-%environment
-	DEBIAN_FRONTEND=noninteractive
-	LANG=en_GB.UTF-8
-	LANGUAGE=en_GB:en
-	LC_ALL=en_GB.UTF-8
-	export DEBIAN_FRONTEND
-
 %post
 	apt-get update
-	apt-get install -y --no-install-recommends locales
-	dpkg-reconfigure locales
+	DEBIAN_FRONTEND=noninteractive \
 	apt-get install -y --no-install-recommends \
 		ninja-build \
 		texlive-latex-base \
