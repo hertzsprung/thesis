@@ -9,20 +9,16 @@ From:ubuntu:17.04
 	export DEBIAN_FRONTEND
 
 %post
-	sudo dpkg-reconfigure locales
 	apt-get update
+	apt-get install -y --no-install-recommends locales
+	dpkg-reconfigure locales
 	apt-get install -y --no-install-recommends \
-		git \
-		ca-certificates \
 		ninja-build \
 		texlive-latex-base \
 		texlive-latex-recommended \
 		texlive-latex-extra \
 		texlive-fonts-recommended \
 		texlive-fonts-extra \
-		texlive-science
+		texlive-science \
+		texlive-publishers
 	rm -rf /var/lib/apt/lists/*
-	git clone --branch master https://github.com/hertzsprung/thesis.git /opt/thesis
-
-%runscript
-	cd /opt/thesis && build.ninja.sh $HOME/thesis/build
