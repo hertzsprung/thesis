@@ -24,7 +24,7 @@
 \usepackage{pifont}
 
 % https://tex.stackexchange.com/q/139401/23339
-\graphicspath{{src/thesis/img/}}
+\graphicspath{{src/thesis/}{build/}}
 
 % https://tex.stackexchange.com/a/79060/23339
 \makeatletter
@@ -86,6 +86,12 @@
 \begin{figure}
 \centering
 \input{gnuplot-figure}
+\caption{\TODO{caption}}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{gmtFoam-figure/constant/mesh.pdf}
 \caption{\TODO{caption}}
 \end{figure}
 
