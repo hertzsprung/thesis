@@ -5,7 +5,7 @@ display_usage() {
 	echo -e "Usage: gnuplot.ninja.sh <in> <out>\n"
 }
 
-if [  $# -le 1 ]
+if [ $# -le 1 ]
 then
 	display_usage
 	exit 1
