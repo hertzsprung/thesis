@@ -1,10 +1,9 @@
 builddir = build
 
+include env.properties
+
 rule cp
     command = cp $in $out
-
-rule rm
-    command = rm -rf $in
 
 rule pdflatex
     command = bin/pdflatex.ninja.sh $in $out
@@ -30,8 +29,6 @@ build $builddir/thesis/gnuplot-figure.tex $
 
 build thesis.pdf: cp $builddir/thesis/thesis.pdf
 
-####
-
 build $builddir/gmtFoam-figure/constant/mesh.pdf: $
   gmtFoam $builddir/gmtFoam-figure/constant/gmtDicts/mesh | $
   $builddir/gmtFoam-figure/constant/polyMesh/points $
@@ -46,13 +43,12 @@ build $builddir/gmtFoam-figure/constant/mesh.pdf: $
     case = $builddir/gmtFoam-figure
 
 build $builddir/gmtFoam-figure/constant/gmtDicts/mesh: cp src/thesis/mesh.gmtdict
-build $builddir/gmtFoam-figure/constant/polyMesh/points: cp src/thesis/gmtFoam-figure/constant/polyMesh/points
-build $builddir/gmtFoam-figure/constant/polyMesh/faces: cp src/thesis/gmtFoam-figure/constant/polyMesh/faces
-build $builddir/gmtFoam-figure/constant/polyMesh/owner: cp src/thesis/gmtFoam-figure/constant/polyMesh/owner
-build $builddir/gmtFoam-figure/constant/polyMesh/neighbour: cp src/thesis/gmtFoam-figure/constant/polyMesh/neighbour
-build $builddir/gmtFoam-figure/constant/polyMesh/boundary: cp src/thesis/gmtFoam-figure/constant/polyMesh/boundary
-build $builddir/gmtFoam-figure/system/controlDict: cp src/thesis/gmtFoam-figure/system/controlDict
-build $builddir/gmtFoam-figure/system/fvSchemes: cp src/thesis/gmtFoam-figure/system/fvSchemes
-build $builddir/gmtFoam-figure/system/fvSolution: cp src/thesis/gmtFoam-figure/system/fvSolution
+build $builddir/gmtFoam-figure/constant/polyMesh/points: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/points
+build $builddir/gmtFoam-figure/constant/polyMesh/faces: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/faces
+build $builddir/gmtFoam-figure/constant/polyMesh/owner: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/owner
+build $builddir/gmtFoam-figure/constant/polyMesh/neighbour: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/neighbour
+build $builddir/gmtFoam-figure/constant/polyMesh/boundary: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/boundary
+build $builddir/gmtFoam-figure/system/controlDict: cp $atmostests_builddir/mesh-blockMesh/system/controlDict
+build $builddir/gmtFoam-figure/system/fvSchemes: cp src/thesis/fvSchemes.plotMesh
+build $builddir/gmtFoam-figure/system/fvSolution: cp src/thesis/fvSolution.plotMesh
 
-#build clean: rm $builddir
