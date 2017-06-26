@@ -21,6 +21,7 @@ build $builddir/thesis/thesis.pdf: $
   src/thesis/math.tex $
   src/thesis/thesis.bib $
   src/thesis/cubicFit.tex $
+  src/thesis/cubicFit/deformationSphere.tex $
   src/thesis/cubicFit/interior-stencils.tex $
   src/thesis/cubicFit/double-upwind-stencil.tex $
   src/thesis/cubicFit/boundary-stencils.tex $
