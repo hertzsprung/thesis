@@ -23,6 +23,9 @@
 \usepackage{bookmark}
 \usepackage{pifont}
 
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{patterns}
+
 % https://tex.stackexchange.com/q/139401/23339
 \graphicspath{{src/thesis/}{build/}}
 
@@ -77,23 +80,14 @@
 
 \mainmatter
 \chapter{Introduction}
-
-\begin{figure}
-\centering
-\input{gnuplot-figure}
-\caption{\TODO{caption}}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{gmtFoam-figure/constant/mesh.pdf}
-\caption{\TODO{caption}}
-\end{figure}
-
-
+%\begin{figure}
+%\centering
+%\includegraphics{gmtFoam-figure/constant/mesh.pdf}
+%\caption{\TODO{caption}}
+%\end{figure}
 \chapter{Existing methodologies}
 \chapter{A new mesh for representing the atmosphere above terrain}
-\input{cubicFit}
+\input{cubicFit.tex}
 \chapter{Generalising the Charney–Phillips staggering for arbitrary meshes}
 %\input{deformationSphere}
 %\input{spherical}

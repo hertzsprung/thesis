@@ -22,12 +22,17 @@ build $builddir/thesis/thesis.pdf: $
   src/thesis/thesis.bib $
   src/thesis/cubicFit.tex $
   src/thesis/cubicFit/interior-stencils.tex $
-  $builddir/thesis/gnuplot-figure.tex $builddir/thesis/gnuplot-figure.eps $
+  src/thesis/cubicFit/double-upwind-stencil.tex $
+  src/thesis/cubicFit/boundary-stencils.tex $
+  $builddir/thesis/cubicFit/stabilisation.tex $
+  $builddir/thesis/cubicFit/stabilisation.eps $
   $builddir/gmtFoam-figure/constant/mesh.pdf
 
-build $builddir/thesis/gnuplot-figure.tex $
-| $builddir/thesis/gnuplot-figure.eps: $
-  gnuplot src/thesis/gnuplot-figure.plt
+build $builddir/thesis/cubicFit/stabilisation.tex $
+| $builddir/thesis/cubicFit/stabilisation.eps: $
+  gnuplot src/thesis/cubicFit/stabilisation.plt $
+| src/thesis/cubicFit/centralQuad.dat $
+  src/thesis/cubicFit/cubic.dat
 
 build thesis.pdf: cp $builddir/thesis/thesis.pdf
 

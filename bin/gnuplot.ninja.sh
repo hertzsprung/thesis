@@ -16,4 +16,4 @@ builddir=$(dirname $2)
 document=$(basename $1 .tex)
 gnuplot="gnuplot --persist"
 
-$gnuplot -e "set output '$2'; load '$1'"
+$gnuplot -e "set output '$2'; set loadpath '$srcdir'; load '$1'"
