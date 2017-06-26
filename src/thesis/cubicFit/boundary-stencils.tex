@@ -1,0 +1,59 @@
+\documentclass[tikz]{standalone}
+\input{math}
+\usetikzlibrary{patterns}
+\begin{document}
+\begin{tikzpicture}[
+  scale=0.56,
+  cpnt/.style={fill=gray},
+]
+
+\node [above] at (0,6) {(a)};
+\fill [pattern=north east lines,pattern color=gray] (0,-1) rectangle (9,0);
+\node at (4.5,-1.5) {Lower boundary};
+\draw (0,0) rectangle (9,4);
+\draw (3,0) -- (3,4);
+\draw (6,0) -- (6,4);
+\draw (0,2) -- (9,2);
+
+\draw [ultra thick] (3,2) -- (6,2);
+\draw [thick] (4.5,2) circle [radius=0.2];
+
+\path [cpnt] (1.5,1) circle [radius=0.1];
+\path [cpnt] (4.5,1) circle [radius=0.1] node [right] {$\phi_u$};
+\path [cpnt] (7.5,1) circle [radius=0.1];
+\path [cpnt] (1.5,3) circle [radius=0.1];
+\path [cpnt] (4.5,3) circle [radius=0.1] node [right] {$\phi_d$};
+\path [cpnt] (7.5,3) circle [radius=0.1];
+\draw [thick, ->] (4.5,2) -- (5,2.4) node [anchor=west] {$\uf$};
+
+\draw [<->] (6,5) node [left] {$y$} -- (7,5) -- (7,6) node [above] {$x$};
+
+\begin{scope}[shift={(10,0)}]
+\node [above] at (0,6) {(b)};
+\fill [pattern=north east lines,pattern color=gray] (0,-1) rectangle (9,0);
+\node at (4.5,-1.5) {Lower boundary};
+\draw (0,0) rectangle (9,6);
+\draw (3,0) -- (3,6);
+\draw (6,0) -- (6,6);
+\draw (0,2) -- (9,2);
+\draw (0,4) -- (9,4);
+
+\draw [ultra thick] (3,4) -- (6,4);
+\draw [thick] (4.5,4) circle [radius=0.2];
+
+\path [cpnt] (1.5,1) circle [radius=0.1];
+\path [cpnt] (4.5,1) circle [radius=0.1];
+\path [cpnt] (7.5,1) circle [radius=0.1];
+\path [cpnt] (1.5,3) circle [radius=0.1];
+\path [cpnt] (4.5,3) circle [radius=0.1] node [right] {$\phi_u$};
+\path [cpnt] (7.5,3) circle [radius=0.1];
+\path [cpnt] (1.5,5) circle [radius=0.1];
+\path [cpnt] (4.5,5) circle [radius=0.1] node [right] {$\phi_d$};
+\path [cpnt] (7.5,5) circle [radius=0.1];
+\draw [thick, ->] (4.5,4) -- (5,4.4) node [anchor=west] {$\uf$};
+
+\draw [<->] (10,5) node [left] {$y$} -- (11,5) -- (11,6) node [above] {$x$};
+\end{scope}
+
+\end{tikzpicture}
+\end{document}
