@@ -2,3 +2,4 @@ build
 gmt.history
 thesis.pdf
 *.img
+env.properties

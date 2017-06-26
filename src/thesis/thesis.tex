@@ -11,7 +11,7 @@
 \usepackage{amsmath}
 \usepackage{bm}
 \usepackage{mathtools}
-\usepackage{subcaption}
+%\usepackage{subcaption}
 \usepackage{booktabs}
 \usepackage{xcolor}
 \PassOptionsToPackage{final}{graphicx}
@@ -37,6 +37,7 @@
 \makeatletter
 
 \newcommand{\TODO}[1]{\textcolor{purple}{TODO: \emph{#1}}}
+\input{math}
 
 \setlrmarginsandblock{\spinemargin}{1in}{*}
 \setmarginnotes{0in}{0in}{0in}
@@ -57,9 +58,10 @@
 
 \OnehalfSpacing
 \input{mysouthall}
+\captionnamefont{\small}
+\captiontitlefont{\small}
 
 \begin{document}
-%\input{mathmacros}
 \input{title}
 
 \frontmatter
@@ -75,13 +77,6 @@
 
 \mainmatter
 \chapter{Introduction}
-\citep{schaer2002}
-
-\begin{figure}
-\centering
-\input{tikz-figure}
-\caption{\TODO{caption}}
-\end{figure}
 
 \begin{figure}
 \centering
@@ -98,7 +93,7 @@
 
 \chapter{Existing methodologies}
 \chapter{A new mesh for representing the atmosphere above terrain}
-\chapter{A stable transport scheme for atmospheric flows over steep slopes}
+\input{cubicFit}
 \chapter{Generalising the Charney–Phillips staggering for arbitrary meshes}
 %\input{deformationSphere}
 %\input{spherical}

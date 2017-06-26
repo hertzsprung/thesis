@@ -18,8 +18,10 @@ build $builddir/thesis/thesis.pdf: $
   pdflatex src/thesis/thesis.tex $
 | src/thesis/title.tex $
   src/thesis/mysouthall.tex $
+  src/thesis/math.tex $
   src/thesis/thesis.bib $
-  src/thesis/tikz-figure.tex $
+  src/thesis/cubicFit.tex $
+  src/thesis/cubicFit/interior-stencils.tex $
   $builddir/thesis/gnuplot-figure.tex $builddir/thesis/gnuplot-figure.eps $
   $builddir/gmtFoam-figure/constant/mesh.pdf
 
