@@ -57,12 +57,12 @@ build $builddir/gmtFoam-figure/constant/mesh.pdf: $
     case = $builddir/gmtFoam-figure
 
 build $builddir/gmtFoam-figure/constant/gmtDicts/mesh: cp src/thesis/mesh.gmtdict
-build $builddir/gmtFoam-figure/constant/polyMesh/points: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/points
-build $builddir/gmtFoam-figure/constant/polyMesh/faces: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/faces
-build $builddir/gmtFoam-figure/constant/polyMesh/owner: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/owner
-build $builddir/gmtFoam-figure/constant/polyMesh/neighbour: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/neighbour
-build $builddir/gmtFoam-figure/constant/polyMesh/boundary: cp $atmostests_builddir/mesh-blockMesh/constant/polyMesh/boundary
-build $builddir/gmtFoam-figure/system/controlDict: cp $atmostests_builddir/mesh-blockMesh/system/controlDict
+build $builddir/gmtFoam-figure/constant/polyMesh/points: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/points
+build $builddir/gmtFoam-figure/constant/polyMesh/faces: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/faces
+build $builddir/gmtFoam-figure/constant/polyMesh/owner: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/owner
+build $builddir/gmtFoam-figure/constant/polyMesh/neighbour: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/neighbour
+build $builddir/gmtFoam-figure/constant/polyMesh/boundary: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/boundary
+build $builddir/gmtFoam-figure/system/controlDict: cp $atmostests_builddir/schaerAdvect-mesh-btf/system/controlDict
 build $builddir/gmtFoam-figure/system/fvSchemes: cp src/thesis/fvSchemes.plotMesh
 build $builddir/gmtFoam-figure/system/fvSolution: cp src/thesis/fvSolution.plotMesh
 

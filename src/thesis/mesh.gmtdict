@@ -20,5 +20,5 @@ FieldsToPlot (
         [none mesh "gray"]
 );
 
-region "-15/0/0/10";
-boundaryMarks "5/2WSen";
+region "-150.5e3/150.5e3/0/25e3";
+boundaryMarks "50e3/10e3WSen";
