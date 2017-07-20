@@ -18,7 +18,7 @@ if [ $3 = "constant" ]
 then
 	ofTime=-constant
 else
-	ofTime=-time $3
+	ofTime="-time $3"
 fi
 
 gmtFoam -case $ofCase $ofTime $gmtDict

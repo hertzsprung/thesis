@@ -2,6 +2,7 @@ Bootstrap:docker
 From:ubuntu:17.04
 
 %environment
+	export GMTU=/usr/share/gmtFoam
 	export FOAM_TUTORIALS=/opt/openfoam-dev/tutorials
 	export PATH=/opt/openfoam-dev/platforms/linux64GccDPInt32Opt/bin:/opt/openfoam-dev/bin:/opt/openfoam-dev/wmake:$PATH
 	export LD_LIBRARY_PATH=/opt/openfoam-dev/platforms/linux64GccDPInt32Opt/lib/openmpi-system:/usr/lib/x86_64-linux-gnu/openmpi/lib:/opt/openfoam-dev/platforms/linux64GccDPInt32Opt/lib:/opt/openfoam-dev/platforms/linux64GccDPInt32Opt/lib/dummy
@@ -62,7 +63,7 @@ From:ubuntu:17.04
                texlive-font-utils \
                texlive-science \
                texlive-publishers \
-               ghostscript \
+	       ps2eps \
 	       gnuplot-nox \
                gnuplot
 

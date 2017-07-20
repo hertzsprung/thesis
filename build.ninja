@@ -29,7 +29,7 @@ build $builddir/thesis/thesis.pdf: $
   $builddir/thesis/cubicFit/stabilisation.eps $
   $builddir/thesis/cubicFit/deformationSphere-gaussiansConvergence.tex $
   $builddir/thesis/cubicFit/deformationSphere-gaussiansConvergence.eps $
-  $builddir/gmtFoam-figure/constant/mesh.pdf
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/0/tracer.pdf
 
 build $builddir/thesis/cubicFit/stabilisation.tex $
 | $builddir/thesis/cubicFit/stabilisation.eps: $
@@ -43,26 +43,29 @@ build $builddir/thesis/cubicFit/deformationSphere-gaussiansConvergence.tex $
 
 build thesis.pdf: cp $builddir/thesis/thesis.pdf
 
-build $builddir/gmtFoam-figure/constant/mesh.pdf: $
-  gmtFoam $builddir/gmtFoam-figure/constant/gmtDicts/mesh | $
-  $builddir/gmtFoam-figure/constant/polyMesh/points $
-  $builddir/gmtFoam-figure/constant/polyMesh/faces $
-  $builddir/gmtFoam-figure/constant/polyMesh/owner $
-  $builddir/gmtFoam-figure/constant/polyMesh/neighbour $
-  $builddir/gmtFoam-figure/constant/polyMesh/boundary $
-  $builddir/gmtFoam-figure/system/controlDict $
-  $builddir/gmtFoam-figure/system/fvSchemes $
-  $builddir/gmtFoam-figure/system/fvSolution
-    time = constant
-    case = $builddir/gmtFoam-figure
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/0/tracer.pdf: $
+  gmtFoam $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/gmtDicts/tracer | $
+  gmt.conf $
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/0/T $
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/points $
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/faces $
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/owner $
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/neighbour $
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/boundary $
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/system/controlDict $
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/system/fvSchemes $
+  $builddir/deformationSphere-gaussians-hex-8-cubicFit/system/fvSolution
+    time = 0
+    case = $builddir/deformationSphere-gaussians-hex-8-cubicFit
 
-build $builddir/gmtFoam-figure/constant/gmtDicts/mesh: cp src/thesis/mesh.gmtdict
-build $builddir/gmtFoam-figure/constant/polyMesh/points: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/points
-build $builddir/gmtFoam-figure/constant/polyMesh/faces: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/faces
-build $builddir/gmtFoam-figure/constant/polyMesh/owner: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/owner
-build $builddir/gmtFoam-figure/constant/polyMesh/neighbour: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/neighbour
-build $builddir/gmtFoam-figure/constant/polyMesh/boundary: cp $atmostests_builddir/schaerAdvect-mesh-btf/constant/polyMesh/boundary
-build $builddir/gmtFoam-figure/system/controlDict: cp $atmostests_builddir/schaerAdvect-mesh-btf/system/controlDict
-build $builddir/gmtFoam-figure/system/fvSchemes: cp src/thesis/fvSchemes.plotMesh
-build $builddir/gmtFoam-figure/system/fvSolution: cp src/thesis/fvSolution.plotMesh
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/gmtDicts/tracer: cp src/thesis/cubicFit/deformationSphere/tracer.gmtdict
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/0/T: cp $atmostests_builddir/deformationSphere-gaussians-hex-8-cubicFit/0/T
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/points: cp $atmostests_builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/points
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/faces: cp $atmostests_builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/faces
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/owner: cp $atmostests_builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/owner
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/neighbour: cp $atmostests_builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/neighbour
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/boundary: cp $atmostests_builddir/deformationSphere-gaussians-hex-8-cubicFit/constant/polyMesh/boundary
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/system/controlDict: cp $atmostests_builddir/deformationSphere-gaussians-hex-8-cubicFit/system/controlDict
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/system/fvSchemes: cp src/thesis/fvSchemes.plotMesh
+build $builddir/deformationSphere-gaussians-hex-8-cubicFit/system/fvSolution: cp src/thesis/fvSolution.plotMesh
 
