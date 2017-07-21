@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from ninjaopenfoam import Build, Case, Gnuplot, GmtPlot, PDFLaTeX, Shortcuts
+from ninjaopenfoam import Build, Case, Gnuplot, GmtPlot, GmtPlotCopyCase, PDFLaTeX, Shortcuts
 import os
 
 class DeformationSphere:
@@ -10,24 +10,40 @@ class DeformationSphere:
                 output=os.path.join('thesis/cubicFit/deformationSphere-gaussiansConvergence'),
                 plot=os.path.join('src/thesis/cubicFit/deformationSphere-gaussiansConvergence.plt'))
 
+        self.gaussiansHex8cubicFit = GmtPlotCopyCase(
+                'deformationSphere-gaussians-hex-8-cubicFit',
+                source='$atmostests_builddir',
+                target='$builddir',
+                plots=[
+                    'src/thesis/cubicFit/deformationSphere/tracer.gmtdict',
+                    'src/thesis/cubicFit/deformationSphere/tracerW.gmtdict',
+                ],
+                files=[
+                    '0/T',
+                    '518400/T',
+                    '1036800/T'
+                ])
+
+        gaussiansHex8cubicFitCase = Case('deformationSphere-gaussians-hex-8-cubicFit')
+
         self.gaussiansInitialTracer = GmtPlot(
             'deformationSphere-gaussiansInitialTracer',
-            plot=os.path.join('src/thesis/cubicFit/deformationSphere/tracer.gmtdict'),
-            case=Case('deformationSphere-gaussians-hex-8-cubicFit', prefix='$atmostests_builddir'),
+            plot='tracer',
+            case=gaussiansHex8cubicFitCase,
             time=0,
             data=['0/T'])
 
         self.gaussiansMidTracer = GmtPlot(
             'deformationSphere-gaussiansMidTracer',
-            plot=os.path.join('src/thesis/cubicFit/deformationSphere/tracerW.gmtdict'),
-            case=Case('deformationSphere-gaussians-hex-8-cubicFit', prefix='$atmostests_builddir'),
+            plot='tracerW',
+            case=gaussiansHex8cubicFitCase,
             time=518400,
             data=['518400/T'])
 
         self.gaussiansFinalTracer = GmtPlot(
             'deformationSphere-gaussiansFinalTracer',
-            plot=os.path.join('src/thesis/cubicFit/deformationSphere/tracerW.gmtdict'),
-            case=Case('deformationSphere-gaussians-hex-8-cubicFit', prefix='$atmostests_builddir'),
+            plot='tracerW',
+            case=gaussiansHex8cubicFitCase,
             time=1036800,
             data=['1036800/T'])
 
@@ -72,6 +88,7 @@ class Thesis:
         shortcut = Shortcuts([thesis.output])
 
         build.add(stabilisation)
+        build.add(deformationSphere.gaussiansHex8cubicFit)
         build.add(deformationSphere.gaussiansConvergence)
         build.add(deformationSphere.gaussiansInitialTracer)
         build.add(deformationSphere.gaussiansMidTracer)
