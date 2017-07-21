@@ -53,9 +53,28 @@ The centre of hill $i$ is positioned at $\vect{x}_i$.  In spherical coordinates,
 
 \begin{figure}
 	\centering
-	\includegraphics{deformationSphere-gaussians-hex-8-cubicFit/0/tracer.pdf}
-%	\includegraphics{../fig-deformationSphere-initialTracer/fig-deformationSphere-initialTracer.pdf}
-	\caption{Tracer fields for the deformational flow test using initial Gaussian hills.  The tracer is deformed by the velocity field before the rotation reverses to return the tracer to its original distribution: (a) the initial tracer distribution at $t = \SI{0}{\second}$; (b) by $t=T/2$ the Gaussian hills are stretched into a thin S-shaped filament; (c) at $t=T$ the tracer resembles the initial Gaussian hills except for some distortion and diffusion due to numerical errors.  Results were obtained with the cubicFit scheme on a hexagonal-icosahedral mesh with an average equatorial mesh spacing of $\Delta \lambda = \ang{0.542}$.}
+	\begin{subfigure}{0.35\textwidth}
+		\caption{$t = \SI{0}{\second}$}
+		\label{fig:cubicFit:deformationSphere-evolution:initial}
+		\includegraphics{deformationSphere-gaussians-hex-8-cubicFit/0/tracer.pdf}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\caption{$t = T/2$}
+		\label{fig:cubicFit:deformationSphere-evolution:mid}
+		\includegraphics{deformationSphere-gaussians-hex-8-cubicFit/518400/tracerW.pdf}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\caption{$t = T$}
+		\label{fig:cubicFit:deformationSphere-evolution:final}
+		\includegraphics{deformationSphere-gaussians-hex-8-cubicFit/1036800/tracerW.pdf}
+	\end{subfigure}
+%
+	\TODO{legend}
+%
+	\caption{Tracer fields for the deformational flow test using initial Gaussian hills.  The tracer is deformed by the velocity field before the rotation reverses to return the tracer to its original distribution:
+	(\subcaptionref{fig:cubicFit:deformationSphere-evolution:initial}) the initial tracer distribution at $t = \SI{0}{\second}$;
+	(\subcaptionref{fig:cubicFit:deformationSphere-evolution:mid}) by $t=T/2$ the Gaussian hills are stretched into a thin S-shaped filament;
+	(\subcaptionref{fig:cubicFit:deformationSphere-evolution:final}) at $t=T$ the tracer resembles the initial Gaussian hills except for some distortion and diffusion due to numerical errors.  Results were obtained with the cubicFit scheme on a hexagonal-icosahedral mesh with an average equatorial mesh spacing of $\Delta \lambda = \ang{0.542}$.}
 	\label{fig:cubicFit:deformationSphere-evolution}
 \end{figure}
 

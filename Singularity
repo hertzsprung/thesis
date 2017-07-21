@@ -65,7 +65,14 @@ From:ubuntu:17.04
                texlive-publishers \
 	       ps2eps \
 	       gnuplot-nox \
-               gnuplot
+               gnuplot \
+	       git \
+	       ca-certificates \
+	       python3-setuptools \
+	       python3-pip
+
+	git clone https://github.com/hertzsprung/ninjaopenfoam.git
+	pip3 install ninjaopenfoam/
 
 	DEBIAN_FRONTEND=noninteractive \
 	apt-get install openfoam-dev -y --no-install-recommends
