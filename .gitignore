@@ -2,5 +2,7 @@ build
 gmt.history
 thesis.pdf
 *.img
-env.properties
+build.ninja
+build.ninja.generated
+build.properties
 *.swp
