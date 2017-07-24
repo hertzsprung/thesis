@@ -8,7 +8,17 @@ class DeformationSphere:
         self.gaussiansConvergence = Gnuplot(
                 'deformationSphere-gaussiansConvergence',
                 output=os.path.join('thesis/cubicFit/deformationSphere-gaussiansConvergence'),
-                plot=os.path.join('src/thesis/cubicFit/deformationSphere-gaussiansConvergence.plt'))
+                plot=os.path.join('src/thesis/cubicFit/deformationSphere-gaussiansConvergence.plt'),
+                data=[
+                    '$atmostests_builddir/deformationSphere-gaussians-hex-linearUpwind-collated/1036800/l2errorT.txt',
+                    '$atmostests_builddir/deformationSphere-gaussians-hex-cubicFit-collated/1036800/l2errorT.txt',
+#                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/l2errorT.txt',
+#                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/l2errorT.txt',
+                    '$atmostests_builddir/deformationSphere-gaussians-hex-linearUpwind-collated/1036800/linferrorT.txt',
+                    '$atmostests_builddir/deformationSphere-gaussians-hex-cubicFit-collated/1036800/linferrorT.txt',
+#                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/linferrorT.txt',
+#                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/linferrorT.txt'
+        ])
 
         self.gaussiansHex8cubicFit = GmtPlotCopyCase(
                 'deformationSphere-gaussians-hex-8-cubicFit',
