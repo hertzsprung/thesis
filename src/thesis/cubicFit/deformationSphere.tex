@@ -107,7 +107,7 @@ The velocity field is the same as before.  This test is used to determine the ``
 \begin{table}
 	\robustify\itshape
 	\centering
-	\begin{tabular}{l l S[detect-weight, detect-shape, detect-mode]}
+	\begin{tabular}{l l S[detect-weight, detect-shape, detect-mode, round-mode=off]}
 \toprule
 	Transport scheme & Mesh type & {Minimal resolution (\si{\degree})} \\
 \midrule
@@ -125,7 +125,7 @@ The velocity field is the same as before.  This test is used to determine the ``
 	\label{tab:deformationSphere:minimal-resolution}
 \end{table}
 
-The minimal resolution for the cubicFit scheme on a hexagonal-icosahedral mesh is about $\Delta \lambda_m = \ang{0.3}$.  Tests were not performed at mesh spacings finer than $\Delta \lambda = \inputval{deformationSphere-mesh-hex-9/averageEquatorialSpacing}$ but approximate minimal resolutions have been extrapolated from the second-order convergence that is found at fine mesh spacings.  These minimal resolutions are presented in table~\ref{tab:deformationSphere:minimal-resolution} along with a selection of transport schemes having similar minimal resolutions from the model intercomparison by \citet{lauritzen2014}.
+The minimal resolution for the cubicFit scheme on a hexagonal-icosahedral mesh is about $\Delta \lambda_m = \ang[round-precision=1]{0.3}$.  Tests were not performed at mesh spacings finer than $\Delta \lambda = \inputval{deformationSphere-mesh-hex-9/averageEquatorialSpacing}$ but approximate minimal resolutions have been extrapolated from the second-order convergence that is found at fine mesh spacings.  These minimal resolutions are presented in table~\ref{tab:deformationSphere:minimal-resolution} along with a selection of transport schemes having similar minimal resolutions from the model intercomparison by \citet{lauritzen2014}.
 
 The series of deformational flow tests presented here demonstrate that the cubicFit scheme is suitable for transport on spherical meshes based on quadrilaterals and hexagons.  The cubicFit scheme is largely insensitive to the mesh type, and results are more accurate compared to the linearUpwind scheme for a given mesh type and mesh spacing.  Neither scheme requires special treatment at the corners of cubed-sphere panels.
 
