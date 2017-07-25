@@ -74,21 +74,21 @@ The centre of hill $i$ is positioned at $\vect{x}_i$.  In spherical coordinates,
 	\caption{Tracer fields for the deformational flow test using initial Gaussian hills.  The tracer is deformed by the velocity field before the rotation reverses to return the tracer to its original distribution:
 	(\subcaptionref{fig:cubicFit:deformationSphere-evolution:initial}) the initial tracer distribution at $t = \SI{0}{\second}$;
 	(\subcaptionref{fig:cubicFit:deformationSphere-evolution:mid}) by $t=T/2$ the Gaussian hills are stretched into a thin S-shaped filament;
-	(\subcaptionref{fig:cubicFit:deformationSphere-evolution:final}) at $t=T$ the tracer resembles the initial Gaussian hills except for some distortion and diffusion due to numerical errors.  Results were obtained with the cubicFit scheme on a hexagonal-icosahedral mesh with an average equatorial mesh spacing of $\Delta \lambda = \ang{0.542}$.}
+	(\subcaptionref{fig:cubicFit:deformationSphere-evolution:final}) at $t=T$ the tracer resembles the initial Gaussian hills except for some distortion and diffusion due to numerical errors.  Results were obtained with the cubicFit scheme on a hexagonal-icosahedral mesh with an average equatorial mesh spacing of $\Delta \lambda = \inputval{deformationSphere-mesh-hex-8/averageEquatorialSpacing}$.}
 	\label{fig:cubicFit:deformationSphere-evolution}
 \end{figure}
 
-The results in figure~\ref{fig:cubicFit:deformationSphere-evolution} are obtained using the cubicFit scheme on a hexagonal-icosahedral mesh with $\Delta \lambda = \ang{0.542}$.
+The results in figure~\ref{fig:cubicFit:deformationSphere-evolution} are obtained using the cubicFit scheme on a hexagonal-icosahedral mesh with $\Delta \lambda = \inputval{deformationSphere-mesh-hex-8/averageEquatorialSpacing}$.
 The initial Gaussian hills are shown in figure~\ref{fig:cubicFit:deformationSphere-evolution}a.  At $t=T/2$ the tracer has been deformed into an S-shaped filament (figure~\ref{fig:cubicFit:deformationSphere-evolution}b).  By $t=T$ the tracer has almost returned to its original distribution except for some slight distortion and diffusion that are the result of numerical errors (figure~\ref{fig:cubicFit:deformationSphere-evolution}c).
 
 \begin{figure}
 	\centering
 	\input{cubicFit/deformationSphere-gaussiansConvergence}
-	\caption{Numerical convergence of the deformational flow test on the sphere using initial Gaussian hills.  $\ell_2$ errors (\TODO{equation~\ref{eqn:l2-error}}) and $\ell_\infty$ errors (\TODO{equation~\ref{eqn:linf-error}}) are marked at mesh spacings between \ang{8.61} and \ang{0.271} using the linearUpwind scheme (dotted lines) and the cubicFit scheme (solid lines) on hexagonal-icosahedral meshes and cubed-sphere meshes.}
+	\caption{Numerical convergence of the deformational flow test on the sphere using initial Gaussian hills.  $\ell_2$ errors (\TODO{equation~\ref{eqn:l2-error}}) and $\ell_\infty$ errors (\TODO{equation~\ref{eqn:linf-error}}) are marked at mesh spacings between \inputval{deformationSphere-mesh-hex-4/averageEquatorialSpacing} and \inputval{deformationSphere-mesh-hex-9/averageEquatorialSpacing} using the linearUpwind scheme (dotted lines) and the cubicFit scheme (solid lines) on hexagonal-icosahedral meshes and cubed-sphere meshes.}
 	\label{fig:cubicFit:deformationSphere-gaussian-convergence}
 \end{figure}
 
-To determine the order of convergence and relative accuracy of the linearUpwind and cubicFit schemes, the same test was performed at a variety of mesh spacings betweeen $\Delta \lambda = \ang{8.61}$ and $\Delta \lambda = \ang{0.271}$ on hexagonal-icosahedral meshes and cubed-sphere meshes.  The results are shown in figure~\ref{fig:cubicFit:deformationSphere-gaussian-convergence}.
+To determine the order of convergence and relative accuracy of the linearUpwind and cubicFit schemes, the same test was performed at a variety of mesh spacings betweeen $\Delta \lambda = \inputval{deformationSphere-mesh-hex-4/averageEquatorialSpacing}$ and $\Delta \lambda = \inputval{deformationSphere-mesh-hex-9/averageEquatorialSpacing}$ on hexagonal-icosahedral meshes and cubed-sphere meshes.  The results are shown in figure~\ref{fig:cubicFit:deformationSphere-gaussian-convergence}.
 The solution is slow to converge at coarse resolutions, and this behaviour agrees with the results from \citet{lauritzen2012}.  Both linearUpwind and cubicFit schemes achieve second-order accuracy at smaller mesh spacings. 
 For any given mesh type and mesh spacing, the cubicFit scheme is more accurate than the linearUpwind scheme.
 Results are more accurate using hexagonal-icosahedral meshes compared to cubed-sphere meshes.  It is not known whether the larger errors on cubed-sphere meshes are due to mesh non-uniformities at panel corners but there is no evidence of grid imprinting in the error fields (not shown).
@@ -125,7 +125,7 @@ The velocity field is the same as before.  This test is used to determine the ``
 	\label{tab:deformationSphere:minimal-resolution}
 \end{table}
 
-The minimal resolution for the cubicFit scheme on a hexagonal-icosahedral mesh is about $\Delta \lambda_m = \ang{0.3}$.  Tests were not performed at mesh spacings finer than $\Delta \lambda = \ang{0.271}$ but approximate minimal resolutions have been extrapolated from the second-order convergence that is found at fine mesh spacings.  These minimal resolutions are presented in table~\ref{tab:deformationSphere:minimal-resolution} along with a selection of transport schemes having similar minimal resolutions from the model intercomparison by \citet{lauritzen2014}.
+The minimal resolution for the cubicFit scheme on a hexagonal-icosahedral mesh is about $\Delta \lambda_m = \ang{0.3}$.  Tests were not performed at mesh spacings finer than $\Delta \lambda = \inputval{deformationSphere-mesh-hex-9/averageEquatorialSpacing}$ but approximate minimal resolutions have been extrapolated from the second-order convergence that is found at fine mesh spacings.  These minimal resolutions are presented in table~\ref{tab:deformationSphere:minimal-resolution} along with a selection of transport schemes having similar minimal resolutions from the model intercomparison by \citet{lauritzen2014}.
 
 The series of deformational flow tests presented here demonstrate that the cubicFit scheme is suitable for transport on spherical meshes based on quadrilaterals and hexagons.  The cubicFit scheme is largely insensitive to the mesh type, and results are more accurate compared to the linearUpwind scheme for a given mesh type and mesh spacing.  Neither scheme requires special treatment at the corners of cubed-sphere panels.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from ninjaopenfoam import Build, Case, Gnuplot, GmtPlot, GmtPlotCopyCase, PDFLaTeX, Shortcuts
+from ninjaopenfoam import Build, Case, Gnuplot, GmtPlot, GmtPlotCopyCase, PDFLaTeX, Shortcuts, siunitx
 import os
 
 class DeformationSphere:
@@ -75,6 +75,18 @@ class Thesis:
                     os.path.join('src/thesis/cubicFit/cubic.dat')
                 ])
 
+        deformationSphereCoarsestSpacing = siunitx.Ang(
+                '$atmostests_builddir/deformationSphere-mesh-hex-4',
+                'averageEquatorialSpacing.txt')
+
+        deformationSphereHex8Spacing = siunitx.Ang(
+                '$atmostests_builddir/deformationSphere-mesh-hex-8',
+                'averageEquatorialSpacing.txt')
+
+        deformationSphereFinestSpacing = siunitx.Ang(
+                '$atmostests_builddir/deformationSphere-mesh-hex-9',
+                'averageEquatorialSpacing.txt')
+
         thesis = PDFLaTeX(
                 'thesis',
                 output=os.path.join('thesis/thesis'),
@@ -93,7 +105,10 @@ class Thesis:
                         + deformationSphere.gaussiansConvergence.outputs()
                         + deformationSphere.gaussiansInitialTracer.outputs()
                         + deformationSphere.gaussiansMidTracer.outputs()
-                        + deformationSphere.gaussiansFinalTracer.outputs())
+                        + deformationSphere.gaussiansFinalTracer.outputs()
+                        + deformationSphereCoarsestSpacing.outputs()
+                        + deformationSphereFinestSpacing.outputs()
+                        + deformationSphereHex8Spacing.outputs())
 
         shortcut = Shortcuts([thesis.output])
 
@@ -103,6 +118,9 @@ class Thesis:
         build.add(deformationSphere.gaussiansInitialTracer)
         build.add(deformationSphere.gaussiansMidTracer)
         build.add(deformationSphere.gaussiansFinalTracer)
+        build.add(deformationSphereCoarsestSpacing)
+        build.add(deformationSphereFinestSpacing)
+        build.add(deformationSphereHex8Spacing)
         build.add(thesis)
         build.add(shortcut)
 
