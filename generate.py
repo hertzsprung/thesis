@@ -41,7 +41,8 @@ class DeformationSphere:
             plot='tracer',
             case=gaussiansHex8cubicFitCase,
             time=0,
-            data=['0/T'])
+            data=['0/T'],
+            colorBar='legends/tracer_T.eps')
 
         self.gaussiansMidTracer = GmtPlot(
             'deformationSphere-gaussiansMidTracer',
