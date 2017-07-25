@@ -12,12 +12,12 @@ class DeformationSphere:
                 data=[
                     '$atmostests_builddir/deformationSphere-gaussians-hex-linearUpwind-collated/1036800/l2errorT.txt',
                     '$atmostests_builddir/deformationSphere-gaussians-hex-cubicFit-collated/1036800/l2errorT.txt',
-#                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/l2errorT.txt',
-#                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/l2errorT.txt',
+                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/l2errorT.txt',
+                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/l2errorT.txt',
                     '$atmostests_builddir/deformationSphere-gaussians-hex-linearUpwind-collated/1036800/linferrorT.txt',
                     '$atmostests_builddir/deformationSphere-gaussians-hex-cubicFit-collated/1036800/linferrorT.txt',
-#                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/linferrorT.txt',
-#                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/linferrorT.txt'
+                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/linferrorT.txt',
+                    '$atmostests_builddir/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/linferrorT.txt'
         ])
 
         self.gaussiansHex8cubicFit = GmtPlotCopyCase(
@@ -98,6 +98,7 @@ class Thesis:
                         'src/thesis/math.tex',
                         'src/thesis/thesis.bib',
                         'src/thesis/cubicFit.tex',
+                        'src/thesis/cubicFit/schaerAdvect.tex',
                         'src/thesis/cubicFit/deformationSphere.tex',
                         'src/thesis/cubicFit/interior-stencils.tex',
                         'src/thesis/cubicFit/double-upwind-stencil.tex',
