@@ -65,13 +65,13 @@ where $A_x = \SI{25}{\kilo\meter}$, $A_z = \SI{3}{\kilo\meter}$ are the horizont
 
 \begin{figure}
 	\centering
-	\TODO{}
+	\input{cubicFit/schaerAdvect-convergence}
 %
 	\caption{Numerical convergence of the two-dimensional horizontal transport test over mountains.  $\ell_2$ errors (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \SI{5000}{\meter} and \SI{250}{\meter} using linearUpwind and cubicFit transport schemes on basic terrain-following meshes.}
 	\label{fig:cubicFit:schaerAdvect:convergence}
 \end{figure}
 
-Tests are integrated for \SI{10000}{\second} using time-steps chosen for each mesh so that the maximum Courant number is about \num{0.4}.  This choice yields a time-step that is well below any stability limit, as recommended by Lauritzen et al. \citep{lauritzen2012}.  By the end of integration the tracer is positioned downwind of the mountain.
+Tests are integrated for \SI{10000}{\second} using time-steps chosen for each mesh so that the maximum Courant number is about \num[round-mode=off]{0.4}.  This choice yields a time-step that is well below any stability limit, as recommended by Lauritzen et al. \citep{lauritzen2012}.  By the end of integration the tracer is positioned downwind of the mountain.
 The analytic solution at $t = \SI{10000}{\second}$ is centred at $(x_0, z_0) = (\SI{50}{\kilo\meter}, \SI{12}{\kilo\meter})$.
 Error norms are calculated by subtracting the analytic solution from the numerical solution,
 \begin{align}

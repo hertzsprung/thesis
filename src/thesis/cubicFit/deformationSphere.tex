@@ -80,11 +80,13 @@ The centre of hill $i$ is positioned at $\vect{x}_i$.  In spherical coordinates,
 \end{figure}
 
 The results in figure~\ref{fig:cubicFit:deformationSphere-evolution} are obtained using the cubicFit scheme on a hexagonal-icosahedral mesh with $\Delta \lambda = \inputval{deformationSphere-mesh-hex-8/averageEquatorialSpacing}$.
-The initial Gaussian hills are shown in figure~\ref{fig:cubicFit:deformationSphere-evolution}a.  At $t=T/2$ the tracer has been deformed into an S-shaped filament (figure~\ref{fig:cubicFit:deformationSphere-evolution}b).  By $t=T$ the tracer has almost returned to its original distribution except for some slight distortion and diffusion that are the result of numerical errors (figure~\ref{fig:cubicFit:deformationSphere-evolution}c).
+The initial Gaussian hills are shown in figure~\ref{fig:cubicFit:deformationSphere-evolution:initial}.
+At $t=T/2$ the tracer has been deformed into an S-shaped filament (figure~\ref{fig:cubicFit:deformationSphere-evolution:mid}).
+By $t=T$ the tracer has almost returned to its original distribution except for some slight distortion and diffusion that are the result of numerical errors (figure~\ref{fig:cubicFit:deformationSphere-evolution:final}).
 
 \begin{figure}
 	\centering
-	\input{cubicFit/deformationSphere-gaussiansConvergence}
+	\input{cubicFit/deformationSphere/gaussiansConvergence}
 	\caption{Numerical convergence of the deformational flow test on the sphere using initial Gaussian hills.  $\ell_2$ errors (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \inputval{deformationSphere-mesh-hex-4/averageEquatorialSpacing} and \inputval{deformationSphere-mesh-hex-9/averageEquatorialSpacing} using the linearUpwind scheme (dotted lines) and the cubicFit scheme (solid lines) on hexagonal-icosahedral meshes and cubed-sphere meshes.}
 	\label{fig:cubicFit:deformationSphere-gaussian-convergence}
 \end{figure}
