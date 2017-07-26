@@ -134,7 +134,9 @@ class Thesis:
                         'src/thesis/cubicFit/double-upwind-stencil.tex',
                         'src/thesis/cubicFit/boundary-stencils.tex',
                         'src/thesis/cubicFit/vonNeumann.tex',
-                        'src/thesis/cubicFit/spherical.tex']
+                        'src/thesis/cubicFit/spherical.tex',
+                        'src/thesis/slanted.tex',
+                        'src/thesis/slanted/mountainAdvect.tex']
                         + stabilisation.outputs()
                         + deformationSphere.outputs())
 
