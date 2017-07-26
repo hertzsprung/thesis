@@ -1,4 +1,4 @@
-set term epslatex color size 5.6,2.5
+set term epslatex color size 5.6,2.7
 
 set style data linespoints
 set logscale

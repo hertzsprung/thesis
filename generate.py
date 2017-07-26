@@ -136,8 +136,10 @@ class Thesis:
                         'src/thesis/cubicFit/vonNeumann.tex',
                         'src/thesis/cubicFit/spherical.tex',
                         'src/thesis/slanted.tex',
-                        'src/thesis/slanted/mountainAdvect.tex']
+                        'src/thesis/slanted/mountainAdvect.tex',
+                        'src/thesis/slanted/resting.tex']
                         + stabilisation.outputs()
+                        + schaerAdvectConvergence.outputs()
                         + deformationSphere.outputs())
 
         shortcut = Shortcuts([thesis.output])
