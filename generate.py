@@ -132,7 +132,9 @@ class Thesis:
                         'src/thesis/cubicFit/deformationSphere.tex',
                         'src/thesis/cubicFit/interior-stencils.tex',
                         'src/thesis/cubicFit/double-upwind-stencil.tex',
-                        'src/thesis/cubicFit/boundary-stencils.tex']
+                        'src/thesis/cubicFit/boundary-stencils.tex',
+                        'src/thesis/cubicFit/vonNeumann.tex',
+                        'src/thesis/cubicFit/spherical.tex']
                         + stabilisation.outputs()
                         + deformationSphere.outputs())
 
