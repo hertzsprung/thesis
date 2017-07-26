@@ -111,7 +111,12 @@ class Thesis:
                 'cubicFit-schaerAdvect-convergence',
                 output=os.path.join('thesis/cubicFit/schaerAdvect-convergence'),
                 plot=os.path.join('src/thesis/cubicFit/schaerAdvect-convergence.plt'),
-                data=[]) # FIXME
+                data=[
+                    '$atmostests_builddir/schaerAdvect-btf-linearUpwind-collated/10000/l2errorT.txt',
+                    '$atmostests_builddir/schaerAdvect-btf-cubicFit-collated/10000/l2errorT.txt',
+                    '$atmostests_builddir/schaerAdvect-btf-linearUpwind-collated/10000/linferrorT.txt',
+                    '$atmostests_builddir/schaerAdvect-btf-cubicFit-collated/10000/linferrorT.txt'
+        ])
 
         thesis = PDFLaTeX(
                 'thesis',
