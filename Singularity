@@ -79,4 +79,3 @@ From:ubuntu:17.04
 
 	DEBIAN_FRONTEND=noninteractive \
 	apt-get install atmosfoam-tools -y --allow-unauthenticated
-	rm -rf /var/lib/apt/lists/*
