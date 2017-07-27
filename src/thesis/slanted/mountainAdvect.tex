@@ -49,18 +49,7 @@ This is evident in figure~\ref{fig:slanted:mountainAdvect:meshes:btf} where the 
 
 \begin{table}
 	\centering
-\begin{tabular}{l S S S S S}
-\toprule
-	& \multicolumn{5}{c}{Peak mountain height $h_0$ (\si{\kilo\meter})} \\
- \cmidrule{2-6}
-
-	Mesh type & 0 & 3 & 4 & 5 & 6 \\
-\midrule
-	BTF & 0 & 0 & 0 & 0 & 0 \\
-	Cut cell & 0 & 0 & 0 & 0 & 0  \\
-	Slanted cell & 0 & 0 & 0 & 0 & 0  \\
-\bottomrule
-\end{tabular}
+	\input{slanted/mountainAdvect/timesteps}
 %
 	\caption{Time-steps (\si{\second}) for the two-dimensional transport test over a mountainous lower boundary.  The time-steps were chosen so that the maximum Courant number was between \num{0.36} and \num{0.46}.}
 	\label{tab:slanted:mountainAdvect:timesteps}
