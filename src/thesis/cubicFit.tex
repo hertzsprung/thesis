@@ -1,6 +1,15 @@
 \chapter{Numerically stable transport over steep slopes}
 \label{ch:cubicFit}
 
+\begin{highlights}
+{\Large Highlights}
+\begin{itemize}
+	\item The cubicFit transport scheme is second-order convergent regardless of mesh distortions or the choice of velocity field
+	\item Sub-grid reconstructions are mostly precomputed depending on the mesh geometry alone
+	\item Misalignment of the velocity field with mesh layers is the primary source of numerical error, not simply mesh distortions
+\end{itemize}
+\end{highlights}
+
 \section{Cubic fit transport scheme}
 
 \begin{figure}
