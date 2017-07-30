@@ -1,4 +1,44 @@
 \chapter{A new mesh for representing the atmosphere above terrain}
 
+\begin{highlights}
+{\Large Highlights}
+\begin{itemize}
+	\item The new slanted cell mesh permits longer time-steps than cut cells, with time-steps comparable to terrain-following meshes
+	\item Pressure gradient calculations are more accurate using slanted cells compared to terrain-following meshes
+	\item Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over very steep slopes
+\end{itemize}
+\end{highlights}
+
+\TODO{
+Motivation
+\begin{itemize}
+	\item cut cells can improve pressure gradient accuracy over TF layers, but they have arbitrarily small cells and they're not simple to construct
+	\item we seek a mesh that improves pressure gradient errors, but avoids arbitrarily small cells and is easier to construct than cut cell meshes
+	\item to ensure cubicFit is numerically stable and accurate on slanted cell meshes with steep slopes, we transport a tracer along the ground through the slanted cells
+\end{itemize}
+}
+
 \input{slanted/mountainAdvect.tex}
 \input{slanted/resting}
+\section{Sch\"{a}r mountain waves}
+\TODO{
+\begin{itemize}
+	\item Meshes: BTF, cut cell, slanted cell
+	\item Schemes: linearUpwind, cubicFit
+	\item Plot: incorrect w contours using linearUpwind, compare with Melvin et al. 2010
+	\item Plot: theta diff heatmap
+	\item Plot: schaerWaves and thermalAdvect vertical cross-sections of theta diff
+	\item Conclusion: unlike linearUpwind, cubicFit gives the correct solution (at least on BTF? is linearUpwind better on cut/slanted cells?)
+	\item Conclusion: should we test max(dt) again? we've not yet done so for a dynamical test.  I'd hope that slanted cells are much better than cut cells.
+\end{itemize}
+}
+
+\section{Transporting a thermal profile in a terrain-following velocity field}
+\TODO{
+\begin{itemize}
+	\item Meshes: BTF, cut cell, slanted cell
+	\item Schemes: cubicFit
+	\item Plot: theta diff heatmap
+	\item Conclusion: schaerWaves errors due to theta cubicFit advection errors
+\end{itemize}
+}

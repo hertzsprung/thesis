@@ -1,6 +1,17 @@
 \section{Horizontal transport over mountains}
 \label{sec:cubicFit:schaerAdvect}
 
+\TODO{
+\begin{itemize}
+	\item Meshes: BTF, cut cells
+	\item Schemes: cubicFit, linearUpwind, others?
+	\item Plot: Tracer and error contours (for schaerAdvect and tfAdvect)
+	\item Plot: Convergence plot (for schaerAdvect and tfAdvect)
+	\item Conclusion: 2nd-order convergence
+	\item Conclusion: numerical errors are due either to grid distortions, or misalignment of the flow with the mesh
+\end{itemize}
+}
+
 A two-dimensional transport test was developed by \citet{schaer2002} to study the effect of terrain-following coordinate transformations on numerical accuracy.  In this standard test, a tracer is positioned aloft and transported horizontally over wave-shaped mountains.  The test challenges transport schemes because the tracer must cross mesh layers, which acts to reduce numerical accuracy \citep{schaer2002}.
 Here we use a more challenging variant of this test that has steeper mountains and highly-distorted terrain-following meshes.
 Convergence results are compared using the linearUpwind and cubicFit transport schemes.

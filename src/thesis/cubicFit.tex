@@ -4,11 +4,21 @@
 \begin{highlights}
 {\Large Highlights}
 \begin{itemize}
-	\item The cubicFit transport scheme is second-order convergent regardless of mesh distortions or the choice of velocity field
+	\item The new cubicFit transport scheme is second-order convergent regardless of mesh distortions or the choice of velocity field
 	\item Sub-grid reconstructions are mostly precomputed depending on the mesh geometry alone
 	\item Misalignment of the velocity field with mesh layers is the primary source of numerical error, not simply mesh distortions
 \end{itemize}
 \end{highlights}
+
+\TODO{
+Motivation
+\begin{itemize}
+	\item Conservation of tracer, therefore Eulerian
+	\item Numerically stable and accurate on arbitrary meshes (because no consensus on "best" mesh: hex or cubed-sphere? TF or cut cells?)
+	\item Avoid all splitting errors (because they get worse with steeper slopes represented by TF meshes)
+	\item Method-of-lines approach permits low computational cost
+\end{itemize}
+}
 
 \section{Cubic fit transport scheme}
 
@@ -259,5 +269,14 @@ For stencils in the interior of the domain, the least squares fit includes all p
 The stabilisation procedure does not modify the least squares fit for these stencils, but we have not explored the three-dimensional extension of cubicFit any further.
 
 \input{cubicFit/schaerAdvect}
+\section{Transport in a terrain-following velocity field}
+\TODO{
+\begin{itemize}
+	\item Meshes: BTF, cut cells
+	\item Schemes: cubicFit, others?
+	\item Conclusion: Misalignment of the velocity field with mesh layers is the primary source of numerical error
+	\item Conclusion: 2nd-order convergence again?
+\end{itemize}
+}
 \input{cubicFit/deformationSphere.tex}
 
