@@ -9,3 +9,31 @@
 	\item Conclusion: slanted cells have spurious velocities comparable to cut cells, much better than BTF, somewhat better than SLEVE
 \end{itemize}
 }
+
+An idealised mountain is submerged in a stably stratified atmosphere at rest in hydrostatic balance.  The analytic solution is time-invariant, but numerical errors in calculating pressure gradients can give rise to spurious velocities which become more severe over steeper terrain \citep{klemp2011}.
+\TODO{Cut cell meshes are often suggested as a technique for reducing these spurious circulations \citep{yamazaki-satomura2010,jebens2011,good2014}.}
+
+The test setup follows the specification by \cite{klemp2011}.  The domain is \SI{200}{\kilo\meter} wide and \SI{20}{\kilo\meter} high, and the mesh spacing is \(\Delta x = \Delta z^\star = \SI{500}{\meter}\).  All boundary conditions are no normal flow.
+
+The wave-shaped mountain profile has a surface height, $h$, given by
+\begin{align}
+	h(x) = h_0 \exp \left( - \left( \frac{x}{a} \right)^2 \right) \cos^2 \left( \alpha x \right) \label{eqn:resting:mountain}
+\end{align}
+where $a = \SI{5}{\kilo\meter}$ is the mountain half-width, $h_0 = \SI{1}{\kilo\meter}$ is the maximum mountain height and $\lambda = \SI{4}{\kilo\meter}$ is the wavelength.  For the optimised SLEVE mesh, the large-scale component $h_1$ is specified as
+\begin{align}
+h_1(x) = \frac{1}{2} h_0 \exp \left( - \left( \frac{x}{a} \right)^2 \right)
+\end{align}
+and, following \cite{leuenberger2010}, $s_1 = \SI{4}{\kilo\meter}$ is the large scale height, $s_2 = \SI{1}{\kilo\meter}$ is the small scale height, and the optimal exponent value of $n = 1.35$ is used.
+
+The initial potential temperature field has $\theta(z = 0) = \SI{288}{\kelvin}$ and a constant static stability with Brunt-V\"ais\"al\"a frequency $N = \SI{0.01}{\per\second}$ everywhere, except for a more stable layer of $N = \SI{0.02}{\per\second}$ between $\SI{2}{\kilo\meter} \leq z \leq \SI{3}{\kilo\meter}$.  The Exner function of pressure is calculated so that it is in discrete hydrostatic balance in the vertical direction \citep{weller-shahrokhi2014}.  The damping function, \(\mu\), is set to \SI{0}{\per\second}.  Unlike \citet{klemp2011}, there is no eddy diffusion in the equation set.
+
+The test was integrated forward by 5 hours using a timestep $\Delta t = \SI{100}{\second}$ on the BTF, \TODO{SLEVE}, cut cell and slanted cell meshes.
+\TODO{
+Maximum vertical velocities are presented in figure~\ref{fig:resting}.  In agreement with \citet{klemp2011}, vertical velocities are larger on more distorted meshes.  However, magnitudes are smaller comparing results on the terrain following meshes with those from \citet{klemp2011}.  
+The results presented in figure~\ref{fig:resting}, which use a curl-free pressure gradient, have maximum spurious values of $w$ of \SI{0.33}{\meter\per\second} on the BTF mesh, compared with a maximum of \(\sim \SI{7}{\meter\per\second}\) found by \citet{klemp2011} using their improved horizontal pressure gradient formulation.
+The results in figure~\ref{fig:resting} have the same maximum errors as \citet{weller-shahrokhi2014} but, due to the more stable split into implicitly and explicitly treated terms (described in the appendix), the errors decay over time due to the dissipative nature of the advection scheme.
+}
+
+\citet{good2014} found the maximum vertical velocity in their cut cell model was \SI{1e-12}{\meter\per\second}, which is better than any result obtained here.  It is worth noting that our model stores values at the geometric centre of cut cells, whereas the model used by \citet{good2014} has cell centres at the centre of the uncut cell, resulting in the centre of some cut cells being below the ground (S.-J. Lock 2014, personal communication).  This means that the mesh is effectively regular when calculating horizontal and vertical gradients.  This would account for the very small velocities found by \citet{good2014}.
+
+\TODO{In summary, spurious velocities in the resting atmosphere test were similar on both terrain following meshes, with lower errors compared to those from \citet{klemp2011}.  The maximum vertical velocity was significantly decreased on the cut cell mesh, so we conclude that non-orthogonality, or lack of alignment of the mesh with surfaces of constant gravitational potential are a significant cause of numerical error in this test.}

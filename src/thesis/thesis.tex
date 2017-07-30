@@ -93,9 +93,31 @@
 \mainmatter
 \chapter{Introduction}
 \chapter{Existing methodologies}
+\TODO{
+\begin{itemize}
+	\item meshes: BTF, SLEVE?, cut cells
+	\item exnerFoamH here or in chapter~\ref{ch:slanted}?
+\end{itemize}
+}
+
+\begin{subequations}
+\begin{align}
+	\text{Momentum} &\ &\  	\frac{\partial \rho \vect{u}}{\partial t} + \nabla \cdot \rho \vect{u}\otimes\vect{u} &= \rho \vect{g} - c_p \rho \theta \nabla \Pi - \mu \rho \vect{u} \label{eqn:exnerFoam:momentum} \\
+	\text{Continuity} &\ &\	\frac{\partial \rho}{\partial t} + \nabla \cdot \rho \vect{u} &= 0 \label{eqn:exnerFoam:cont} \\
+	\text{Thermodynamic equation} &\ &\ \frac{\partial \rho \theta}{\partial t} + \nabla \cdot \rho \vect{u} \theta &= 0 \label{eqn:exnerFoam:theta} \\
+	\text{Ideal gas law} &\ &\ \Pi^{(1 - \kappa)/\kappa} &= \frac{R \rho \theta}{p_0} \label{eqn:exnerFoam:state}
+\end{align}
+\end{subequations}
+where \(\rho\) is the density, \(\vect{u}\) is the velocity field, \(\vect{g}\) is the gravitational acceleration, \(c_p\) is the heat capacity at constant pressure, \(\theta = T \left(p_0/p\right)^\kappa\) is the potential temperature, \(T\) is the temperature, \(p\) is the pressure, \(p_0 = \SI{1000}{\hecto\pascal}\) is a reference pressure, \(\Pi = \left(p / p_0 \right)^\kappa\) is the Exner function of pressure, and \(\kappa = R/c_p\) is the gas constant to heat capacity ratio.  \(\mu\) is a damping function used \TODO{for the sponge layer in the gravity waves test in section nnn}.
+
+\TODO{The fully-compressible model uses the C-grid staggering in the horizontal and the Lorenz staggering in the vertical such that $\theta$, $\rho$ and $\Pi$ are stored at cell centroids and the covariant component of velocity at cell faces.  The model is configured without Coriolis forces.}
+
+Acoustic and \TODO{gravity waves are treated implicitly} and advection is treated explicitly. The trapezoidal implicit treatment of fast waves and the Hodge operator suitable for non-orthogonal grids are described in \TODO{appendix or ref to shaw-weller2016?}. To avoid time-splitting errors between the advection and the fast waves, the advection is time-stepped using a three-stage, second-order Runge-Kutta scheme. The advection terms of the momentum and $\theta$ equations, (\ref{eqn:exnerFoam:momentum}) and (\ref{eqn:exnerFoam:theta}), are discretised in flux form using \TODO{the cubicFit transport scheme ... or linearUpwind}.
+
 \input{cubicFit.tex}
 \input{slanted.tex}
 \chapter{Generalising the Charney–Phillips staggering for arbitrary meshes}
+\chapter{Conclusion}
 
 \appendixpage
 \appendix
