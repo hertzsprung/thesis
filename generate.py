@@ -14,6 +14,7 @@ class Thesis:
     def write(self):
         build = self.build
 
+        schaerAdvect = generators.SchaerAdvect()
         deformationSphere = generators.DeformationSphere()
         mountainAdvect = generators.MountainAdvect()
 
@@ -25,17 +26,6 @@ class Thesis:
                     os.path.join('src/thesis/cubicFit/centralQuad.dat'),
                     os.path.join('src/thesis/cubicFit/cubic.dat')
                 ])
-
-        schaerAdvectConvergence = Gnuplot(
-                'cubicFit-schaerAdvect-convergence',
-                output=os.path.join('thesis/cubicFit/schaerAdvect-convergence'),
-                plot=os.path.join('src/thesis/cubicFit/schaerAdvect-convergence.plt'),
-                data=[
-                    '$atmostests_builddir/schaerAdvect-btf-linearUpwind-collated/10000/l2errorT.txt',
-                    '$atmostests_builddir/schaerAdvect-btf-cubicFit-collated/10000/l2errorT.txt',
-                    '$atmostests_builddir/schaerAdvect-btf-linearUpwind-collated/10000/linferrorT.txt',
-                    '$atmostests_builddir/schaerAdvect-btf-cubicFit-collated/10000/linferrorT.txt'
-        ])
 
         thesis = PDFLaTeX(
                 'thesis',
@@ -61,14 +51,14 @@ class Thesis:
                         'src/thesis/slanted/mountainAdvect.tex',
                         'src/thesis/slanted/resting.tex']
                         + stabilisation.outputs()
-                        + schaerAdvectConvergence.outputs()
+                        + schaerAdvect.outputs()
                         + deformationSphere.outputs()
                         + mountainAdvect.outputs())
 
         shortcut = Shortcuts([thesis.output])
 
         build.add(stabilisation)
-        build.add(schaerAdvectConvergence)
+        schaerAdvect.addTo(build)
         deformationSphere.addTo(build)
         mountainAdvect.addTo(build)
         build.add(thesis)

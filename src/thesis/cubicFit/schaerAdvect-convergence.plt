@@ -1,4 +1,4 @@
-set term epslatex color size 5.6,2.7
+set term epslatex color size 5.6,3
 
 set style data linespoints
 set logscale
@@ -10,23 +10,30 @@ set key tmargin
 set xlabel "$\\Delta x$ (\\si{\\meter})" offset 0,0.5
 
 set xrange [10000:100]
-set yrange [1e-2:1]
+set yrange [1e-4:1]
 
 set multiplot layout 1,2
 
 ### l2
 
 set ylabel "$\\ell_2$ error" offset 1.5
-plot "`echo $atmostests_builddir`/schaerAdvect-btf-linearUpwind-collated/10000/l2errorT.txt" using 1:2 lc 1 dt 3 lw 2 title 'linearUpwind', \
-     "`echo $atmostests_builddir`/schaerAdvect-btf-cubicFit-collated/10000/l2errorT.txt" using 1:2 lc 1 title 'cubicFit', \
+plot "`echo $atmostests_builddir`/schaerAdvect-btf-linearUpwind-collated/10000/l2errorT.txt" using 1:2 lc 1 dt 3 lw 2 title 'BTF, linearUpwind', \
+     "`echo $atmostests_builddir`/schaerAdvect-btf-cubicFit-collated/10000/l2errorT.txt" using 1:2 lc 1 title 'BTF, cubicFit', \
+     "`echo $atmostests_builddir`/schaerAdvect-cutCell-linearUpwind-collated/10000/l2errorT.txt" using 1:2 lc 2 dt 3 lw 2 title 'Cut cells, linearUpwind', \
+     "`echo $atmostests_builddir`/schaerAdvect-cutCell-cubicFit-collated/10000/l2errorT.txt" using 1:2 lc 2 title 'Cut cells, cubicFit', \
      x * 5e-4 lc rgbcolor "black" dt 1 lw 1 notitle, \
-     x**2 * 2e-7 lc rgbcolor "black" dt 3 lw 3 notitle
+     x**2 * 2e-7 lc rgbcolor "black" dt 3 lw 3 notitle,\
+     x**2 * 1e-8 lc rgbcolor "black" dt 3 lw 3 notitle
 
 ### linf
 
+set tmargin 5.2
 set rmargin 4
 set ylabel "$\\ell_\\infty$ error" offset 1.5
 plot "`echo $atmostests_builddir`/schaerAdvect-btf-linearUpwind-collated/10000/linferrorT.txt" using 1:2 lc 1 dt 3 lw 2 notitle, \
      "`echo $atmostests_builddir`/schaerAdvect-btf-cubicFit-collated/10000/linferrorT.txt" using 1:2 lc 1 notitle, \
+     "`echo $atmostests_builddir`/schaerAdvect-cutCell-linearUpwind-collated/10000/linferrorT.txt" using 1:2 lc 2 dt 3 lw 2 notitle, \
+     "`echo $atmostests_builddir`/schaerAdvect-cutCell-cubicFit-collated/10000/linferrorT.txt" using 1:2 lc 2 notitle, \
      x * 5e-4 lc rgbcolor "black" dt 1 lw 1 title '1st order', \
-     x**2 * 2e-7 lc rgbcolor "black" dt 3 lw 3 title '2nd order'
+     x**2 * 2e-7 lc rgbcolor "black" dt 3 lw 3 title '2nd order', \
+     x**2 * 1e-8 lc rgbcolor "black" dt 3 lw 3 notitle
