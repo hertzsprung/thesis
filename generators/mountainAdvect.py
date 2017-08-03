@@ -1,9 +1,52 @@
-from ninjaopenfoam import Gnuplot, LaTeXSubstitution, siunitx, Paths
+from ninjaopenfoam import Case, Gnuplot, GmtPlot, GmtPlotCopyCase, \
+        LaTeXSubstitution, siunitx, Paths
 import itertools
 import os
 
 class MountainAdvect:
     def __init__(self):
+        self.btf5000mLinearUpwind = GmtPlotCopyCase(
+                'mountainAdvect-h0-btf-1000-5000m-linearUpwind',
+                source='$atmostests_builddir',
+                target='$builddir',
+                plots=['src/thesis/slanted/mountainAdvect/meshW.gmtdict']
+        )
+
+        self.cutCell5000mLinearUpwind = GmtPlotCopyCase(
+                'mountainAdvect-h0-cutCell-1000-5000m-linearUpwind',
+                source='$atmostests_builddir',
+                target='$builddir',
+                plots=['src/thesis/slanted/mountainAdvect/meshW.gmtdict']
+        )
+
+        self.slantedCell5000mLinearUpwind = GmtPlotCopyCase(
+                'mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind',
+                source='$atmostests_builddir',
+                target='$builddir',
+                plots=['src/thesis/slanted/mountainAdvect/mesh.gmtdict']
+        )
+
+        self.btfMesh = GmtPlot(
+            'mountainAdvect-btfMesh',
+            plot='meshW',
+            case=Case('mountainAdvect-h0-btf-1000-5000m-linearUpwind'),
+            time='constant'
+        )
+
+        self.cutCellMesh = GmtPlot(
+            'mountainAdvect-cutCellMesh',
+            plot='meshW',
+            case=Case('mountainAdvect-h0-cutCell-1000-5000m-linearUpwind'),
+            time='constant'
+        )
+
+        self.slantedCellMesh = GmtPlot(
+            'mountainAdvect-slantedCellMesh',
+            plot='mesh',
+            case=Case('mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind'),
+            time='constant'
+        )
+
         self.l2ByMountainHeight = Gnuplot(
                 'mountainAdvect-l2ByMountainHeight',
                 output=os.path.join('thesis/slanted/mountainAdvect/l2ByMountainHeight'),
@@ -57,12 +100,21 @@ class MountainAdvect:
                 Paths.courantNumber)
 
     def outputs(self):
-        return self.l2ByMountainHeight.outputs() \
+        return self.btfMesh.outputs() \
+                + self.cutCellMesh.outputs() \
+                + self.slantedCellMesh.outputs() \
+                + self.l2ByMountainHeight.outputs() \
                 + self.maxdt.outputs() \
                 + self.timesteps.outputs() \
                 + self.unstableCourantNumber.outputs()
 
     def addTo(self, build):
+        build.add(self.btf5000mLinearUpwind)
+        build.add(self.btfMesh)
+        build.add(self.cutCell5000mLinearUpwind)
+        build.add(self.cutCellMesh)
+        build.add(self.slantedCell5000mLinearUpwind)
+        build.add(self.slantedCellMesh)
         build.add(self.l2ByMountainHeight)
         build.add(self.maxdt)
         build.add(self.timesteps)
