@@ -17,6 +17,7 @@ class Thesis:
         schaerAdvect = generators.SchaerAdvect()
         deformationSphere = generators.DeformationSphere()
         mountainAdvect = generators.MountainAdvect()
+        resting = generators.Resting()
 
         stabilisation = Gnuplot(
                 'cubicFit-stabilisation',
@@ -53,7 +54,8 @@ class Thesis:
                         + stabilisation.outputs()
                         + schaerAdvect.outputs()
                         + deformationSphere.outputs()
-                        + mountainAdvect.outputs())
+                        + mountainAdvect.outputs()
+                        + resting.outputs())
 
         shortcut = Shortcuts([thesis.output])
 
@@ -61,6 +63,7 @@ class Thesis:
         schaerAdvect.addTo(build)
         deformationSphere.addTo(build)
         mountainAdvect.addTo(build)
+        resting.addTo(build)
         build.add(thesis)
         build.add(shortcut)
 

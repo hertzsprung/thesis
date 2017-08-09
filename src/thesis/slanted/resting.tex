@@ -27,6 +27,12 @@ and, following \cite{leuenberger2010}, $s_1 = \SI{4}{\kilo\meter}$ is the large 
 
 The initial potential temperature field has $\theta(z = 0) = \SI{288}{\kelvin}$ and a constant static stability with Brunt-V\"ais\"al\"a frequency $N = \SI{0.01}{\per\second}$ everywhere, except for a more stable layer of $N = \SI{0.02}{\per\second}$ between $\SI{2}{\kilo\meter} \leq z \leq \SI{3}{\kilo\meter}$.  The Exner function of pressure is calculated so that it is in discrete hydrostatic balance in the vertical direction \citep{weller-shahrokhi2014}.  The damping function, \(\mu\), is set to \SI{0}{\per\second}.  Unlike \citet{klemp2011}, there is no eddy diffusion in the equation set.
 
+\begin{figure}
+	\input{slanted/resting/maxw}
+	\label{fig:slanted:resting:maxw}
+	\caption{\TODO{}}
+\end{figure}
+
 The test was integrated forward by 5 hours using a timestep $\Delta t = \SI{100}{\second}$ on the BTF, \TODO{SLEVE}, cut cell and slanted cell meshes.
 \TODO{
 Maximum vertical velocities are presented in figure~\ref{fig:resting}.  In agreement with \citet{klemp2011}, vertical velocities are larger on more distorted meshes.  However, magnitudes are smaller comparing results on the terrain following meshes with those from \citet{klemp2011}.  

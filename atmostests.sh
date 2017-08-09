@@ -14,3 +14,4 @@ ninja -C $atmostests_dir build/mountainAdvect-h0-{btf,cutCell,slantedCell}-1000-
 ninja -C $atmostests_dir build/mountainAdvect-maxdt-{btf,cutCell,slantedCell}-6000m-cubicFit-collated/{dt,co}.txt
 ninja -C $atmostests_dir build/mountainAdvect-h0-slantedCell-1000-6000m-linearUpwind/co.txt
 ninja -C $atmostests_dir build/mountainAdvect-h0-{btf,cutCell,slantedCell}-1000-5000m-linearUpwind/10000/{T,T_analytic,T_diff}
+ninja -C $atmostests_dir build/resting-{btf,sleve,cutCell,slantedCell}-{linearUpwind,cubicFit}-collated/maxw.txt
