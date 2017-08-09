@@ -88,15 +88,15 @@ A small phase lag is apparent when the numerical solution marked with solid cont
 	\centering
 	%
 	\begin{subfigure}{0.3\textwidth}
-		\TODO{}
+		\includegraphics{mountainAdvect-h0-btf-1000-5000m-linearUpwind/10000/errorW.pdf}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-btf}
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
-		\TODO{}
+		\includegraphics{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/10000/error.pdf}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-cutCell}
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
-		\TODO{}
+		\includegraphics{mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind/10000/error.pdf}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-slantedCell}
 	\end{subfigure} \\
 	\begin{subfigure}{0.3\textwidth}
@@ -111,6 +111,7 @@ A small phase lag is apparent when the numerical solution marked with solid cont
 		\TODO{}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:cubicFit-slantedCell}
 	\end{subfigure}
+	\includegraphics[height=5in,angle=270]{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/mountainAdvect-cutCellLinearUpwindError-colorBar.eps}
 
 	\caption{Tracer contours at $t=\SI{10000}{\second}$ for the two-dimensional tracer transport tests over a mountainous lower boundary.  A region in the lee of the mountain is plotted corresponding to the shaded area in figure~\ref{fig:slanted:mountainAdvect:tracer}.
 	Results are presented on BTF, cut cell and slanted cell meshes (shown in figure~\ref{fig:slanted:mountainAdvect:meshes}) using the linearUpwind and cubicFit transport schemes.  The numerical solutions are marked by solid black lines.  The analytic solution is marked by dotted lines.  Contours are every \SI{0.1}{\kilo\gram\per\meter\cubed}.}

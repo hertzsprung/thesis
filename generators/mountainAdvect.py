@@ -9,43 +9,49 @@ class MountainAdvect:
                 'mountainAdvect-h0-btf-1000-5000m-linearUpwind',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/slanted/mountainAdvect/meshW.gmtdict']
+                plots=[
+                    'src/thesis/slanted/mountainAdvect/meshW.gmtdict',
+                    'src/thesis/slanted/mountainAdvect/errorW.gmtdict'
+                ],
+                files=[
+                    '10000/T',
+                    '10000/T_analytic',
+                    '10000/T_diff'
+                ]
         )
 
         self.cutCell5000mLinearUpwind = GmtPlotCopyCase(
                 'mountainAdvect-h0-cutCell-1000-5000m-linearUpwind',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/slanted/mountainAdvect/meshW.gmtdict']
+                plots=[
+                    'src/thesis/slanted/mountainAdvect/meshW.gmtdict',
+                    'src/thesis/slanted/mountainAdvect/error.gmtdict'
+                ],
+                files=[
+                    '10000/T',
+                    '10000/T_analytic',
+                    '10000/T_diff'
+                ]
         )
 
         self.slantedCell5000mLinearUpwind = GmtPlotCopyCase(
                 'mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/slanted/mountainAdvect/mesh.gmtdict']
+                plots=[
+                    'src/thesis/slanted/mountainAdvect/mesh.gmtdict',
+                    'src/thesis/slanted/mountainAdvect/error.gmtdict'
+                ],
+                files=[
+                    '10000/T',
+                    '10000/T_analytic',
+                    '10000/T_diff'
+                ]
         )
 
-        self.btfMesh = GmtPlot(
-            'mountainAdvect-btfMesh',
-            plot='meshW',
-            case=Case('mountainAdvect-h0-btf-1000-5000m-linearUpwind'),
-            time='constant'
-        )
-
-        self.cutCellMesh = GmtPlot(
-            'mountainAdvect-cutCellMesh',
-            plot='meshW',
-            case=Case('mountainAdvect-h0-cutCell-1000-5000m-linearUpwind'),
-            time='constant'
-        )
-
-        self.slantedCellMesh = GmtPlot(
-            'mountainAdvect-slantedCellMesh',
-            plot='mesh',
-            case=Case('mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind'),
-            time='constant'
-        )
+        self.meshes()
+        self.heatmaps()
 
         self.l2ByMountainHeight = Gnuplot(
                 'mountainAdvect-l2ByMountainHeight',
@@ -99,6 +105,66 @@ class MountainAdvect:
                 '$atmostests_builddir/mountainAdvect-h0-slantedCell-1000-6000m-linearUpwind',
                 Paths.courantNumber)
 
+    def meshes(self):
+        self.btfMesh = GmtPlot(
+            'mountainAdvect-btfMesh',
+            plot='meshW',
+            case=Case('mountainAdvect-h0-btf-1000-5000m-linearUpwind'),
+            time='constant'
+        )
+
+        self.cutCellMesh = GmtPlot(
+            'mountainAdvect-cutCellMesh',
+            plot='meshW',
+            case=Case('mountainAdvect-h0-cutCell-1000-5000m-linearUpwind'),
+            time='constant'
+        )
+
+        self.slantedCellMesh = GmtPlot(
+            'mountainAdvect-slantedCellMesh',
+            plot='mesh',
+            case=Case('mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind'),
+            time='constant'
+        )
+
+    def heatmaps(self):
+        self.btfLinearUpwindError = GmtPlot(
+            'mountainAdvect-btfLinearUpwindError',
+            plot='errorW',
+            case=Case('mountainAdvect-h0-btf-1000-5000m-linearUpwind'),
+            time=10000,
+            data=[
+                '10000/T',
+                '10000/T_analytic',
+                '10000/T_diff'
+            ]
+        )
+
+        self.cutCellLinearUpwindError = GmtPlot(
+            'mountainAdvect-cutCellLinearUpwindError',
+            plot='error',
+            case=Case('mountainAdvect-h0-cutCell-1000-5000m-linearUpwind'),
+            time=10000,
+            data=[
+                '10000/T',
+                '10000/T_analytic',
+                '10000/T_diff'
+            ],
+            colorBar='legends/error_T_diff.eps'
+        )
+
+        self.slantedCellLinearUpwindError = GmtPlot(
+            'mountainAdvect-slantedCellLinearUpwindError',
+            plot='error',
+            case=Case('mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind'),
+            time=10000,
+            data=[
+                '10000/T',
+                '10000/T_analytic',
+                '10000/T_diff'
+            ]
+        )
+
     def outputs(self):
         return self.btfMesh.outputs() \
                 + self.cutCellMesh.outputs() \
@@ -110,11 +176,17 @@ class MountainAdvect:
 
     def addTo(self, build):
         build.add(self.btf5000mLinearUpwind)
-        build.add(self.btfMesh)
         build.add(self.cutCell5000mLinearUpwind)
-        build.add(self.cutCellMesh)
         build.add(self.slantedCell5000mLinearUpwind)
+
+        build.add(self.btfMesh)
+        build.add(self.cutCellMesh)
         build.add(self.slantedCellMesh)
+
+        build.add(self.btfLinearUpwindError)
+        build.add(self.cutCellLinearUpwindError)
+        build.add(self.slantedCellLinearUpwindError)
+
         build.add(self.l2ByMountainHeight)
         build.add(self.maxdt)
         build.add(self.timesteps)
