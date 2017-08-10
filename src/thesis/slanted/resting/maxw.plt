@@ -1,12 +1,13 @@
 set term epslatex color colortext size 4.5,3
 
 set style data linespoints
+set logscale y
 
 set xlabel "Peak mountain height $h_0$ (\\si{\\kilo\\meter})"
 set ylabel "$\\max(\\Mag{w})$ (\\si{\\meter\\per\\second})"
 
 set xrange [0:10]
-set yrange [0:1]
+set yrange [0.01:10]
 
 set key inside top right
 
