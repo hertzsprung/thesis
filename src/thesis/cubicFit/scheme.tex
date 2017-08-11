@@ -20,7 +20,7 @@ The stencil has \num{4} points in $x$ and \num{3} points in $y$, leading to a na
 A least-squares approach is needed because the system of equations is overconstrained, with \num{12} stencil values but only \num{9} polynomial terms.  The stencil geometry is expressed in a local coordinate system with the face centroid as the origin so that the approximated value $\phi_F$ is equal to the constant coefficient $a_1$.
 The stencil is upwind-biased to improve numerical stability, and the multidimensional cubic polynomial is chosen to improve accuracy in the direction of flow \citep{leonard1993}.
 
-The remainder of this \TODO{subsection} generalises the approximation technique for arbitrary meshes and describes the methods for constructing stencils, performing a least-squares fit with a suitable polynomial, and ensuring numerical stability of the transport scheme.
+The remainder of this section generalises the approximation technique for arbitrary meshes and describes the methods for constructing stencils, performing a least-squares fit with a suitable polynomial, and ensuring numerical stability of the transport scheme.
 
 \subsection{Stencil construction}
 \label{sec:cubicFit:stencil}
@@ -172,7 +172,7 @@ Using a polynomial with all nine terms and the stencil in figure~\ref{fig:cubicF
 
 The candidate polynomials are all the dense subsets of $M(x,y)$ that have a cardinality greater than one with a stencil matrix that is full rank.  The final stage of the cubicFit transport scheme selects a candidate polynomial and ensures that the least-squares fit is numerically stable.
 
-\subsection{Stabilisation procedure}
+\subsection{Achieving numerical stability}
 \label{sec:cubicFit:stabilisation}
 So far, we have constructed a stencil and found a set of candidate polynomials.  Applying a least-squares fit to any of these candidate polynomials avoids creating an underconstrained problem.  The final stage of the transport scheme chooses a suitable candidate polynomial and appropriate multipliers $\vect{m}$ so that the fit is numerically stable.
 
@@ -180,7 +180,93 @@ The approximated value $\phi_F$ is equal to $a_1$ which is calculated from equat
 If the cell centre values $\bm{\phi}$ are assumed to approximate a smooth field then we expect $\phi_F$ to be close to the values of $\phi_u$ and $\phi_d$, and expect $\phi_F$ to be insensitive to small changes in $\bm{\phi}$.
 When the weights $\vect{w}$ have large magnitude then this is no longer true: $\phi_F$ becomes sensitive to small changes in $\bm{\phi}$ which can result in large, numerically unstable departures from the smooth field $\bm{\phi}$.
 
-To avoid numerical instabilities, a simplified, one-dimensional von Neumann analysis was performed, presented in appendix~\ref{app:vonNeumann}.  The analysis is used to impose three stability conditions on the weights $\vect{w}$,
+To avoid numerical instabilities, simplified, one-dimensional von Neumann analyses were performed in order to impose stability conditions on the weights $\vect{w}$.
+The first analysis uses a two-cell approximation to derive separate stability conditions involving the upwind weight $w_u$ and downwind weight $w_d$.  The second analysis uses three cells to derive a stability condition that involves all weights in a stencil.
+
+\subsubsection{Two-cell analysis}
+We start with the conservation equation for a dependent variable $\phi$ that is discrete-in-space and continuous-in-time
+\begin{align}
+\frac{\partial \phi_j}{\partial t} &= - v \frac{\phi_R - \phi_L}{\Delta x} \label{eqn:vonNeumann:advectionLR} \\
+%
+\intertext{where $v$ is the velocity, and the left and right fluxes, $\phi_L$ and $\phi_R$, are weighted averages of the neighbouring cell centres.  Assuming that $v$ is positive}
+%
+\phi_L &= \alpha_u \phi_{j-1} + \alpha_d \phi_j \\
+\phi_R &= \beta_u \phi_j + \beta_d \phi_{j+1}
+\end{align}
+where $\phi_{j-1}, \phi_j, \phi_{j+1}$ are cell centre values, and $j$ denotes a cell centre position $x = j \Delta x$ where $\Delta x$ is a uniform mesh spacing.
+$\alpha_u$ and $\beta_u$ are the upwind weights and $\alpha_d$ and $\beta_d$ are the downwind weights for the left and right fluxes respectively, and $\alpha_u + \alpha_d = 1$ and $\beta_u + \beta_d = 1$.
+
+At a given time $t = n \Delta t$ at time-level $n$ and with a time-step $\Delta t$, we assume a wave-like solution with an amplification factor $A$, such that
+\begin{align}
+	\phi_j^{(n)} &= A^n e^{\iu j k \Delta x} \label{eqn:vonNeumann:fourier}
+\end{align}
+where $\phi_j^{(n)}$ denotes a value of $\phi$ at position $j$ and time-level $n$.  Using this to rewrite the left-hand side of equation~\eqref{eqn:vonNeumann:advectionLR}
+\begin{align}
+\frac{\partial \phi_j}{\partial t} &= \frac{\partial}{\partial t} \left( A^{t / \Delta t} \right) e^{ijk\Delta x} = \frac{\ln A}{\Delta t} A^n e^{ikj\Delta x} \\
+%
+\shortintertext{hence equation~\eqref{eqn:vonNeumann:advectionLR} becomes}
+%
+\frac{\ln A}{\Delta t} &= - \frac{v}{\Delta x} \left( \beta_u + \beta_d e^{ik\Delta x} - \alpha_u e^{-ik\Delta x} - \alpha_d \right) \\
+\ln A &= -c \left( \beta_u - \alpha_d + \beta_d \cos k\Delta x + \iu \beta_d \sin k \Delta x - \alpha_u \cos k\Delta x + \iu \alpha_u \sin k\Delta x \right)
+%
+\intertext{where the Courant number $c = v \Delta t / \Delta x$.
+Let $\Re = \beta_u - \alpha_d + \beta_d \cos k\Delta x - \alpha_u \cos k\Delta x$ and
+$\Im = \beta_d \sin k \Delta x + \alpha_u \sin k\Delta x$, then}
+%
+\ln A &= -c \left( \Re + \iu \Im \right) \\
+A &= e^{-c \Re} e^{-\iu c \Im} \\
+%
+\shortintertext{and the complex modulus of $A$ is}
+%
+|A| &= e^{-c \Re} = \exp \left( -c \left( \beta_u - \alpha_d + \left(\beta_d - \alpha_u \right) \cos k\Delta x \right) \right) \text{ .}
+\end{align}
+For stability we need $|A| \leq 1$ and, imposing the additional constraints that $\alpha_u = \beta_u$ and $\alpha_d = \beta_d$, then
+\begin{align}
+\left( \alpha_u - \alpha_d \right) \left( 1 - \cos k\Delta x \right) &\geq 0 \quad \forall k\Delta x
+%
+\shortintertext{and, given $0 \leq 1 - \cos k \Delta x \leq 2$, then}
+%
+\alpha_u - \alpha_d \geq 0 \text{ .} \label{eqn:vonNeumann:twopoint-lower}
+\end{align}
+Additionally, we do not want more damping than a first-order upwind scheme (where $\alpha_u = \beta_u = 1$, $\alpha_d = \beta_d = 0$), having an amplification factor, $A_\mathrm{up}$, so we need $\left\lvert A \right\rvert \geq \left\lvert A_\mathrm{up} \right\rvert$, hence
+\begin{align}
+	\exp \left( -c \left(\alpha_u - \alpha_d\right) \left( 1 - \cos k\Delta x \right) \right) &\geq \exp \left( -c \left(1 - \cos k\Delta x \right) \right) \quad \forall k\Delta x
+%
+\shortintertext{therefore}
+%
+	\alpha_u - \alpha_d &\leq 1 \text{ .} \label{eqn:vonNeumann:twopoint-upper}
+\end{align}
+Now, knowing that $\alpha_u + \alpha_d = 1$ (or $\alpha_d = 1 - \alpha_u$) then, using equations~\eqref{eqn:vonNeumann:twopoint-lower} and \eqref{eqn:vonNeumann:twopoint-upper}, we obtain the first two stability conditions,
+\begin{align}
+	0.5 \leq \alpha_u &\leq 1 \text{ and} \label{eqn:vonNeumann:upwind} \\
+	0 \leq \alpha_d &\leq 0.5 \label{eqn:vonNeumann:downwind} \text{ .}
+\end{align}
+
+\subsubsection{Three-cell analysis}
+We start again from equation~\eqref{eqn:vonNeumann:advectionLR} but this time approximate $\phi_L$ and $\phi_R$ using three cell centre values,
+\begin{align}
+	\phi_L &= \alpha_{uu} \phi_{j-2} + \alpha_u \phi_{j-1} + \alpha_d \phi_j \\
+	\phi_R &= \alpha_{uu} \phi_{j-1} + \alpha_u \phi_j + \alpha_d \phi_{j+1}
+\end{align}
+having used the same weights $\alpha_{uu}$, $\alpha_u$ and $\alpha_d$ for both left and right fluxes.
+Substituting equation~\eqref{eqn:vonNeumann:fourier} into equation~\eqref{eqn:vonNeumann:advectionLR} we find
+\begin{align}
+A = \exp\left( -c \left[ \alpha_{uu} \left( e^{-ik\Delta x} - e^{-2ik\Delta x} \right) + \alpha_u \left( 1 - e^{-ik\Delta x} \right) + \alpha_d \left( e^{ik\Delta x} - 1 \right) \right] \right)
+%
+\intertext{so that, if the complex modulus $\left\lvert A \right\rvert \leq 1$ then}
+%
+\alpha_u - \alpha_d + \left( \alpha_{uu} - \alpha_u + \alpha_d \right) \cos k\Delta x - \alpha_{uu} \cos 2k\Delta x \geq 0 \text{ .}
+\end{align}
+If $k\Delta x = \pi$ then $\cos k\Delta x = -1$ and $\cos 2k\Delta x = 1$ and $\alpha_u - \alpha_d \geq \alpha_{uu}$.  If $k\Delta x = \pi / 2$ then $\cos k\Delta x = 0$ and $\cos 2k\Delta x = -1$ and $\alpha_u - \alpha_d \geq -\alpha_{uu}$.  Hence we find that
+\begin{align}
+	\alpha_u - \alpha_d &\geq \left\lvert\alpha_{uu}\right\rvert \label{eqn:vonNeumann:uuConstraint} \text{ .}
+%
+	\intertext{When the same analysis is performed with four cells, $\alpha_{uuu}$, $\alpha_{uu}$, $\alpha_u$ and $\alpha_d$, by varying $k \Delta x$ we find that equation~\eqref{eqn:vonNeumann:uuConstraint} holds replacing $\left\lvert \alpha_{uu} \right\rvert$ with $\max(\left\lvert\alpha_{uu}\right\rvert, \left\lvert\alpha_{uuu}\right\rvert)$.  Hence, we generalise equation~\eqref{eqn:vonNeumann:uuConstraint} to obtain the final stability condition}
+%
+	\alpha_u - \alpha_d &\geq \max_{p\:\in\:P} |\alpha_p|
+\end{align}
+where the peripheral cells $P$ is the set of all stencil cells except for the upwind cell and downwind cell, and $\alpha_p$ is the weight for a given peripheral cell $p$.
+The three stability conditions (equations~\ref{eqn:vonNeumann:upwind}, \ref{eqn:vonNeumann:downwind} and \ref{eqn:vonNeumann:uuConstraint}) are used to impose three stability conditions on the weights $\vect{w}$,
 \begin{subequations}
 \label{eqn:cubicFit:stability}
 \begin{align}
@@ -191,7 +277,13 @@ To avoid numerical instabilities, a simplified, one-dimensional von Neumann anal
 \end{subequations}
 where $w_u$ and $w_d$ are the weights for the upwind and downwind cells respectively.  The \textit{peripheral points} $P$ are the cells in the stencil that are not the upwind or downwind cells, and $w_p$ is the weight for a given peripheral point $p$.
  The upwind, downwind and peripheral weights sum to one such that $w_u + w_d + \sum_{p \in P} w_p = 1$.
+We hypothesise that the stability conditions given by equation~\eqref{eqn:cubicFit:stability} are necessary but not sufficient for a transport scheme on arbitrary meshes.
 
+The stability of the one-dimensional transport equation discretised in space and time could be analysed using existing techniques \citep{baldauf2008}, but we have only analysed the spatial stability of the cubicFit scheme.  Numerical experiments presented in section~\ref{sec:slanted:mountainAdvect} demonstrate that the cubicFit scheme is generally insensitive to the time-step, provided that it is below a stability limit.
+
+\subsubsection{Stabilisation procedure}
+
+Equipped with three stability conditions in equation~\ref{eqn:cubicFit:stability}, we develop a stabilisation procedure that achieves numerical stability on arbitrary meshes.
 The stabilisation procedure comprises three steps.  In the first step, the set of candidate polynomials is sorted in preference order so that candidates with more terms are preferred over those with fewer terms.
 If there are multiple candidates with the same number of terms, the minimum singular value of $\vect{B}$ is calculated for each candidate, and an ordering is imposed such that the candidate with the larger minimum singular value is preferred.  This ordering ensures that the preferred candidate is the highest-order polynomial with the most information content.\footnote{Note that singular values are used for two purposes: first, to test if the matrix $\vect{B}$ is full-rank and, second, to impose an ordering on candidates.
 We have used the minimum singular value, $\sigma_\mathrm{min}(\vect{B})$, for both purposes.  Alternatively, we could use the condition number, $\mathrm{cond}(\vect{B})$, which is the ratio of smallest to largest singular value.
