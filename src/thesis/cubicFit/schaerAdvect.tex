@@ -76,9 +76,18 @@ where $A_x = \SI{25}{\kilo\meter}$, $A_z = \SI{3}{\kilo\meter}$ are the horizont
 
 \begin{figure}
 	\centering
+	\begin{subfigure}{\textwidth}
 	\input{cubicFit/schaerAdvect-convergence}
+	\phantomsubcaption\label{fig:cubicFit:schaerAdvect:convergence:l2}
+	\phantomsubcaption\label{fig:cubicFit:schaerAdvect:convergence:linf}
+	\phantomsubcaption\label{fig:cubicFit:tfAdvect:convergence:l2}
+	\phantomsubcaption\label{fig:cubicFit:tfAdvect:convergence:linf}
+	\end{subfigure}
 %
-	\caption{Numerical convergence of the two-dimensional horizontal transport test over mountains.  $\ell_2$ errors (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \SI{5000}{\meter} and \SI{250}{\meter} using linearUpwind and cubicFit transport schemes on basic terrain-following and cut cell meshes.}
+	\caption{Numerical convergence of the two-dimensional tracer transport tests over mountains using
+	(\subcaptionref{fig:cubicFit:schaerAdvect:convergence:l2}, \subcaptionref{fig:cubicFit:schaerAdvect:convergence:linf}) horizontal and
+	(\subcaptionref{fig:cubicFit:tfAdvect:convergence:l2}, \subcaptionref{fig:cubicFit:tfAdvect:convergence:linf}) terrain-following velocity fields.
+	$\ell_2$ errors (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \SI{5000}{\meter} and \SI{250}{\meter} using linearUpwind and cubicFit transport schemes on basic terrain-following and cut cell meshes.}
 	\label{fig:cubicFit:schaerAdvect:convergence}
 \end{figure}
 

@@ -58,14 +58,17 @@ class DeformationSphere:
             data=['1036800/T'])
 
         self.coarsestSpacing = siunitx.Ang(
+                'deformationSphere-mesh-hex-4-averageEquatorialSpacing',
                 '$atmostests_builddir/deformationSphere-mesh-hex-4',
                 'averageEquatorialSpacing.txt')
 
         self.hex8Spacing = siunitx.Ang(
+                'deformationSphere-mesh-hex-8-averageEquatorialSpacing',
                 '$atmostests_builddir/deformationSphere-mesh-hex-8',
                 'averageEquatorialSpacing.txt')
 
         self.finestSpacing = siunitx.Ang(
+                'deformationSphere-mesh-hex-9-averageEquatorialSpacing',
                 '$atmostests_builddir/deformationSphere-mesh-hex-9',
                 'averageEquatorialSpacing.txt')
 

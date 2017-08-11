@@ -16,7 +16,15 @@ class SchaerAdvect:
                     '$atmostests_builddir/schaerAdvect-cutCell-linearUpwind-collated/10000/l2errorT.txt',
                     '$atmostests_builddir/schaerAdvect-cutCell-cubicFit-collated/10000/l2errorT.txt',
                     '$atmostests_builddir/schaerAdvect-cutCell-linearUpwind-collated/10000/linferrorT.txt',
-                    '$atmostests_builddir/schaerAdvect-cutCell-cubicFit-collated/10000/linferrorT.txt'
+                    '$atmostests_builddir/schaerAdvect-cutCell-cubicFit-collated/10000/linferrorT.txt',
+                    '$atmostests_builddir/tfAdvect-btf-linearUpwind-collated/10000/l2errorT.txt',
+                    '$atmostests_builddir/tfAdvect-btf-cubicFit-collated/10000/l2errorT.txt',
+                    '$atmostests_builddir/tfAdvect-btf-linearUpwind-collated/10000/linferrorT.txt',
+                    '$atmostests_builddir/tfAdvect-btf-cubicFit-collated/10000/linferrorT.txt',
+                    '$atmostests_builddir/tfAdvect-cutCell-linearUpwind-collated/10000/l2errorT.txt',
+                    '$atmostests_builddir/tfAdvect-cutCell-cubicFit-collated/10000/l2errorT.txt',
+                    '$atmostests_builddir/tfAdvect-cutCell-linearUpwind-collated/10000/linferrorT.txt',
+                    '$atmostests_builddir/tfAdvect-cutCell-cubicFit-collated/10000/linferrorT.txt'
         ])
 
     def outputs(self):
