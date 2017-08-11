@@ -8,13 +8,16 @@ class Thesis:
     def __init__(self):
         self.build = Build([
             'generators/deformationSphere.py',
-            'generators/mountainAdvect.py'
+            'generators/mountainAdvect.py',
+            'generators/resting.py',
+            'generators/schaerAdvect.py'
         ])
 
     def write(self):
         build = self.build
 
         schaerAdvect = generators.SchaerAdvect()
+        tfAdvect = generators.TfAdvect()
         deformationSphere = generators.DeformationSphere()
         mountainAdvect = generators.MountainAdvect()
         resting = generators.Resting()
@@ -52,6 +55,7 @@ class Thesis:
                         'src/thesis/slanted/resting.tex']
                         + stabilisation.outputs()
                         + schaerAdvect.outputs()
+                        + tfAdvect.outputs()
                         + deformationSphere.outputs()
                         + mountainAdvect.outputs()
                         + resting.outputs())
@@ -60,6 +64,7 @@ class Thesis:
 
         build.add(stabilisation)
         schaerAdvect.addTo(build)
+        tfAdvect.addTo(build)
         deformationSphere.addTo(build)
         mountainAdvect.addTo(build)
         resting.addTo(build)

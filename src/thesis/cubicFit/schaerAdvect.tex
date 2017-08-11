@@ -6,7 +6,6 @@
 	\item Meshes: BTF, cut cells
 	\item Schemes: cubicFit, linearUpwind, others?
 	\item Plot: Tracer and error contours (for schaerAdvect and tfAdvect)
-	\item Plot: Convergence plot (for schaerAdvect and tfAdvect)
 	\item Conclusion: 2nd-order convergence
 	\item Conclusion: numerical errors are due either to grid distortions, or misalignment of the flow with the mesh
 \end{itemize}
@@ -77,11 +76,49 @@ where $A_x = \SI{25}{\kilo\meter}$, $A_z = \SI{3}{\kilo\meter}$ are the horizont
 \begin{figure}
 	\centering
 	\begin{subfigure}{\textwidth}
-	\input{cubicFit/schaerAdvect-convergence}
-	\phantomsubcaption\label{fig:cubicFit:schaerAdvect:convergence:l2}
-	\phantomsubcaption\label{fig:cubicFit:schaerAdvect:convergence:linf}
-	\phantomsubcaption\label{fig:cubicFit:tfAdvect:convergence:l2}
-	\phantomsubcaption\label{fig:cubicFit:tfAdvect:convergence:linf}
+		\includegraphics{schaerAdvect-btf-1000-linearUpwind/10000/errorW.pdf}
+		\includegraphics{schaerAdvect-cutCell-1000-linearUpwind/10000/error.pdf}
+		$\ell_2 = \input{schaerAdvect-btf-1000-linearUpwind/10000/l2errorT}$
+		$\ell_\infty = \input{schaerAdvect-btf-1000-linearUpwind/10000/linferrorT}$
+		$\ell_2 = \input{schaerAdvect-cutCell-1000-linearUpwind/10000/l2errorT}$
+		$\ell_\infty = \input{schaerAdvect-cutCell-1000-linearUpwind/10000/linferrorT}$
+	\end{subfigure}
+	\begin{subfigure}{\textwidth}
+		\includegraphics{schaerAdvect-btf-1000-cubicFit/10000/errorSW.pdf}
+		\includegraphics{schaerAdvect-cutCell-1000-cubicFit/10000/errorS.pdf}
+		$\ell_2 = \input{schaerAdvect-btf-1000-cubicFit/10000/l2errorT}$
+		$\ell_\infty = \input{schaerAdvect-btf-1000-cubicFit/10000/linferrorT}$
+		$\ell_2 = \input{schaerAdvect-cutCell-1000-cubicFit/10000/l2errorT}$
+		$\ell_\infty = \input{schaerAdvect-cutCell-1000-cubicFit/10000/linferrorT}$
+	\end{subfigure}
+	\begin{subfigure}{\textwidth}
+		\includegraphics{tfAdvect-btf-1000-linearUpwind/10000/errorW.pdf}
+		\includegraphics{tfAdvect-cutCell-1000-linearUpwind/10000/error.pdf}
+		$\ell_2 = \input{tfAdvect-btf-1000-linearUpwind/10000/l2errorT}$
+		$\ell_\infty = \input{tfAdvect-btf-1000-linearUpwind/10000/linferrorT}$
+		$\ell_2 = \input{tfAdvect-cutCell-1000-linearUpwind/10000/l2errorT}$
+		$\ell_\infty = \input{tfAdvect-cutCell-1000-linearUpwind/10000/linferrorT}$
+	\end{subfigure}
+	\begin{subfigure}{\textwidth}
+		\includegraphics{tfAdvect-btf-1000-cubicFit/10000/errorSW.pdf}
+		\includegraphics{tfAdvect-cutCell-1000-cubicFit/10000/errorS.pdf}
+		$\ell_2 = \input{tfAdvect-btf-1000-cubicFit/10000/l2errorT}$
+		$\ell_\infty = \input{tfAdvect-btf-1000-cubicFit/10000/linferrorT}$
+		$\ell_2 = \input{tfAdvect-cutCell-1000-cubicFit/10000/l2errorT}$
+		$\ell_\infty = \input{tfAdvect-cutCell-1000-cubicFit/10000/linferrorT}$
+	\end{subfigure}
+	\caption{\TODO{numerical and analytic tracer contours, error heatmap for schaerAdvect and tfAdvect}}
+	\label{fig:cubicFit:schaerAdvect:error}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{\textwidth}
+		\input{cubicFit/schaerAdvect/convergence}
+		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:convergence:l2}
+		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:convergence:linf}
+		\phantomsubcaption\label{fig:cubicFit:tfAdvect:convergence:l2}
+		\phantomsubcaption\label{fig:cubicFit:tfAdvect:convergence:linf}
 	\end{subfigure}
 %
 	\caption{Numerical convergence of the two-dimensional tracer transport tests over mountains using

@@ -160,11 +160,7 @@ class MountainAdvect:
             plot='errorW',
             case=Case('mountainAdvect-h0-btf-1000-5000m-linearUpwind'),
             time=10000,
-            data=[
-                '10000/T',
-                '10000/T_analytic',
-                '10000/T_diff'
-            ]
+            data=['10000/T', '10000/T_analytic', '10000/T_diff']
         )
 
         self.cutCellLinearUpwindError = GmtPlot(
@@ -172,11 +168,7 @@ class MountainAdvect:
             plot='error',
             case=Case('mountainAdvect-h0-cutCell-1000-5000m-linearUpwind'),
             time=10000,
-            data=[
-                '10000/T',
-                '10000/T_analytic',
-                '10000/T_diff'
-            ],
+            data=['10000/T', '10000/T_analytic', '10000/T_diff'],
             colorBar='legends/error_T_diff.eps'
         )
 
@@ -185,11 +177,7 @@ class MountainAdvect:
             plot='error',
             case=Case('mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind'),
             time=10000,
-            data=[
-                '10000/T',
-                '10000/T_analytic',
-                '10000/T_diff'
-            ]
+            data=['10000/T', '10000/T_analytic', '10000/T_diff']
         )
 
         self.btfCubicFitError = GmtPlot(
@@ -197,11 +185,7 @@ class MountainAdvect:
             plot='errorSW',
             case=Case('mountainAdvect-h0-btf-1000-5000m-cubicFit'),
             time=10000,
-            data=[
-                '10000/T',
-                '10000/T_analytic',
-                '10000/T_diff'
-            ]
+            data=['10000/T', '10000/T_analytic', '10000/T_diff']
         )
 
         self.cutCellCubicFitError = GmtPlot(
@@ -209,11 +193,7 @@ class MountainAdvect:
             plot='errorS',
             case=Case('mountainAdvect-h0-cutCell-1000-5000m-cubicFit'),
             time=10000,
-            data=[
-                '10000/T',
-                '10000/T_analytic',
-                '10000/T_diff'
-            ]
+            data=['10000/T', '10000/T_analytic', '10000/T_diff']
         )
 
         self.slantedCellCubicFitError = GmtPlot(
@@ -221,11 +201,7 @@ class MountainAdvect:
             plot='errorS',
             case=Case('mountainAdvect-h0-slantedCell-1000-5000m-cubicFit'),
             time=10000,
-            data=[
-                '10000/T',
-                '10000/T_analytic',
-                '10000/T_diff'
-            ]
+            data=['10000/T', '10000/T_analytic', '10000/T_diff']
         )
 
         self.heatmapL2Errors = [
