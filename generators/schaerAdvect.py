@@ -1,11 +1,19 @@
-from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, Gnuplot, siunitx
+from .tfAdvect import TfAdvect
+from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, Gnuplot, Paths, PDFLaTeXFigure, siunitx
 import itertools
 import os
 
 class SchaerAdvect:
     def __init__(self):
+        self.tfAdvect = TfAdvect()
         self.copyCases()
         self.heatmaps()
+
+        self.btfTimestep = siunitx.Num(
+                'schaerAdvect-btf-1000-dt', '$atmostests_builddir/schaerAdvect-btf-1000-linearUpwind', Paths.timestep)
+
+        self.cutCellTimestep = siunitx.Num(
+                'schaerAdvect-cutCell-1000-dt', '$atmostests_builddir/schaerAdvect-cutCell-1000-linearUpwind', Paths.timestep)
 
         self.convergence = Gnuplot(
                 'cubicFit-schaerAdvect-convergence',
@@ -110,26 +118,49 @@ class SchaerAdvect:
             siunitx.Num('schaerAdvect-cutCell-1000-cubicFit-linferror', '$atmostests_builddir/schaerAdvect-cutCell-1000-cubicFit', '10000/linferrorT.txt')
         ]
 
+        self.heatmap = PDFLaTeXFigure(
+                'schaerAdvect-fig-error',
+                output=os.path.join('thesis/cubicFit/schaerAdvect/fig-error'),
+                figure=os.path.join('src/thesis/cubicFit/schaerAdvect/fig-error'),
+                components= \
+                       self.btfLinearUpwindError.outputs() \
+                     + self.cutCellLinearUpwindError.outputs() \
+                     + self.btfCubicFitError.outputs() \
+                     + self.cutCellCubicFitError.outputs() \
+                     + self.tfAdvect.btfLinearUpwindError.outputs() \
+                     + self.tfAdvect.cutCellLinearUpwindError.outputs() \
+                     + self.tfAdvect.btfCubicFitError.outputs() \
+                     + self.tfAdvect.cutCellCubicFitError.outputs() \
+                     + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapL2Errors])) \
+                     + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapLinfErrors])) \
+                     + list(itertools.chain.from_iterable([e.outputs() for e in self.tfAdvect.heatmapL2Errors])) \
+                     + list(itertools.chain.from_iterable([e.outputs() for e in self.tfAdvect.heatmapLinfErrors]))
+        )
+
     def outputs(self):
-        return self.convergence.outputs() \
-             + self.btfLinearUpwindError.outputs() \
-             + self.cutCellLinearUpwindError.outputs() \
-             + self.btfCubicFitError.outputs() \
-             + self.cutCellCubicFitError.outputs() \
-             + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapL2Errors])) \
-             + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapLinfErrors]))
+        return self.heatmap.outputs() \
+             + self.btfTimestep.outputs() \
+             + self.cutCellTimestep.outputs() \
+             + self.convergence.outputs() \
+             + self.tfAdvect.outputs()
 
     def addTo(self, build):
+        self.tfAdvect.addTo(build)
+
         build.add(self.btfLinearUpwind)
         build.add(self.cutCellLinearUpwind)
         build.add(self.btfCubicFit)
         build.add(self.cutCellCubicFit)
 
+        build.add(self.heatmap)
         build.add(self.btfLinearUpwindError)
         build.add(self.cutCellLinearUpwindError)
         build.add(self.btfCubicFitError)
         build.add(self.cutCellCubicFitError)
         build.addAll(self.heatmapL2Errors)
         build.addAll(self.heatmapLinfErrors)
+
+        build.add(self.btfTimestep)
+        build.add(self.cutCellTimestep)
 
         build.add(self.convergence)

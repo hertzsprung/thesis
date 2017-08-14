@@ -8,3 +8,4 @@ build.ninja.generated
 build.properties
 *.swp
 *.pyc
+colourScale.cpt

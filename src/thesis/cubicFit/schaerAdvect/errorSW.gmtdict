@@ -11,17 +11,18 @@ FoamFile {
     object          gmtDict;
 }
 
-projection "X2.1i/1.5i";
+projection "X2i/1.25i";
 projection2D XZ;
 boundaryPatch ground;
 plotBoundaryDots false;
 separateLegend true;
 
 FieldsToPlot (
-    [T_diff rawValues -0.6 0.6 0.05 "$GMTU/colours/red_white_blue.cpt"]
+    [T_diff rawValues -0.7 0.7 0.05 "$GMTU/colours/red_white_blue.cpt"]
     [T contours 0.1 1 0.1 "black"]
+    [T contours -1 -0.1 0.1 "red"]
     [T_analytic contours 0.1 1 0.1 "black,1_1:0"]
 );
 
-region "15e3/90e3/0/20e3";
+region "5e3/90e3/0/20e3";
 boundaryMarks "25e3/5e3WSen";

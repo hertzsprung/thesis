@@ -1,18 +1,11 @@
 \section{Horizontal transport over mountains}
 \label{sec:cubicFit:schaerAdvect}
 
-\TODO{
-\begin{itemize}
-	\item Conclusion: 2nd-order convergence
-	\item Conclusion: numerical errors are due either to grid distortions, or misalignment of the flow with the mesh
-\end{itemize}
-}
-
 A two-dimensional transport test was developed by \citet{schaer2002} to study the effect of terrain-following coordinate transformations on numerical accuracy.
 In this standard test, a tracer is positioned aloft and transported horizontally over wave-shaped mountains.
 When terrain-following meshes are used, this test challenges transport schemes because the tracer must cross mesh layers, which acts to reduce numerical accuracy \citep{schaer2002}.
 Here we use a more challenging variant of the test that has steeper mountains and highly-distorted terrain-following meshes.
-Numerical errors and numerical convergence results are compared using the linearUpwind and cubicFit transport schemes.
+Numerical convergence and numerical error structures are compared using the linearUpwind and cubicFit transport schemes on terrain-following meshes and cut cell meshes.
 
 The domain is defined on a rectangular $x$--$z$ plane that is \SI{301}{\kilo\meter} wide and \SI{25}{\kilo\meter} high as measured between parallel boundary edges.
 Boundary conditions are imposed on the tracer density $\phi$ such that $\phi = \SI{0}{\kilo\gram\per\meter\cubed}$ at the inlet boundary, and a zero normal gradient
@@ -71,57 +64,8 @@ A tracer with density $\phi$ has the shape
 \end{subequations}
 where $A_x = \SI{25}{\kilo\meter}$, $A_z = \SI{3}{\kilo\meter}$ are the horizontal and vertical half-widths respectively, and $\phi_0 = \SI{1}{\kilogram\per\meter\cubed}$ is the maximum density of the tracer.  At $t = \SI{0}{\second}$, the tracer is centred at $(x_0, z_0) = (\SI{-50}{\kilo\meter}, \SI{12}{\kilo\meter})$ so that the tracer is upwind of the mountain, in the region of uniform flow above $z_2$.
 
-\begin{figure}
-	\centering
-	\begin{subfigure}{\textwidth}
-		\includegraphics{schaerAdvect-btf-1000-linearUpwind/10000/errorW.pdf}
-		\includegraphics{schaerAdvect-cutCell-1000-linearUpwind/10000/error.pdf}
-		$\ell_2 = \input{schaerAdvect-btf-1000-linearUpwind/10000/l2errorT}$
-		$\ell_\infty = \input{schaerAdvect-btf-1000-linearUpwind/10000/linferrorT}$
-		$\ell_2 = \input{schaerAdvect-cutCell-1000-linearUpwind/10000/l2errorT}$
-		$\ell_\infty = \input{schaerAdvect-cutCell-1000-linearUpwind/10000/linferrorT}$
-		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:btf:linearUpwind}
-		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:cutCell:linearUpwind}
-		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:btf:cubicFit}
-		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:cutCell:cubicFit}
-	\end{subfigure}
-	\begin{subfigure}{\textwidth}
-		\includegraphics{schaerAdvect-btf-1000-cubicFit/10000/errorSW.pdf}
-		\includegraphics{schaerAdvect-cutCell-1000-cubicFit/10000/errorS.pdf}
-		$\ell_2 = \input{schaerAdvect-btf-1000-cubicFit/10000/l2errorT}$
-		$\ell_\infty = \input{schaerAdvect-btf-1000-cubicFit/10000/linferrorT}$
-		$\ell_2 = \input{schaerAdvect-cutCell-1000-cubicFit/10000/l2errorT}$
-		$\ell_\infty = \input{schaerAdvect-cutCell-1000-cubicFit/10000/linferrorT}$
-	\end{subfigure}
-	\begin{subfigure}{\textwidth}
-		\includegraphics{tfAdvect-btf-1000-linearUpwind/10000/errorW.pdf}
-		\includegraphics{tfAdvect-cutCell-1000-linearUpwind/10000/error.pdf}
-		$\ell_2 = \input{tfAdvect-btf-1000-linearUpwind/10000/l2errorT}$
-		$\ell_\infty = \input{tfAdvect-btf-1000-linearUpwind/10000/linferrorT}$
-		$\ell_2 = \input{tfAdvect-cutCell-1000-linearUpwind/10000/l2errorT}$
-		$\ell_\infty = \input{tfAdvect-cutCell-1000-linearUpwind/10000/linferrorT}$
-	\end{subfigure}
-	\begin{subfigure}{\textwidth}
-		\includegraphics{tfAdvect-btf-1000-cubicFit/10000/errorSW.pdf}
-		\includegraphics{tfAdvect-cutCell-1000-cubicFit/10000/errorS.pdf}
-		$\ell_2 = \input{tfAdvect-btf-1000-cubicFit/10000/l2errorT}$
-		$\ell_\infty = \input{tfAdvect-btf-1000-cubicFit/10000/linferrorT}$
-		$\ell_2 = \input{tfAdvect-cutCell-1000-cubicFit/10000/l2errorT}$
-		$\ell_\infty = \input{tfAdvect-cutCell-1000-cubicFit/10000/linferrorT}$
-	\end{subfigure}
-	\caption{\TODO{numerical and analytic tracer contours, error heatmap for schaerAdvect and tfAdvect}}
-	\label{fig:cubicFit:schaerAdvect:error}
-\end{figure}
-
-Tests are integrated for \SI{10000}{\second} using time-steps chosen for each mesh so that the maximum Courant number is about \num{0.4}.  This choice yields a time-step that is well below any stability limit, as recommended by \citet{lauritzen2012}.  By the end of integration the tracer is positioned downwind of the mountain.
+Tests are integrated for \SI{10000}{\second} using s chosen for each mesh so that the maximum Courant number is about \num{0.4}.  This choice yields a time-step that is well below any stability limit, as recommended by \citet{lauritzen2012}.  By the end of integration the tracer is positioned downwind of the mountain.
 The analytic solution at $t = \SI{10000}{\second}$ is centred at $(x_0, z_0) = (\SI{50}{\kilo\meter}, \SI{12}{\kilo\meter})$ with its shape unchanged from the initial condition.
-
-The test was performed using the linearUpwind and cubicFit transport schemes on BTF and cut cell meshes with $\Delta x = \SI{1000}{\meter}$, $\Delta z = \SI{500}{\meter}$.  To obtain a maximum Courant number of about \num{0.4}, $\Delta t = \SI{40}{\second}$ on the cut cell mesh where the flow is aligned with the mesh layers and there are no fluxes through upper and lower cell faces.
-On the BTF mesh, $\Delta t$ is only \SI{8}{\second} because the flow is misaligned the mesh layers, with fluxes through all four faces of cells above sloping terrain.
-
-The highly-distorted BTF mesh presents a particular challenge to the linearUpwind scheme with the final numerical solution, marked by solid lines, losing its correct shape and maximum intensity compared to the analytic solution marked by dashed lines (figure~\ref{fig:cubicFit:schaerAdvect:error:btf:linearUpwind}).
-In contrast, the linearUpwind scheme produces a more reasonable solution on the cut cell mesh, with only small phase errors apparent in figure~\ref{fig:cubicFit:schaerAdvect:error:cutCell:linearUpwind}.
-Accuracy is much improved using the cubicFit scheme: on the BTF mesh, shape and maximum intensity are similar to the analytic solution (figure~\ref{fig:cubicFit:schaerAdvect:error:btf:cubicFit}) and, on the cut cell mesh, numerical errors are so small they are not visible (figure~\ref{fig:cubicFit:schaerAdvect:error:cutCell:cubicFit}).
 
 \begin{figure}
 	\centering
@@ -140,19 +84,54 @@ Accuracy is much improved using the cubicFit scheme: on the BTF mesh, shape and 
 	\label{fig:cubicFit:schaerAdvect:convergence}
 \end{figure}
 
-%A range of mesh spacings are chosen so that $\Delta x \mathbin{:} \Delta z = 2\mathbin{:}1$ to match the original test specification from \citet{schaer2002}.
-%Tests were performed using the linearUpwind and cubicFit schemes at mesh spacings between $\Delta x = \SI{250}{\meter}$ and $\Delta x = \SI{5000}{\meter}$.
+To assess numerical convergence, a range of mesh spacings are chosen so that $\Delta x \mathbin{:} \Delta z = 2\mathbin{:}1$ to match the original test specification from \citet{schaer2002}.
+Tests were performed using the linearUpwind and cubicFit schemes using BTF meshes and cut cell meshes with mesh spacings between $\Delta x = \SI{250}{\meter}$ and $\Delta x = \SI{5000}{\meter}$.
 Error norms are calculated by subtracting the analytic solution from the numerical solution,
 \begin{align}
 	\ell_2 &= \sqrt{\frac{\sum_c \left(\phi - \phi_T \right)^2 \vol_c}{\sum_c \left(\phi_T^2 \vol_c \right)}} \label{eqn:l2-error} \\
 	\ell_\infty &= \frac{\max_c \Mag{\phi - \phi_T}}{\max_c \Mag{\phi_T}} \label{eqn:linf-error}
 \end{align}
 where $\phi$ is the numerical value, $\phi_T$ is the analytic value, $\sum_c$ denotes a summation over all cells $c$ in the domain, and $\max_c$ denotes a maximum value of any cell.
-Numerical convergence in the $\ell_2$ and $\ell_\infty$ norms is plotted in figure~\ref{fig:cubicFit:schaerAdvect:convergence}.
-The linearUpwind and cubicFit schemes are second-order convergent at all but the coarsest mesh spacings where errors are saturated for both schemes.
+The linearUpwind and cubicFit schemes are second-order convergent in the $\ell_2$ norm (figure~\ref{fig:cubicFit:schaerAdvect:convergence:l2}) and $\ell_\infty$ norm (figure~\ref{fig:cubicFit:schaerAdvect:convergence}) at all but the coarsest mesh spacings where errors are saturated for both schemes.
 
 The cubicFit scheme achieves a given $\ell_2$ error using a mesh spacing that is almost twice as coarse as that needed by the linearUpwind scheme.  Doubling the mesh spacing results in a coarser mesh with four times fewer cells because the $\Delta x \mathbin{:} \Delta z$ aspect ratio is fixed.
 Recall that the stencil for the cubicFit scheme has about twice as many cells as the stencil for the linearUpwind scheme.
 Hence, for a given $\ell_2$ error, the computational cost during integration of the cubicFit scheme is about half the computational cost of the linearUpwind scheme.
 
-This test demonstrates that cubicFit is second-order convergent in the domain interior irrespective of mesh distortions.  \TODO{In the next test, ...}
+\begin{figure}
+	\centering
+	\begin{subfigure}{\textwidth}
+		\includegraphics{thesis/cubicFit/schaerAdvect/fig-error.pdf}
+		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:btf:linearUpwind}
+		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:cutCell:linearUpwind}
+		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:btf:cubicFit}
+		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:cutCell:cubicFit}
+		\phantomsubcaption\label{fig:cubicFit:tfAdvect:error:btf:linearUpwind}
+		\phantomsubcaption\label{fig:cubicFit:tfAdvect:error:cutCell:linearUpwind}
+		\phantomsubcaption\label{fig:cubicFit:tfAdvect:error:btf:cubicFit}
+		\phantomsubcaption\label{fig:cubicFit:tfAdvect:error:cutCell:cubicFit}
+	\end{subfigure}
+	\caption{Tracer contours at the end of integration for the two-dimensional tracer transport tests over mountains using
+	(\subcaptionref{fig:cubicFit:schaerAdvect:error:btf:linearUpwind},
+	\subcaptionref{fig:cubicFit:schaerAdvect:error:cutCell:linearUpwind},
+	\subcaptionref{fig:cubicFit:schaerAdvect:error:btf:cubicFit},
+	\subcaptionref{fig:cubicFit:schaerAdvect:error:cutCell:cubicFit}) horizontal and 
+	(\subcaptionref{fig:cubicFit:tfAdvect:error:btf:linearUpwind},
+	\subcaptionref{fig:cubicFit:tfAdvect:error:cutCell:linearUpwind},
+	\subcaptionref{fig:cubicFit:tfAdvect:error:btf:cubicFit},
+	\subcaptionref{fig:cubicFit:tfAdvect:error:cutCell:cubicFit}) terrain-following velocity fields.  The numerical solution, marked with solid lines, and the analytic solution, marked with dashed lines, are plotted every \num{0.1}.  Tracer contours overlay a color error field, calculated by subtracting the analytic solution from the numerical solution.  Only the lowest \SI{20}{\kilo\meter} in the lee of the mountain is plotted.  The entire domain is \SI{301}{\kilo\meter} wide and \SI{25}{\kilo\meter} high.
+	}
+	
+	\label{fig:cubicFit:schaerAdvect:error}
+\end{figure}
+
+Next, we examine the structure of numerical errors with test results using the linearUpwind and cubicFit transport schemes on BTF and cut cell meshes with $\Delta x = \SI{1000}{\meter}$, $\Delta z = \SI{500}{\meter}$.  To obtain a maximum Courant number of about \num{0.4}, we choose $\Delta t = \TODO{\SI{40}{\second}}$ on the cut cell mesh where the flow is aligned with the mesh layers and there are no fluxes through upper and lower cell faces.  Since there is no flow below $z = \SI{7}{\kilo\meter}$, the time-step is not constrained by small, cut cells next to the lower boundary.
+On the BTF mesh, $\Delta t$ is only \TODO{\SI{8}{\second}} because the flow is misaligned the mesh layers, with fluxes through all four faces of cells above sloping terrain.
+
+The highly-distorted BTF mesh presents a particular challenge to the linearUpwind scheme with the final numerical solution, marked by solid lines, losing its correct shape and maximum intensity compared to the analytic solution marked by dashed lines (figure~\ref{fig:cubicFit:schaerAdvect:error:btf:linearUpwind}).
+The linearUpwind scheme produces a much better solution on the cut cell mesh, with only small phase errors apparent in figure~\ref{fig:cubicFit:schaerAdvect:error:cutCell:linearUpwind}.
+Accuracy is much improved using the cubicFit scheme: on the BTF mesh, shape and maximum intensity are similar to the analytic solution (figure~\ref{fig:cubicFit:schaerAdvect:error:btf:cubicFit}) and, on the cut cell mesh, numerical errors are so small they are not visible (figure~\ref{fig:cubicFit:schaerAdvect:error:cutCell:cubicFit}).
+The numerical and analytic contours overlay a color error field that reveals horizontal streaks of error on the BTF mesh (figure~\ref{fig:cubicFit:schaerAdvect:error:btf:linearUpwind},~\ref{fig:cubicFit:schaerAdvect:error:btf:cubicFit}) that were generated above the steepest mountain peaks before becoming trapped in the region of zero flow below $z = \SI{7}{\kilo\meter}$.
+
+The horizontal advection test demonstrates that the cubicFit scheme is second-order convergent in the domain interior irrespective of mesh distortions.  Numerical errors are largest on terrain-following meshes, due either to misalignment of the flow with the mesh, or to mesh distortions.
+In the next section, we propose a new test in order to identify the cause of these numerical errors.
