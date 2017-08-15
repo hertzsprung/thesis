@@ -1,4 +1,4 @@
-from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, Gnuplot, siunitx
+from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, Gnuplot, PDFLaTeXFigure, siunitx
 import itertools
 import os
 
@@ -6,6 +6,21 @@ class TfAdvect:
     def __init__(self):
         self.copyCases()
         self.heatmaps()
+
+        self.tracerPlot = GmtPlot(
+            'tfAdvect-btfCubicFitTracer',
+            plot='tracer',
+            case=Case('tfAdvect-btf-1000-cubicFit'),
+            time=10000,
+            data=['10000/T', '10000/T_analytic']
+        )
+
+        self.tracerFigure = PDFLaTeXFigure(
+                'tfAdvect-fig-tracer',
+                output=os.path.join('thesis/cubicFit/tfAdvect/fig-tracer'),
+                figure=os.path.join('src/thesis/cubicFit/tfAdvect/fig-tracer'),
+                components=self.tracerPlot.outputs()
+        )
 
     def copyCases(self):
         self.btfLinearUpwind = GmtPlotCopyCase(
@@ -28,7 +43,10 @@ class TfAdvect:
                 'tfAdvect-btf-1000-cubicFit',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/cubicFit/schaerAdvect/errorSW.gmtdict'],
+                plots=[
+                    'src/thesis/cubicFit/schaerAdvect/errorSW.gmtdict',
+                    'src/thesis/tracer.gmtdict'
+                ],
                 files=['10000/T', '10000/T_analytic', '10000/T_diff']
         )
 
@@ -93,7 +111,8 @@ class TfAdvect:
              + self.btfCubicFitError.outputs() \
              + self.cutCellCubicFitError.outputs() \
              + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapL2Errors])) \
-             + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapLinfErrors]))
+             + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapLinfErrors])) \
+             + self.tracerFigure.outputs()
 
     def addTo(self, build):
         build.add(self.btfLinearUpwind)
@@ -108,3 +127,5 @@ class TfAdvect:
         build.addAll(self.heatmapL2Errors)
         build.addAll(self.heatmapLinfErrors)
 
+        build.add(self.tracerPlot)
+        build.add(self.tracerFigure)
