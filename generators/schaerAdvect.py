@@ -85,7 +85,8 @@ class SchaerAdvect:
             plot='error',
             case=Case('schaerAdvect-cutCell-1000-linearUpwind'),
             time=10000,
-            data=['10000/T', '10000/T_analytic', '10000/T_diff']
+            data=['10000/T', '10000/T_analytic', '10000/T_diff'],
+            colorBar='legends/error_T_diff.eps'
         )
 
         self.btfCubicFitError = GmtPlot(

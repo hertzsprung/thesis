@@ -1,6 +1,4 @@
 build
-legends
-gmt.history
 thesis.pdf
 *.img
 build.ninja
@@ -8,4 +6,3 @@ build.ninja.generated
 build.properties
 *.swp
 *.pyc
-colourScale.cpt

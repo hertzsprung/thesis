@@ -1,6 +1,0 @@
-- [x] set up singularity container running ubuntu
-- [x] get latex and ninja installed
-- [ ] git clone thesis master branch
-- [ ] make branch configurable when creating container
-- [ ] allow container to build thesis from host?
-- [x] build an empty PDF with pdflatex

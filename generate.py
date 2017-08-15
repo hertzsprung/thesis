@@ -44,6 +44,7 @@ class Thesis:
                         'src/thesis/cubicFit/scheme.tex',
                         'src/thesis/cubicFit/linearUpwind.tex',
                         'src/thesis/cubicFit/schaerAdvect.tex',
+                        'src/thesis/cubicFit/tfAdvect.tex',
                         'src/thesis/cubicFit/deformationSphere.tex',
                         'src/thesis/cubicFit/interior-stencils.tex',
                         'src/thesis/cubicFit/double-upwind-stencil.tex',

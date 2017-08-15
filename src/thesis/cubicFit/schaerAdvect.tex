@@ -19,8 +19,8 @@ The terrain is wave-shaped, specified by the surface elevation $h$ such that
 \shortintertext{where}
 %
    h^\star(x) &= \left\{ \begin{array}{l l}
-       h_0 \cos^2 ( \beta x ) & \quad \text{if $| x | < a$} \\
-	0 & \quad \text{otherwise}
+       h_0 \cos^2 ( \beta x ) & \enskip \text{if $| x | < a$} \\
+	0 & \enskip \text{otherwise}
     \end{array} \right.
 \end{align}
 \end{subequations}
@@ -28,28 +28,38 @@ where $a = \SI{25}{\kilo\meter}$ is the mountain envelope half-width, $h_0 = \SI
 
 \TODO{might have already described BTF in a previous chapter}
 A basic terrain-following (BTF) mesh is constructed by using the terrain profile to modify the uniform mesh.
-The BTF method uses a linear decay function so that mesh surfaces become horizontal at the top of the model domain \citep{galchen-somerville1975a},
+The BTF method uses a linear decay function so that mesh layers become horizontal at the top of the model domain \citep{galchen-somerville1975a},
 \begin{equation}
-	z(x) = \left( H - h(x) \right) \left( z^\star / H \right) + h(x)
+	z(x) = \left( H - h(x) \right) \left( z^\star / H \right) + h(x) \label{eqn:btf}
 \end{equation}
-where $z$ is the geometric height, $H$ is the height of the domain, $h(x)$ is the surface elevation and $z^\star$ is the computational height of a mesh surface.  If there were no terrain then $h = 0$ and $z = z^\star$.
+where $z$ is the geometric height, $H$ is the height of the domain, $h(x)$ is the surface elevation and $z^\star$ is the computational height of a mesh layer.  If there were no terrain then $h = 0$ and $z = z^\star$.
 
 A velocity field is prescribed with uniform horizontal flow aloft and zero flow near the ground,
 \begin{align}
 	u(z) = u_0 \left\{ \begin{array}{l l}
-		1 & \quad \text{if $z \geq z_2$} \\
-		\sin^2 \left( \frac{\pi}{2} \frac{z - z_1}{z_2 - z_1} \right) & \quad \text{if $z_1 < z < z_2$} \\
-		0 & \quad \text{otherwise}
+		1 & \enskip \text{if $z \geq z_2$} \\
+		\sin^2 \left( \frac{\pi}{2} \frac{z - z_1}{z_2 - z_1} \right) & \enskip \text{if $z_1 < z < z_2$} \\
+		0 & \enskip \text{otherwise}
 	\end{array} \right.	
 \end{align}
 where $u_0 = \SI{10}{\meter\per\second}$, $z_1 = \SI{7}{\kilo\meter}$ and $z_2 = \SI{8}{\kilo\meter}$.
+This results in a constant wind above $z_2$, and zero flow at \SI{7}{\kilo\meter} and below.
 
-A tracer with density $\phi$ has the shape
+The discrete velocity field is defined using a streamfunction, \(\Psi\).  Given that \(u = -\partial \Psi / \partial z\), the streamfunction is found by vertical integration of the velocity profile:
+\begin{align}
+	\Psi(z) &= -\frac{u_0}{2} \left\{ \begin{array}{l l}
+		\left( 2z - z_1 - z_2 \right) & \enskip \text{if $z > z_2$} \\
+		z - z_1 - \frac{z_2 - z_1}{\pi} \sin \left(\pi \frac{z - z_1}{z_2-z_1}\right) & \enskip \text{if $z_1 < z \leq z_2$} \\
+		0 & \enskip \text{if $z \leq z_1$}
+	\end{array} \right.
+\end{align}
+
+A tracer with density $\phi$ is positioned upstream above the height of the terrain.  It has the shape
 \begin{subequations}
 \begin{align}
 	\phi(x, z) &= \phi_0 \left\{ \begin{array}{l l}
-		\cos^2 \left( \frac{\pi r}{2} \right) & \quad \text{if $r \leq 1$} \\
-		0 & \quad \text{otherwise}
+		\cos^2 \left( \frac{\pi r}{2} \right) & \enskip \text{if $r \leq 1$} \\
+		0 & \enskip \text{otherwise}
 	\end{array} \right.
 %
 \intertext{with radius $r$ given by}
@@ -101,6 +111,7 @@ Hence, for a given $\ell_2$ error, the computational cost during integration of 
 \begin{figure}
 	\centering
 	\begin{subfigure}{\textwidth}
+		\centering
 		\includegraphics{thesis/cubicFit/schaerAdvect/fig-error.pdf}
 		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:btf:linearUpwind}
 		\phantomsubcaption\label{fig:cubicFit:schaerAdvect:error:cutCell:linearUpwind}
@@ -133,5 +144,5 @@ The linearUpwind scheme produces a much better solution on the cut cell mesh, wi
 Accuracy is much improved using the cubicFit scheme: on the BTF mesh, shape and maximum intensity are similar to the analytic solution (figure~\ref{fig:cubicFit:schaerAdvect:error:btf:cubicFit}) and, on the cut cell mesh, numerical errors are so small they are not visible (figure~\ref{fig:cubicFit:schaerAdvect:error:cutCell:cubicFit}).
 The numerical and analytic contours overlay a color error field that reveals horizontal streaks of error on the BTF mesh (figure~\ref{fig:cubicFit:schaerAdvect:error:btf:linearUpwind},~\ref{fig:cubicFit:schaerAdvect:error:btf:cubicFit}) that were generated above the steepest mountain peaks before becoming trapped in the region of zero flow below $z = \SI{7}{\kilo\meter}$.
 
-The horizontal advection test demonstrates that the cubicFit scheme is second-order convergent in the domain interior irrespective of mesh distortions.  Numerical errors are largest on terrain-following meshes, due either to misalignment of the flow with the mesh, or to mesh distortions.
+The horizontal transport test demonstrates that the cubicFit scheme is second-order convergent in the domain interior irrespective of mesh distortions.  Numerical errors are largest on terrain-following meshes, due either to misalignment of the flow with the mesh, or to mesh distortions.
 In the next section, we propose a new test in order to identify the cause of these numerical errors.

@@ -21,56 +21,56 @@
 \begin{document}
 
 \TPMargin{1pt}
-\begin{textblock*}{12em}(0.9in,1.3in)
+\begin{textblock*}{12em}(0.9in,1.2in)
 \normalsize
 (a) BTF, linearUpwind \\
 \hspace*{0.3em}$\ell_2 = \input{schaerAdvect-btf-1000-linearUpwind/10000/l2errorT}$
 \hspace*{1em}$\ell_\infty = \input{schaerAdvect-btf-1000-linearUpwind/10000/linferrorT}$
 \end{textblock*}
 
-\begin{textblock*}{12em}(3.12in,1.3in)
+\begin{textblock*}{12em}(3.12in,1.2in)
 \normalsize
 (b) Cut cells, linearUpwind \\
 \hspace*{0.3em}$\ell_2 = \input{schaerAdvect-cutCell-1000-linearUpwind/10000/l2errorT}$
 \hspace*{1em}$\ell_\infty = \input{schaerAdvect-cutCell-1000-linearUpwind/10000/linferrorT}$
 \end{textblock*}
 
-\begin{textblock*}{12em}(0.9in,2.7in)
+\begin{textblock*}{12em}(0.9in,2.65in)
 \normalsize
 (c) BTF, cubicFit \\
 \hspace*{0.3em}$\ell_2 = \input{schaerAdvect-btf-1000-cubicFit/10000/l2errorT}$
 \hspace*{1em}$\ell_\infty = \input{schaerAdvect-btf-1000-cubicFit/10000/linferrorT}$
 \end{textblock*}
 
-\begin{textblock*}{12em}(3.12in,2.7in)
+\begin{textblock*}{12em}(3.12in,2.65in)
 \normalsize
 (d) Cut cells, cubicFit \\
 \hspace*{0.3em}$\ell_2 = \input{schaerAdvect-cutCell-1000-cubicFit/10000/l2errorT}$
 \hspace*{1em}$\ell_\infty = \input{schaerAdvect-cutCell-1000-cubicFit/10000/linferrorT}$
 \end{textblock*}
 
-\begin{textblock*}{12em}(0.9in,4.95in)
+\begin{textblock*}{12em}(0.9in,4.8in)
 \normalsize
 (e) BTF, linearUpwind \\
 \hspace*{0.3em}$\ell_2 = \input{tfAdvect-btf-1000-linearUpwind/10000/l2errorT}$
 \hspace*{1em}$\ell_\infty = \input{tfAdvect-btf-1000-linearUpwind/10000/linferrorT}$
 \end{textblock*}
 
-\begin{textblock*}{12em}(3.12in,4.95in)
+\begin{textblock*}{12em}(3.12in,4.8in)
 \normalsize
 (f) Cut cells, linearUpwind \\
 \hspace*{0.3em}$\ell_2 = \input{tfAdvect-cutCell-1000-linearUpwind/10000/l2errorT}$
 \hspace*{1em}$\ell_\infty = \input{tfAdvect-cutCell-1000-linearUpwind/10000/linferrorT}$
 \end{textblock*}
 
-\begin{textblock*}{12em}(0.9in,6.4in)
+\begin{textblock*}{12em}(0.9in,6.25in)
 \normalsize
 (g) BTF, cubicFit \\
 \hspace*{0.3em}$\ell_2 = \input{tfAdvect-btf-1000-cubicFit/10000/l2errorT}$
 \hspace*{1em}$\ell_\infty = \input{tfAdvect-btf-1000-cubicFit/10000/linferrorT}$
 \end{textblock*}
 
-\begin{textblock*}{12em}(3.12in,6.4in)
+\begin{textblock*}{12em}(3.12in,6.25in)
 \normalsize
 (h) Cut cells, cubicFit \\
 \hspace*{0.3em}$\ell_2 = \input{tfAdvect-cutCell-1000-cubicFit/10000/l2errorT}$
@@ -78,6 +78,7 @@
 \end{textblock*}
 
 \begin{center}Horizontal velocity field\end{center}
+\vspace{-0.5em}
 
 $z$ (\si{\meter}) \raisebox{-.5\height}{
 	\includegraphics{schaerAdvect-btf-1000-linearUpwind/10000/errorW.pdf}
@@ -93,6 +94,7 @@ $z$ (\si{\meter}) \raisebox{-.5\height}{
 \hspace*{13.5em}$x$ (\si{\meter})\hspace{14em}$x$ (\si{\meter})
 
 \begin{center}Terrain-following velocity field\end{center}
+\vspace{-0.5em}
 
 $z$ (\si{\meter}) \raisebox{-.5\height}{
 	\includegraphics{tfAdvect-btf-1000-linearUpwind/10000/errorW.pdf}
@@ -107,5 +109,5 @@ $z$ (\si{\meter}) \raisebox{-.5\height}{
 \vspace{0.5em}
 \hspace*{13.5em}$x$ (\si{\meter})\hspace{14em}$x$ (\si{\meter})
 
-TODO: colorBar
+\centering \includegraphics[height=5in,angle=270]{schaerAdvect-cutCell-1000-linearUpwind/schaerAdvect-cutCellLinearUpwindError-colorBar.eps}
 \end{document}
