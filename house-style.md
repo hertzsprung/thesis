@@ -1,5 +1,7 @@
+- 'time-step', not 'timestep' or 'time step'
+- 'cut cell', not 'cut-cell'
 - 'terrain', not 'orography'
 - 'transport', not 'advection'
 - 'mesh', not 'grid'
 - 'the cubicFit transport scheme' or 'the cubicFit scheme', not just 'cubicFit'
-- 'mesh layers', not 'mesh surfaces'
+- 'mesh layers', not 'the mesh layers' or 'mesh surfaces'

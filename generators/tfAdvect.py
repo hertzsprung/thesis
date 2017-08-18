@@ -1,4 +1,4 @@
-from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, Gnuplot, PDFLaTeXFigure, siunitx
+from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, Gnuplot, Paths, PDFLaTeXFigure, siunitx
 import itertools
 import os
 
@@ -7,12 +7,23 @@ class TfAdvect:
         self.copyCases()
         self.heatmaps()
 
+        self.btfTimestep = siunitx.Num(
+                'tfAdvect-btf-1000-dt', '$atmostests_builddir/tfAdvect-btf-1000-linearUpwind', Paths.timestep)
+
+        self.cutCellTimestep = siunitx.Num(
+                'tfAdvect-cutCell-1000-dt', '$atmostests_builddir/tfAdvect-cutCell-1000-linearUpwind', Paths.timestep)
+
         self.tracerPlot = GmtPlot(
             'tfAdvect-btfCubicFitTracer',
             plot='tracer',
             case=Case('tfAdvect-btf-1000-cubicFit'),
             time=10000,
-            data=['10000/T', '10000/T_analytic']
+            data=[
+                '10000/T_0',
+                '10000/T_5000',
+                '10000/T',
+                '10000/T_analytic'
+            ]
         )
 
         self.tracerFigure = PDFLaTeXFigure(
@@ -47,7 +58,8 @@ class TfAdvect:
                     'src/thesis/cubicFit/schaerAdvect/errorSW.gmtdict',
                     'src/thesis/tracer.gmtdict'
                 ],
-                files=['10000/T', '10000/T_analytic', '10000/T_diff']
+                files=['10000/T', '10000/T_analytic', '10000/T_diff'],
+                renamedFiles={'0/T': '10000/T_0', '5000/T': '10000/T_5000'}
         )
 
         self.cutCellCubicFit = GmtPlotCopyCase(
@@ -112,7 +124,9 @@ class TfAdvect:
              + self.cutCellCubicFitError.outputs() \
              + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapL2Errors])) \
              + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapLinfErrors])) \
-             + self.tracerFigure.outputs()
+             + self.tracerFigure.outputs() \
+             + self.btfTimestep.outputs() \
+             + self.cutCellTimestep.outputs()
 
     def addTo(self, build):
         build.add(self.btfLinearUpwind)
@@ -126,6 +140,9 @@ class TfAdvect:
         build.add(self.cutCellCubicFitError)
         build.addAll(self.heatmapL2Errors)
         build.addAll(self.heatmapLinfErrors)
+
+        build.add(self.btfTimestep)
+        build.add(self.cutCellTimestep)
 
         build.add(self.tracerPlot)
         build.add(self.tracerFigure)
