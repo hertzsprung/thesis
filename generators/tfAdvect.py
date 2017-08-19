@@ -7,11 +7,11 @@ class TfAdvect:
         self.copyCases()
         self.heatmaps()
 
-        self.btfTimestep = siunitx.Num(
-                'tfAdvect-btf-1000-dt', '$atmostests_builddir/tfAdvect-btf-1000-linearUpwind', Paths.timestep)
+        self.btfTimestep = siunitx.Timestep(
+                'tfAdvect-btf-1000-dt', '$atmostests_builddir/tfAdvect-btf-1000-linearUpwind')
 
-        self.cutCellTimestep = siunitx.Num(
-                'tfAdvect-cutCell-1000-dt', '$atmostests_builddir/tfAdvect-cutCell-1000-linearUpwind', Paths.timestep)
+        self.cutCellTimestep = siunitx.Timestep(
+                'tfAdvect-cutCell-1000-dt', '$atmostests_builddir/tfAdvect-cutCell-1000-linearUpwind')
 
         self.tracerPlot = GmtPlot(
             'tfAdvect-btfCubicFitTracer',

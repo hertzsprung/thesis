@@ -36,7 +36,8 @@ An analytic solution at \SI{10000}{\second} is obtained by calculating the new h
 Because the velocity field is non-divergent, the flow accelerates over mountain ridges and the tracer travels \TODO{\SI{123}{\meter}} further compared to the tracer in a purely horizontal velocity field.  The vertical tracer position is unchanged downwind of the mountains because flow is parallel to the mesh layers.
 
 To enable comparisons with the horizontal transport test, results are obtained using the linearUpwind and cubicFit transport schemes on BTF and cut cell meshes with $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.
-To obtain a maximum Courant number of about \num{0.4}, we choose $\Delta t = \SI{25}{\second}$ on the BTF mesh where flow is aligned with mesh layers.  The cut cell mesh suffers from the small cell problem, having a more stringent time-step constraint of $\Delta t = \SI{2}{\second}$.  Recall that, in this test, there is flow everywhere in the domain, and it is flow through arbitrarily small cut cells that imposes the more stringent time-step constraint.
+To obtain a maximum Courant number of about \num{0.4}, we choose $\Delta t = \inputval{tfAdvect-btf-1000-linearUpwind/dt}$ on the BTF mesh where flow is aligned with mesh layers.
+The cut cell mesh suffers from the small cell problem, having a more stringent time-step constraint of $\Delta t = \inputval{tfAdvect-cutCell-1000-linearUpwind/dt}$.  Recall that, in this test, there is flow everywhere in the domain, and it is flow through arbitrarily small cut cells that imposes the more stringent time-step constraint.
 
 \begin{figure}
 	\centering

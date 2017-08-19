@@ -9,11 +9,11 @@ class SchaerAdvect:
         self.copyCases()
         self.heatmaps()
 
-        self.btfTimestep = siunitx.Num(
-                'schaerAdvect-btf-1000-dt', '$atmostests_builddir/schaerAdvect-btf-1000-linearUpwind', Paths.timestep)
+        self.btfTimestep = siunitx.Timestep(
+                'schaerAdvect-btf-1000-dt', '$atmostests_builddir/schaerAdvect-btf-1000-linearUpwind')
 
-        self.cutCellTimestep = siunitx.Num(
-                'schaerAdvect-cutCell-1000-dt', '$atmostests_builddir/schaerAdvect-cutCell-1000-linearUpwind', Paths.timestep)
+        self.cutCellTimestep = siunitx.Timestep(
+                'schaerAdvect-cutCell-1000-dt', '$atmostests_builddir/schaerAdvect-cutCell-1000-linearUpwind')
 
         self.convergence = Gnuplot(
                 'cubicFit-schaerAdvect-convergence',
