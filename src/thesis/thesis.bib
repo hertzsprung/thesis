@@ -1,7 +1,12 @@
+@STRING{ACTAGEO = "Acta\ Geophys."}
+@STRING{ASL       = "Atmos. Sci. Lett."}
 @STRING{GMD       = "Geosci.\ Model\ Dev."}
-@STRING{QJRMS     = "Quart.\ J.\ Roy.\ Meteor.\ Soc."}
-@STRING{MWR       = "Mon.\ Wea.\ Rev."}
+@STRING{IJNME     = "Int.\ J.\ Numer.\ Meth.\ Engng"}
 @string{JCP       = "J.\ Comp.\ Phys."}
+@STRING{JSC       = "SIAM J.\ Sci.\ Comput."}
+@STRING{MWR       = "Mon.\ Wea.\ Rev."}
+@String{NMPDE	  = "Numer.\ Methods.\ Partial\ Differ.\ Equ."}
+@STRING{QJRMS     = "Quart.\ J.\ Roy.\ Meteor.\ Soc."}
 
 @article{baldauf2008,
 	title={Stability analysis for linear discretisations of the advection equation with {Runge--Kutta} time integration},
@@ -13,6 +18,38 @@
 	year={2008},
 	publisher={Elsevier},
 	doi={10.1016/j.jcp.2008.03.025}
+}
+
+@article{chen2017,
+	title={Comparison of Dimensionally-Split and Multi-Dimensional Atmospheric Transport Schemes for Long Time-Steps},
+	author={Yumeng Chen and Hilary Weller and Stephen Pring and James Shaw},
+	year={2017},
+	journal=QJRMS,
+	doi={10.1002/qj.3125}
+}
+
+@article{cuetofelgueroso2006,
+	title={High-order finite volume schemes on unstructured grids using moving least-squares reconstruction. {Application} to shallow water dynamics},
+	author={Cueto-Felgueroso, L and Colominas, I and Fe, J and Navarrina, F and Casteleiro, M},
+	journal=IJNME,
+	volume={65},
+	number={3},
+	pages={295--331},
+	year={2006},
+	publisher={John Wiley \& Sons},
+	doi={10.1002/nme.1442}
+}
+
+@article{cuetofelgueroso2007,
+	title={Finite volume solvers and Moving Least-Squares approximations for the compressible {Navier--Stokes} equations on unstructured grids},
+	author={Cueto-Felgueroso, Luis and Colominas, Ignasi and Nogueira, Xesus and Navarrina, Fermin and Casteleiro, Manuel},
+	journal=CMAME,
+	volume={196},
+	number={45},
+	pages={4712--4736},
+	year={2007},
+	publisher={Elsevier},
+	doi={10.1016/j.cma.2007.06.003}
 }
 
 @book{durran2013,
@@ -49,6 +86,17 @@
 	Publisher = {John Wiley \& Sons, Ltd},
 }
 
+@article{guo2014,
+	title={A conservative {semi-Lagrangian} discontinuous {Galerkin} scheme on the cubed sphere},
+	author={Guo, Wei and Nair, Ramachandran D and Qiu, Jing-Mei},
+	journal=MWR,
+	volume={142},
+	number={1},
+	pages={457--475},
+	year={2014},
+	doi={10.1175/MWR-D-13-00048.1}
+}
+
 @article{heikes-randall1995a,
 	title={Numerical integration of the shallow-water equations on a twisted icosahedral grid. {Part I}: Basic design and results of tests},
 	author={Heikes, Ross and Randall, David A},
@@ -71,6 +119,30 @@
 	doi={10.1175/1520-0493(1995)123<1881:NIOTSW>2.0.CO;2}
 }
 
+@article{ii-xiao2009,
+	title={High order multi-moment constrained finite volume method. {Part I}: Basic formulation},
+	author={Ii, Satoshi and Xiao, Feng},
+	journal=JCP,
+	volume={228},
+	number={10},
+	pages={3669--3707},
+	year={2009},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2009.02.009}
+}
+
+@article{iske-kaeser2004,
+	title={Conservative {semi-Lagrangian} advection on adaptive unstructured meshes},
+	author={Iske, Armin and K{\"a}ser, Martin},
+	journal=NMPDE,
+	volume={20},
+	number={3},
+	pages={388--411},
+	year={2004},
+	publisher={Wiley Online Library},
+	doi={10.1002/num.10100}
+}
+
 @article{jebens2011,
 	title={Partially implicit peer methods for the compressible {Euler} equations},
 	author={Jebens, Stefan and Knoth, Oswald and Weiner, R{\"u}diger},
@@ -81,6 +153,18 @@
 	year={2011},
 	publisher={Elsevier},
 	doi={10.1016/j.jcp.2011.03.015}
+}
+
+@article{kent2014,
+	title={Dynamical core model intercomparison project: Tracer transport test cases},
+	author={Kent, James and Ullrich, Paul A and Jablonowski, Christiane},
+	journal=QJRMS,
+	volume={140},
+	number={681},
+	pages={1279--1293},
+	year={2014},
+	publisher={Wiley Online Library},
+	doi={10.1002/qj.2208}
 }
 
 @article{klemp2011,
@@ -94,12 +178,56 @@
 	doi={10.1175/MWR-D-10-05046.1}
 }
 
+@article{kuehnlein-smolarkiewicz2017,
+	title={An unstructured-mesh finite-volume {MPDATA} for compressible atmospheric dynamics},
+	author={K{\"u}hnlein, Christian and Smolarkiewicz, Piotr K},
+	journal=JCP,
+	volume={334},
+	pages={16--30},
+	year={2017},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2016.12.054}
+}
+
 @phdthesis{lashley2002,
 	title={Automatic generation of accurate advection schemes on unstructured grids and their application to meteorological problems},
 	author={Lashley, Raymond K},
 	year={2002},
 	pages={223},
 	school={University of Reading}
+}
+
+@article{lauritzen2010,
+	title={A conservative {semi-Lagrangian} multi-tracer transport scheme ({CSLAM}) on the cubed-sphere grid},
+	author={Lauritzen, Peter H and Nair, Ramachandran D and Ullrich, Paul A},
+	journal=JCP,
+	volume={229},
+	number={5},
+	pages={1401--1424},
+	year={2010},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2009.10.036}
+}
+
+@article{lauritzen2011,
+	title={On simplifying ‘incremental remap’--based transport schemes},
+	author={Lauritzen, Peter H and Erath, Christoph and Mittal, Rashmi},
+	journal=JCP,
+	volume={230},
+	number={22},
+	pages={7957--7963},
+	year={2011},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2011.06.030}
+}
+
+@book{lauritzen2011book,
+	title={Numerical techniques for global atmospheric models},
+	author={Lauritzen, Peter H and Jablonowski, Christiane and Taylor, Mark A and Nair, Ramachandran D},
+	volume={80},
+	year={2011},
+	publisher={Springer Science \& Business Media},
+	doi={10.1007/978-3-642-11640-7}
 }
 
 @article{lauritzen2012,
@@ -132,6 +260,17 @@
 	number={106055}
 }
 
+@article{leonard1996,
+	title={Conservative explicit unrestricted-time-step multidimensional constancy-preserving advection schemes},
+	author={Leonard, BP and Lock, AP and MacVean, MK},
+	journal=MWR,
+	volume={124},
+	number={11},
+	pages={2588--2606},
+	year={1996},
+	doi={10.1175/1520-0493(1996)124<2588:CEUTSM>2.0.CO;2}
+}
+
 @article{leuenberger2010,
 	title={A Generalization of the {SLEVE} Vertical Coordinate},
 	author={Leuenberger, Daniel and Koller, Marcel and Fuhrer, Oliver and Sch{\"a}r, Christoph},
@@ -141,6 +280,28 @@
 	pages={3683--3689},
 	year={2010},
 	doi={10.1175/2010MWR3307.1}
+}
+
+@article{li2013,
+	title={A multimoment constrained finite-volume model for nonhydrostatic atmospheric dynamics},
+	author={Li, Xingliang and Chen, Chungang and Shen, Xueshun and Xiao, Feng},
+	journal=MWR,
+	volume={141},
+	number={4},
+	pages={1216--1240},
+	year={2013},
+	doi={10.1175/MWR-D-12-00144.1}
+}
+
+@article{lin-rood1996,
+	title={Multidimensional flux-form {semi-Lagrangian} transport schemes},
+	author={Lin, Shian-Jiann and Rood, Richard B},
+	journal=MWR,
+	volume={124},
+	number={9},
+	pages={2046--2070},
+	year={1996},
+	doi={10.1175/1520-0493(1996)124<2046:MFFSLT>2.0.CO;2}
 }
 
 @article{miura2007,
@@ -159,6 +320,18 @@
 	year={2016},
 	author={{CFD Direct}},
 	note={\url{http://cfd.direct/openfoam/user-guide/fvschemes/}}
+}
+
+@article{putman-lin2007,
+	title={Finite-volume transport on various cubed-sphere grids},
+	author={Putman, William M and Lin, Shian-Jiann},
+	journal=JCP,
+	volume={227},
+	number={1},
+	pages={55--78},
+	year={2007},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2007.07.022}
 }
 
 @article{schaer2002,
@@ -194,6 +367,30 @@
 	doi={10.1175/2010MWR3390.1}
 }
 
+@article{smolarkiewicz-szmelter2005,
+	title={{MPDATA}: An edge-based unstructured-grid formulation},
+	author={Smolarkiewicz, Piotr K and Szmelter, Joanna},
+	journal=JCP,
+	volume={206},
+	number={2},
+	pages={624--649},
+	year={2005},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2004.12.021}
+}
+
+@article{smolarkiewicz-szmelter2011,
+	title={A nonhydrostatic unstructured-mesh soundproof model for simulation of internal gravity waves},
+	author={Smolarkiewicz, Piotr K and Szmelter, Joanna},
+	journal=ACTAGEO,
+	volume={59},
+	number={6},
+	pages={1109--1134},
+	year={2011},
+	publisher={Springer},
+	doi={10.2478/s11600-011-0043-z}
+}
+
 @article{staniforth-thuburn2012,
 	title={Horizontal grids for global weather and climate prediction models: a review},
 	author={Staniforth, Andrew and Thuburn, John},
@@ -204,6 +401,17 @@
 	year={2012},
 	publisher={Wiley Online Library},
 	doi={10.1002/qj.958}
+}
+
+@article{steppeler-klemp2017,
+	title={Advection on Cut-Cell Grids for an Idealized Mountain of Constant Slope},
+	author={Steppeler, J and Klemp, JB},
+	journal=MWR,
+	year={2017},
+	volume={145},
+	number={5},
+	pages={1765--1777},
+	doi={10.1175/MWR-D-16-0308.1}
 }
 
 @article{thuburn2014,
@@ -227,6 +435,17 @@
 	isbn={9781400844807}
 }
 
+@article{weller2009, 
+        title={{Voronoi}, {Delaunay}, and block-structured mesh refinement for solution of the shallow-water equations on the sphere}, 
+        author={Weller, Hilary and Weller, Henry G and Fournier, Aim{\'e}}, 
+        journal=MWR, 
+        volume={137}, 
+        number={12}, 
+        pages={4208--4224}, 
+        year={2009},
+	doi={10.1175/2009MWR2917.1}
+}
+
 @article{weller-shahrokhi2014,
 	title={Curl free pressure gradients over orography in a solution of the fully compressible {Euler} equations with implicit treatment of acoustic and gravity waves},
 	author={Hilary Weller and Ava Shahrokhi},
@@ -238,6 +457,17 @@
 	doi={10.1175/MWR-D-14-00054.1}
 }
 
+@article{white2017,
+	title={Flow Simulation in Heterogeneous Porous Media With the Moving Least-Squares Method},
+	author={Laurent White and Rohan Panchadhara and Dimitar Trenev},
+	year={2017},
+	journal=JSC,
+	volume={39},
+	number={2},
+	pages={B323--B351},
+	doi={10.1137/16M1070840}
+}	
+
 @article{white-dongarra2011,
 	title={High-performance high-resolution {semi-Lagrangian} tracer transport on a sphere},
 	author={White, JB and Dongarra, Jack J},
@@ -248,4 +478,26 @@
 	year={2011},
 	publisher={Elsevier},
 	doi={10.1016/j.jcp.2011.05.008}
+}
+
+@article{xie-xiao2016,
+	title={A multi-moment constrained finite volume method on arbitrary unstructured grids for incompressible flows},
+	author={Xie, Bin and Xiao, Feng},
+	journal=JCP,
+	volume={327},
+	pages={747--778},
+	year={2016},
+	publisher={Elsevier}
+}
+
+@article{zerroukat-allen2012,
+	title={A three-dimensional monotone and conservative {semi-Lagrangian} scheme ({SLICE-3D}) for transport problems},
+	author={Zerroukat, M and Allen, T},
+	journal=QJRMS,
+	volume={138},
+	number={667},
+	pages={1640--1651},
+	year={2012},
+	publisher={Wiley Online Library},
+	doi={10.1002/qj.1902}
 }
