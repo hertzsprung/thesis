@@ -10,26 +10,18 @@
 \end{itemize}
 \end{highlights}
 
-Numerical simulations of atmospheric flows solve equations of motion that result in the transport of momentum, temperature, water species and trace gases.
 
-\TODO{it would be nice to have a citation for each desirable properties demonstrating what can happen if that property is absent}
-
-% sources showing that advection is important:
-% atmospheric general circulation, water vapour isotopes, diffusivity 10.5194/gmd-2017-178
-% ocean, spurious oscillations 10.1016/j.ocemod.2017.06.010
-% fronts too weak?
-% met office eternal fountain, lack of conservation -- no citations
-% conservation: 10.1002/qj.1902
-
-% - numerical
-%   - conservation of tracer
-%   - numerical stability
-%   - low numerical diffusion and dispersion (phase errors)
-%   - better than first-order convergence (staniforth-thuburn2012)
-%   - lack of grid imprinting (staniforth-thuburn2012) -- solid body rotation tests?
-%   - insensitive to mesh distortions or jumps in mesh spacing (e.g. AMR)
-% - computational
-%   - time-to-solution
+\TODO{it would be nice to have a citation for each desirable properties demonstrating what can happen if that property is absent
+\begin{description}
+	\item[Conservation]{Conserve mass for climate runs, conserve moisture to avoid Met Office's `eternal fountain'}
+	\item[Numerical stability]{grid-point storms when CFL is violated -- not really the fault of the advection scheme, though!}
+	\item[Numerical diffusion]{\citet{schaer2002, kent2014} show it happens with horizontal flow on TF meshes.  \citet{hoinka-zaengl2004} show it happens for moisture and momentum advection.  How about spurious smoothing of fronts? stable isotopes of water, important for paleoclimate simulations \citep{cauquoin-risi2017}}
+	\item[Numerical dispersion/spurious oscillations]{Spurious oscillations found in many variables: in OLAM \citep{walko-avissar2008b}, MC2 \citep{schaer2002} and MM5 \citep{hoinka-zaengl2004}.  Also problematic in ocean/sea-ice modelling \citep{naughten2017}.}
+	\item[Better than first-order convergence]{\citep{staniforth-thuburn2012}}
+	\item[Grid imprinting]{\citep{staniforth-thuburn2012} Anyone talk about it in the context of advection? \citet{thuburn2014} mentions it but his advection scheme shows little sign of grid imprinting}
+	\item[Mesh distortions]{Intro already covers this well}
+	\item[Time-to-solution]{Intro already covers computational efficiency well}
+\end{description}}
 
 A huge variety of transport schemes have been developed for atmospheric models, but few are able to account for distortions associated with steep terrain because they treat horizontal and vertical transport separately \citep{kent2014}, resulting in numerical errors called `splitting errors'.
 Such errors can be reduced by explicitly accounting for transverse fluxes when combining fluxes \citep{leonard1996}, but splitting errors are still apparent in flows over steep terrain where meshes are highly distorted and metric terms in a terrain-following coordinate transform are large \citep{chen2017}.
