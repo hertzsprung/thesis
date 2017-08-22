@@ -7,8 +7,16 @@ class MountainAdvect:
     def __init__(self):
         self.copyCases()
         self.meshes()
-        self.heatmaps()
+        self.meshesFigure =  PDFLaTeXFigure(
+                'mountainAdvect-fig-meshes',
+                output=os.path.join('thesis/slanted/mountainAdvect/fig-meshes'),
+                figure=os.path.join('src/thesis/slanted/mountainAdvect/fig-meshes'),
+                components=self.btfMesh.outputs() \
+                    + self.cutCellMesh.outputs() \
+                    + self.slantedCellMesh.outputs()
+        )
 
+        self.heatmaps()
         self.errorFigure = PDFLaTeXFigure(
                 'mountainAdvect-fig-error',
                 output=os.path.join('thesis/slanted/mountainAdvect/fig-error'),
@@ -237,9 +245,7 @@ class MountainAdvect:
         ]
 
     def outputs(self):
-        return self.btfMesh.outputs() \
-                + self.cutCellMesh.outputs() \
-                + self.slantedCellMesh.outputs() \
+        return self.meshesFigure.outputs() \
                 + self.errorFigure.outputs() \
                 + self.l2ByMountainHeight.outputs() \
                 + self.maxdt.outputs() \
@@ -257,6 +263,7 @@ class MountainAdvect:
         build.add(self.btfMesh)
         build.add(self.cutCellMesh)
         build.add(self.slantedCellMesh)
+        build.add(self.meshesFigure)
 
         build.add(self.btfLinearUpwindError)
         build.add(self.cutCellLinearUpwindError)
