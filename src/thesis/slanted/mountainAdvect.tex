@@ -65,37 +65,17 @@ For the first series of tests with $h_0 = \SI{5}{\kilo\meter}$, tracer contours 
 A small phase lag is apparent when the numerical solution marked with solid contour lines is compared with the analytic solution marked with dotted contour lines.
 
 \begin{figure}
-	\centering
-	%
 	\begin{subfigure}{\textwidth}
-		\includegraphics{mountainAdvect-h0-btf-1000-5000m-linearUpwind/10000/errorW.pdf}
-		\includegraphics{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/10000/error.pdf}
-		\includegraphics{mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind/10000/error.pdf}
+		\centering
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-cutCell}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-btf}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-slantedCell}
-		$\ell_2 = \input{mountainAdvect-h0-btf-1000-5000m-linearUpwind/10000/l2errorT}$
-		$\ell_\infty = \input{mountainAdvect-h0-btf-1000-5000m-linearUpwind/10000/linferrorT}$
-		$\ell_2 = \input{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/10000/l2errorT}$
-		$\ell_\infty = \input{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/10000/linferrorT}$
-		$\ell_2 = \input{mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind/10000/l2errorT}$
-		$\ell_\infty = \input{mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind/10000/linferrorT}$
-	\end{subfigure}
-	\begin{subfigure}{\textwidth}
-		\includegraphics{mountainAdvect-h0-btf-1000-5000m-cubicFit/10000/errorSW.pdf}
-		\includegraphics{mountainAdvect-h0-cutCell-1000-5000m-cubicFit/10000/errorS.pdf}
-		\includegraphics{mountainAdvect-h0-slantedCell-1000-5000m-cubicFit/10000/errorS.pdf}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:cubicFit-btf}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:cubicFit-cutCell}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:cubicFit-slantedCell}
-		$\ell_2 = \input{mountainAdvect-h0-btf-1000-5000m-cubicFit/10000/l2errorT}$
-		$\ell_\infty = \input{mountainAdvect-h0-btf-1000-5000m-cubicFit/10000/linferrorT}$
-		$\ell_2 = \input{mountainAdvect-h0-cutCell-1000-5000m-cubicFit/10000/l2errorT}$
-		$\ell_\infty = \input{mountainAdvect-h0-cutCell-1000-5000m-cubicFit/10000/linferrorT}$
-		$\ell_2 = \input{mountainAdvect-h0-slantedCell-1000-5000m-cubicFit/10000/l2errorT}$
-		$\ell_\infty = \input{mountainAdvect-h0-slantedCell-1000-5000m-cubicFit/10000/linferrorT}$
+		%
+		\includegraphics{thesis/slanted/mountainAdvect/fig-error.pdf}
 	\end{subfigure}
-	\includegraphics[height=5in,angle=270]{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/mountainAdvect-cutCellLinearUpwindError-colorBar.eps}
 
 	\caption{Tracer contours at $t=\SI{10000}{\second}$ for the two-dimensional tracer transport tests over a mountainous lower boundary.  A region in the lee of the mountain is plotted corresponding to the shaded area in figure~\ref{fig:slanted:mountainAdvect:tracer}.
 	Results are presented on BTF, cut cell and slanted cell meshes (shown in figure~\ref{fig:slanted:mountainAdvect:meshes}) using the linearUpwind and cubicFit transport schemes.  The numerical solutions are marked by solid black lines.  The analytic solution is marked by dotted lines.  Contours are every \SI{0.1}{\kilo\gram\per\meter\cubed}.}
@@ -110,7 +90,7 @@ Error fields are compared between BTF, cut cell and slanted cell meshes using th
 \ref{fig:slanted:mountainAdvect:errors:cubicFit-slantedCell} respectively).
 Results are least accurate using the linearUpwind scheme on the slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:linearUpwind-slantedCell}).  The final tracer is slightly distorted and does not extend far enough towards the ground.
 The $\ell_\infty$ error magnitude is reduced by using the linearUpwind scheme on the cut cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:linearUpwind-cutCell}), but the shape of the error remains the same.
-The cubicFit scheme is less sensitive to the choice of mesh with similar error magnitudes on the BTF mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-btf}), cut cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-cutCell}) and slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-slantedCell}).  Errors using the cubicFit scheme on cut cell and slanted cell meshes are much smaller than the errors using the linearUpwind scheme on the same meshes.
+\TODO{this is no longer true... The cubicFit scheme is less sensitive to the choice of mesh with similar error magnitudes on the BTF mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-btf}), cut cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-cutCell}) and slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-slantedCell})}.  Errors using the cubicFit scheme on cut cell and slanted cell meshes are much smaller than the errors using the linearUpwind scheme on the same meshes.
 
 \subsection{Numerical stability and numerical accuracy with increasingly steep slopes}
 

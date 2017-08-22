@@ -11,7 +11,7 @@ FoamFile {
     object          gmtDict;
 }
 
-projection "X1.5i/1.3i";
+projection "X1.3i/1.2i";
 projection2D XZ;
 boundaryPatch ground;
 plotBoundaryDots false;
