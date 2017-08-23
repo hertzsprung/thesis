@@ -1,7 +1,7 @@
 \section{Transport over a mountainous lower boundary}
 \label{sec:slanted:mountainAdvect}
 
-Following \citet{schaer2002}, the domain is \SI{301}{\kilo\meter} wide and \SI{25}{\kilo\meter} high as measured between parallel boundary edges, with a mesh spacing of $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.  The boundary conditions are the same as those used in section~\ref{sec:cubicFit:schaerAdvect}.
+The domain size and mountain profile is the same as those in the horizontal tracer advection test in section~\ref{sec:cubicFit:schaerAdvect}, with a mesh spacing of $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.
 Cell edges in the central region of the domain are shown in figure~\ref{fig:slanted:mountainAdvect:meshes} for each of the three mesh types.
 Cells in the BTF mesh are highly distorted over steep slopes (figure~\ref{fig:slanted:mountainAdvect:meshes:btf}) while the cut cell mesh (figure~\ref{fig:slanted:mountainAdvect:meshes:cutCell}) and slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:meshes:slantedCell}) are orthogonal everywhere except for cells nearest the ground.
 
@@ -25,12 +25,10 @@ Only the lowest \SI{10}{\kilo\meter} for the central region of the domain is sho
 	\label{fig:slanted:mountainAdvect:meshes}
 \end{figure}
 
-\TODO{ripped lots out into tfAdvect section, needs rejigging}
-A velocity field is chosen that follows the terrain at the surface and becomes entirely horizontal aloft.
-The velocity field becomes purely horizontal above $H_1 = \SI{10}{\kilo\meter}$.
-The flow is deliberately misaligned with the BTF, cut cell and slanted cell meshes away from the ground (figure~\ref{fig:slanted:mountainAdvect:meshes}) to ensure that flow always crosses mesh surfaces in order to challenge the transport scheme.
-The value of $H_1$ is chosen to be much smaller than the domain height $H$ in \TODO{equation~\eqref{eqn:btf}} so that flow crosses the surfaces of the BTF mesh.
+A velocity field is chosen that follows the terrain at the surface and becomes entirely horizontal above $H_1 = \SI{10}{\kilo\meter}$.
+The value of $H_1$ is chosen to be much smaller than the domain height $H$ in equation~\eqref{eqn:btf} so that flow crosses the surfaces of the BTF mesh.
 This is evident in figure~\ref{fig:slanted:mountainAdvect:meshes:btf} where the the velocity streamlines are tangential to the mesh only at the ground.
+The flow is deliberately misaligned with the BTF, cut cell and slanted cell meshes away from the ground (figure~\ref{fig:slanted:mountainAdvect:meshes}) to ensure that flow always crosses mesh surfaces in order to challenge the transport schemes.
 
 \begin{table}
 	\centering
@@ -42,14 +40,15 @@ This is evident in figure~\ref{fig:slanted:mountainAdvect:meshes:btf} where the 
 
 The tracer is defined again by equation~\eqref{eqn:cubicFit:schaerAdvect:tracer} but is now positioned at the ground with $(x_0, z_0) = (\SI{-50}{\kilo\meter}, \SI{0}{\kilo\meter})$ with half-widths $A_x = \SI{25}{\kilo\meter}$ and $A_z = \SI{10}{\kilo\meter}$.
 Tests are integrated forward for \SI{10000}{\second}.  The time-step was chosen for each mesh so that the maximum Courant number was about \num{0.4} (table~\ref{tab:slanted:mountainAdvect:timesteps}).
-\TODO{An analytic solution at \SI{10000}{\second} is obtained by calculating the new horizontal position of the tracer.  
-By solving this equation we find that \(x(t=\SI{10000}{\second}) = \SI{123}{\meter}\) when $h_0 = \SI{5}{\kilo\meter}$.}
+An analytic solution at \SI{10000}{\second} is obtained by calculating the new horizontal position of the tracer using equation~\eqref{eqn:cubicFit:tfAdvect:trajectory}.
+By solving this equation we find that \(x(t=\SI{10000}{\second}) = \TODO{\SI{123}{\meter}}\) when $h_0 = \SI{5}{\kilo\meter}$.
 
 The tracer density boundary conditions are the same as those in section~\ref{sec:cubicFit:schaerAdvect}.
 Since the cubicFit transport scheme uses values at boundaries with Dirichlet boundary conditions, the cubicFit scheme uses only inlet boundary values in this test case.
 
 \begin{figure}
 	\centering
+	\includegraphics{thesis/slanted/mountainAdvect/fig-tracer.pdf}
 	%
 	\caption{Evolution of the tracer in the two-dimensional transport test over a mountainous lower boundary.  The tracer is transported to the right over the wave-shaped terrain.  Tracer contours are every \SI{0.1}{\kilo\gram\per\meter\cubed}.  The result obtained using the cubicFit scheme on the basic terrain-following mesh is shown at $t=\SI{0}{\second}$, $t=\SI{5000}{\second}$ and $t=\SI{10000}{\second}$ with solid black contours. The analytic solution at $t=\SI{10000}{\second}$ is shown with dotted contours.
 	The shaded box indicates the region that is plotted in figure~\ref{fig:slanted:mountainAdvect:errors}.}

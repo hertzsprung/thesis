@@ -7,7 +7,7 @@ The flow is then aligned with the BTF mesh layers, but the points in the linearU
 Conversely, the flow is misaligned with the cut cell mesh layers but, except in cut cells next to the ground, the cut cell mesh is undistorted.
 This test determines whether the primary source of numerical error is due to mesh distortions or misalignment of the flow with mesh layers.
 
-The domain size, mountain profile and initial tracer profile are the same as those in the horizontal tracer advection test.
+The domain size, mountain profile, initial tracer profile and boundary conditions are the same as those in the horizontal tracer advection test in section~\ref{sec:cubicFit:schaerAdvect}.
 The discrete velocity field is calculated using a streamfunction $\Psi$ in the same way as the horizontal transport test.
 Here, we define a different streamfunction that yields a velocity field that follows the BTF mesh layers given by equation~\eqref{eqn:btf} such that
 \begin{equation}
@@ -32,7 +32,7 @@ An analytic solution at \SI{10000}{\second} is obtained by calculating the new h
 	\mathrm{d}t &= \mathrm{d}x / u(x) \\
 	t &= \int_{-a}^a \frac{H_1 - h(x)}{u_0 H_1}\:\mathrm{d}x \\
 	t &= \frac{2a}{u_0} - \frac{h_0}{16 u_0 H_1} \left[ 4x + \frac{\sin 2 (\alpha + \beta) x}{\alpha + \beta} +
-\frac{\sin 2(\alpha - \beta) x}{\alpha - \beta} + 2 \left( \frac{\sin 2\alpha x}{\alpha} + \frac{\sin 2\beta x}{\beta} \right) \right]_{-a}^a
+	\frac{\sin 2(\alpha - \beta) x}{\alpha - \beta} + 2 \left( \frac{\sin 2\alpha x}{\alpha} + \frac{\sin 2\beta x}{\beta} \right) \right]_{-a}^a \label{eqn:cubicFit:tfAdvect:trajectory}
 \end{align}
 Because the velocity field is non-divergent, the flow accelerates over mountain ridges and the tracer travels \TODO{\SI{123}{\meter}} further compared to the tracer in a purely horizontal velocity field.  The vertical tracer position is unchanged downwind of the mountains because flow is parallel to the mesh layers.
 
@@ -45,7 +45,7 @@ The cut cell mesh suffers from the small cell problem, having a more stringent t
 	\includegraphics{thesis/cubicFit/tfAdvect/fig-tracer.pdf}
 	\caption{Tracer contours transported above mountains in a terrain-following velocity field at $t = \SI{0}{\second}$, \SI{5000}{\second}, and \SI{10000}{\second} using the cubicFit transport scheme on a BTF mesh.
 	The analytic solution at $t = \SI{10000}{\second}$ is plotted with dashed contours.
-	All contour intervals are \num{0.1}.  \TODO{The terrain profile is shown immediately above the x axis.}
+	All contour intervals are \num{0.1}.  The terrain profile is shown immediately above the $x$ axis.
 	The region highlighted in orange marks the region plotted in the panels of figure~\ref{fig:cubicFit:schaerAdvect:error}.
 	Only the central \SI{200}{\kilo\meter} of the domain is shown.  The entire domain is \SI{301}{\kilo\meter} wide and \SI{25}{\kilo\meter} high.}
 	\label{fig:cubicFit:tfAdvect:tracer}

@@ -1,0 +1,27 @@
+FoamFile {
+    version         2.2;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "constant";
+    local           "";
+
+    class           dictionary;
+    object          gmtDict;
+}
+
+projection "X4.15i/1.2i";
+projection2D XZ;
+boundaryPatch ground;
+plotBoundaryDots false;
+
+FieldsToPlot (
+    [T_0 contours 0.1 3 0.1 "black"]
+    [T_5000 contours 0.1 3 0.1 "black"]
+    [T contours 0.1 3 0.1 "black"]
+    [T_analytic contours 0.1 3 0.1 "black,1_1:0"]
+);
+
+region "-100e3/100e3/0/20e3";
+boundaryMarks "25e3/5e3WSen";

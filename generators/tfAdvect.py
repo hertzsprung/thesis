@@ -56,7 +56,7 @@ class TfAdvect:
                 target='$builddir',
                 plots=[
                     'src/thesis/cubicFit/schaerAdvect/errorSW.gmtdict',
-                    'src/thesis/tracer.gmtdict'
+                    'src/thesis/cubicFit/tfAdvect/tracer.gmtdict'
                 ],
                 files=['10000/T', '10000/T_analytic', '10000/T_diff'],
                 renamedFiles={'0/T': '10000/T_0', '5000/T': '10000/T_5000'}

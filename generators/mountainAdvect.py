@@ -1,5 +1,5 @@
 from ninjaopenfoam import Case, Gnuplot, GmtPlot, GmtPlotCopyCase, \
-        LaTeXSubstitution, siunitx, Paths
+        LaTeXSubstitution, siunitx, Paths, PDFLaTeXFigure
 import itertools
 import os
 
@@ -8,6 +8,26 @@ class MountainAdvect:
         self.copyCases()
         self.meshes()
         self.heatmaps()
+
+        self.tracerPlot = GmtPlot(
+            'mountainAdvect-btfCubicFitTracer',
+            plot='tracer',
+            case=Case('mountainAdvect-h0-btf-1000-5000m-cubicFit'),
+            time=10000,
+            data=[
+                '10000/T_0',
+                '10000/T_5000',
+                '10000/T',
+                '10000/T_analytic'
+            ]
+        )
+
+        self.tracerFigure = PDFLaTeXFigure(
+                'mountainAdvect-fig-tracer',
+                output=os.path.join('thesis/slanted/mountainAdvect/fig-tracer'),
+                figure=os.path.join('src/thesis/slanted/mountainAdvect/fig-tracer'),
+                components=self.tracerPlot.outputs()
+        )
 
         self.l2ByMountainHeight = Gnuplot(
                 'mountainAdvect-l2ByMountainHeight',
@@ -112,8 +132,12 @@ class MountainAdvect:
                 'mountainAdvect-h0-btf-1000-5000m-cubicFit',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/slanted/mountainAdvect/errorSW.gmtdict'],
-                files=['10000/T', '10000/T_analytic', '10000/T_diff']
+                plots=[
+                    'src/thesis/slanted/mountainAdvect/errorSW.gmtdict',
+                    'src/thesis/slanted/mountainAdvect/tracer.gmtdict'
+                ],
+                files=['10000/T', '10000/T_analytic', '10000/T_diff'],
+                renamedFiles={'0/T': '10000/T_0', '5000/T': '10000/T_5000'}
         )
 
         self.cutCell5000mCubicFit = GmtPlotCopyCase(
@@ -234,6 +258,7 @@ class MountainAdvect:
                 + self.slantedCellCubicFitError.outputs() \
                 + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapL2Errors])) \
                 + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapLinfErrors])) \
+                + self.tracerFigure.outputs() \
                 + self.l2ByMountainHeight.outputs() \
                 + self.maxdt.outputs() \
                 + self.timesteps.outputs() \
@@ -259,6 +284,9 @@ class MountainAdvect:
         build.add(self.slantedCellCubicFitError)
         build.addAll(self.heatmapL2Errors)
         build.addAll(self.heatmapLinfErrors)
+
+        build.add(self.tracerPlot)
+        build.add(self.tracerFigure)
 
         build.add(self.l2ByMountainHeight)
         build.add(self.maxdt)

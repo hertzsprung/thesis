@@ -10,7 +10,8 @@ class Thesis:
             'generators/deformationSphere.py',
             'generators/mountainAdvect.py',
             'generators/resting.py',
-            'generators/schaerAdvect.py'
+            'generators/schaerAdvect.py',
+            'generators/tfAdvect.py'
         ])
 
     def write(self):
