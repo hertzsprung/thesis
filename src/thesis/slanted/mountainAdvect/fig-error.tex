@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage[paperwidth=5.33in,paperheight=3.55in,margin=0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[final,babel]{microtype}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{color}
+\usepackage{tikz}
+
+\sisetup{round-mode=off,round-precision=3}
+
+\graphicspath{{src/thesis/}{build/}}
+\makeatletter
+\def\input@path{{src/thesis/}{build/thesis/}{build/}}
+\makeatother
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\begin{textblock*}{12em}(0.88in,0.15in)
+\footnotesize
+(a) BTF, linearUpwind \\
+\hspace*{0.2em}$\ell_2 = \input{mountainAdvect-h0-btf-1000-5000m-linearUpwind/10000/l2errorT}$ \\
+\hspace*{0.2em}$\ell_\infty = \input{mountainAdvect-h0-btf-1000-5000m-linearUpwind/10000/linferrorT}$
+\end{textblock*}
+\begin{textblock*}{12em}(2.41in,0.15in)
+\footnotesize
+(b) Cut cells linearUpwind \\
+\hspace*{0.2em}$\ell_2 = \input{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/10000/l2errorT}$ \\
+\hspace*{0.2em}$\ell_\infty = \input{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/10000/linferrorT}$
+\end{textblock*}
+\begin{textblock*}{12em}(3.94in,0.15in)
+\footnotesize
+(c) Slanted cells \\
+linearUpwind \\
+\hspace*{0.2em}$\ell_2 = \input{mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind/10000/l2errorT}$ \\
+\hspace*{0.2em}$\ell_\infty = \input{mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind/10000/linferrorT}$
+\end{textblock*}
+\begin{textblock*}{12em}(0.88in,1.5in)
+\footnotesize
+(a) BTF, cubicFit \\
+\hspace*{0.2em}$\ell_2 = \input{mountainAdvect-h0-btf-1000-5000m-cubicFit/10000/l2errorT}$ \\
+\hspace*{0.2em}$\ell_\infty = \input{mountainAdvect-h0-btf-1000-5000m-cubicFit/10000/linferrorT}$
+\end{textblock*}
+\begin{textblock*}{12em}(2.41in,1.5in)
+\footnotesize
+(b) Cut cells, cubicFit \\
+\hspace*{0.2em}$\ell_2 = \input{mountainAdvect-h0-cutCell-1000-5000m-cubicFit/10000/l2errorT}$ \\
+\hspace*{0.2em}$\ell_\infty = \input{mountainAdvect-h0-cutCell-1000-5000m-cubicFit/10000/linferrorT}$
+\end{textblock*}
+\begin{textblock*}{12em}(3.94in,1.5in)
+\footnotesize
+(c) Slanted cells, cubicFit \\
+\hspace*{0.2em}$\ell_2 = \input{mountainAdvect-h0-slantedCell-1000-5000m-cubicFit/10000/l2errorT}$ \\
+\hspace*{0.2em}$\ell_\infty = \input{mountainAdvect-h0-slantedCell-1000-5000m-cubicFit/10000/linferrorT}$
+\end{textblock*}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{
+\includegraphics{mountainAdvect-h0-btf-1000-5000m-linearUpwind/10000/errorW.pdf}%
+\hspace{5pt}%
+\includegraphics{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/10000/error.pdf}%
+\hspace{5pt}%
+\includegraphics{mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind/10000/error.pdf}
+}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{
+\includegraphics{mountainAdvect-h0-btf-1000-5000m-cubicFit/10000/errorSW.pdf}%
+\includegraphics{mountainAdvect-h0-cutCell-1000-5000m-cubicFit/10000/errorS.pdf}%
+\includegraphics{mountainAdvect-h0-slantedCell-1000-5000m-cubicFit/10000/errorS.pdf}
+}
+
+\vspace{0.5em}
+\hspace*{10em}$x$ (\si{\meter})\hspace{8.8em}$x$ (\si{\meter})\hspace{8.8em}$x$ (\si{\meter})
+
+\centering
+\includegraphics[height=5in,angle=270]{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/mountainAdvect-cutCellLinearUpwindError-colorBar.eps}
+\end{document}

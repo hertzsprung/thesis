@@ -7,7 +7,29 @@ class MountainAdvect:
     def __init__(self):
         self.copyCases()
         self.meshes()
+        self.meshesFigure =  PDFLaTeXFigure(
+                'mountainAdvect-fig-meshes',
+                output=os.path.join('thesis/slanted/mountainAdvect/fig-meshes'),
+                figure=os.path.join('src/thesis/slanted/mountainAdvect/fig-meshes'),
+                components=self.btfMesh.outputs() \
+                    + self.cutCellMesh.outputs() \
+                    + self.slantedCellMesh.outputs()
+        )
+
         self.heatmaps()
+        self.errorFigure = PDFLaTeXFigure(
+                'mountainAdvect-fig-error',
+                output=os.path.join('thesis/slanted/mountainAdvect/fig-error'),
+                figure=os.path.join('src/thesis/slanted/mountainAdvect/fig-error'),
+                components=self.btfLinearUpwindError.outputs() \
+                    + self.cutCellLinearUpwindError.outputs() \
+                    + self.slantedCellLinearUpwindError.outputs() \
+                    + self.btfCubicFitError.outputs() \
+                    + self.cutCellCubicFitError.outputs() \
+                    + self.slantedCellCubicFitError.outputs() \
+                    + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapL2Errors])) \
+                    + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapLinfErrors]))
+        )
 
         self.tracerPlot = GmtPlot(
             'mountainAdvect-btfCubicFitTracer',
@@ -247,18 +269,9 @@ class MountainAdvect:
         ]
 
     def outputs(self):
-        return self.btfMesh.outputs() \
-                + self.cutCellMesh.outputs() \
-                + self.slantedCellMesh.outputs() \
-                + self.btfLinearUpwindError.outputs() \
-                + self.cutCellLinearUpwindError.outputs() \
-                + self.slantedCellLinearUpwindError.outputs() \
-                + self.btfCubicFitError.outputs() \
-                + self.cutCellCubicFitError.outputs() \
-                + self.slantedCellCubicFitError.outputs() \
-                + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapL2Errors])) \
-                + list(itertools.chain.from_iterable([e.outputs() for e in self.heatmapLinfErrors])) \
+        return self.meshesFigure.outputs() \
                 + self.tracerFigure.outputs() \
+                + self.errorFigure.outputs() \
                 + self.l2ByMountainHeight.outputs() \
                 + self.maxdt.outputs() \
                 + self.timesteps.outputs() \
@@ -275,6 +288,7 @@ class MountainAdvect:
         build.add(self.btfMesh)
         build.add(self.cutCellMesh)
         build.add(self.slantedCellMesh)
+        build.add(self.meshesFigure)
 
         build.add(self.btfLinearUpwindError)
         build.add(self.cutCellLinearUpwindError)
@@ -284,6 +298,7 @@ class MountainAdvect:
         build.add(self.slantedCellCubicFitError)
         build.addAll(self.heatmapL2Errors)
         build.addAll(self.heatmapLinfErrors)
+        build.add (self.errorFigure)
 
         build.add(self.tracerPlot)
         build.add(self.tracerFigure)

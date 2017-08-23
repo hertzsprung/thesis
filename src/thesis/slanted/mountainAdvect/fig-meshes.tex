@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage[paperwidth=5.3in,paperheight=3.3in,margin=0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[final,babel]{microtype}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{color}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\tikzset{>=latex}
+
+\graphicspath{{src/thesis/}{build/}}
+\makeatletter
+\def\input@path{{src/thesis/}{build/thesis/}{build/}}
+\makeatother
+
+\setlength{\parindent}{0pt}
+
+\definecolor{gnuplotred}{HTML}{e51e10}
+\begin{document}
+\TPMargin{2pt}
+
+% (a) streamlines
+\begin{textblock*}{5in}(0.78in,0.148in)
+\textblockcolour{}
+\begin{tikzpicture}[xscale=0.2175,yscale=0.2]
+	\draw [line width=1.2pt,color=gnuplotred,domain=-25:25,samples=200] plot (\x,{2.5 + (1 - 2.5/10)*5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
+	
+	\draw [line width=1.2pt,color=gnuplotred,domain=-25:25,samples=200] plot (\x,{5 + (1 - 5/10)*5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
+
+	\draw [line width=1.2pt,color=gnuplotred,domain=-25:25,samples=200] plot (\x,{7.5 + (1 - 7.5/10)*5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
+\end{tikzpicture}
+\end{textblock*}
+
+% (b) streamlines
+\begin{textblock*}{5in}(0.78in,1.12in)
+\textblockcolour{}
+\begin{tikzpicture}[xscale=0.2175,yscale=0.2]
+	\draw [line width=1.2pt,color=gnuplotred,domain=-25:25,samples=200] plot (\x,{2.5 + (1 - 2.5/10)*5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
+	
+	\draw [line width=1.2pt,color=gnuplotred,domain=-25:25,samples=200] plot (\x,{5 + (1 - 5/10)*5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
+
+	\draw [line width=1.2pt,color=gnuplotred,domain=-25:25,samples=200] plot (\x,{7.5 + (1 - 7.5/10)*5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
+\end{tikzpicture}
+\end{textblock*}
+
+% (c) streamlines
+\begin{textblock*}{5in}(0.78in,2.09in)
+\textblockcolour{}
+\begin{tikzpicture}[xscale=0.2175,yscale=0.2]
+	\draw [line width=1.2pt,color=gnuplotred,domain=-25:25,samples=200] plot (\x,{2.5 + (1 - 2.5/10)*5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
+	
+	\draw [line width=1.2pt,color=gnuplotred,domain=-25:25,samples=200] plot (\x,{5 + (1 - 5/10)*5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
+
+	\draw [line width=1.2pt,color=gnuplotred,domain=-25:25,samples=200] plot (\x,{7.5 + (1 - 7.5/10)*5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
+\end{tikzpicture}
+\end{textblock*}
+
+\begin{textblock*}{12em}(0.85in,0.1in)
+\normalsize
+\textblockcolour{white}
+(a) Basic terrain-following
+\end{textblock*}
+\begin{textblock*}{6em}(0.85in,1.08in)
+\normalsize
+\textblockcolour{white}
+(b) Cut cells
+\end{textblock*}
+\begin{textblock*}{7em}(0.85in,2.05in)
+\normalsize
+\textblockcolour{white}
+(c) Slanted cells
+\end{textblock*}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{%
+	\includegraphics{mountainAdvect-h0-btf-1000-5000m-linearUpwind/constant/meshW.pdf}
+}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{%
+	\includegraphics{mountainAdvect-h0-cutCell-1000-5000m-linearUpwind/constant/meshW.pdf}
+}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{%
+	\includegraphics{mountainAdvect-h0-slantedCell-1000-5000m-linearUpwind/constant/mesh.pdf}
+}
+
+\vspace{0.5em}
+\hspace*{21em}$x$ (\si{\meter})
+\end{document}
