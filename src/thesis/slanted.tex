@@ -21,18 +21,7 @@ Motivation
 
 \input{slanted/mountainAdvect.tex}
 \input{slanted/resting.tex}
-\section{Sch\"{a}r mountain waves}
-\TODO{
-\begin{itemize}
-	\item Meshes: BTF, cut cell, slanted cell
-	\item Schemes: linearUpwind, cubicFit
-	\item Plot: incorrect w contours using linearUpwind, compare with Melvin et al. 2010
-	\item Plot: theta diff heatmap
-	\item Plot: schaerWaves and thermalAdvect vertical cross-sections of theta diff
-	\item Conclusion: unlike linearUpwind, cubicFit gives the correct solution (at least on BTF? is linearUpwind better on cut/slanted cells?)
-	\item Conclusion: should we test max(dt) again? we've not yet done so for a dynamical test.  I'd hope that slanted cells are much better than cut cells.
-\end{itemize}
-}
+\input{slanted/schaerWaves.tex}
 
 \section{Transporting a thermal profile in a terrain-following velocity field}
 \TODO{

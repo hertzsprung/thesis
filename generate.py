@@ -11,6 +11,7 @@ class Thesis:
             'generators/mountainAdvect.py',
             'generators/resting.py',
             'generators/schaerAdvect.py',
+            'generators/schaerWaves.py',
             'generators/tfAdvect.py'
         ])
 
@@ -21,6 +22,7 @@ class Thesis:
         deformationSphere = generators.DeformationSphere()
         mountainAdvect = generators.MountainAdvect()
         resting = generators.Resting()
+        schaerWaves = generators.SchaerWaves()
 
         stabilisation = Gnuplot(
                 'cubicFit-stabilisation',
@@ -53,22 +55,25 @@ class Thesis:
                         'src/thesis/cubicFit/spherical.tex',
                         'src/thesis/slanted.tex',
                         'src/thesis/slanted/mountainAdvect.tex',
-                        'src/thesis/slanted/resting.tex']
+                        'src/thesis/slanted/resting.tex',
+                        'src/thesis/slanted/schaerWaves.tex']
                         + stabilisation.outputs()
                         + schaerAdvect.outputs()
                         + deformationSphere.outputs()
                         + mountainAdvect.outputs()
-                        + resting.outputs())
+                        + resting.outputs()
+                        + schaerWaves.outputs())
 
-        shortcut = Shortcuts([thesis.output])
+        shortcuts = Shortcuts([thesis.output])
 
         build.add(stabilisation)
         schaerAdvect.addTo(build)
         deformationSphere.addTo(build)
         mountainAdvect.addTo(build)
         resting.addTo(build)
+        schaerWaves.addTo(build)
         build.add(thesis)
-        build.add(shortcut)
+        build.add(shortcuts)
 
         build.write()
 
