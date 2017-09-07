@@ -7,7 +7,7 @@ class MountainAdvect:
     def __init__(self):
         self.copyCases()
         self.meshes()
-        self.meshesFigure =  PDFLaTeXFigure(
+        self.meshesFigure = PDFLaTeXFigure(
                 'mountainAdvect-fig-meshes',
                 output=os.path.join('thesis/slanted/mountainAdvect/fig-meshes'),
                 figure=os.path.join('src/thesis/slanted/mountainAdvect/fig-meshes'),
