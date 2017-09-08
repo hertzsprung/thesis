@@ -11,6 +11,38 @@
 \end{itemize}
 }
 
+The test originally specified by \citet{schaer2002} prescribes flow over terrain with small-scale and large-scale undulations which induces propagating and evanescent gravity waves.  \TODO{what is the motivation for this test?  it is needed to assess the dynamics solver with horizontal and vertical transport}
+
+Following \citet{melvin2010}, the domain is \SI{300}{\kilo\meter} wide and \SI{30}{\kilo\meter} high.
+The mountain profile has the same form as equation~\eqref{eqn:resting:mountain}, but the gravity waves tests have a mountain height of $h_0 = \SI{250}{\meter}$.  As in the resting atmosphere test, $a = \SI{5}{\kilo\meter}$ is the mountain half-width and $\lambda = \SI{4}{\kilo\meter}$ is the wavelength.
+
+A uniform horizontal wind $(u, w) = (10, 0)\:\si{\meter\per\second}$ is prescribed in the interior domain and at the inlet boundary.  No normal flow is imposed at the top and bottom boundaries and the velocity field has a zero gradient outlet boundary condition.
+
+The initial thermodynamic conditions have constant static stability with $N = \SI{0.01}{\per\second}$ everywhere such that
+\begin{align}
+	\theta(z) = \theta_0 \exp \left( \frac{N^2}{g} z \right) \label{eqn:slanted:schaerWaves:thermal-profile}
+\end{align}
+where the temperature at $z=0$ is $\theta_0 = \SI{288}{\kelvin}$.
+Potential temperature values are prescribed at the inlet and upper boundary using equation~\eqref{eqn:slanted:schaerWaves:thermal-profile}, and a zero gradient boundary condition is applied at the outlet.
+At the ground, fixed gradients are imposed by calculating the component of $\nabla \theta$ normal to each face using the vertical derivative of equation~\eqref{eqn:slanted:schaerWaves:thermal-profile}.
+For the Exner function of pressure, hydrostatic balance is prescribed on top and bottom boundaries and the inlet and outlet are zero normal gradient.
+
+Sponge layers are added to the upper \SI{10}{\kilo\meter} and leftmost \SI{10}{\kilo\meter} at the inlet boundary to damp the reflection of waves.
+The damping function, \(\mu\), is adapted from \citet{melvin2010} such that
+\begin{align}
+	\mu(x, z) &= \mu_\mathrm{upper} + \mu_\mathrm{inlet} \\
+	\mu_\mathrm{upper}(z) &= \begin{cases}
+		\overline{\mu} \sin^2 \left( \frac{\pi}{2} \frac{z - z_B}{H - z_B} \right) & \text{if } z \geq z_B \\
+		0 & \text{otherwise} \\
+	\end{cases} \\
+	\mu_\mathrm{inlet}(x) &= \begin{cases}
+		\overline{\mu} \sin^2 \left( \frac{\pi}{2} \frac{x_I - x}{x_I - x_0} \right) & \text{if } x < x_I \\
+		0 & \text{otherwise}
+	\end{cases}
+\end{align}
+where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer, $H = \SI{30}{\kilo\meter}$ is the top of the domain, $x_0 = \SI{-150}{\kilo\meter}$ is the leftmost limit of the domain and $x_I = \SI{-140}{\kilo\meter}$ is the rightmost extent of the inlet sponge layer.  The sponge layer is only active on faces whose normal is vertical so that it damps vertical momentum only.
+Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the purposes of generating BTF meshes, the domain height is set to \SI{20}{\kilo\meter} because the sponge layer occupies the uppermost \SI{10}{\kilo\meter}.
+
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.58\textwidth}
