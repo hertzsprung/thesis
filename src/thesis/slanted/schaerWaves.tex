@@ -3,8 +3,6 @@
 \begin{itemize}
 	\item Meshes: BTF, cut cell, slanted cell
 	\item Schemes: linearUpwind, cubicFit
-	\item Plot: incorrect w contours using linearUpwind, compare with Melvin et al. 2010
-	\item Plot: theta diff heatmap
 	\item Plot: schaerWaves and thermalAdvect vertical cross-sections of theta diff
 	\item Conclusion: unlike linearUpwind, cubicFit gives the correct solution (at least on BTF? is linearUpwind better on cut/slanted cells?)
 	\item Conclusion: should we test max(dt) again? we've not yet done so for a dynamical test.  I'd hope that slanted cells are much better than cut cells.
@@ -58,7 +56,16 @@ Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the pu
 		\caption{\citep{melvin2010}}
 		\label{fig:slanted:schaerWaves:w:melvin}
 	\end{subfigure}
-	\caption{\TODO{$w$ contours}}
+	\caption{\TODO{$w$ contours} \TODO{include third panel for correct cubicFit result}}
 	\label{fig:slanted:schaerWaves:w}
 \end{figure}
 
+\begin{figure}
+	\centering
+	\begin{subfigure}{\textwidth}
+		\centering
+		\includegraphics{thesis/slanted/schaerWaves/fig-btf-50dz-cubicFit-thetaDiff.pdf}
+	\end{subfigure}
+	\caption{\TODO{thetaDiff heatmap}}
+	\label{fig:slanted:schaerWaves:thetaDiff}
+\end{figure}
