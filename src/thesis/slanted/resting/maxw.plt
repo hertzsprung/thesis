@@ -1,15 +1,17 @@
-set term epslatex color colortext size 4.5,3
+set term epslatex color colortext size 5,3
 
 set style data linespoints
 set logscale y
 
 set xlabel "Peak mountain height $h_0$ (\\si{\\kilo\\meter})"
-set ylabel "$\\max(\\Mag{w})$ (\\si{\\meter\\per\\second})"
+set ylabel "$\\max(\\Mag{w})$ (\\si{\\meter\\per\\second})" offset 1
 
-set xrange [0:10]
-set yrange [0.01:10]
+set xrange [0:8]
+set yrange [0.0001:20]
 
-set key inside top right
+set ytics format "$10^{%T}$"
+
+set key inside bottom right
 
 plot "`echo $atmostests_builddir`/resting-btf-cubicFit-collated/maxw.txt" using ($1/1000):($2) title 'BTF cubicFit', \
      "`echo $atmostests_builddir`/resting-sleve-cubicFit-collated/maxw.txt" using ($1/1000):($2) title 'SLEVE cubicFit', \
