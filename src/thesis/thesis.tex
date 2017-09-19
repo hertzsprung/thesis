@@ -88,36 +88,11 @@
 \nobibliography*
 
 \thispagestyle{plain}
-\null\vfil
-\begin{acknowledgements}
-This research is supported by a PhD studentship funded by NERC grants NE/K500860/1 and NE/L501608/1 and the University of Reading with CASE support from the UK Met Office.  I am indebted to my supervisors, Hilary Weller (University of Reading), John Methven (University of Reading) and Terry Davies (Met Office) for their dedicated support and guidance throughout my time at the University of Reading.
-
-I am very grateful to Hans Johansen (Lawrence Berkeley National Laboratory) for providing the mathematical techniques enabling the development of a high-order transport scheme.  The Leibniz Institute for Tropospheric Research kindly provided their cut cell mesh generator, and Christoph Sch\"{a}r (ETH Z\"{u}rich) provided his transport scheme and test case implementation.
-I am also grateful to my friend Shing Hing Man for his assistance with cubicFit candidate polynomial generation.  I thank the Dynamics Research group at the Met Office, and Tristan Pryer (University of Reading), for many useful discussions.
-I must also thank my partner Isabel for her patience and encouragement.
-	
-This thesis is based upon two journal articles, and I thank the anonymous reviewers for their helpful questions. \citet{shaw-weller2016} developed the slanted cell method (section~\TODO{}) and performed those numerical experiments found in sections~\ref{sec:cubicFit:schaerAdvect}, \ref{sec:cubicFit:tfAdvect}, \ref{sec:slanted:resting} and \ref{sec:slanted:schaerWaves}.
-\citet{shaw2017} developed the cubicFit transport scheme (chapter~\ref{ch:cubicFit}) and performed those transport tests found in sections~\ref{sec:cubicFit:deformationSphere} and \ref{sec:slanted:mountainAdvect}.
-
-\vspace*{4em}
-
-\bibentry{shaw-weller2016}
-
-\bibentry{shaw2017}
-\end{acknowledgements}
-\vfil
-\begin{quote}{\small Declaration: I confirm that this is my own work and the use of all material from other sources has been properly and fully acknowledged. --- James Shaw}
-\end{quote}
-
+\input{acknowledgements.tex}
 \cleardoublepage
 
 \thispagestyle{plain}
-\null\vfil
-\begin{abstract}
-\blindtext
-\end{abstract}
-\vfil
-
+\input{abstract.tex}
 \cleardoublepage
 
 {\hypersetup{linkcolor=black}\tableofcontents*}

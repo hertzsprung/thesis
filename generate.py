@@ -39,6 +39,8 @@ class Thesis:
                 document=os.path.join('src/thesis/thesis'),
                 components=[
                         'src/thesis/title.tex',
+                        'src/thesis/acknowledgements.tex',
+                        'src/thesis/abstract.tex',
                         'src/thesis/mysouthall.tex',
                         'src/thesis/math.tex',
                         'src/thesis/thesis.bib',
