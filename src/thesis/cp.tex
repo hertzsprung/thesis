@@ -1,0 +1,44 @@
+\chapter{Generalising the Charney–Phillips staggering for arbitrary meshes}
+
+\section{Advective-form transport for arbitrary Charney--Phillips meshes}
+
+\TODO{describe the CP advection scheme: interpGrad+fvcReconstructCP (advective form)}
+
+\section{A new test case to excite the Lorenz computational mode}
+\TODO{
+\begin{itemize}
+	\item Test: 2D vertical slice with initial $\theta$ perturbation, ExnerFoamH and ExnerFoamCP
+	\item Meshes: uniform, edgeGrading (sloping horizontal surfaces, sloping vertical faces)
+	\item Plot: horizontal edgeGrading, vertical edgeGrading
+	\item Plot: initial theta\_diff, final theta\_diff for ExnerFoamH and ExnerFoamCP
+	\item Plot: conservation of internal energy and total energy time series, ExnerFoamH and ExnerFoamCP, uniform mesh, horizontal edgeGrading, vertical edgeGrading
+	\item Conclusion: the test excites the Lorenz computational mode with ExnerFoamH
+	\item Conclusion: ExnerFoamCP eliminates computational mode
+	\item Conclusion: edgeGrading reveals lack of conservation... is it due to the advective form transport of $\theta$?  next test will try to provide an answer
+\end{itemize}
+}
+
+\section{Horizontal transport on distorted Charney--Phillips meshes}
+\TODO{
+\begin{itemize}
+	\item Test: horizontal advection; advectiveFoamF, advectionFoam with linear interp, advectionFoam with linearUpwind interp; measure l2 and linf errors (s.t. they can be compared with cell-centred, C-grid results); uniform and edgeGraded meshes
+	\item Plot: error fields, analytic+numerical contours of final solution, which schemes and which meshes? too many combinations to plot all of them
+	\item Plot: time-series of conservation, ExnerFoamH and ExnerFoamCP, uniform mesh, horizontal edgeGrading, vertical edgeGrading
+	\item Conclusion: advection is conservative on uniform meshes, non-conservative on non-uniform meshes
+	\item Conclusion: advectiveFoamF errors are comparable to advectionFoam with linear interpolation?
+	\item Conclusion: advectiveFoamF errors are worse than advectionFoam with linearUpwind interpolation?
+\end{itemize}
+}
+
+\section{Sch\"{a}r mountain waves}
+
+\TODO{
+\begin{itemize}
+	\item test: Schaer waves
+	\item mesh: BTF, BTF + edgeGrading on vertical faces?
+	\item conclusion: CP formulation works for advection-dominated flow, but advection scheme is not sufficiently accurate to obtain the correct solution (this is not surprising since advectiveFoamF is less accurate than advectionFoam with linearUpwind, and we already know that ExnerFoamH+linearUpwind is also inaccurate for schaerWaves test)
+	\item conclusion: flow over mountains can also excite the Lorenz computational mode but less clearly than our more artificial test case?
+	\item conclusion: ExnerFoamCP again eliminates computational mode?
+\end{itemize}
+}
+

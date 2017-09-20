@@ -58,7 +58,8 @@ class Thesis:
                         'src/thesis/slanted.tex',
                         'src/thesis/slanted/mountainAdvect.tex',
                         'src/thesis/slanted/resting.tex',
-                        'src/thesis/slanted/schaerWaves.tex']
+                        'src/thesis/slanted/schaerWaves.tex',
+                        'src/thesis/cp.tex']
                         + stabilisation.outputs()
                         + schaerAdvect.outputs()
                         + deformationSphere.outputs()
