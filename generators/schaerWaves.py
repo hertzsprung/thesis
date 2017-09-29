@@ -1,4 +1,4 @@
-from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, PDFLaTeXFigure
+from ninjaopenfoam import Case, Gnuplot, GmtPlot, GmtPlotCopyCase, PDFLaTeXFigure
 
 import os
 
@@ -6,6 +6,7 @@ class SchaerWaves:
     def __init__(self):
         self.linearUpwindW()
         self.thetaDiff()
+        self.sampleLines()
 
     def linearUpwindW(self):
         self.btf300dzLinearUpwind = GmtPlotCopyCase(
@@ -56,10 +57,46 @@ class SchaerWaves:
                 components=self.btf50dzCubicFitThetaDiff.outputs()
         )
 
+    def sampleLines(self):
+        self.sampleLines = Gnuplot(
+            'schaerWaves-sampleLines',
+            output=os.path.join('thesis/slanted/schaerWaves/sampleLines'),
+            plot=os.path.join('src/thesis/slanted/schaerWaves/sampleLines.plt'),
+            data=[
+                '$atmostests_builddir/thermalAdvect-btf-500dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-btf-300dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-btf-250dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-btf-200dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-btf-150dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-btf-125dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-btf-100dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-btf-75dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-btf-50dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-cutCell-500dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-cutCell-300dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-cutCell-250dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-cutCell-200dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-cutCell-150dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-cutCell-125dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-cutCell-100dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-cutCell-75dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-cutCell-50dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-slantedCell-500dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-slantedCell-300dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-slantedCell-250dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-slantedCell-200dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-slantedCell-150dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-slantedCell-125dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-slantedCell-100dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-slantedCell-75dz-cubicFit/18000/T_diff.sampleLine.dat',
+                '$atmostests_builddir/thermalAdvect-slantedCell-50dz-cubicFit/18000/T_diff.sampleLine.dat',
+        ])
+
     def outputs(self):
         return ['src/thesis/slanted/schaerWaves/melvin2010-w-mass-conserving-sisl.png'] \
              + self.btf300dzLinearUpwindWFigure.outputs() \
-             + self.btf50dzCubicFitThetaDiffFigure.outputs()
+             + self.btf50dzCubicFitThetaDiffFigure.outputs() \
+             + self.sampleLines.outputs()
 
     def addTo(self, build):
         build.add(self.btf300dzLinearUpwind)
@@ -70,3 +107,5 @@ class SchaerWaves:
 
         build.add(self.btf50dzCubicFitThetaDiff)
         build.add(self.btf50dzCubicFitThetaDiffFigure)
+
+        build.add(self.sampleLines)
