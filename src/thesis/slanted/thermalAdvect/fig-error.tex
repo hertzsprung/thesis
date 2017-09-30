@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage[paperwidth=5.3in,paperheight=2.7in,margin=0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[final,babel]{microtype}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[absolute,overlay]{textpos}
+
+\graphicspath{{src/thesis/}{build/}}
+\makeatletter
+\def\input@path{{src/thesis/}{build/thesis/}{build/}}
+\makeatother
+
+\sisetup{round-mode=off,round-precision=3}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\TPMargin{1pt}
+%\begin{textblock*}{12em}(0.9in,1.2in)
+%\normalsize
+%(a) BTF \\
+%\hspace*{0.3em}$\ell_2 = \input{schaerAdvect-btf-1000-linearUpwind/10000/l2errorT}$
+%\hspace*{1em}$\ell_\infty = \input{schaerAdvect-btf-1000-linearUpwind/10000/linferrorT}$
+%\end{textblock*}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{
+	\includegraphics{thermalAdvect-btf-50dz-cubicFit/18000/error.pdf}
+	\includegraphics{thermalAdvect-cutCell-50dz-cubicFit/18000/errorS.pdf}
+}
+
+\vspace{0.5em}
+\hspace*{13.5em}$x$ (\si{\meter})\hspace{14em}$x$ (\si{\meter})
+
+\centering \includegraphics[height=5in,angle=270]{thermalAdvect-btf-50dz-cubicFit/thermalAdvect-btfError-colorBar.eps}
+\end{document}
