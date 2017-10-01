@@ -2,8 +2,16 @@
 
 \begin{figure}
 	\centering
-	\input{cubicFit/interior-stencils}
-	\caption{Upwind-biased stencils for faces far away from the boundaries of two-dimensional (a) rectangular and (b) hexagon meshes.  The stencil is used to fit a multidimensional polynomial to cell centre values, $\phi_c$, marked by grey circles, in order to approximate the value $\phi_F$ at the face centroid marked by an open circle.  $\phi_u$ and $\phi_d$ are the values at the centroids of the upwind and downwind cells neighbouring the target face, drawn with a heavy line.  The velocity vector $\uf$ is prescribed at face $f$ and determines the choice of stencil at each time-step.}
+	\begin{subfigure}{\textwidth}
+		\centering
+		\input{cubicFit/interior-stencils}
+		\phantomsubcaption\label{fig:cubicFit:interiorStencils:quad}
+		\phantomsubcaption\label{fig:cubicFit:interiorStencils:hex}
+	\end{subfigure}
+	\caption{Upwind-biased stencils for faces far away from the boundaries of two-dimensional
+	(\subcaptionref{fig:cubicFit:interiorStencils:quad}) rectangular and
+	(\subcaptionref{fig:cubicFit:interiorStencils:hex}) hexagon meshes.
+	The stencil is used to fit a multidimensional polynomial to cell centre values, $\phi_c$, marked by grey circles, in order to approximate the value $\phi_F$ at the face centroid marked by an open circle.  $\phi_u$ and $\phi_d$ are the values at the centroids of the upwind and downwind cells neighbouring the target face, drawn with a heavy line.  The velocity vector $\uf$ is prescribed at face $f$ and determines the choice of stencil at each time-step.}
 	\label{fig:cubicFit:interiorStencils}
 \end{figure}
 
@@ -11,7 +19,7 @@ The cubicFit scheme approximates the value of the dependent variable at the face
 To introduce the approximation method, we will consider how an approximate value is calculated for a face that is far away from the boundaries of a two-dimensional uniform rectangular mesh.
 For any mesh, every interior face connects two adjacent cells.  The velocity direction at the face determines which of the two adjacent cells is the upwind cell.  Since the stencil is upwind-biased and asymmetric, two stencils must be constructed for every interior face, and the appropriate stencil is chosen depending on the velocity direction at each face for every time-step.
 
-The upwind-biased stencil for a face $f$ is shown in figure~\ref{fig:cubicFit:interiorStencils}a.  The wind at the face, $\uf$, is blowing from the upwind cell $c_u$ to the downwind cell $c_d$.
+The upwind-biased stencil for a face $f$ is shown in figure~\ref{fig:cubicFit:interiorStencils:quad}.  The wind at the face, $\uf$, is blowing from the upwind cell $c_u$ to the downwind cell $c_d$.
 To obtain an approximate value at $f$, a polynomial least-squares fit is calculated using the stencil values.
 The stencil has \num{4} points in $x$ and \num{3} points in $y$, leading to a natural choice of polynomial that is cubic in $x$ and quadratic in $y$,
 \begin{align}
@@ -143,16 +151,23 @@ For faces of a non-rectangular mesh, or faces that are near a boundary, the numb
 
 \begin{figure}
 	\centering
-	\input{cubicFit/boundary-stencils}
-	\caption{Upwind-biased stencils for faces near the lower boundary of a rectangular $x$--$z$ mesh, with (a) a $3 \times 2$ stencil for the face immediately adjacent to the lower boundary, and (b) a $3 \times 3$ stencil for the face immediately adjacent to the face in (a).  Each stencil belongs to the face marked by a thick line.  The local coordinate system is shown, having an $x$ direction normal to the face a $y$ direction tangent to the face.  For both stencils, attempting a least-squares fit using the nine-term polynomial in equation~\eqref{eqn:cubicFit:fullPoly} would result in an underconstrained problem.
+	\begin{subfigure}{\textwidth}
+		\centering
+		\input{cubicFit/boundary-stencils}
+		\phantomsubcaption\label{fig:cubicFit:boundaryStencils:two}
+		\phantomsubcaption\label{fig:cubicFit:boundaryStencils:three}
+	\end{subfigure}
+	\caption{Upwind-biased stencils for faces near the lower boundary of a rectangular $x$--$z$ mesh, with
+	(\subcaptionref{fig:cubicFit:boundaryStencils:two}) a $3 \times 2$ stencil for the face immediately adjacent to the lower boundary, and
+	(\subcaptionref{fig:cubicFit:boundaryStencils:three}) a $3 \times 3$ stencil for the face immediately adjacent to the face in (\subcaptionref{fig:cubicFit:boundaryStencils:two}).  Each stencil belongs to the face marked by a thick line.  The local coordinate system is shown, having an $x$ direction normal to the face a $y$ direction tangent to the face.  For both stencils, attempting a least-squares fit using the nine-term polynomial in equation~\eqref{eqn:cubicFit:fullPoly} would result in an underconstrained problem.
 	There is no normal flow at the lower boundary.}
 	\label{fig:cubicFit:boundaryStencils}
 \end{figure}
 
-The majority of faces on a uniform two-dimensional mesh have stencils with more than nine cells.  For example, a rectangular mesh has 12 points (figure~\ref{fig:cubicFit:interiorStencils}a), and a hexagonal mesh has 10 points (figure~\ref{fig:cubicFit:interiorStencils}b).
+The majority of faces on a uniform two-dimensional mesh have stencils with more than nine cells.  For example, a rectangular mesh has 12 points (figure~\ref{fig:cubicFit:interiorStencils:quad}), and a hexagonal mesh has 10 points (figure~\ref{fig:cubicFit:interiorStencils:hex}).
 In both cases, constructing a system of equations using the nine-term polynomial in equation~\eqref{eqn:cubicFit:fullPoly} leads to an overconstrained problem that can be solved using least-squares.
-However, this is not true for faces near boundaries: stencils that have fewer than nine cells (figure~\ref{fig:cubicFit:boundaryStencils}a) would result in an underconstrained problem, and stencils that have exactly nine cells may lack sufficient information to constrain high-order terms.
-For example, the stencil in figure~\ref{fig:cubicFit:boundaryStencils}b lacks sufficient information to fit the $x^3$ term.  In such cases, it becomes necessary to perform a least-squares fit using a polynomial with fewer terms.
+However, this is not true for faces near boundaries: stencils that have fewer than nine cells (figure~\ref{fig:cubicFit:boundaryStencils:two}) would result in an underconstrained problem, and stencils that have exactly nine cells may lack sufficient information to constrain high-order terms.
+For example, the stencil in figure~\ref{fig:cubicFit:boundaryStencils:three} lacks sufficient information to fit the $x^3$ term.  In such cases, it becomes necessary to perform a least-squares fit using a polynomial with fewer terms.
 
 For every stencil, we find a set of \textit{candidate polynomials} that do not result in an underconstrained problem.
 In two dimensions, a candidate polynomial has some combination of between one and nine terms from equation~\eqref{eqn:cubicFit:fullPoly}.  There are two additional constraints that a candidate polynomial must satisfy.
@@ -168,7 +183,7 @@ For example, the polynomial $\phi = a_1 + a_2 x + a_3 y + a_4 xy + a_5 x^2 + a_6
 In total there are 26 dense subsets of the two-dimensional polynomial in equation~\eqref{eqn:cubicFit:fullPoly}.
 
 Second, a candidate polynomial must have a stencil matrix $\vect{B}$ that is full rank.  The matrix is considered full rank if its smallest singular value is greater than \num{1e-9}.
-Using a polynomial with all nine terms and the stencil in figure~\ref{fig:cubicFit:boundaryStencils}b results in a rank-deficient matrix and so the nine-term polynomial is not a candidate polynomial.
+Using a polynomial with all nine terms and the stencil in figure~\ref{fig:cubicFit:boundaryStencils:three} results in a rank-deficient matrix and so the nine-term polynomial is not a candidate polynomial.
 
 The candidate polynomials are all the dense subsets of $M(x,y)$ that have a cardinality greater than one with a stencil matrix that is full rank.  The final stage of the cubicFit transport scheme selects a candidate polynomial and ensures that the least-squares fit is numerically stable.
 
@@ -300,13 +315,26 @@ For stencils in the interior of a uniform rectangular mesh, the least squares fi
 
 \begin{figure}
 	\centering
-	\input{cubicFit/stabilisation}
-	\caption{One-dimensional least-squares fits with a stencil of five points using (a) a cubic polynomial with multipliers $m_u = 1024$, $m_d = 1024$ and $m_p = 1$, (b) a quadratic polynomial with the same multipliers, and (c) a quadratic polynomial with multipliers $m_u = 1024$, $m_d = 1$ and $m_p = 1$.  Notice that the curves in (a) and (b) fit almost exactly through the upwind and downwind points immediately adjacent to the $y$-axis, but in (c) the curve fits almost exactly only through the upwind point immediately to the left of the $y$-axis.  The point data are labelled with their respective weights.
+	\begin{subfigure}{\textwidth}
+		\centering
+		\input{cubicFit/stabilisation}
+		\phantomsubcaption\label{fig:cubicFit:oscillatory1D:cubic}
+		\phantomsubcaption\label{fig:cubicFit:oscillatory1D:quadratic}
+		\phantomsubcaption\label{fig:cubicFit:oscillatory1D:quadraticUpwind}
+	\end{subfigure}
+	\caption{One-dimensional least-squares fits with a stencil of five points using
+	(\subcaptionref{fig:cubicFit:oscillatory1D:cubic}) a cubic polynomial with multipliers $m_u = 1024$, $m_d = 1024$ and $m_p = 1$,
+	(\subcaptionref{fig:cubicFit:oscillatory1D:quadratic}) a quadratic polynomial with the same multipliers, and
+	(\subcaptionref{fig:cubicFit:oscillatory1D:quadraticUpwind}) a quadratic polynomial with multipliers $m_u = 1024$, $m_d = 1$ and $m_p = 1$.
+	Notice that the curves in
+	(\subcaptionref{fig:cubicFit:oscillatory1D:cubic}) and
+	(\subcaptionref{fig:cubicFit:oscillatory1D:quadratic}) fit almost exactly through the upwind and downwind points immediately adjacent to the $y$-axis, but in
+	(\subcaptionref{fig:cubicFit:oscillatory1D:quadraticUpwind}) the curve fits almost exactly only through the upwind point immediately to the left of the $y$-axis.  The point data are labelled with their respective weights.
 	Points that have failed one of the stability conditions in equation~\eqref{eqn:cubicFit:stability} are marked in red with italicised labels.  The upwind point is located at $(-1, 1.8)$ and the downwind point at $(0.62, 1.9)$, and the peripheral points are at $(-2.8, 2.4)$, $(-1.6, 2.7)$ and $(-1.2, 2.2)$.  The stabilisation procedure (section~\ref{sec:cubicFit:stabilisation}) calculates weights using only $x$ positions, and values of $\phi$ are included here for illustration only.}
 	\label{fig:cubicFit:oscillatory1D}
 \end{figure}
 
-To illustrate the stabilisation procedure, figure~\ref{fig:cubicFit:oscillatory1D}a presents a one-dimensional example of a cubic polynomial fitted through five points, with the weight at each point printed beside it.
+To illustrate the stabilisation procedure, figure~\ref{fig:cubicFit:oscillatory1D:cubic} presents a one-dimensional example of a cubic polynomial fitted through five points, with the weight at each point printed beside it.
 The stabilisation procedure only uses the $x$ positions of these points and does not use the values of $\phi$ themselves.  The $\phi$ values are included here for illustration only.
 Hence, for a given set of $x$ positions, the same set of weights are chosen irrespective of the $\phi$ values.
 
@@ -318,8 +346,8 @@ For a one-dimensional cubic polynomial fit, the list of candidate polynomials in
 	\phi &= a_1 \text{ .}
 \end{align}
 We begin with the cubic equation~\eqref{eqn:cubicFit:cubicCandidate}.  The multipliers are chosen so that the polynomial passes almost exactly through the upwind and downwind points that are immediately to the left and right of the $y$-axis respectively.
-The stability condition on the upwind point is violated because $w_u = 1.822 > 1$ (equation~\ref{eqn:cubicFit:stabilityU}).  Reducing the downwind multiplier does not help to satisfy the stability condition, so we start again with the quadratic equation~\eqref{eqn:cubicFit:quadCandidate}, and the new fit is presented in figure~\ref{fig:cubicFit:oscillatory1D}b.
-Again, the multipliers are chosen to force the polynomial through the upwind and downwind points, but this violates the stability condition on the downwind point because $w_d = 0.502 > 0.5$ (equation~\ref{eqn:cubicFit:stabilityD}).  This time, however, stable weights are found by reducing $m_d$ to one (figure~\ref{fig:cubicFit:oscillatory1D}c) and these are the weights that will be used to approximate $\phi_F$, where the polynomial intercepts the $y$-axis.
+The stability condition on the upwind point is violated because $w_u = 1.822 > 1$ (equation~\ref{eqn:cubicFit:stabilityU}).  Reducing the downwind multiplier does not help to satisfy the stability condition, so we start again with the quadratic equation~\eqref{eqn:cubicFit:quadCandidate}, and the new fit is presented in figure~\ref{fig:cubicFit:oscillatory1D:quadratic}.
+Again, the multipliers are chosen to force the polynomial through the upwind and downwind points, but this violates the stability condition on the downwind point because $w_d = 0.502 > 0.5$ (equation~\ref{eqn:cubicFit:stabilityD}).  This time, however, stable weights are found by reducing $m_d$ to one (figure~\ref{fig:cubicFit:oscillatory1D:quadraticUpwind}) and these are the weights that will be used to approximate $\phi_F$, where the polynomial intercepts the $y$-axis.
 
 \subsubsection{Future extension to three dimensions}
 All the procedures used in the cubicFit scheme generalise to three dimensions.  The stencil construction procedure described in section~\ref{sec:cubicFit:stencil} creates a stencil with \num{12} cells for a face in the interior of a two-dimensional rectangular mesh.  In three dimensions, the same procedure creates a stencil with $3 \times 12 = 36$ cells.
