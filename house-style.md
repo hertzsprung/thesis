@@ -10,15 +10,18 @@
 
 # colors
 
-- BTF purple
-- cut cells green
-- slanted cells blue
+- BTF purple, squares (lc 1) pt 4/5
+- SLEVE yellow, diamonds (lc 4) pt 12/13
+- cut cells green, circles (lc 2) pt 6/7
+- slanted cells blue, triangles (lc 3) lt 8/9
+- cubicFit: solid lines, filled markers
+- linearUpwind: dashed lines, outline markers (dt 2)
 
 - numerical solid contours
 - analytic dotted contours
 
-- hexagonal-icosahedral purple
-- cubed-sphere green
+- hexagonal-icosahedral dark blue
+- cubed-sphere red
 
 - cubicFit normal label font, solid line
 - linearUpwind italicised label font, dotted line

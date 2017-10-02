@@ -1,34 +1,52 @@
+set term epslatex color colortext size 5.2,2.5
+
 set style data lines
-set xrange [0:6]
 set logscale y
-set xlabel "$t$ (hours)" offset 0,1
-set ylabel "$\\mathrm{max}(w)$ (\\si{\\meter\\per\\second})" offset 4
-set xtics offset 0,0.5
+
+set xlabel "$t$ (hours)" offset 0,0.4
+set ylabel "$\\mathrm{max}(\\Mag{w})$ (\\si{\\meter\\per\\second})" offset 2
+
+set xrange [0:6]
+set yrange [1e-5:20]
+
 set ytics offset 0.5 format "$10^{%T}$"
 
-set key outside
+set multiplot layout 1,2 margins 0.08, 0.98, 0.12, 0.94 spacing 0.12,0.12
 
-plot "/home/jshaw/AtmosTests/build/resting-btf-1000m-linearUpwind/energy.dat" using ($1/3600):6 title 'linUp BTF 1000m', \
-     "/home/jshaw/AtmosTests/build/resting-sleve-1000m-linearUpwind/energy.dat" using ($1/3600):6 title 'linUp SLEVE 1000m', \
-     "/home/jshaw/AtmosTests/build/resting-cutCell-1000m-linearUpwind/energy.dat" using ($1/3600):6 title 'linUp cutCell 1000m', \
-     "/home/jshaw/AtmosTests/build/resting-slantedCell-1000m-linearUpwind/energy.dat" using ($1/3600):6 title 'linUp slantedCell 1000m', \
-     "/home/jshaw/AtmosTests/build/resting-btf-2000m-linearUpwind/energy.dat" using ($1/3600):6 lc 1 dt 2 title 'linUp BTF 2000m', \
-     "/home/jshaw/AtmosTests/build/resting-sleve-2000m-linearUpwind/energy.dat" using ($1/3600):6 lc 2 dt 2 title 'linUp SLEVE 2000m', \
-     "/home/jshaw/AtmosTests/build/resting-cutCell-2000m-linearUpwind/energy.dat" using ($1/3600):6 lc 3 dt 2 title 'linUp cutCell 2000m', \
-     "/home/jshaw/AtmosTests/build/resting-slantedCell-2000m-linearUpwind/energy.dat" using ($1/3600):6 lc 4 dt 2 title 'linUp slantedCell 2000m', \
-     "/home/jshaw/AtmosTests/build/resting-btf-3000m-linearUpwind/energy.dat" using ($1/3600):6 lc 1 dt 3 title 'linUp BTF 3000m', \
-     "/home/jshaw/AtmosTests/build/resting-sleve-3000m-linearUpwind/energy.dat" using ($1/3600):6 lc 2 dt 3 title 'linUp SLEVE 3000m', \
-     "/home/jshaw/AtmosTests/build/resting-cutCell-3000m-linearUpwind/energy.dat" using ($1/3600):6 lc 3 dt 3 title 'linUp cutCell 3000m', \
-     "/home/jshaw/AtmosTests/build/resting-slantedCell-3000m-linearUpwind/energy.dat" using ($1/3600):6 lc 4 dt 3 title 'linUp slantedCell 3000m', \
-     "/home/jshaw/AtmosTests/build/resting-btf-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 1 lw 2 title 'cubicFit BTF 1000m', \
-     "/home/jshaw/AtmosTests/build/resting-sleve-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 2 lw 2 title 'cubicFit SLEVE 1000m', \
-     "/home/jshaw/AtmosTests/build/resting-cutCell-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 3 lw 2 title 'cubicFit cutCell 1000m', \
-     "/home/jshaw/AtmosTests/build/resting-slantedCell-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 4 lw 2 title 'cubicFit slantedCell 1000m', \
-     "/home/jshaw/AtmosTests/build/resting-btf-2000m-cubicFit/energy.dat" using ($1/3600):6 lc 1 lw 2 dt 2 title 'cubicFit BTF 2000m', \
-     "/home/jshaw/AtmosTests/build/resting-sleve-2000m-cubicFit/energy.dat" using ($1/3600):6 lc 2 lw 2 dt 2 title 'cubicFit SLEVE 2000m', \
-     "/home/jshaw/AtmosTests/build/resting-cutCell-2000m-cubicFit/energy.dat" using ($1/3600):6 lc 3 lw 2 dt 2 title 'cubicFit cutCell 2000m', \
-     "/home/jshaw/AtmosTests/build/resting-slantedCell-2000m-cubicFit/energy.dat" using ($1/3600):6 lc 4 lw 2 dt 2 title 'cubicFit slantedCell 2000m', \
-     "/home/jshaw/AtmosTests/build/resting-btf-3000m-cubicFit/energy.dat" using ($1/3600):6 lc 1 lw 2 dt 3 title 'cubicFit BTF 3000m', \
-     "/home/jshaw/AtmosTests/build/resting-sleve-3000m-cubicFit/energy.dat" using ($1/3600):6 lc 2 lw 2 dt 3 title 'cubicFit SLEVE 3000m', \
-     "/home/jshaw/AtmosTests/build/resting-cutCell-3000m-cubicFit/energy.dat" using ($1/3600):6 lc 3 lw 2 dt 3 title 'cubicFit cutCell 3000m', \
-     "/home/jshaw/AtmosTests/build/resting-slantedCell-3000m-cubicFit/energy.dat" using ($1/3600):6 lc 4 lw 2 dt 3 title 'cubicFit slantedCell 3000m'
+# t
+
+unset key
+set label "(a)" at 0.2,5
+set label "BTF" at 0.8,3e-1
+set label "SLEVE" at 0.8,1.5e-2
+set label "Cut cells" at 0.8,6e-4
+set label "Slanted cells" at 0.8,5e-5
+
+plot "/home/jshaw/AtmosTests/build/resting-btf-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 1 lw 2 title 'cubicFit BTF', \
+     "/home/jshaw/AtmosTests/build/resting-sleve-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 4 lw 2 title 'cubicFit SLEVE', \
+     "/home/jshaw/AtmosTests/build/resting-cutCell-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 2 lw 2 title 'cubicFit cutCell', \
+     "/home/jshaw/AtmosTests/build/resting-slantedCell-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 3 lw 2 title 'cubicFit slantedCell'
+
+# h0
+
+set style data linespoints
+set key inside bottom right
+set xrange [0:6]
+set xlabel "Peak mountain height $h_0$ (\\si{\\kilo\\meter})"
+set ylabel "$\\max(\\Mag{w})$ (\\si{\\meter\\per\\second})" offset 2
+unset label
+set label "(b)" at 0.2,5
+
+plot 1e-6 lc 0 lw 2 title 'cubicFit', \
+     1e-6 lc 0 lw 2 dt 2 title 'linearUpwind', \
+     1e-6 lc rgbcolor 'white' title ' ', \
+     "`echo $atmostests_builddir`/resting-btf-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 1 lw 2 pt 5 title 'BTF', \
+     "`echo $atmostests_builddir`/resting-sleve-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 4 lw 2 pt 13 ps 1.5 title 'SLEVE', \
+     "`echo $atmostests_builddir`/resting-cutCell-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 2 lw 2 pt 7 title 'cutCell', \
+     "`echo $atmostests_builddir`/resting-slantedCell-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 3 lw 2 pt 9 ps 1.5 title 'slantedCell', \
+     "`echo $atmostests_builddir`/resting-btf-linearUpwind-collated/maxw.txt" using ($1/1000):($2) lc 1 dt 2 pt 4 notitle, \
+     "`echo $atmostests_builddir`/resting-sleve-linearUpwind-collated/maxw.txt" using ($1/1000):($2) lc 4 dt 2 pt 12 ps 1.5 notitle, \
+     "`echo $atmostests_builddir`/resting-cutCell-linearUpwind-collated/maxw.txt" using ($1/1000):($2) lc 2 dt 2 pt 6 notitle, \
+     "`echo $atmostests_builddir`/resting-slantedCell-linearUpwind-collated/maxw.txt" using ($1/1000):($2) lc 3 dt 2 pt 8 ps 1.5 notitle
+
+unset multiplot

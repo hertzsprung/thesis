@@ -17,10 +17,10 @@ set multiplot layout 1,2
 ### l2
 
 set ylabel "$\\ell_2$ error" offset 1.5
-plot "`echo $atmostests_builddir`/deformationSphere-gaussians-hex-linearUpwind-collated/1036800/l2errorT.txt" using 1:2 lc 1 dt 3 lw 2 title 'Hexagonal-icosahedral, linearUpwind', \
-     "`echo $atmostests_builddir`/deformationSphere-gaussians-hex-cubicFit-collated/1036800/l2errorT.txt" using 1:2 lc 1 title 'Hexagonal-icosahedral, cubicFit', \
-     "`echo $atmostests_builddir`/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/l2errorT.txt" using 1:2 lc 2 dt 3 lw 2 title 'Cubed-sphere, linearUpwind', \
-     "`echo $atmostests_builddir`/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/l2errorT.txt" using 1:2 lc 2 title 'Cubed-sphere, cubicFit', \
+plot "`echo $atmostests_builddir`/deformationSphere-gaussians-hex-linearUpwind-collated/1036800/l2errorT.txt" using 1:2 lc 6 pt 10 ps 1.5 dt 3 lw 2 title 'Hexagonal-icosahedral, linearUpwind', \
+     "`echo $atmostests_builddir`/deformationSphere-gaussians-hex-cubicFit-collated/1036800/l2errorT.txt" using 1:2 lc 6 pt 11 ps 1.5 title 'Hexagonal-icosahedral, cubicFit', \
+     "`echo $atmostests_builddir`/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/l2errorT.txt" using 1:2 lc 7 pt 14 ps 1.5 dt 3 lw 2 title 'Cubed-sphere, linearUpwind', \
+     "`echo $atmostests_builddir`/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/l2errorT.txt" using 1:2 lc 7 pt 15 ps 1.5 title 'Cubed-sphere, cubicFit', \
      x * 1e-1 lc rgbcolor "black" dt 1 lw 1 notitle, \
      x**2 * 1e-1 lc rgbcolor "black" dt 3 lw 3 notitle
 
@@ -28,9 +28,9 @@ plot "`echo $atmostests_builddir`/deformationSphere-gaussians-hex-linearUpwind-c
 
 set tmargin 5.2
 set ylabel "$\\ell_\\infty$ error" offset 1.5
-plot "`echo $atmostests_builddir`/deformationSphere-gaussians-hex-linearUpwind-collated/1036800/linferrorT.txt" using 1:2 lc 1 dt 3 lw 2 notitle, \
-     "`echo $atmostests_builddir`/deformationSphere-gaussians-hex-cubicFit-collated/1036800/linferrorT.txt" using 1:2 lc 1 notitle, \
-     "`echo $atmostests_builddir`/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/linferrorT.txt" using 1:2 lc 2 dt 3 lw 2 notitle, \
-     "`echo $atmostests_builddir`/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/linferrorT.txt" using 1:2 lc 2 notitle, \
+plot "`echo $atmostests_builddir`/deformationSphere-gaussians-hex-linearUpwind-collated/1036800/linferrorT.txt" using 1:2 lc 6 pt 10 ps 1.5 dt 3 lw 2 notitle, \
+     "`echo $atmostests_builddir`/deformationSphere-gaussians-hex-cubicFit-collated/1036800/linferrorT.txt" using 1:2 lc 6 pt 11 ps 1.5 notitle, \
+     "`echo $atmostests_builddir`/deformationSphere-gaussians-cubedSphere-linearUpwind-collated/1036800/linferrorT.txt" using 1:2 lc 7 pt 14 ps 1.5 dt 3 lw 2 notitle, \
+     "`echo $atmostests_builddir`/deformationSphere-gaussians-cubedSphere-cubicFit-collated/1036800/linferrorT.txt" using 1:2 lc 7 pt 15 ps 1.5 notitle, \
      x * 1e-1 lc rgbcolor "black" dt 1 lw 1 title '1st order', \
      x**2 * 1e-1 lc rgbcolor "black" dt 3 lw 3 title '2nd order'

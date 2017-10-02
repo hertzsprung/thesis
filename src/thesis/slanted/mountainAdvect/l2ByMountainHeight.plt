@@ -20,7 +20,7 @@ unset key
 
 plot "`echo $atmostests_builddir`/mountainAdvect-h0-btf-1000-linearUpwind-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 1 lw 2 dt 2 ps 1.5 pt 4, \
      "`echo $atmostests_builddir`/mountainAdvect-h0-btf-1000-cubicFit-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 1 lw 2 dt 1 ps 1.5 pt 5, \
-     "`echo $atmostests_builddir`/mountainAdvect-h0-cutCell-1000-linearUpwind-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 2 lw 2 dt 2 ps 1.5 pt 8, \
-     "`echo $atmostests_builddir`/mountainAdvect-h0-cutCell-1000-cubicFit-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 2 lw 2 dt 1 ps 1.5 pt 9, \
-     "`echo $atmostests_builddir`/mountainAdvect-h0-slantedCell-1000-linearUpwind-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 3 lw 2 dt 2 ps 1.5 pt 6, \
-     "`echo $atmostests_builddir`/mountainAdvect-h0-slantedCell-1000-cubicFit-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 3 lw 2 dt 1 ps 1.5 pt 7
+     "`echo $atmostests_builddir`/mountainAdvect-h0-cutCell-1000-linearUpwind-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 2 lw 2 dt 2 ps 1.5 pt 6, \
+     "`echo $atmostests_builddir`/mountainAdvect-h0-cutCell-1000-cubicFit-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 2 lw 2 dt 1 ps 1.5 pt 7, \
+     "`echo $atmostests_builddir`/mountainAdvect-h0-slantedCell-1000-linearUpwind-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 3 lw 2 dt 2 ps 1.5 pt 8, \
+     "`echo $atmostests_builddir`/mountainAdvect-h0-slantedCell-1000-cubicFit-collated/10000/l2errorT.txt" using ($1/1000):($2) lc 3 lw 2 dt 1 ps 1.5 pt 9

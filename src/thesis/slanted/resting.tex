@@ -3,10 +3,7 @@
 
 \TODO{
 \begin{itemize}
-	\item Meshes: BTF, cut cell, slanted cell (with upward vertex shifts), SLEVE
-	\item Schemes: cubicFit, linearUpwind?
-	\item Plot: time series of max(abs(w)) for $h_0=\SI{1}{\kilo\meter}$, cubicFit
-	\item Conclusion: slanted cells have spurious velocities comparable to cut cells, much better than BTF, somewhat better than SLEVE
+	\item Conclusion: ???
 \end{itemize}
 }
 
@@ -29,12 +26,20 @@ The initial potential temperature field has $\theta(z = 0) = \SI{288}{\kelvin}$ 
 
 \begin{figure}
 	\centering
-	\input{slanted/resting/maxw}
-	\caption{\TODO{}}
-	\label{fig:slanted:resting:maxw}
+	\begin{subfigure}{\textwidth}
+		\centering
+		\input{slanted/resting/w}
+		\phantomsubcaption\label{fig:slanted:resting:w:timeseries}
+		\phantomsubcaption\label{fig:slanted:resting:w:max}
+	\end{subfigure}
+	\caption{Spurious vertical velocities in the resting atmosphere test using BTF, SLEVE, cut cell and slanted cell meshes.
+	(\subcaptionref{fig:slanted:resting:w:timeseries}) Time series of spurious vertical velocities, with the maximum absolute value calculated at each time-step. 
+	(\subcaptionref{fig:slanted:resting:w:max}) Sensitivity of spurious vertical velocities to peak mountain height $h_0$, with the maximum absolute value calculated across all time-steps.
+	}
+	\label{fig:slanted:resting:w}
 \end{figure}
 
-The test was integrated forward by 5 hours using a timestep $\Delta t = \SI{100}{\second}$ on the BTF, \TODO{SLEVE}, cut cell and slanted cell meshes.
+The test was integrated forward by 6 hours using a time-step of $\Delta t = \SI{25}{\second}$ on the BTF, SLEVE, cut cell and slanted cell meshes.
 \TODO{
 Maximum vertical velocities are presented in figure~\ref{fig:resting}.  In agreement with \citet{klemp2011}, vertical velocities are larger on more distorted meshes.  However, magnitudes are smaller comparing results on the terrain following meshes with those from \citet{klemp2011}.  
 The results presented in figure~\ref{fig:resting}, which use a curl-free pressure gradient, have maximum spurious values of $w$ of \SI{0.33}{\meter\per\second} on the BTF mesh, compared with a maximum of \(\sim \SI{7}{\meter\per\second}\) found by \citet{klemp2011} using their improved horizontal pressure gradient formulation.

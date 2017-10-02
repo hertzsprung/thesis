@@ -4,11 +4,15 @@ import os
 
 class Resting:
     def __init__(self):
-        self.maxw = Gnuplot(
-                'resting-maxw',
-                output=os.path.join('thesis/slanted/resting/maxw'),
-                plot=os.path.join('src/thesis/slanted/resting/maxw.plt'),
+        self.w = Gnuplot(
+                'resting-w',
+                output=os.path.join('thesis/slanted/resting/w'),
+                plot=os.path.join('src/thesis/slanted/resting/w.plt'),
                 data=[
+                    '$atmostests_builddir/resting-btf-1000m-cubicFit/energy.dat',
+                    '$atmostests_builddir/resting-sleve-1000m-cubicFit/energy.dat',
+                    '$atmostests_builddir/resting-cutCell-1000m-cubicFit/energy.dat',
+                    '$atmostests_builddir/resting-slantedCell-1000m-cubicFit/energy.dat',
                     '$atmostests_builddir/resting-btf-linearUpwind-collated/maxw.txt',
                     '$atmostests_builddir/resting-sleve-linearUpwind-collated/maxw.txt',
                     '$atmostests_builddir/resting-cutCell-linearUpwind-collated/maxw.txt',
@@ -20,7 +24,7 @@ class Resting:
         ])
 
     def outputs(self):
-        return self.maxw.outputs()
+        return self.w.outputs()
 
     def addTo(self, build):
-        build.add(self.maxw)
+        build.add(self.w)
