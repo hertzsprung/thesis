@@ -5,7 +5,7 @@
 {\Large Highlights}
 \begin{itemize}
 	\item The new slanted cell mesh permits longer time-steps than cut cells, with time-steps comparable to terrain-following meshes
-	\item Pressure gradient calculations are more accurate using slanted cells compared to terrain-following meshes
+	\item \TODO{Pressure gradient calculations are more accurate using slanted cells compared to BTF meshes --- but not SLEVE! this is a weak conclusion!}
 	\item Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over very steep slopes
 \end{itemize}
 \end{highlights}
@@ -17,6 +17,14 @@ Motivation
 	\item we seek a mesh that improves pressure gradient errors, but avoids arbitrarily small cells and is easier to construct than cut cell meshes
 	\item to ensure cubicFit is numerically stable and accurate on slanted cell meshes with steep slopes, we transport a tracer along the ground through the slanted cells
 \end{itemize}
+}
+
+\TODO{The new resting atmosphere results with steeper mountains make slantedCells unattractive compared to SLEVE or cut cells.  So now there are no tests in which slanted cells outperform other meshes.  I see three options here:
+\begin{enumerate}
+\item Keep the weak conclusion that slanted cells aren't very good.
+\item Formulate and implement a better cell merging method to better control pressure gradient errors.
+\item Present two sets of slanted cell results in the resting atmosphere test: one with tolerance=0 and another with tolerance=2dx/5.  I already know that results are more stable and accurate when tolerance=2dz/5 is used to remove the thinnest slanted cells.  This crude thin-cell-avoidance method is quite effective, therefore we'd expect a better cell merging method to help further still.
+\end{enumerate}
 }
 
 \input{slanted/mountainAdvect.tex}
