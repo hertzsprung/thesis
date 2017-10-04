@@ -15,14 +15,38 @@ set ytics format "% h"
 set ylabel "$z$ (\\si{\\meter})" offset 3
 
 set title "Sch\\\"{a}r waves BTF"
-plot "`echo $atmostests_builddir`/schaerWaves-btf-300dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle
+plot "`echo $atmostests_builddir`/schaerWaves-btf-500dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-btf-300dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-btf-250dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-btf-200dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-btf-150dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-btf-125dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-btf-100dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-btf-75dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-btf-50dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle
 
 unset ylabel
 set title "Sch\\\"{a}r waves cut cells"
-plot "`echo $atmostests_builddir`/schaerWaves-cutCell-300dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle
+plot "`echo $atmostests_builddir`/schaerWaves-cutCell-500dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-cutCell-300dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-cutCell-250dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-cutCell-200dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-cutCell-150dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-cutCell-125dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-cutCell-100dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-cutCell-75dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-cutCell-50dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle
 
 set title "Sch\\\"{a}r waves slanted cells"
-plot "`echo $atmostests_builddir`/schaerWaves-slantedCell-300dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle
+plot "`echo $atmostests_builddir`/schaerWaves-slantedCell-500dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-slantedCell-300dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-slantedCell-250dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-slantedCell-200dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-slantedCell-150dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-slantedCell-125dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-slantedCell-100dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-slantedCell-75dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/schaerWaves-slantedCell-50dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle
 
 set ylabel "$z$ (\\si{\\meter})" offset 3
 set title "Thermal transport BTF"
@@ -44,9 +68,9 @@ plot "`echo $atmostests_builddir`/thermalAdvect-cutCell-500dz-cubicFit/18000/T_d
      "`echo $atmostests_builddir`/thermalAdvect-cutCell-200dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
      "`echo $atmostests_builddir`/thermalAdvect-cutCell-150dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
      "`echo $atmostests_builddir`/thermalAdvect-cutCell-125dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
-     "`echo $atmostests_builddir`/thermalAdvect-cutCell-100dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 title '\SI{100}{\meter}', \
-     "`echo $atmostests_builddir`/thermalAdvect-cutCell-75dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 title '\SI{75}{\meter}', \
-     "`echo $atmostests_builddir`/thermalAdvect-cutCell-50dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 title '\SI{50}{\meter}'
+     "`echo $atmostests_builddir`/thermalAdvect-cutCell-100dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/thermalAdvect-cutCell-75dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/thermalAdvect-cutCell-50dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle
 
 set title "Thermal transport slanted cells"
 plot "`echo $atmostests_builddir`/thermalAdvect-slantedCell-500dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
@@ -55,6 +79,6 @@ plot "`echo $atmostests_builddir`/thermalAdvect-slantedCell-500dz-cubicFit/18000
      "`echo $atmostests_builddir`/thermalAdvect-slantedCell-200dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
      "`echo $atmostests_builddir`/thermalAdvect-slantedCell-150dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
      "`echo $atmostests_builddir`/thermalAdvect-slantedCell-125dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
-     "`echo $atmostests_builddir`/thermalAdvect-slantedCell-100dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 title '\SI{100}{\meter}', \
-     "`echo $atmostests_builddir`/thermalAdvect-slantedCell-75dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 title '\SI{75}{\meter}', \
-     "`echo $atmostests_builddir`/thermalAdvect-slantedCell-50dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 title '\SI{50}{\meter}'
+     "`echo $atmostests_builddir`/thermalAdvect-slantedCell-100dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/thermalAdvect-slantedCell-75dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
+     "`echo $atmostests_builddir`/thermalAdvect-slantedCell-50dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle
