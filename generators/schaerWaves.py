@@ -5,6 +5,7 @@ import os
 class SchaerWaves:
     def __init__(self):
         self.linearUpwindW()
+        self.cubicFitW()
         self.thetaDiff()
         self.sampleLines()
 
@@ -30,6 +31,30 @@ class SchaerWaves:
                 output=os.path.join('thesis/slanted/schaerWaves/fig-btf-300dz-linearUpwind-w'),
                 figure=os.path.join('src/thesis/slanted/schaerWaves/fig-btf-300dz-linearUpwind-w'),
                 components=self.btf300dzLinearUpwindW.outputs()
+        )
+
+    def cubicFitW(self):
+        self.btf300dzCubicFit = GmtPlotCopyCase(
+                'schaerWaves-btf-300dz-cubicFit',
+                source='$atmostests_builddir',
+                target='$builddir',
+                plots=['src/thesis/slanted/schaerWaves/w.gmtdict'],
+                files=['18000/Uf'])
+
+        btf300dzCubicFitCase = Case('schaerWaves-btf-300dz-cubicFit')
+
+        self.btf300dzCubicFitW = GmtPlot(
+            'schaerWaves-btf-300dz-cubicFit-w',
+            plot='w',
+            case=btf300dzCubicFitCase,
+            time=18000,
+            data=['18000/Uf'])
+
+        self.btf300dzCubicFitWFigure = PDFLaTeXFigure(
+                'schaerWaves-btf-300dz-cubicFit-w-figure',
+                output=os.path.join('thesis/slanted/schaerWaves/fig-btf-300dz-cubicFit-w'),
+                figure=os.path.join('src/thesis/slanted/schaerWaves/fig-btf-300dz-cubicFit-w'),
+                components=self.btf300dzCubicFitW.outputs()
         )
 
     def thetaDiff(self):
@@ -122,15 +147,19 @@ class SchaerWaves:
     def outputs(self):
         return ['src/thesis/slanted/schaerWaves/melvin2010-w-mass-conserving-sisl.png'] \
              + self.btf300dzLinearUpwindWFigure.outputs() \
+             + self.btf300dzCubicFitWFigure.outputs() \
              + self.btf50dzCubicFitThetaDiffFigure.outputs() \
              + self.sampleLines.outputs()
 
     def addTo(self, build):
         build.add(self.btf300dzLinearUpwind)
+        build.add(self.btf300dzCubicFit)
         build.add(self.btf50dzCubicFit)
 
         build.add(self.btf300dzLinearUpwindW)
         build.add(self.btf300dzLinearUpwindWFigure)
+        build.add(self.btf300dzCubicFitW)
+        build.add(self.btf300dzCubicFitWFigure)
 
         build.add(self.btf50dzCubicFitThetaDiff)
         build.add(self.btf50dzCubicFitThetaDiffFigure)

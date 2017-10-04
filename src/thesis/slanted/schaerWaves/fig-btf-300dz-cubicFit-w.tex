@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage[paperwidth=3.1in,paperheight=2.15in,margin=0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[final,babel]{microtype}
+\usepackage{graphicx}
+\usepackage{siunitx}
+
+\graphicspath{{src/thesis/}{build/}}
+\makeatletter
+\def\input@path{{src/thesis/}{build/thesis/}{build/}}
+\makeatother
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+$z$ (\si{\meter}) \raisebox{-.5\height}{
+	\includegraphics{schaerWaves-btf-300dz-cubicFit/18000/w.pdf}
+}
+
+\vspace{0.5em}
+\hspace*{12.5em}$x$ (\si{\meter})
+\end{document}
