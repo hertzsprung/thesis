@@ -38,14 +38,14 @@ class SchaerWaves:
                 'schaerWaves-btf-300dz-cubicFit',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/slanted/schaerWaves/w.gmtdict'],
+                plots=['src/thesis/slanted/schaerWaves/wS.gmtdict'],
                 files=['18000/Uf'])
 
         btf300dzCubicFitCase = Case('schaerWaves-btf-300dz-cubicFit')
 
         self.btf300dzCubicFitW = GmtPlot(
             'schaerWaves-btf-300dz-cubicFit-w',
-            plot='w',
+            plot='wS',
             case=btf300dzCubicFitCase,
             time=18000,
             data=['18000/Uf'])
