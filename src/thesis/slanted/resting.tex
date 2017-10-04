@@ -11,6 +11,14 @@
 \end{itemize}
 }
 
+\TODO{
+\begin{itemize}
+	\item SLEVE does best in resting tests but we don't test SLEVE anywhere else
+	\item this seems odd given SLEVE shows such promise (and because operational models use smoothed TF meshes such as SLEVE)
+	\item that said, for all advection tests I'd expect SLEVE results to be somewhere between BTF and cut/slanted cells
+\end{itemize}
+}
+
 An idealised mountain is submerged in a stably stratified atmosphere at rest in hydrostatic balance.  The analytic solution is time-invariant, but numerical errors in calculating pressure gradients can give rise to spurious velocities which become more severe over steeper terrain \citep{klemp2011}.
 \TODO{Cut cell meshes are often suggested as a technique for reducing these spurious circulations \citep{yamazaki-satomura2010,jebens2011,good2014}.}
 
