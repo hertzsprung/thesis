@@ -63,6 +63,9 @@ class SchaerWaves:
             output=os.path.join('thesis/slanted/schaerWaves/sampleLines'),
             plot=os.path.join('src/thesis/slanted/schaerWaves/sampleLines.plt'),
             data=[
+                '$atmostests_builddir/schaerWaves-btf-300dz-cubicFit/18000/theta_diff.sampleLine.dat',
+                '$atmostests_builddir/schaerWaves-cutCell-300dz-cubicFit/18000/theta_diff.sampleLine.dat',
+                '$atmostests_builddir/schaerWaves-slantedCell-300dz-cubicFit/18000/theta_diff.sampleLine.dat',
                 '$atmostests_builddir/thermalAdvect-btf-500dz-cubicFit/18000/T_diff.sampleLine.dat',
                 '$atmostests_builddir/thermalAdvect-btf-300dz-cubicFit/18000/T_diff.sampleLine.dat',
                 '$atmostests_builddir/thermalAdvect-btf-250dz-cubicFit/18000/T_diff.sampleLine.dat',

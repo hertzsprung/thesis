@@ -2,7 +2,7 @@ set term epslatex color size 6,4
 
 set style data linespoints
 
-set multiplot layout 1,3
+set multiplot layout 2,3
 #margins 0.1,0.95,0.1,0.9 spacing 0.15
 
 set xrange [-0.1:0.1]
@@ -12,6 +12,18 @@ set yzeroaxis
 
 set xlabel "$\\theta$ (\\si{\\kelvin})" offset 0,0.5
 set ytics format "% h"
+set ylabel "$z$ (\\si{\\meter})" offset 3
+
+set title "Sch\\\"{a}r waves BTF"
+plot "`echo $atmostests_builddir`/schaerWaves-btf-300dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle
+
+unset ylabel
+set title "Sch\\\"{a}r waves cut cells"
+plot "`echo $atmostests_builddir`/schaerWaves-cutCell-300dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle
+
+set title "Sch\\\"{a}r waves slanted cells"
+plot "`echo $atmostests_builddir`/schaerWaves-slantedCell-300dz-cubicFit/18000/theta_diff.sampleLine.dat" using 2:1 notitle
+
 set ylabel "$z$ (\\si{\\meter})" offset 3
 set title "Thermal transport BTF"
 plot "`echo $atmostests_builddir`/thermalAdvect-btf-500dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
@@ -24,6 +36,7 @@ plot "`echo $atmostests_builddir`/thermalAdvect-btf-500dz-cubicFit/18000/T_diff.
      "`echo $atmostests_builddir`/thermalAdvect-btf-75dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 title '\SI{75}{\meter}', \
      "`echo $atmostests_builddir`/thermalAdvect-btf-50dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 title '\SI{50}{\meter}'
 
+unset ylabel
 set title "Thermal transport cut cells"
 plot "`echo $atmostests_builddir`/thermalAdvect-cutCell-500dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
      "`echo $atmostests_builddir`/thermalAdvect-cutCell-300dz-cubicFit/18000/T_diff.sampleLine.dat" using 2:1 notitle, \
