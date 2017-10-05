@@ -58,6 +58,8 @@ class Thesis:
                         'src/thesis/cubicFit/boundary-stencils.tex',
                         'src/thesis/cubicFit/spherical.tex',
                         'src/thesis/slanted.tex',
+                        'src/thesis/slanted/method.tex',
+                        'src/thesis/slanted/construct-mesh.tex',
                         'src/thesis/slanted/mountainAdvect.tex',
                         'src/thesis/slanted/resting.tex',
                         'src/thesis/slanted/schaerWaves.tex',
