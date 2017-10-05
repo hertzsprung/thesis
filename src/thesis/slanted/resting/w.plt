@@ -37,16 +37,9 @@ set ylabel "$\\max(\\Mag{w})$ (\\si{\\meter\\per\\second})" offset 2
 unset label
 set label "(b)" at 0.2,5
 
-plot 1e-6 lc 0 lw 2 title 'cubicFit', \
-     1e-6 lc 0 lw 2 dt 2 title 'linearUpwind', \
-     1e-6 lc rgbcolor 'white' title ' ', \
-     "`echo $atmostests_builddir`/resting-btf-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 1 lw 2 pt 5 title 'BTF', \
+plot "`echo $atmostests_builddir`/resting-btf-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 1 lw 2 pt 5 title 'BTF', \
      "`echo $atmostests_builddir`/resting-sleve-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 4 lw 2 pt 13 ps 1.5 title 'SLEVE', \
      "`echo $atmostests_builddir`/resting-cutCell-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 2 lw 2 pt 7 title 'cutCell', \
-     "`echo $atmostests_builddir`/resting-slantedCell-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 3 lw 2 pt 9 ps 1.5 title 'slantedCell', \
-     "`echo $atmostests_builddir`/resting-btf-linearUpwind-collated/maxw.txt" using ($1/1000):($2) lc 1 dt 2 pt 4 notitle, \
-     "`echo $atmostests_builddir`/resting-sleve-linearUpwind-collated/maxw.txt" using ($1/1000):($2) lc 4 dt 2 pt 12 ps 1.5 notitle, \
-     "`echo $atmostests_builddir`/resting-cutCell-linearUpwind-collated/maxw.txt" using ($1/1000):($2) lc 2 dt 2 pt 6 notitle, \
-     "`echo $atmostests_builddir`/resting-slantedCell-linearUpwind-collated/maxw.txt" using ($1/1000):($2) lc 3 dt 2 pt 8 ps 1.5 notitle
+     "`echo $atmostests_builddir`/resting-slantedCell-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 3 lw 2 pt 9 ps 1.5 title 'slantedCell'
 
 unset multiplot
