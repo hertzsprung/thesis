@@ -1,0 +1,24 @@
+FoamFile {
+    version         1.4;
+    format          ascii;
+
+    root            "";
+    case            "";
+    instance        "constant";
+    local           "";
+
+    class           dictionary;
+    object          gmtDict;
+}
+
+projection "X1.6i/1.6i";
+projection2D XZ;
+separateLegend true;
+plotBoundaryDots false;
+
+FieldsToPlot (
+    [theta_diff rawValues -0.6 0.6 0.1 "$GMTU/colours/red_white_blue.cpt"]
+);
+
+region "-120e3/120e3/0/20e3";
+boundaryMarks "100e3/5e3WSen";

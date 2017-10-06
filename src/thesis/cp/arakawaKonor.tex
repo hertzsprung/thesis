@@ -1,0 +1,35 @@
+\section{A new test case to excite the Lorenz computational mode}
+
+\TODO{
+\begin{itemize}
+	\item Test: 2D vertical slice with initial $\theta$ perturbation, ExnerFoamH and ExnerFoamCP
+	\item Meshes: uniform, edgeGrading (sloping horizontal surfaces, sloping vertical faces)
+	\item Plot: horizontal edgeGrading, vertical edgeGrading
+	\item Plot: initial theta\_diff, final theta\_diff for ExnerFoamH and ExnerFoamCP
+	\item Plot: conservation of internal energy and total energy time series, ExnerFoamH and ExnerFoamCP, uniform mesh, horizontal edgeGrading, vertical edgeGrading
+	\item Conclusion: the test excites the Lorenz computational mode with ExnerFoamH
+	\item Conclusion: ExnerFoamCP eliminates computational mode
+	\item Conclusion: edgeGrading reveals lack of conservation... is it due to the advective form transport of $\theta$?  next test will try to provide an answer
+\end{itemize}
+}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.38\textwidth}
+		\includegraphics{arakawaKonor-uniform-lorenz/0/theta_diff.pdf}
+		\caption{\TODO{initial}}
+		\label{fig:cp:arakawaKonor:theta_diff:initial}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\includegraphics{arakawaKonor-uniform-lorenz/172800/theta_diff.pdf}
+		\caption{\TODO{Lorenz}}
+		\label{fig:cp:arakawaKonor:theta_diff:lorenz}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\includegraphics{arakawaKonor-uniform-lorenz/172800/theta_diff.pdf}
+		\caption{\TODO{Charney--Phillips}}
+		\label{fig:cp:arakawaKonor:theta_diff:cp}
+	\end{subfigure}
+	\caption{\TODO{theta diffs}}
+	\label{fig:cp:arakawaKonor:theta_diff}
+\end{figure}

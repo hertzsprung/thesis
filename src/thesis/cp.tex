@@ -4,19 +4,7 @@
 
 \TODO{describe the CP advection scheme: interpGrad+fvcReconstructCP (advective form)}
 
-\section{A new test case to excite the Lorenz computational mode}
-\TODO{
-\begin{itemize}
-	\item Test: 2D vertical slice with initial $\theta$ perturbation, ExnerFoamH and ExnerFoamCP
-	\item Meshes: uniform, edgeGrading (sloping horizontal surfaces, sloping vertical faces)
-	\item Plot: horizontal edgeGrading, vertical edgeGrading
-	\item Plot: initial theta\_diff, final theta\_diff for ExnerFoamH and ExnerFoamCP
-	\item Plot: conservation of internal energy and total energy time series, ExnerFoamH and ExnerFoamCP, uniform mesh, horizontal edgeGrading, vertical edgeGrading
-	\item Conclusion: the test excites the Lorenz computational mode with ExnerFoamH
-	\item Conclusion: ExnerFoamCP eliminates computational mode
-	\item Conclusion: edgeGrading reveals lack of conservation... is it due to the advective form transport of $\theta$?  next test will try to provide an answer
-\end{itemize}
-}
+\input{cp/arakawaKonor.tex}
 
 \section{Horizontal transport on distorted Charney--Phillips meshes}
 \TODO{
