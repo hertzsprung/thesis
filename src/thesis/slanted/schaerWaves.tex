@@ -4,7 +4,9 @@
 \TODO{
 \begin{itemize}
 	\item Meshes: BTF, cut cell, slanted cell, SLEVE?
+	\item Conclusion: linearUpwind solution similar to non-cancellation of metric terms in \citep{klemp2003}
 	\item Conclusion: unlike linearUpwind, cubicFit gives the correct solution (at least on BTF? is linearUpwind better on cut/slanted cells?)
+	\item Conclusion: cubicFit produces almost identical results on BTF, cut cell and slanted cell meshes.  Unlike the results in \citep{shaw-weller2016}, errors in potential temperature are negligible using the cubicFit scheme.
 	\item Conclusion: should we test max(dt) again? we've not yet done so for a dynamical test.  I'd hope that slanted cells are much better than cut cells.
 \end{itemize}
 }
