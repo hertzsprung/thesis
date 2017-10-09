@@ -11,8 +11,8 @@
 
 The test originally specified by \citet{schaer2002} prescribes flow over terrain with small-scale and large-scale undulations which induces propagating and evanescent gravity waves.  \TODO{what is the motivation for this test?  it is needed to assess the dynamics solver with horizontal and vertical transport}
 
-Following \citet{melvin2010}, the domain is \SI{300}{\kilo\meter} wide and \SI{30}{\kilo\meter} high.
-The mountain profile has the same form as equation~\eqref{eqn:resting:mountain}, but the gravity waves tests have a mountain height of $h_0 = \SI{250}{\meter}$.  As in the resting atmosphere test, $a = \SI{5}{\kilo\meter}$ is the mountain half-width and $\lambda = \SI{4}{\kilo\meter}$ is the wavelength.
+Following \citet{melvin2010}, the domain is \SI{300}{\kilo\meter} wide and \SI{30}{\kilo\meter} high, and the mesh spacing is $\Delta x = \SI{500}{\meter}$ and $\Delta z^\star = \SI{300}{\meter}$.
+The mountain profile has the same form as equation~\eqref{eqn:resting:mountain}, but the mountain waves test has a lower peak mountain height of $h_0 = \SI{250}{\meter}$.  As in the resting atmosphere test, $a = \SI{5}{\kilo\meter}$ is the mountain half-width and $\lambda = \SI{4}{\kilo\meter}$ is the wavelength.
 
 A uniform horizontal wind $(u, w) = (10, 0)\:\si{\meter\per\second}$ is prescribed in the interior domain and at the inlet boundary.  No normal flow is imposed at the top and bottom boundaries and the velocity field has a zero gradient outlet boundary condition.
 
@@ -45,30 +45,36 @@ Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the pu
 	\centering
 	\begin{subfigure}{0.55\textwidth}
 		\centering
-		\includegraphics{thesis/slanted/schaerWaves/fig-btf-300dz-linearUpwind-w.pdf}
-		\caption{\TODO{linearUpwind}}
+		\caption{Lorenz staggering, linearUpwind transport}
 		\label{fig:slanted:schaerWaves:w:linearUpwind}
+		\includegraphics{thesis/slanted/schaerWaves/fig-btf-300dz-linearUpwind-w.pdf}
 	\end{subfigure}
 	\begin{subfigure}{0.44\textwidth}
 		\centering
-		\includegraphics{thesis/slanted/schaerWaves/fig-btf-300dz-cubicFit-w.pdf}
-		\caption{\TODO{cubicFit}}
+		\caption{Lorenz staggering, cubicFit transport}
 		\label{fig:slanted:schaerWaves:w:cubicFit}
+		\includegraphics{thesis/slanted/schaerWaves/fig-btf-300dz-cubicFit-w.pdf}
 	\end{subfigure}
 	\\
+	\vspace*{1em}
+	%
 	\begin{subfigure}{0.55\textwidth}
 		\centering
-		\includegraphics{thesis/slanted/schaerWaves/fig-btf-300dz-cp-w.pdf}
-		\caption{\TODO{Charney--Phillips}}
+		\caption{Charney--Phillips staggering}
 		\label{fig:slanted:schaerWaves:w:cp}
+		\includegraphics{thesis/slanted/schaerWaves/fig-btf-300dz-cp-w.pdf}
 	\end{subfigure}
 	\begin{subfigure}{0.44\textwidth}
 		\centering
-		\raisebox{0.2in}{\includegraphics[height=1.9in]{slanted/schaerWaves/melvin2010-w-mass-conserving-sisl.png}}
-		\caption{\citep{melvin2010}}
+		\caption{Reference solution by \citet{melvin2010}}
 		\label{fig:slanted:schaerWaves:w:melvin}
+		\raisebox{0.2in}{\includegraphics[height=1.9in]{slanted/schaerWaves/melvin2010-w-mass-conserving-sisl.png}}
 	\end{subfigure}
-	\caption{\TODO{$w$ contours} \TODO{include third panel for correct cubicFit result and maybe a fourth panel for the Charney--Phillips result}}
+	\caption{Vertical velocities at the end of integration of the Sch\"{a}r mountain waves test case.
+	Results obtained using a BTF mesh and Lorenz staggering, with potential temperature and momentum transported by (\subcaptionref{fig:slanted:schaerWaves:w:linearUpwind}) the linearUpwind scheme and
+	(\subcaptionref{fig:slanted:schaerWaves:w:cubicFit}) the cubicFit scheme, and (\subcaptionref{fig:slanted:schaerWaves:w:cp}) using a BTF mesh and Charney--Phillips staggering.
+	For comparison, (\subcaptionref{fig:slanted:schaerWaves:w:melvin}) provides a reference solution obtained with a mass-conserving semi-implicit semi-Lagrangian model \citep{melvin2010}.
+	Contours are plotted every \SI{0.05}{\meter\per\second}.  In figures (\subcaptionref{fig:slanted:schaerWaves:w:linearUpwind}), (\subcaptionref{fig:slanted:schaerWaves:w:cubicFit}) and (\subcaptionref{fig:slanted:schaerWaves:w:cp}), ascending velocities are marked by solid black lines and descending velocities are marked by dashed red lines.}
 	\label{fig:slanted:schaerWaves:w}
 \end{figure}
 

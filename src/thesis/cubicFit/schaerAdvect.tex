@@ -7,7 +7,7 @@ When terrain-following meshes are used, this test challenges transport schemes b
 Here we use a more challenging variant of the test that has steeper mountains and highly-distorted terrain-following meshes.
 Numerical convergence and numerical error structures are compared using the linearUpwind and cubicFit transport schemes on terrain-following meshes and cut cell meshes.
 
-The domain is defined on a rectangular $x$--$z$ plane that is \SI{301}{\kilo\meter} wide and \SI{25}{\kilo\meter} high as measured between parallel boundary edges.
+The domain is defined on a rectangular $x$--$z$ plane that is \SI{300}{\kilo\meter} wide as measured between the outermost cell centres, and \SI{25}{\kilo\meter} high as measured between upper and lower boundary edges.
 Boundary conditions are imposed on the tracer density $\phi$ such that $\phi = \SI{0}{\kilo\gram\per\meter\cubed}$ at the inlet boundary, and a zero normal gradient
 $\partial \phi / \partial n = \SI{0}{\kilo\gram\per\meter\tothe{4}}$ is imposed at the outlet boundary.  There is no normal flow at the lower and upper boundaries.
 

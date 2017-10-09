@@ -64,8 +64,8 @@ A small phase lag is apparent when the numerical solution marked with solid cont
 \begin{figure}
 	\begin{subfigure}{\textwidth}
 		\centering
-		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-cutCell}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-btf}
+		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-cutCell}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:linearUpwind-slantedCell}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:cubicFit-btf}
 		\phantomsubcaption\label{fig:slanted:mountainAdvect:errors:cubicFit-cutCell}
@@ -85,9 +85,9 @@ Error fields are compared between BTF, cut cell and slanted cell meshes using th
 \ref{fig:slanted:mountainAdvect:errors:linearUpwind-slantedCell} respectively) and the cubicFit scheme (figures~\ref{fig:slanted:mountainAdvect:errors:cubicFit-btf},
 \ref{fig:slanted:mountainAdvect:errors:cubicFit-cutCell} and
 \ref{fig:slanted:mountainAdvect:errors:cubicFit-slantedCell} respectively).
-Results are least accurate using the linearUpwind scheme on the slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:linearUpwind-slantedCell}).  The final tracer is slightly distorted and does not extend far enough towards the ground.
+Results are least accurate using the linearUpwind scheme on the slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:linearUpwind-slantedCell}) with the final tracer being slightly distorted.
 The $\ell_\infty$ error magnitude is reduced by using the linearUpwind scheme on the cut cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:linearUpwind-cutCell}), but the shape of the error remains the same.
-\TODO{this is no longer true... The cubicFit scheme is less sensitive to the choice of mesh with similar error magnitudes on the BTF mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-btf}), cut cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-cutCell}) and slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-slantedCell})}.  Errors using the cubicFit scheme on cut cell and slanted cell meshes are much smaller than the errors using the linearUpwind scheme on the same meshes.
+On the BTF mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-btf}), cut cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-cutCell}) and slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:errors:cubicFit-slantedCell}), the cubicFit scheme is more accurate than the linearUpwind scheme.
 
 \subsection{Numerical stability and numerical accuracy with increasingly steep slopes}
 
@@ -122,13 +122,13 @@ In contrast, the cubicFit scheme is less sensitive to the mesh type and errors g
 	\label{fig:slanted:mountainAdvect:maxdt}
 \end{figure}
 
-A final series of tests were performed to determine the stability limit of the cubicFit scheme with the two-stage Heun time-stepping scheme (\TODO{equation~\ref{eqn:heun}}).
+A final series of tests were performed to determine the stability limit of the cubicFit scheme with the two-stage Heun time-stepping scheme (equation~\ref{eqn:heun}).
 The tracer was transported on BTF, slanted cell and cut cell meshes with a variety of mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{125}{\meter}$.  $\Delta z$ was chosen so that a constant aspect ratio is preserved such that $\Delta x / \Delta z = 2$.
 For each test, the time-step was increased until the result became unstable.  The largest stable time-steps, $\Delta t_\mathrm{max}$, are presented in figure~\ref{fig:slanted:mountainAdvect:maxdt:dt}.
 BTF meshes permit the longest time-steps of all three mesh types since cells are almost uniform in volume.  As expected, the longest stable time-step scales linearly with BTF mesh spacing.
 There is no such linear scaling on cut cell meshes because these meshes can have arbitrarily small cells.  The time-step constraints on cut cell meshes are the most severe of the three mesh types.  Slanted cell meshes have a slightly stronger time-step constraint than BTF meshes but still exhibit similar linear scaling with mesh spacing.  \TODO{Furthermore, a dynamical model that uses slanted cell meshes instead of BTF meshes is expected to calculate pressure gradients more accurately... which is going to be the next test (resting atmosphere)}
 
-Figure~\ref{fig:slanted:mountainAdvect:maxdt:co} presents the largest stable maximum Courant numbers, $\max(\mathrm{Co})$, which were calculated by substituting $\Delta t = \Delta t_\mathrm{max}$ into \TODO{equation~\eqref{eqn:co}}.
+Figure~\ref{fig:slanted:mountainAdvect:maxdt:co} presents the largest stable maximum Courant numbers, $\max(\mathrm{Co})$, which were calculated by substituting $\Delta t = \Delta t_\mathrm{max}$ into equation~\eqref{eqn:co}.
 On basic terrain following meshes, the maximum Courant number tends towards about \num{1.3} with finer mesh spacings.
 No such trend is found on cut cell or slanted cell meshes.
 Cut cell meshes permit the largest maximum Courant numbers of around \num{3}, but the largest stable time-steps on cut cell meshes are still smaller than corresponding time-steps on basic terrain following and slanted cell meshes.
