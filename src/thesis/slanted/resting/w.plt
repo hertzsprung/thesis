@@ -22,10 +22,10 @@ set label "SLEVE" at 0.8,1.5e-2
 set label "Cut cells" at 0.8,6e-4
 set label "Slanted cells" at 0.8,5e-5
 
-plot "/home/jshaw/AtmosTests/build/resting-btf-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 1 lw 2 title 'cubicFit BTF', \
-     "/home/jshaw/AtmosTests/build/resting-sleve-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 4 lw 2 title 'cubicFit SLEVE', \
-     "/home/jshaw/AtmosTests/build/resting-cutCell-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 2 lw 2 title 'cubicFit cutCell', \
-     "/home/jshaw/AtmosTests/build/resting-slantedCell-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 3 lw 2 title 'cubicFit slantedCell'
+plot "`echo $atmostests_builddir`/resting-btf-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 1 lw 2 title 'cubicFit BTF', \
+     "`echo $atmostests_builddir`/resting-sleve-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 4 lw 2 title 'cubicFit SLEVE', \
+     "`echo $atmostests_builddir`/resting-cutCell-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 2 lw 2 title 'cubicFit cutCell', \
+     "`echo $atmostests_builddir`/resting-slantedCell-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 3 lw 2 title 'cubicFit slantedCell'
 
 # h0
 
