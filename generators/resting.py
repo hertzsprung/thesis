@@ -1,4 +1,4 @@
-from ninjaopenfoam import Gnuplot
+from ninjaopenfoam import Gnuplot, siunitx
 
 import os
 
@@ -19,8 +19,15 @@ class Resting:
                     '$atmostests_builddir/resting-slantedCell-cubicFit-collated/maxw.txt'
         ])
 
+        self.btf1000mMaxW = siunitx.Velocity(
+                'resting-btf-1000m-cubicFit-maxw',
+                '$atmostests_builddir/resting-btf-1000m-cubicFit',
+                'maxw.txt')
+
     def outputs(self):
-        return self.w.outputs()
+        return  self.w.outputs() + \
+                self.btf1000mMaxW.outputs()
 
     def addTo(self, build):
         build.add(self.w)
+        build.add(self.btf1000mMaxW)
