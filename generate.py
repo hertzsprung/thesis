@@ -61,6 +61,7 @@ class Thesis:
                         'src/thesis/slanted/method.tex',
                         'src/thesis/slanted/construct-mesh.tex',
                         'src/thesis/slanted/mountainAdvect.tex',
+                        'src/thesis/slanted/exnerFoamH.tex',
                         'src/thesis/slanted/resting.tex',
                         'src/thesis/slanted/schaerWaves.tex',
                         'src/thesis/cp.tex',
