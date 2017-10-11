@@ -7,6 +7,7 @@
 - 'mesh', not 'grid'
 - 'the cubicFit transport scheme' or 'the cubicFit scheme', not just 'cubicFit'
 - 'mesh layers', not 'the mesh layers' or 'mesh surfaces'
+- 'peak mountain height', not 'maximum mountain height'
 
 # colors
 
