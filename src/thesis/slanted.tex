@@ -19,14 +19,6 @@ Motivation
 \end{itemize}
 }
 
-\TODO{The new resting atmosphere results with steeper mountains make slantedCells unattractive compared to SLEVE or cut cells.  So now there are no tests in which slanted cells outperform other meshes.  I see three options here:
-\begin{enumerate}
-\item Keep the weak conclusion that slanted cells aren't very good.
-\item Formulate and implement a better cell merging method to better control pressure gradient errors.
-\item Present two sets of slanted cell results in the resting atmosphere test: one with tolerance=0 and another with tolerance=2dx/5.  I already know that results are more stable and accurate when tolerance=2dz/5 is used to remove the thinnest slanted cells.  This crude thin-cell-avoidance method is quite effective, therefore we'd expect a better cell merging method to help further still.
-\end{enumerate}
-}
-
 \input{slanted/method.tex}
 \input{slanted/mountainAdvect.tex}
 \input{slanted/resting.tex}
