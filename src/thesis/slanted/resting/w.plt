@@ -11,7 +11,7 @@ set yrange [1e-5:20]
 
 set ytics offset 0.5 format "$10^{%T}$"
 
-set multiplot layout 1,2 margins 0.08, 0.98, 0.12, 0.94 spacing 0.12,0.12
+set multiplot layout 1,2 margins 0.08, 0.98, 0.12, 0.94 spacing 0.06,0.12
 
 # t
 
@@ -33,13 +33,14 @@ set style data linespoints
 set key inside bottom right
 set xrange [0:6]
 set xlabel "Peak mountain height $h_0$ (\\si{\\kilo\\meter})"
-set ylabel "$\\max(\\Mag{w})$ (\\si{\\meter\\per\\second})" offset 2
+set ytics format ""
+unset ylabel
 unset label
 set label "(b)" at 0.2,5
 
 plot "`echo $atmostests_builddir`/resting-btf-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 1 lw 2 pt 5 title 'BTF', \
      "`echo $atmostests_builddir`/resting-sleve-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 4 lw 2 pt 13 ps 1.5 title 'SLEVE', \
-     "`echo $atmostests_builddir`/resting-cutCell-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 2 lw 2 pt 7 title 'cutCell', \
-     "`echo $atmostests_builddir`/resting-slantedCell-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 3 lw 2 pt 9 ps 1.5 title 'slantedCell'
+     "`echo $atmostests_builddir`/resting-cutCell-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 2 lw 2 pt 7 title 'Cut cells', \
+     "`echo $atmostests_builddir`/resting-slantedCell-cubicFit-collated/maxw.txt" using ($1/1000):($2) lc 3 lw 2 pt 9 ps 1.5 title 'Slanted cells'
 
 unset multiplot

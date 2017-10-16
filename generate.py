@@ -63,8 +63,8 @@ class Thesis:
                         'src/thesis/slanted/mountainAdvect.tex',
                         'src/thesis/slanted/exnerFoamH.tex',
                         'src/thesis/slanted/resting.tex',
-                        'src/thesis/slanted/schaerWaves.tex',
                         'src/thesis/cp.tex',
+                        'src/thesis/cp/schaerWaves.tex',
                         'src/thesis/cp/arakawaKonor.tex']
                         + stabilisation.outputs()
                         + schaerAdvect.outputs()

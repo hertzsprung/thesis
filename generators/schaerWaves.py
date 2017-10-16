@@ -13,7 +13,7 @@ class SchaerWaves:
                 'schaerWaves-btf-300dz-linearUpwind',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/slanted/schaerWaves/w.gmtdict'],
+                plots=['src/thesis/cp/schaerWaves/w.gmtdict'],
                 files=['18000/Uf'])
 
         btf300dzLinearUpwindCase = Case('schaerWaves-btf-300dz-linearUpwind')
@@ -27,8 +27,8 @@ class SchaerWaves:
 
         self.btf300dzLinearUpwindWFigure = PDFLaTeXFigure(
                 'schaerWaves-btf-300dz-linearUpwind-w-figure',
-                output=os.path.join('thesis/slanted/schaerWaves/fig-btf-300dz-linearUpwind-w'),
-                figure=os.path.join('src/thesis/slanted/schaerWaves/fig-btf-300dz-linearUpwind-w'),
+                output=os.path.join('thesis/cp/schaerWaves/fig-btf-300dz-linearUpwind-w'),
+                figure=os.path.join('src/thesis/cp/schaerWaves/fig-btf-300dz-linearUpwind-w'),
                 components=self.btf300dzLinearUpwindW.outputs()
         )
 
@@ -37,7 +37,7 @@ class SchaerWaves:
                 'schaerWaves-btf-300dz-cubicFit',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/slanted/schaerWaves/wS.gmtdict'],
+                plots=['src/thesis/cp/schaerWaves/wS.gmtdict'],
                 files=['18000/Uf'])
 
         btf300dzCubicFitCase = Case('schaerWaves-btf-300dz-cubicFit')
@@ -51,8 +51,8 @@ class SchaerWaves:
 
         self.btf300dzCubicFitWFigure = PDFLaTeXFigure(
                 'schaerWaves-btf-300dz-cubicFit-w-figure',
-                output=os.path.join('thesis/slanted/schaerWaves/fig-btf-300dz-cubicFit-w'),
-                figure=os.path.join('src/thesis/slanted/schaerWaves/fig-btf-300dz-cubicFit-w'),
+                output=os.path.join('thesis/cp/schaerWaves/fig-btf-300dz-cubicFit-w'),
+                figure=os.path.join('src/thesis/cp/schaerWaves/fig-btf-300dz-cubicFit-w'),
                 components=self.btf300dzCubicFitW.outputs()
         )
 
@@ -61,7 +61,7 @@ class SchaerWaves:
                 'schaerWavesCP-btf-300dz',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/slanted/schaerWaves/w.gmtdict'],
+                plots=['src/thesis/cp/schaerWaves/w.gmtdict'],
                 files=['18000/Uf'])
 
         btf300dzCharneyPhillipsCase = Case('schaerWavesCP-btf-300dz')
@@ -75,13 +75,13 @@ class SchaerWaves:
 
         self.btf300dzCharneyPhillipsWFigure = PDFLaTeXFigure(
                 'schaerWaves-btf-300dz-cp-w-figure',
-                output=os.path.join('thesis/slanted/schaerWaves/fig-btf-300dz-cp-w'),
-                figure=os.path.join('src/thesis/slanted/schaerWaves/fig-btf-300dz-cp-w'),
+                output=os.path.join('thesis/cp/schaerWaves/fig-btf-300dz-cp-w'),
+                figure=os.path.join('src/thesis/cp/schaerWaves/fig-btf-300dz-cp-w'),
                 components=self.btf300dzCharneyPhillipsW.outputs()
         )
 
     def outputs(self):
-        return ['src/thesis/slanted/schaerWaves/melvin2010-w-mass-conserving-sisl.png'] \
+        return ['src/thesis/cp/schaerWaves/melvin2010-w-mass-conserving-sisl.png'] \
              + self.btf300dzLinearUpwindWFigure.outputs() \
              + self.btf300dzCubicFitWFigure.outputs() \
              + self.btf300dzCharneyPhillipsWFigure.outputs()

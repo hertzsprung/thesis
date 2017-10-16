@@ -1,6 +1,8 @@
 \chapter{Generalising the Charney–Phillips staggering for arbitrary meshes}
 \label{ch:cp}
 
+\input{cp/schaerWaves.tex}
+
 \section{Advective-form transport for arbitrary Charney--Phillips meshes}
 
 \TODO{describe the CP advection scheme: interpGrad+fvcReconstructCP (advective form)}
@@ -16,17 +18,6 @@
 	\item Conclusion: advection is conservative on uniform meshes, non-conservative on non-uniform meshes
 	\item Conclusion: advectiveFoamF errors are comparable to advectionFoam with linear interpolation?
 	\item Conclusion: advectiveFoamF errors are worse than advectionFoam with linearUpwind interpolation?
-\end{itemize}
-}
-
-\section{Sch\"{a}r mountain waves}
-
-\TODO{
-\begin{itemize}
-	\item mesh: BTF, BTF + edgeGrading on vertical faces?
-	\item conclusion: CP formulation works for advection-dominated flow, but advection scheme is not sufficiently accurate to obtain the correct solution (this is not surprising since advectiveFoamF is less accurate than advectionFoam with linearUpwind, and we already know that ExnerFoamH+linearUpwind is also inaccurate for schaerWaves test)
-	\item conclusion: flow over mountains can also excite the Lorenz computational mode but less clearly than our more artificial test case?
-	\item conclusion: ExnerFoamCP again eliminates computational mode?
 \end{itemize}
 }
 

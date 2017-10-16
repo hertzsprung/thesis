@@ -1,7 +1,5 @@
 \section{Sch\"{a}r mountain waves}
-\label{sec:slanted:schaerWaves}
-
-\TODO{I'm thinking that this section should move to the end of chapter~\ref{ch:cp} because we've already demonstrated the advantages of slanted cells and this test presents little additional evidence in support of slanted cells}
+\label{sec:cp:schaerWaves}
 
 \TODO{
 \begin{itemize}
@@ -14,6 +12,16 @@
 \end{itemize}
 }
 
+\TODO{
+	Charney--Phillips aspects:
+\begin{itemize}
+	\item mesh: BTF, BTF + edgeGrading on vertical faces?
+	\item conclusion: CP formulation works for advection-dominated flow, but advection scheme is not sufficiently accurate to obtain the correct solution (this is not surprising since advectiveFoamF is less accurate than advectionFoam with linearUpwind, and we already know that ExnerFoamH+linearUpwind is also inaccurate for schaerWaves test)
+	\item conclusion: flow over mountains can also excite the Lorenz computational mode but less clearly than our more artificial test case?
+	\item conclusion: ExnerFoamCP again eliminates computational mode?
+\end{itemize}
+}
+
 The test originally specified by \citet{schaer2002} prescribes flow over terrain with small-scale and large-scale undulations which induces propagating and evanescent gravity waves.  \TODO{what is the motivation for this test?  it is needed to assess the dynamics solver with horizontal and vertical transport}
 
 Following \citet{melvin2010}, the domain is \SI{300}{\kilo\meter} wide and \SI{30}{\kilo\meter} high, and the mesh spacing is $\Delta x = \SI{500}{\meter}$ and $\Delta z^\star = \SI{300}{\meter}$.
@@ -23,11 +31,11 @@ A uniform horizontal wind $(u, w) = (10, 0)\:\si{\meter\per\second}$ is prescrib
 
 The initial thermodynamic conditions have constant static stability with $N = \SI{0.01}{\per\second}$ everywhere such that
 \begin{align}
-	\theta(z) = \theta_0 \exp \left( \frac{N^2}{g} z \right) \label{eqn:slanted:schaerWaves:thermal-profile}
+	\theta(z) = \theta_0 \exp \left( \frac{N^2}{g} z \right) \label{eqn:cp:schaerWaves:thermal-profile}
 \end{align}
 where the temperature at $z=0$ is $\theta_0 = \SI{288}{\kelvin}$.
-Potential temperature values are prescribed at the inlet and upper boundary using equation~\eqref{eqn:slanted:schaerWaves:thermal-profile}, and a zero gradient boundary condition is applied at the outlet.
-At the ground, fixed gradients are imposed by calculating the component of $\nabla \theta$ normal to each face using the vertical derivative of equation~\eqref{eqn:slanted:schaerWaves:thermal-profile}.
+Potential temperature values are prescribed at the inlet and upper boundary using equation~\eqref{eqn:cp:schaerWaves:thermal-profile}, and a zero gradient boundary condition is applied at the outlet.
+At the ground, fixed gradients are imposed by calculating the component of $\nabla \theta$ normal to each face using the vertical derivative of equation~\eqref{eqn:cp:schaerWaves:thermal-profile}.
 For the Exner function of pressure, hydrostatic balance is prescribed on top and bottom boundaries and the inlet and outlet are zero normal gradient.
 
 Sponge layers are added to the upper \SI{10}{\kilo\meter} and leftmost \SI{10}{\kilo\meter} at the inlet boundary to damp the reflection of waves.
@@ -51,14 +59,14 @@ Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the pu
 	\begin{subfigure}{0.55\textwidth}
 		\centering
 		\caption{Lorenz staggering, linearUpwind transport}
-		\label{fig:slanted:schaerWaves:w:linearUpwind}
-		\includegraphics{thesis/slanted/schaerWaves/fig-btf-300dz-linearUpwind-w.pdf}
+		\label{fig:cp:schaerWaves:w:linearUpwind}
+		\includegraphics{thesis/cp/schaerWaves/fig-btf-300dz-linearUpwind-w.pdf}
 	\end{subfigure}
 	\begin{subfigure}{0.44\textwidth}
 		\centering
 		\caption{Lorenz staggering, cubicFit transport}
-		\label{fig:slanted:schaerWaves:w:cubicFit}
-		\includegraphics{thesis/slanted/schaerWaves/fig-btf-300dz-cubicFit-w.pdf}
+		\label{fig:cp:schaerWaves:w:cubicFit}
+		\includegraphics{thesis/cp/schaerWaves/fig-btf-300dz-cubicFit-w.pdf}
 	\end{subfigure}
 	\\
 	\vspace*{1em}
@@ -66,20 +74,20 @@ Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the pu
 	\begin{subfigure}{0.55\textwidth}
 		\centering
 		\caption{Charney--Phillips staggering}
-		\label{fig:slanted:schaerWaves:w:cp}
-		\includegraphics{thesis/slanted/schaerWaves/fig-btf-300dz-cp-w.pdf}
+		\label{fig:cp:schaerWaves:w:cp}
+		\includegraphics{thesis/cp/schaerWaves/fig-btf-300dz-cp-w.pdf}
 	\end{subfigure}
 	\begin{subfigure}{0.44\textwidth}
 		\centering
 		\caption{Reference solution by \citet{melvin2010}}
-		\label{fig:slanted:schaerWaves:w:melvin}
-		\raisebox{0.2in}{\includegraphics[height=1.9in]{slanted/schaerWaves/melvin2010-w-mass-conserving-sisl.png}}
+		\label{fig:cp:schaerWaves:w:melvin}
+		\raisebox{0.2in}{\includegraphics[height=1.9in]{cp/schaerWaves/melvin2010-w-mass-conserving-sisl.png}}
 	\end{subfigure}
 	\caption{Vertical velocities at the end of integration of the Sch\"{a}r mountain waves test case.
-	Results obtained using a BTF mesh and Lorenz staggering, with potential temperature and momentum transported by (\subcaptionref{fig:slanted:schaerWaves:w:linearUpwind}) the linearUpwind scheme and
-	(\subcaptionref{fig:slanted:schaerWaves:w:cubicFit}) the cubicFit scheme, and (\subcaptionref{fig:slanted:schaerWaves:w:cp}) using a BTF mesh and Charney--Phillips staggering.
-	For comparison, (\subcaptionref{fig:slanted:schaerWaves:w:melvin}) provides a reference solution obtained with a mass-conserving semi-implicit semi-Lagrangian model \citep{melvin2010}.
-	Contours are plotted every \SI{0.05}{\meter\per\second}.  In figures (\subcaptionref{fig:slanted:schaerWaves:w:linearUpwind}), (\subcaptionref{fig:slanted:schaerWaves:w:cubicFit}) and (\subcaptionref{fig:slanted:schaerWaves:w:cp}), ascending velocities are marked by solid black lines and descending velocities are marked by dashed red lines.}
-	\label{fig:slanted:schaerWaves:w}
+	Results obtained using a BTF mesh and Lorenz staggering, with potential temperature and momentum transported by (\subcaptionref{fig:cp:schaerWaves:w:linearUpwind}) the linearUpwind scheme and
+	(\subcaptionref{fig:cp:schaerWaves:w:cubicFit}) the cubicFit scheme, and (\subcaptionref{fig:cp:schaerWaves:w:cp}) using a BTF mesh and Charney--Phillips staggering.
+	For comparison, (\subcaptionref{fig:cp:schaerWaves:w:melvin}) provides a reference solution obtained with a mass-conserving semi-implicit semi-Lagrangian model \citep{melvin2010}.
+	Contours are plotted every \SI{0.05}{\meter\per\second}.  In figures (\subcaptionref{fig:cp:schaerWaves:w:linearUpwind}), (\subcaptionref{fig:cp:schaerWaves:w:cubicFit}) and (\subcaptionref{fig:cp:schaerWaves:w:cp}), ascending velocities are marked by solid black lines and descending velocities are marked by dashed red lines.}
+	\label{fig:cp:schaerWaves:w}
 \end{figure}
 
