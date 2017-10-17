@@ -14,7 +14,7 @@ Two sources of numerical error receive particular attention in atmospheric model
 The previous chapter developed the cubicFit transport scheme that reduced numerical errors associated with transport over mountains.
 This chapter seeks to reduce errors associated with pressure gradient calculations by representing the atmosphere above terrain using a new type of mesh, the slanted cell mesh.
 
-Pressure gradient errors result in spurious flows that are especially apparent for diurnal valley flows where synoptic-scale winds are weak \citep{fast2003}, and in idealised studies with zero flow \citep{zaengl2004a,klemp2011}.  \TODO{mention errors in other quantities such as PV? \citep{hoinka-zaengl2004}.}
+Pressure gradient errors result in spurious flows that are especially apparent for diurnal valley flows where synoptic-scale winds are weak \citep{fast2003}, and small velocity errors can produce large errors in derived quantities such as relative vorticity and potential vorticity \citep{hoinka-zaengl2004}.
 These numerical errors are particularly large using terrain-following meshes with steeply sloping terrain \citep{zaengl2012}.
 Terrain-following meshes are typically implemented using a coordinate transform that introduces metric terms into the equations of motion.  The horizontal pressure gradient $\left. \partial p / \partial x \right|_z$ can be written as \citep{mahrer1984}
 \begin{align}

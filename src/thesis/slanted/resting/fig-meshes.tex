@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[paperwidth=5.3in,paperheight=2.7in,margin=0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[final,babel]{microtype}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{color}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\tikzset{>=latex}
+
+\graphicspath{{src/thesis/}{build/}}
+\makeatletter
+\def\input@path{{src/thesis/}{build/thesis/}{build/}}
+\makeatother
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\TPMargin{2pt}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{%
+	\includegraphics{resting-mesh-btf-6000m/constant/meshW.pdf}
+	\includegraphics{resting-mesh-sleve-6000m/constant/mesh.pdf}
+}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{%
+	\includegraphics{resting-mesh-cutCell-6000m/constant/meshSW.pdf}
+	\includegraphics{resting-mesh-slantedCell-6000m/constant/meshS.pdf}
+}
+
+\vspace{0.5em}
+\hspace*{13em}$x$ (\si{\meter}) \hspace*{14em} $x$ (\si{\meter})
+\end{document}
