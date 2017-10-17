@@ -9,6 +9,7 @@
 - 'mesh layers', not 'the mesh layers' or 'mesh surfaces'
 - 'peak mountain height', not 'maximum mountain height'
 - 'flow', not 'circulation'
+- for SLEVE, 'coarse' and 'fine', not 'large' and 'small'
 
 # colors
 
