@@ -27,7 +27,9 @@ where $\left. \partial / \partial x \right|_z$ denotes a horizontal derivative a
 These terms tend to be large and of opposite sign over steep terrain, and cancellation errors between the two terms result in pressure gradients errors that drive spurious flows \citep{fast2003}.
 
 There are two main approaches to minimizing errors associated with terrain-following meshes.
-First, by smoothing the effects of terrain with height, the influence of the terrain is reduced, hence pressure gradient errors are also reduced aloft \citep{schaer2002,leuenberger2010,klemp2011}.
+The first approach reduces the influence of the terrain on the mesh by choosing a vertical decay function that smooths mesh layers rapidly with height.  The Smooth Level Vertical decay function formulated by \citet{schaer2002} is one such approach.
+\TODO{say something about complexity of mesh generation: SLEVE coordinate transform is non-monotonic if parameter values are poorly chosen}
+\TODO{wrap up by saying that such smoothing has been found to reduce pressure gradient errors \citep{schaer2002,leuenberger2010,klemp2011}}
 Second, numerical errors can also be reduced by improving the accuracy in calculating the horizontal pressure gradient itself.  Instead of calculating the horizontal pressure gradient in the computational domain, the techniques proposed by \citet{klemp2011} and \citet{zaengl2012} both involve interpolation onto $z$ levels in the physical domain in order to calculate the horizontal pressure gradient.  This gave them the flexibility to design more accurate horizontal pressure gradient discretizations using more appropriate stencils.
 %The technique proposed by \citet{weller-shahrokhi2014} involves calculating pressure gradients in the direction aligned with the mesh, thus ensuring curl-free pressure gradients and improved accuracy.
 
@@ -35,8 +37,6 @@ Cut cell meshes are more regular than any smoothed terrain-following mesh, and s
 Spurious winds seen using terrain-following meshes are not present with cut cells and errors do not increase with steeper terrain \citep{good2014}.
 A comparison of terrain-following and cut cell meshes using real initial data by \citet{steppeler2013} found that 5-day forecasts of precipitation and wind over Asia in January 1989 were more accurate in the cut-cell model, although this result was dependent on using an old version of a model.
 \TODO{however, cut cells can be arbitrarily small}
-
-\TODO{say something about complexity of mesh generation: SLEVE coordinate transform is non-monotonic if parameter values are poorly chosen; cut cell meshes are constructed using a level set method... citation?}
 
 We seek a new type of mesh that improves pressure gradient calculations compared to terrain-following methods, and avoids the severe time-step constraints associated with arbitrarily small cut cells.  Section~\ref{sec:slanted:method} describes the slanted cell method which is designed to satisfy these criteria.
 Section~\ref{sec:slanted:mountainAdvect} presents a new two-dimensional test that challanges transport schemes by transporting a tracer along the ground through slanted cells.
