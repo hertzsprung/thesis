@@ -19,6 +19,7 @@
 \label{fig:slanted:construct-mesh}
 \end{figure}
 
+The slanted cell method is straightforward, and slanted cell meshes are always free of mesh tangling by construction.
 Starting from a uniform rectangular mesh, all cell vertices that lie beneath the orography are moved up to the surface.
 Additionally, to avoid creating very thin cells, all vertices up to $2 \Delta z/5$ above the orography can be moved down to the surface.
 Where all four of a cell's vertices are moved, the cell has zero volume and so it is removed.  Where two vertices at the same horizontal location are moved up to the surface they will occupy the same point; this results in a zero-length edge that is removed to create a triangular cell.

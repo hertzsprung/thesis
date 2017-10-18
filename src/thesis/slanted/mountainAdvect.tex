@@ -5,7 +5,7 @@ The two-dimensional tests performed in chapter~\ref{ch:cubicFit} transported tra
 The test presents a particular challenge to transport schemes as they must transport the tracer through arbitrarily small cut cells and distorted slanted cells.
 
 The domain size and mountain profile is the same as those in the horizontal tracer advection test in section~\ref{sec:cubicFit:schaerAdvect}, with a mesh spacing of $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.
-In order to present the most challenging test on slanted cell meshes, vertices were not moved downwards and so thin cells remain near mountain peaks.
+In order to present the most challenging test on slanted cell meshes, vertices are not moved downwards and so thin cells remain near mountain peaks.
 Cell edges in the central region of the domain are shown in figure~\ref{fig:slanted:mountainAdvect:meshes} for each of the three mesh types.
 Cells in the BTF mesh are highly distorted over steep slopes (figure~\ref{fig:slanted:mountainAdvect:meshes:btf}) while the cut cell mesh (figure~\ref{fig:slanted:mountainAdvect:meshes:cutCell}) and slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:meshes:slantedCell}) are orthogonal everywhere except for cells nearest the ground.
 
@@ -63,7 +63,7 @@ The third series verifies accuracy at Courant numbers close to the limit of stab
 
 \subsection{A comparison of numerical accuracy between mesh types and transport schemes}
 For the first series of tests with $h_0 = \SI{5}{\kilo\meter}$, tracer contours at the initial time $t=\SI{0}{\second}$, half-way time $t=\SI{5000}{\second}$, and end time $t=\SI{10000}{\second}$ are shown in figure~\ref{fig:slanted:mountainAdvect:tracer} using the cubicFit scheme on the BTF mesh.  As apparent at $t=\SI{5000}{\second}$, the tracer is distorted by the terrain-following velocity field as it passes over the mountain, but its original shape is restored once it has cleared the mountain by $t=\SI{10000}{\second}$.
-A small phase lag is apparent when the numerical solution marked with solid contour lines is compared with the analytic solution marked with dotted contour lines.
+Slight errors are apparent when the numerical solution marked with solid contour lines is compared with the analytic solution marked with dotted contour lines.
 
 \begin{figure}
 	\begin{subfigure}{\textwidth}
@@ -108,8 +108,8 @@ Results were obtained on BTF, cut cell and slanted cell meshes using the linearU
 Note that the analytic solution is a function of mountain height, with the tracer travelling farther over higher mountains due to non-divergent flow through a narrower channel.
 In all cases, error increases with increasing mountain height because steeper slopes lead to greater mesh distortions.
 Errors are identical for a given transport scheme when $h_0 = \SI{0}{\kilo\meter}$ and the ground is entirely flat because the BTF, cut cell and slanted cell meshes are identical.
-Compared with the cubicFit scheme, the linearUpwind scheme is more sensitive to the mesh type and mountain height.  The linearUpwind scheme is unstable on the slanted cell mesh with a peak mountain height $h_0 = \SI{6}{\kilo\meter}$ despite using a Courant number of \inputval{mountainAdvect-h0-slantedCell-1000-6000m-linearUpwind/co}\unskip.
-In contrast, the cubicFit scheme is less sensitive to the mesh type and errors grow more slowly with increasing mountain height.  The cubicFit scheme yields stable results in all tests.
+The linearUpwind scheme is unstable on the slanted cell mesh with a peak mountain height $h_0 = \SI{6}{\kilo\meter}$ despite using a Courant number of \inputval{mountainAdvect-h0-slantedCell-1000-6000m-linearUpwind/co}\unskip.
+The cubicFit scheme yields stable results in all tests, and cubicFit is more accurate than linearUpwind in all tests.
 
 \subsection{Numerical stability limits of the cubicFit transport scheme}
 

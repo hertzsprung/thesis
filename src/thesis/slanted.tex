@@ -11,10 +11,10 @@
 \end{highlights}
 
 Two sources of numerical error receive particular attention in atmospheric models: errors associated with transport terms and errors associated with the pressure gradient term.
-The previous chapter developed the cubicFit transport scheme that reduced numerical errors associated with transport over mountains.
+The previous chapter developed the cubicFit transport scheme that reduces numerical errors associated with transport over mountains.
 This chapter seeks to reduce errors associated with pressure gradient calculations by representing the atmosphere above terrain using a new type of mesh, the slanted cell mesh.
 
-Pressure gradient errors result in spurious flows that are especially apparent for diurnal valley flows where synoptic-scale winds are weak \citep{fast2003}, and small velocity errors can produce large errors in derived quantities such as relative vorticity and potential vorticity \citep{hoinka-zaengl2004}.
+Pressure gradient errors result in spurious flows that are especially apparent for diurnal valley flows where synoptic-scale winds are weak \citep{fast2003}, and even small velocity errors can produce large errors in derived quantities such as relative vorticity and potential vorticity \citep{hoinka-zaengl2004}.
 These numerical errors are particularly large using terrain-following meshes with steeply sloping terrain \citep{zaengl2012}.
 Terrain-following meshes are typically implemented using a coordinate transform that introduces metric terms into the equations of motion.  The horizontal pressure gradient $\left. \partial p / \partial x \right|_z$ can be written as \citep{mahrer1984}
 \begin{align}
@@ -24,7 +24,7 @@ Terrain-following meshes are typically implemented using a coordinate transform 
 	\frac{\partial p}{\partial z^\star} \label{eqn:slanted:dpdx}
 \end{align}
 where $\left. \partial / \partial x \right|_z$ denotes a horizontal derivative at a fixed height in the physical domain, and $\left. \partial / \partial x \right|_{z^\star}$ denotes a horizontal derivative at a fixed model level in the computational domain.  The first term on the right hand side of equation~\eqref{eqn:slanted:dpdx} is the change in pressure along the terrain-following coordinate surfacee, and the second term corrects for the vertical contribution in the first.
-These terms tend to be large and of opposite sign over steep terrain, and cancellation errors between the two terms result in pressure gradients errors that drive spurious flows \citep{fast2003}.
+These terms tend to be large and of opposite sign over steep terrain, and cancellation errors between the two terms result in pressure gradients errors that drive spurious flows.
 
 \begin{figure}
 	\centering
@@ -38,14 +38,14 @@ These terms tend to be large and of opposite sign over steep terrain, and cancel
 %
 	\caption{Two dimensional $x$-$z$ meshes created with the
 	(\subcaptionref{fig:slanted:resting:meshes:btf}) basic terrain-following,
-	(\subcaptionref{fig:slanted:resting:meshes:sleve}) SLEVE terrain-following,
+	(\subcaptionref{fig:slanted:resting:meshes:sleve}) SLEVE,
 	(\subcaptionref{fig:slanted:resting:meshes:cutCell}) cut cell, and
 	(\subcaptionref{fig:slanted:resting:meshes:slantedCell}) slanted cell methods, used for the resting atmosphere tests in section~\ref{sec:slanted:resting}.  Cell edges are marked by thin black lines.  The peak mountain height $h_0 = \SI{6}{\kilo\meter}$.
 	Only the lowest \SI{12}{\kilo\meter} for the central region of the domain is shown.  The entire domain is \SI{201}{\kilo\meter} wide and \SI{20}{\kilo\meter} high.}
 	\label{fig:slanted:resting:meshes}
 \end{figure}
 
-There are two main approaches to reducing errors associated with terrain-following meshes.
+There are two common approaches to reducing errors associated with terrain-following meshes.
 The first approach reduces the influence of the terrain on the mesh by choosing a vertical decay function that smooths mesh layers rapidly with height.
 The Smooth Level Vertical (SLEVE) decay function formulated by \citet{schaer2002}, later improved by \citet{leuenberger2010}, is one such approach.
 The SLEVE method achieves a less distorted terrain-following mesh in the middle and top of the domain than the BTF method.
@@ -59,18 +59,18 @@ The transformation is defined as \citep{leuenberger2010}
 \end{align}
 and \(s_1\) and \(s_2\) are the scale heights of coarse-scale and fine-scale terrain respectively.
 The exponent \(n\) was introduced by \citet{leuenberger2010} in order to increase cell thickness in the layers nearest the ground, allowing longer timesteps.  \citet{leuenberger2010} found the exponent has an optimal value of \(n = 1.35\).  Choosing \(n = 1\) gives the decay functions used by \citet{schaer2002}.
-While SLEVE can produce very smooth meshes, the coordinate transform becomes non-monotonic and meshes become tangled if parameter values are chosen poorly \citep{schaer2002,leuenberger2010}, making it difficult to produce a very smooth global mesh with real terrain (C. K\"{u}hnlein 2015, personal communication).
+While SLEVE can produce very smooth meshes, the coordinate transform becomes non-monotonic and the SLEVE mesh becomes tangled if parameter values are chosen poorly \citep{schaer2002,leuenberger2010}, making it difficult to produce a very smooth global mesh with real terrain (C. K\"{u}hnlein 2015, personal communication).
 Many operational atmospheric models use some form of coordinate smoothing \citep{eckermann2009}, and this approach has been found to reduce pressure gradient errors \citep{schaer2002,leuenberger2010,klemp2011}.
 
 The second approach to reducing pressure gradient errors is to improve the accuracy in calculating the horizontal pressure gradient itself.
-Instead of calculating the horizontal pressure gradient in the computational domain, the techniques proposed by \citet{klemp2011} and \citet{zaengl2012} both involve interpolation onto $z$ levels in the physical domain in order to calculate the horizontal pressure gradient.  This gave them the flexibility to design more accurate horizontal pressure gradient discretizations using more appropriate stencils.
+Instead of calculating the horizontal pressure gradient in the computational domain, the techniques proposed by \citet{klemp2011} and \citet{zaengl2012} both involve interpolation onto $z$ levels in the physical domain.  This gave them the flexibility to design more accurate horizontal pressure gradient discretizations using more appropriate stencils.
 
 Cut cell meshes are less distorted than any smoothed terrain-following mesh, and some studies have shown examples where cut cells produce more accurate results when compared to terrain-following meshes.
-Spurious winds seen using terrain-following meshes are not present with cut cells and errors do not increase with steeper terrain \citep{good2014}.
+Spurious winds seen using terrain-following meshes are not present with cut cells, and errors do not increase with steeper terrain \citep{good2014}.
 A comparison of terrain-following and cut cell meshes using real initial data by \citet{steppeler2013} found that 5-day forecasts of precipitation and wind over Asia in January 1989 were more accurate in the cut-cell model, although this result was dependent on using an old version of a model.
-However, when explicit methods are used with cut cell meshes, the small cell problem must be overcome in order to avoid severe time-step constraints.
+Although cut cell meshes are almost entirely undistorted, when explicit methods are used with cut cells, the small cell problem must be overcome in order to avoid severe time-step constraints.
 
-We seek a new type of mesh that improves pressure gradient calculations compared to terrain-following methods, and avoids the severe time-step constraints associated with arbitrarily small cut cells.  Section~\ref{sec:slanted:method} describes the slanted cell method which is designed to satisfy these criteria, and slanted cell meshes are straightforward to construct and they are always free of mesh tangling.
+We seek a new type of mesh that improves pressure gradient calculations compared to terrain-following methods, and avoids the severe time-step constraints associated with arbitrarily small cut cells.  Section~\ref{sec:slanted:method} describes the slanted cell method which is designed to satisfy these criteria.
 Section~\ref{sec:slanted:mountainAdvect} presents a new two-dimensional test that challanges transport schemes by transporting a tracer along the ground through slanted cells, and this test is used to measure time-step constraints for terrain-following, cut cell and slanted cell meshes.
 Section~\ref{sec:slanted:exnerFoamH} outlines the discretisation of the fully compressible model taken from \citet{weller-shahrokhi2014} which includes a curl-free pressure gradient formulation.  In section~\ref{sec:slanted:resting}, the fully compressible model is used to simulate a standard resting atmosphere test case \citep{klemp2011}, comparing results using terrain-following, cut cell and slanted cell meshes.
 
