@@ -18,9 +18,9 @@ set multiplot layout 1,2 margins 0.08, 0.98, 0.12, 0.94 spacing 0.06,0.12
 unset key
 set label "(a)" at 0.2,5
 set label "BTF" at 0.8,3e-1
-set label "SLEVE" at 0.8,1.5e-2
-set label "Cut cells" at 0.8,6e-4
-set label "Slanted cells" at 0.8,5e-5
+set label "SLEVE" at 0.8,2.5e-2
+set label "Cut cells" at 0.8,8e-4
+set label "Slanted cells" at 0.8,7e-5
 
 plot "`echo $atmostests_builddir`/resting-btf-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 1 lw 2 title 'cubicFit BTF', \
      "`echo $atmostests_builddir`/resting-sleve-1000m-cubicFit/energy.dat" using ($1/3600):6 lc 4 lw 2 title 'cubicFit SLEVE', \

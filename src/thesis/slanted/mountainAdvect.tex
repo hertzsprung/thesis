@@ -43,7 +43,7 @@ The flow is deliberately misaligned with the BTF, cut cell and slanted cell mesh
 The tracer is defined again by equation~\eqref{eqn:cubicFit:schaerAdvect:tracer} but is now positioned at the ground with $(x_0, z_0) = (\SI{-50}{\kilo\meter}, \SI{0}{\kilo\meter})$ with half-widths $A_x = \SI{25}{\kilo\meter}$ and $A_z = \SI{10}{\kilo\meter}$.
 Tests are integrated forward for \SI{10000}{\second}.  The time-step was chosen for each mesh so that the maximum Courant number was about \num{0.4} (table~\ref{tab:slanted:mountainAdvect:timesteps}).
 An analytic solution at \SI{10000}{\second} is obtained by calculating the new horizontal position of the tracer using equation~\eqref{eqn:cubicFit:tfAdvect:trajectory}.
-By solving this equation we find that \(x(t=\SI{10000}{\second}) = \TODO{\SI{123}{\meter}}\) when $h_0 = \SI{5}{\kilo\meter}$.
+By solving this equation we find that \(x(t=\SI{10000}{\second}) = \SI{6244.087}{\meter}\) when $h_0 = \SI{5}{\kilo\meter}$.
 
 The tracer density boundary conditions are the same as those in section~\ref{sec:cubicFit:schaerAdvect}.
 Since the cubicFit transport scheme uses values at boundaries with Dirichlet boundary conditions, the cubicFit scheme uses only inlet boundary values in this test case.
