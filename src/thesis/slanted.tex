@@ -26,10 +26,31 @@ Terrain-following meshes are typically implemented using a coordinate transform 
 where $\left. \partial / \partial x \right|_z$ denotes a horizontal derivative at a fixed height in the physical domain, and $\left. \partial / \partial x \right|_{z^\star}$ denotes a horizontal derivative at a fixed model level in the computational domain.  The first term on the right hand side of equation~\eqref{eqn:slanted:dpdx} is the change in pressure along the terrain-following coordinate surfacee, and the second term corrects for the vertical contribution in the first.
 These terms tend to be large and of opposite sign over steep terrain, and cancellation errors between the two terms result in pressure gradients errors that drive spurious flows \citep{fast2003}.
 
+\begin{figure}
+	\centering
+	\begin{subfigure}{\textwidth}
+		\phantomsubcaption\label{fig:slanted:resting:meshes:btf}
+		\phantomsubcaption\label{fig:slanted:resting:meshes:sleve}
+		\phantomsubcaption\label{fig:slanted:resting:meshes:cutCell}
+		\phantomsubcaption\label{fig:slanted:resting:meshes:slantedCell}
+		\includegraphics{thesis/slanted/resting/fig-meshes.pdf}
+	\end{subfigure}
+%
+	\caption{Two dimensional $x$-$z$ meshes created with the
+	(\subcaptionref{fig:slanted:resting:meshes:btf}) basic terrain-following,
+	(\subcaptionref{fig:slanted:resting:meshes:sleve}) SLEVE terrain-following,
+	(\subcaptionref{fig:slanted:resting:meshes:cutCell}) cut cell, and
+	(\subcaptionref{fig:slanted:resting:meshes:slantedCell}) slanted cell methods, used for the resting atmosphere tests in section~\ref{sec:slanted:resting}.  Cell edges are marked by thin black lines.  The peak mountain height $h_0 = \SI{6}{\kilo\meter}$.
+	Only the lowest \SI{12}{\kilo\meter} for the central region of the domain is shown.  The entire domain is \SI{201}{\kilo\meter} wide and \SI{20}{\kilo\meter} high.}
+	\label{fig:slanted:resting:meshes}
+\end{figure}
+
 There are two main approaches to reducing errors associated with terrain-following meshes.
 The first approach reduces the influence of the terrain on the mesh by choosing a vertical decay function that smooths mesh layers rapidly with height.
 The Smooth Level Vertical (SLEVE) decay function formulated by \citet{schaer2002}, later improved by \citet{leuenberger2010}, is one such approach.
-The SLEVE method achieves a less distorted terrain-following mesh in the middle and top of the domain than the BTF method.  The terrain height is split into coarse-scale and fine-scale components, \(h_1\) and \(h_2\), such that \(h = h_1 + h_2\), with each component having a different exponential decay.
+The SLEVE method achieves a less distorted terrain-following mesh in the middle and top of the domain than the BTF method.
+The difference is illustrated in figure~\ref{fig:slanted:resting:meshes}, in which the SLEVE mesh (figure~\ref{fig:slanted:resting:meshes:sleve}) is noticeably smoother than the equivalent BTF mesh (figure~\ref{fig:slanted:resting:meshes:btf}).
+The terrain height is split into coarse-scale and fine-scale components, \(h_1\) and \(h_2\), such that \(h = h_1 + h_2\), with each component having a different exponential decay.
 The transformation is defined as \citep{leuenberger2010}
 \begin{align}
 	z &= z^\star + h_1 b_1 + h_2 b_2
