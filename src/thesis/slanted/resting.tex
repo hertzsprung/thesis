@@ -46,7 +46,7 @@ To evaluate the slanted cell method with steeper slopes, we perform a second ser
 The BTF, SLEVE, cut cell and slanted cell meshes with the largest peak mountain height of $h_0 = \SI{6}{\kilo\meter}$ are shown in figure~\ref{fig:slanted:resting:meshes}.
 To obtain a single measure of spurious flow for a given mesh, the maximum absolute vertical velocity is calculated across all time-steps.
 The most accurate results are obtained without mountains when $h_0 = \SI{0}{\kilo\meter}$ when all meshes become identical, with $\max(\Mag{w}) \sim \SI{1e-11}{\meter\per\second}$.
-Using terrain-following meshes, the model becomes unstable beyond $h_0 = \SI{2}{\kilo\meter}$ using BTF and SLEVE meshes.
+Using terrain-following meshes, the model becomes unstable beyond $h_0 = \SI{2}{\kilo\meter}$.
 Using cut cell meshes, maximum vertical velocities are almost constant at $\sim \SI{0.5}{\meter\per\second}$ beyond $h_0 = \SI{1}{\kilo\meter}$ because cut cell mesh distortions are largely independent of mountain height.
 Using slanted cell meshes, maximum vertical velocities are one to two orders of magnitude smaller than those found on terrain-following meshes at a given mountain height.  Unlike results on terrain-following meshes, slanted cell meshes yield stable results for all mountain heights, although maximum vertical velocities increase with peak mountain height as slanted cells become increasingly distorted.  Up to a peak mountain height of $h_0 = \SI{4}{\kilo\meter}$, slanted cell meshes produce results that are more accurate than those obtained for any other mesh.
 
