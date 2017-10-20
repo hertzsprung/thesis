@@ -26,8 +26,7 @@ The terrain is wave-shaped, specified by the surface elevation $h$ such that
 \end{subequations}
 where $a = \SI{25}{\kilo\meter}$ is the mountain envelope half-width, $h_0 = \SI{6}{\kilo\meter}$ is the maximum mountain height, $\lambda = \SI{8}{\kilo\meter}$ is the wavelength, \(\alpha = \pi / \lambda\) and \(\beta = \pi / (2a)\).  Note that, in order to make this test more challenging, the mountain height $h_0$ is double the mountain height used by \citet{schaer2002}.
 
-\TODO{might have already described BTF in a previous chapter}
-A basic terrain-following (BTF) mesh is constructed by using the terrain profile to modify the uniform mesh.
+A basic terrain-following (BTF) mesh is constructed by using the terrain profile to modify the uniform rectangular mesh.
 The BTF method uses a linear decay function so that mesh layers become horizontal at the top of the model domain \citep{galchen-somerville1975a},
 \begin{equation}
 	z(x) = \left( H - h(x) \right) \left( z^\star / H \right) + h(x) \label{eqn:btf}

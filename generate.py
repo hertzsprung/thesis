@@ -46,6 +46,7 @@ class Thesis:
                         'src/thesis/mysouthall.tex',
                         'src/thesis/math.tex',
                         'src/thesis/thesis.bib',
+                        'src/thesis/intro.tex',
                         'src/thesis/cubicFit.tex',
                         'src/thesis/cubicFit/transport.tex',
                         'src/thesis/cubicFit/scheme.tex',
