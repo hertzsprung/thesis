@@ -5,7 +5,7 @@ The finite volume model of the fully compressible Euler equations is taken from 
 
 \begin{subequations}
 \begin{align}
-	\text{Momentum} &\ &\  	\frac{\partial \rho \vect{u}}{\partial t} + \nabla \cdot \rho \vect{u}\otimes\vect{u} &= \rho \vect{g} - c_p \rho \theta \nabla \Pi - \mu \rho \vect{u} \label{eqn:exnerFoam:momentum} \\
+	\text{Momentum} &\ &\  	\frac{\partial \rho \vect{u}}{\partial t} + \nabla \cdot \left( \rho \vect{u}\otimes\vect{u} \right) &= \rho \vect{g} - c_p \rho \theta \nabla \Pi - \mu \rho \vect{u} \label{eqn:exnerFoam:momentum} \\
 	\text{Continuity} &\ &\	\frac{\partial \rho}{\partial t} + \nabla \cdot \rho \vect{u} &= 0 \label{eqn:exnerFoam:cont} \\
 	\text{Thermodynamic equation} &\ &\ \frac{\partial \rho \theta}{\partial t} + \nabla \cdot \rho \vect{u} \theta &= 0 \label{eqn:exnerFoam:theta} \\
 	\text{Ideal gas law} &\ &\ \Pi^{(1 - \kappa)/\kappa} &= \frac{R \rho \theta}{p_0} \label{eqn:exnerFoam:state}
