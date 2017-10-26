@@ -12,21 +12,21 @@ The time derivative is discretised using a two-stage, second-order Heun method,
 	\phi^{(n+1)} &= \phi^{(n)} + \frac{\Delta t}{2} \left[ g(\phi^{(n)}) + g(\phi^{\star}) \right]
 \end{align} \label{eqn:heun}
 \end{subequations}
-where \(g(\phi^{(n)}) = - \nabla \cdot (\vect{u} \phi^{(n)})\) at time level \(n\).  The same time-stepping method is used for both the cubicFit scheme and the multidimensional linear upwind scheme.
-Although the Heun method is unstable for a linear oscillator \citep{durran2013} and for solving the transport equation using centred, linear differencing, it is stable when it is used for transport schemes with sufficient upwinding.
+\unskip where \(g(\phi^{(n)}) = - \nabla \cdot (\vect{u} \phi^{(n)})\) at time level \(n\).  The same time-stepping method is used for both the cubicFit scheme and the multidimensional linear upwind scheme.
+Although the Heun method is unstable for a linear oscillator \citep{durran2013} and for solving the transport equation using centred, linear differencing, it is stable when it is used for transport schemes with sufficient upwinding. \TODO{this statement needs justification}
 
 Using the finite volume method, the velocity field is prescribed at face centroids and the dependent variable is stored at cell centroids.  The divergence term in equation~\eqref{eqn:advection} is discretised using Gauss's theorem:
 \begin{align}
 	\nabla \cdot \left( \vect{u} \phi \right) \approx \frac{1}{\vol_c} \sum_{f \in\:c} \vect{u}_f \cdot \Sf \phi_F \label{eqn:gauss-div}
 \end{align}
 where subscript $f$ denotes a value stored at a face and subscript $F$ denotes a value approximated at a face from surrounding values.  $\vol_c$ is the cell volume, $\vect{u}_f$ is a velocity vector prescribed at a face, $\Sf$ is the surface area vector with a direction outward normal to the face and a magnitude equal to the face area, $\phi_F$ is an approximation of the dependent variable at the face, and $\sum_{f \in\:c}$ denotes a summation over all faces $f$ bordering cell $c$.
-Note that equation~\eqref{eqn:gauss-div} is a second-order approximation of the divergence term which limits the cubicFit transport scheme to second-order numerical convergence.
+Note that equation~\eqref{eqn:gauss-div} is a second-order approximation of the divergence term which limits the cubicFit transport scheme to second-order numerical convergence. \TODO{Hilary says that the equation is exact, and that the approximation is that centroids represent face averages or cell averages.  I think perhaps that we are limited to second-order because we treat cell centre and face centre values as pointwise values rather than values averaged over cell volumes or face areas.}
 
-This discretisation is applicable to arbitrary meshes.  A necessary condition for stability is given by the multidimensional Courant number,
+This discretisation is applicable to arbitrary meshes.  A necessary condition for stability is given by the multidimensional Courant number \citep{weller-shahrokhi2014},
 \begin{align}
 	\mathrm{Co}_c = \frac{\Delta t}{2 \mathcal{V}_c} \sum_{f \in\: c} \Mag{\vect{u} \cdot \Sf} \label{eqn:co}
 \end{align}
 such that, for all cells $c$ in the domain, $\mathrm{Co}_c$ is less than or equal to some constant that depends upon the spatial and temporal discretisation.  Hence, stability is constrained by the maximum Courant number of any cell in the domain.
 
-The accurate approximation of the dependent variable at the face, $\phi_F$, is key to the overall accuracy of the transport scheme. The cubicFit scheme and multidimensional linear upwind scheme differ in their approximations, and these approximation methods are described next.
+The accurate approximation of the dependent variable at the face, $\phi_F$, is key to the overall accuracy of the transport scheme. The cubicFit scheme and \TODO{first mention of this scheme, needs a proper introduction} multidimensional linear upwind scheme differ in their approximations, and these approximation methods are described next.
 

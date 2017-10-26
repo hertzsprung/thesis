@@ -15,6 +15,7 @@
 	\label{fig:cubicFit:interiorStencils}
 \end{figure}
 
+\TODO{cite previous work on cubicFit: \citep{lashley2002,thuburn2014,weller-shahrokhi2014}}
 The cubicFit scheme approximates the value of the dependent variable at the face, $\phi_F$, using a least-squares fit over a stencil of surrounding known values.
 To introduce the approximation method, we will consider how an approximate value is calculated for a face that is far away from the boundaries of a two-dimensional uniform rectangular mesh.
 For any mesh, every interior face connects two adjacent cells.  The velocity direction at the face determines which of the two adjacent cells is the upwind cell.  Since the stencil is upwind-biased and asymmetric, two stencils must be constructed for every interior face, and the appropriate stencil is chosen depending on the velocity direction at each face for every time-step.
