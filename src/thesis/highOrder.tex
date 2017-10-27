@@ -1,0 +1,22 @@
+\chapter{High-order transport for arbitrary meshes}
+
+\TODO{
+Motivation
+\begin{itemize}	
+	\item cubicFit is suitable for flows over steep terrain but it is only second-order convergent despite having a large stencil and a cubic/quadratic polynomial
+	\item high-order schemes on coarser meshes can be more computationally efficient than lower-order schemes on finer meshes... sure I saw a citation for this recently
+	\item existing high-order FV schemes exist, but are they more computationally expensive? or unsuitable for arbitrary meshes? identify applications of high-order FV schemes to atmospheric models
+	\item we want to retain the low computational cost of cubicFit but achieve high-order convergence at the same time
+\end{itemize}
+}
+\TODO{
+\begin{itemize}	
+\item highOrderFit formulation based on \citet{devendran2017}
+\item Taylor series analyses of cubicFit/highOrderFit to show why cubicFit is limited to second-order convergence and highOrderFit is not
+\item test: solid body rotation in 2D on uniform and distorted meshes following \citet{leonard1996,chen2017}
+\item test: horizontal flow above a mountain on a basic terrain-following mesh \citep{schaer2002,shaw2017}
+\item test: deformational flow in 2D? \citep{lauritzen2012,chen2017} will need periodic BCs
+\item will I have to transport a very smooth initial condition in order to see high-order convergence?
+\end{itemize}
+}
+

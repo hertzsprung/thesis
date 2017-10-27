@@ -1,11 +1,13 @@
 @STRING{ACTAGEO = "Acta\ Geophys."}
 @STRING{ASL       = "Atmos. Sci. Lett."}
 @STRING{BAMS      = "Bull.\ Amer.\ Meteor.\ Soc."}
+@STRING{CAMCOS    = "Comm.\ App.\ Math.\ Comp.\ Sci."}
 @STRING{GMD       = "Geosci.\ Model\ Dev."}
 @STRING{IJNME     = "Int.\ J.\ Numer.\ Meth.\ Engng."}
 @STRING{IJNMF     = "Int.\ J.\ Numer.\ Meth.\ Fluids"}
 @STRING{JAS       = "J.\ Atmos.\ Sci."}
 @STRING{JCP       = "J.\ Comp.\ Phys."}
+@STRING{JM        = "J.\ Meteor."}
 @STRING{JSC       = "SIAM J.\ Sci.\ Comput."}
 @STRING{METZEIT   = "Meteor.\ Z."}
 @STRING{MWR       = "Mon.\ Wea.\ Rev."}
@@ -13,7 +15,19 @@
 @STRING{OM        = "Ocean Model."}
 @STRING{PTRSA     = "Philos.\ Trans.\ Roy.\ Soc.\ A"}
 @STRING{QJRMS     = "Quart.\ J.\ Roy.\ Meteor.\ Soc."}
+@STRING{SCSDES    ="Sci.\ China\ Ser.\ D\ Earth\ Sci."}
 @STRING{WF        = "Wea.\ Forecasting"}
+
+@article{arakawa-konor1996,
+	title={Vertical Differencing of the Primitive Equations Based on the {Charney-Phillips} Grid in Hybrid $\sigma$--$p$ Vertical Coordinates},
+	author={Arakawa, Akio and Konor, Celal S},
+	journal=MWR,
+	volume={124},
+	number={3},
+	pages={511--528},
+	year={1996},
+	doi={10.1175/1520-0493(1996)124\%3C0511:VDOTPE\%3E2.0.CO;2}
+}
 
 @article{baldauf2008,
 	title={Stability analysis for linear discretisations of the advection equation with {Runge--Kutta} time integration},
@@ -33,6 +47,17 @@
 	journal=GMD,
 	year=2017,
 	doi={10.5194/gmd-2017-178}
+}
+
+@article{charney-phillips1953,
+	title={Numerical integration of the quasi-geostrophic equations for barotropic and simple baroclinic flows},
+	author={Charney, J. G. and Phillips, N. A.},
+	journal=JM,
+	volume={10},
+	number={2},
+	pages={71--99},
+	year={1953},
+	doi={10.1175/1520-0469(1953)010\%3C0071:NIOTQG\%3E2.0.CO;2}
 }
 
 @article{chen2017,
@@ -85,6 +110,30 @@
 	year={2007},
 	publisher={Elsevier},
 	doi={10.1016/j.cma.2007.06.003}
+}
+
+@article{davies2005,
+	title={A new dynamical core for the {Met Office}'s global and regional modelling of the atmosphere},
+	author={Davies, T and Cullen, MJP and Malcolm, AJ and Mawson, MH and Staniforth, A and White, AA and Wood, N},
+	journal=QJRMS,
+	volume={131},
+	number={608},
+	pages={1759--1782},
+	year={2005},
+	publisher={Wiley Online Library},
+	doi={10.1256/qj.04.101}
+}
+
+@article{devendran2017,
+	title={A fourth-order {Cartesian} grid embedded boundary method for {Poisson's} equation},
+	author={Devendran, Dharshi and Graves, Daniel and Johansen, Hans and Ligocki, Terry},
+	journal=CAMCOS,
+	volume={12},
+	number={1},
+	pages={51--79},
+	year={2017},
+	publisher={Mathematical Sciences Publishers},
+	doi={10.2140/camcos.2017.12.51}
 }
 
 @article{diot2013,
@@ -151,6 +200,17 @@
 	doi={10.1175/1520-0469(1973)030<0223:EOTEIT>2.0.CO;2}
 }
 
+@article{girard2014,
+	title={Staggered vertical discretization of the {Canadian Environmental Multiscale} ({GEM}) model using a coordinate of the log-hydrostatic-pressure type},
+	author={Girard, Claude and Plante, Andr{\'e} and Desgagn{\'e}, Michel and McTaggart-Cowan, Ron and C{\^o}t{\'e}, Jean and Charron, Martin and Gravel, Sylvie and Lee, Vivian and Patoine, Alain and Qaddouri, Abdessamad and others},
+	journal=MWR,
+	volume={142},
+	number={3},
+	pages={1183--1196},
+	year={2014},
+	doi={10.1175/MWR-D-13-00255.1}
+}
+
 @article{good2014,
 	author = {Good, Beth and Gadian, Alan and Lock, Sarah-Jane and Ross, Andrew},
 	title = {Performance of the cut-cell method of representing orography in idealized simulations},
@@ -207,6 +267,14 @@
 	pages={1860--1867},
 	year={2004},
 	doi={10.1175/1520-0493(2004)132<1860:TIOTVC>2.0.CO;2}
+}
+
+@book{hollingsworth1995,
+	title={A Spurious Mode in the `{Lorenz}' Arrangement of $f$ and $T$ which Does Not Exist in the `{Charney--Phillips}' Arrangement},
+	author={Hollingsworth, A},
+	year={1995},
+	publisher={European Centre for Medium-Range Weather Forecasts},
+	number={211}
 }
 
 @book{hundsdorfer-verwer2013,
@@ -626,6 +694,18 @@
 	doi={10.5194/gmd-7-909-2014}
 }
 
+@article{untch-hortal2004,
+	title={A finite-element scheme for the vertical discretization of the {semi-Lagrangian} version of the {ECMWF} forecast model},
+	author={Untch, A and Hortal, Mariano},
+	journal=QJRMS,
+	volume={130},
+	number={599},
+	pages={1505--1530},
+	year={2004},
+	publisher={Wiley Online Library},
+	doi={10.1256/qj.03.173}
+}
+
 @book{vanbrummelen2013,
 	title={Heavenly mathematics: The forgotten art of spherical trigonometry},
 	author={Van Brummelen, Glen},
@@ -711,6 +791,29 @@
 	pages={747--778},
 	year={2016},
 	publisher={Elsevier}
+}
+
+@article{yang2007,
+	title={A semi-implicit {semi-Lagrangian} global nonhydrostatic model and the polar discretization scheme},
+	author={Yang, XueSheng and Chen, JiaBin and Hu, JiangLin and Chen, DeHui and Shen, XueShun and Zhang, HongLiang},
+	journal=SCSDES,
+	volume={50},
+	number={12},
+	pages={1885--1891},
+	year={2007},
+	publisher={Springer},
+	doi={10.1007/s11430-007-0124-7}
+}
+
+@article{yi-park2017,
+	title={Vertical discretization with finite elements for a global hydrostatic model on the cubed sphere},
+	author={Yi, Tae-Hyeong and Park, Ja-Rin},
+	journal=JCP,
+	volume={338},
+	pages={339--356},
+	year={2017},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2017.02.067}
 }
 
 @article{zaengl2004a,

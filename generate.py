@@ -58,6 +58,7 @@ class Thesis:
                         'src/thesis/cubicFit/double-upwind-stencil.tex',
                         'src/thesis/cubicFit/boundary-stencils.tex',
                         'src/thesis/cubicFit/spherical.tex',
+                        'src/thesis/highOrder.tex',
                         'src/thesis/slanted.tex',
                         'src/thesis/slanted/method.tex',
                         'src/thesis/slanted/construct-mesh.tex',

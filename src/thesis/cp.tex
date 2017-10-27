@@ -1,6 +1,14 @@
 \chapter{Generalising the Charney–Phillips staggering for arbitrary meshes}
 \label{ch:cp}
 
+The Charney--Phillips vertical staggering of variables \citep{charney-phillips1953} is suitable for structured meshes with cells stacked in columns.
+This staggering has been adopted by several operational models \citep{davies2005,girard2014,yang2007} because it avoids the computational mode that is associated with the Lorenz vertical staggering \citep{arakawa-konor1996}.
+The generalisation of the Lorenz staggering for arbitrary meshes is straightforward \citep{weller-shahrokhi2014} but this is not true for the Charney--Phillips staggering.
+On a finite volume mesh, variables are ordinarily placed at cell centres or cell faces. In the Charney--Phillips staggering, the thermodynamic variable is placed at only those cell faces that lie on the vertical coordinate surfaces, and vertically-oriented faces have no thermodynamic information.
+This existing staggering is unsuitable for arbitrary finite volume meshes because faces can have any orientation.
+
+\TODO{somewhere give evidence for Lorenz computational mode having been excited \citep{girard2014,yi-park2017}}
+
 \input{cp/schaerWaves.tex}
 
 \section{Advective-form transport for arbitrary Charney--Phillips meshes}
