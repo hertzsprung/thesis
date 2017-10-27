@@ -5,11 +5,12 @@
 {\Large Highlights}
 \begin{itemize}
 	\item The new slanted cell mesh permits longer time-steps than cut cells, with time-steps comparable to terrain-following meshes
-	\item Pressure gradient calculations are more accurate using the new slanted cell method compared to terrain-following methods
+	\item Resting atmosphere simulations are more accurate using the new slanted cell method compared to terrain-following methods
 	\item Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over very steep slopes
 \end{itemize}
 \end{highlights}
 
+\TODO{It is the balance between pressure gradient and gravity that is more accurate with cells aligned or perpendicular to gravity}
 Two sources of numerical error receive particular attention in atmospheric models: errors associated with transport terms and errors associated with the pressure gradient term.
 The previous chapter developed the cubicFit transport scheme that reduces numerical errors associated with transport over mountains.
 This chapter seeks to reduce errors associated with pressure gradient calculations by representing the atmosphere above terrain using a new type of mesh, the slanted cell mesh.
@@ -64,6 +65,7 @@ Many operational atmospheric models use some form of coordinate smoothing \citep
 
 The second approach to reducing pressure gradient errors is to improve the accuracy in calculating the horizontal pressure gradient itself.
 Instead of calculating the horizontal pressure gradient in the computational domain, the techniques proposed by \citet{klemp2011} and \citet{zaengl2012} both involve interpolation onto $z$ levels in the physical domain.  This gave them the flexibility to design more accurate horizontal pressure gradient discretizations using more appropriate stencils.
+\TODO{Or improve the balance between pressure gradient and gravity and reduce the spurious solenoidal term by using a curl-free gradient formulation \citep{weller-shahrokhi2014}}
 
 Cut cell meshes are less distorted than any smoothed terrain-following mesh, and some studies have shown examples where cut cells produce more accurate results when compared to terrain-following meshes.
 Spurious winds seen using terrain-following meshes are not present with cut cells, and errors do not increase with steeper terrain \citep{good2014}.
