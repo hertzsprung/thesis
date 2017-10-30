@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{siunitx}
+\usepackage{eufrak}
+\usepackage{filecontents}
+\usepackage{natbib}
+\usepackage{doi}
+
+\begin{filecontents}{resting-errors-analysis.bib}
+@article{weller-shahrokhi2014,
+	title={Curl free pressure gradients over orography in a solution of the fully compressible {Euler} equations with implicit treatment of acoustic and gravity waves},
+	author={Hilary Weller and Ava Shahrokhi},
+	journal={Mon.\ Wea.\ Rev.},
+	year={2014},
+	volume={142},
+	number={12},
+	pages={4439--4457},
+	doi={10.1175/MWR-D-14-00054.1}
+}
+\end{filecontents}
+
+\newcommand{\Mag}[1]{\lvert #1 \rvert}
+\newcommand{\vect}{\mathbf}
+\newcommand{\Exner}{\Pi}
+\newcommand{\Sf}{\vect{S}_f}
+\newcommand{\moment}{\mathfrak{m}}
+\newcommand{\iu}{{i\mkern1mu}}
+\newcommand{\TODO}[1]{\textcolor{purple}{TODO: \emph{#1}}}
+
+\title{High-order advection}
+\author{James Shaw}
+
+\begin{document}
+\maketitle
+In the resting atmosphere tests in section 3.4 of the thesis, unstable results are obtained on terrain-following meshes with very steep slopes.  Hilary noted in her 2017-10-26 review that errors are a result of a numerical imbalance between the pressure gradient and gravity.  This document discusses some thoughts on the nature of these errors.
+
+The discretisation of the fully compressible Euler equations by \citet{weller-shahrokhi2014} prognoses the Exner function of pressure, $\Exner$, stored at cell centres.  The pressure gradient term is discretised by calculating Exner gradients in the direction of adjacent cell centres.  As such, gradients are entirely horizontal or entirely vertical only when the mesh is orthogonal.
+On orthogonal meshes, the pressure gradient on vertical faces is exactly zero assuming horizontally uniform, stably-stratified initial conditions.  In the resting atmosphere test, the initial $\Exner$ field is calculated to obtain discrete hydrostatic balance with the initial potential temperature field, so pressure gradients are zero on all faces.
+Terrain-following meshes are non-orthogonal and the direction of adjacent cell centres is misaligned with surfaces of constant gravitational potential.
+
+
+\TODO{some points to make:
+\begin{itemize}
+	\item while $\nabla \Exner$ is formulated to be curl-free, it is not necessarily the case that the pressure gradient $\nabla p$ is curl-free \citep{weller-shahrokhi2014}
+	\item orthogonal part of the pressure gradient is calculated implicitly, non-orthogonal part is a deferred correction.  Perhaps the system of equations is not converging for highly non-orthogonal meshes?  Reducing the timestep from $\Delta t = \SI{25}{\second}$ to $\Delta t = \SI{0.01}{\second}$ did not help, however: the resting atmosphere test became unstable around $t = \SI{50}{\second}$ on a basic terrain-following mesh and a peak mountain height $h_0 = \SI{6}{\kilo\meter}$.
+	\item the terms involving $\vect{g} \cdot \vect{d}$ and $c_p \theta \nabla \Exner$ need to cancel exactly to avoid spurious flows (see equation (14) in \citet{weller-shahrokhi2014}).  This is trivial on orthogonal meshes because both terms are zero on vertical faces, and initialisation ensures discrete balance on horizontal faces.
+\end{itemize}
+}
+
+\bibliographystyle{ametsoc2014}
+\bibliography{resting-errors-analysis}
+
+\end{document}
