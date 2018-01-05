@@ -11,7 +11,6 @@ Motivation
 }
 \TODO{
 \begin{itemize}	
-\item highOrderFit formulation based on \citet{devendran2017}
 \item Taylor series analyses of cubicFit/highOrderFit to show why cubicFit is limited to second-order convergence and highOrderFit is not
 \item test: solid body rotation in 2D on uniform and distorted meshes following \citet{leonard1996,chen2017}
 \item test: horizontal flow above a mountain on a basic terrain-following mesh \citep{schaer2002,shaw2017} -- the cosBell tracer field might be insufficiently smooth for high-order but still a useful comparison with cubicFit, and returns to the mountainous theme!
@@ -19,4 +18,87 @@ Motivation
 \item will I have to transport a very smooth initial condition in order to see high-order convergence?
 \end{itemize}
 }
+\TODO{somewhere in chapter intro: We define \textit{high-order convergence} as any rate of convergence beyond second-order.}
 
+The cubicFit transport scheme acheives only second-order convergence even though it includes high-order polynomial terms.  The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
+\citet{devendran2017} developed a high-order finite volume scheme for solving Poisson’s equation, and they achieved high-order convergence by constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
+We apply their approach to obtain a transport scheme with high-order convergence.
+Since it has much in common with the cubicFit transport scheme, we name this high-order transport scheme `highOrderFit'.
+
+Integrating the flux-form transport equation \eqref{eqn:advection} over a volume $\vol$ and using Gauss's divergence theorem,
+\begin{align}
+	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \int_{\partial \vol} \phi \vect{u} \cdot \nvect dA \label{eqn:highOrder:integrated-advection}
+\end{align}
+where $\nvect$ is the outward unit normal vector.
+For a polygonal cell with faces $f$ equation~\eqref{eqn:highOrder:integrated-advection} becomes
+\begin{align}
+	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \sum_f \int_{\area_f} \phi \vect{u} \cdot \nvect d\area_f \label{eqn:highOrder:advection}
+\end{align}
+where $\area_f$ is the area of face $f$.
+If $\phi$ is a sufficiently smooth field then it can be approximated to $P$-order accuracy by replacing $\phi$ with a polynomial interpolant $\psi$,
+\begin{align}
+	\psi = \sum_{\Mag{\vect{p}} \leq P} c_{\vect{p}} \left(\vect{x} - \vect{x}_0 \right)^\vect{p} \label{eqn:highOrder:interpolant}
+\end{align}
+where $c_\vect{p}$ are unknown polynomial coefficients, $\vect{x}_0$ is the origin of some local coordinate system, and $P$ is the total polynomial order.
+Note that we use the multi-index notation such that $\Mag{\vect{p}} = p_1 + \ldots + p_n$ and
+\begin{align}
+	c_{\vect{p}} \left( \vect{x} - \vect{x}_0 \right)^\vect{p} = c_\vect{p} \prod_{d=1}^D \left( x_d - x_{0_d} \right)^{p_d} \text{ .}
+\end{align}
+where $D$ is the number of physical dimensions.
+As an example, the exponents $\vect{p}$ in two dimensions $(x, y)$ with $\Mag{\vect{p}} \leq 1$ are $(0, 0)$, $(1, 0)$ and $(0, 1)$, hence the two-dimensional polynomial interpolant for a total polynomial order $P = 1$ is
+\begin{align}
+	\psi = c_{0,0} + c_{1,0} \left( x - x_0 \right) + c_{0,1} \left( y - y_0 \right) \text{ .}
+\end{align}
+Replacing $\phi$ in \eqref{eqn:highOrder:advection} with $\psi$ in \eqref{eqn:highOrder:interpolant} we obtain an expression for the face flux,
+\begin{align}
+	\int_\area \phi \vect{u} \cdot \nvect d\area = \vect{u} \cdot \nvect \sum_{\Mag{\vect{p}} \leq P} a_{\vect{p}} \moment_\area^\vect{p} \label{eqn:highOrder:face-flux}
+\end{align}
+where $\moment_\area^\vect{p} = \int_\area \left( \vect{x} - \vect{x}_0 \right)^\vect{p} d \area$ is the $\vect{p}$-th moment of area $\area$.
+Therefore, the face flux can be calculated by finding the the polynomial coefficients $a_\vect{p}$.
+
+Following the same approach as the cubicFit transport scheme, taking a total polynomial order $P = 3$ gives 9 polynomial terms with polynomial coefficients calculated using the same upwind-biased stencil.
+For every cell in the stencil we require that the average of the polynomial integrated over a cell volume equals the cell average value,
+\begin{align}
+	\volave{\psi} = \volave{\phi} \label{eqn:highOrder:equal-volumes}
+%
+\intertext{where the average over volume $\vol$ is}
+%
+	\volave{\psi} = \frac{1}{\vol} \int_\vol \psi d\vol \text{ .} \label{eqn:highOrder:volume-average}
+\end{align}
+Using equations~\eqref{eqn:highOrder:interpolant} and \eqref{eqn:highOrder:volume-average} we can rewrite equation~\eqref{eqn:highOrder:equal-volumes} as
+\begin{align}
+	\frac{1}{\moment_\vol^\vect{0}} \sum_{\Mag{\vect{p}} \leq P} c_\vect{p} \moment_\vol^\vect{p} = \volave{\phi}
+\end{align}
+where $\moment_\vol^\vect{p} = \int_\vol \left( \vect{x} - \vect{x}_0 \right)^\vect{p} d\vol$ is the $\vect{p}$-th moment of volume $\vol$, and the zeroth moment $\moment_\vol^\vect{0}$ is the volume.
+For $m$ polynomial terms and a stencil with $n$ cells we can write the linear system
+\begin{align}
+	\begin{bmatrix}
+		\moment_{\vol_1}^{\vect{p}_1}/\moment_{\vol_1}^\vect{0} & \cdots & \moment_{\vol_1}^{\vect{p}_m}/\moment_{\vol_1}^\vect{0} \\
+		\vdots & & \vdots \\
+		\moment_{\vol_n}^{\vect{p}_1}/\moment_{\vol_n}^\vect{0} & \cdots & \moment_{\vol_n}^{\vect{p}_m}/\moment_{\vol_n}^\vect{0}
+	\end{bmatrix}
+	\begin{bmatrix}
+		a_{\vect{p}_1} \\
+		\vdots \\
+		a_{\vect{p}_m}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\langle \phi \rangle_{\vol_1} \\
+		\vdots \\
+		\langle \phi \rangle_{\vol_n}
+	\end{bmatrix}
+\end{align}
+which can be written as
+\begin{align}
+	\vect{B} \vect{a} = \bm{\phi} \text{ .}
+\end{align}
+where $\vect{B}$ is the stencil matrix, which is constructed using only the mesh geometry.
+Assuming the stencil comprises at least as many cells as there are polynomial coefficients then $n \geq m$ and the matrix equation can be solved using a least-squares approach to find the unknown coefficients $\vect{a}$.
+
+To obtain a stable advection scheme, we follow the approach of the cubicFit scheme by introducing multipliers $\vect{m}$ to obtain
+\begin{align}
+	\vect{\tilde{B}} \vect{a} = \vect{m} \cdot \bm{\phi}
+\end{align}
+where $\vect{\tilde{B}} = \vect{M} \vect{B}$ and $\vect{M} = \mathrm{diag}(\vect{m})$.
+The upwind cell and downwind cell have multipliers $m_u = 2^{10}$ and $m_d = 2^{10}$ respectively, and all peripheral points have multipliers $m_p = 1$.

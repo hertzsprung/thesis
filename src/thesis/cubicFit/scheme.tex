@@ -137,7 +137,8 @@ We assign an integer \textit{multiplier} to each cell in the stencil, $\vect{m} 
 \begin{align}
 	\vect{\tilde{B}} \vect{a} = \vect{m} \cdot \bm{\phi}
 \end{align}
-where $\vect{\tilde{B}} = \vect{M} \vect{B}$ and $\vect{M} = \mathrm{diag}(\vect{m})$.  The constant coefficient $a_1$ is calculated from the pseudo-inverse, $\vect{\tilde{B}}^+$,
+where $\vect{\tilde{B}} = \vect{M} \vect{B}$ and $\vect{M} = \mathrm{diag}(\vect{m})$.
+The constant coefficient $a_1$ is calculated from the pseudo-inverse, $\vect{\tilde{B}}^+$,
 \begin{align}
 	a_1 = \vect{\tilde{b}_1^+} \cdot \vect{m} \cdot \bm{\phi} \label{eqn:cubicFit:weightedPinv}
 \end{align}
