@@ -87,7 +87,7 @@ For $m$ polynomial terms and a stencil with $n$ cells we can write the linear sy
 		\langle \phi \rangle_{\vol_1} \\
 		\vdots \\
 		\langle \phi \rangle_{\vol_n}
-	\end{bmatrix}
+	\end{bmatrix} \label{eqn:highOrder:moment-matrix}
 \end{align}
 which can be written as
 \begin{align}
@@ -102,3 +102,8 @@ To obtain a stable advection scheme, we follow the approach of the cubicFit sche
 \end{align}
 where $\vect{\tilde{B}} = \vect{M} \vect{B}$ and $\vect{M} = \mathrm{diag}(\vect{m})$.
 The upwind cell and downwind cell have multipliers $m_u = 2^{10}$ and $m_d = 2^{10}$ respectively, and all peripheral points have multipliers $m_p = 1$.
+
+The calculation of high-order cell volume moments and surface moments are required by equations~\eqref{eqn:highOrder:moment-matrix} and~\eqref{eqn:highOrder:face-flux} respectively.  These volume and surface moments can be calculated exactly using the method of \citet{tuzikov2003}.
+We follow their method but, in order to avoid any degenerate triangles, we introduce a centre point shared by all triangles instead of triangulating polygons with only existing vertices.
+
+\TODO{discuss any hacks near boundaries}
