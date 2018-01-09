@@ -17,7 +17,8 @@ where $a = \SI{5}{\kilo\meter}$ is the mountain half-width $\lambda = \SI{4}{\ki
 \end{align}
 To accommodate a range of mountain heights we choose a coarse scale height $s_1 = \SI{20}{\kilo\meter}$ and a fine scale height $s_2 = \SI{8}{\kilo\meter}$.  Following \citet{leuenberger2010} the optimal exponent value of $n = \num{1.35}$ is used.  These parameter values result in a SLEVE mesh that is more distorted than the SLEVE mesh used by \citet{klemp2011}, but the choice is necessary to avoid mesh tangling with mountains higher than \SI{1}{\kilo\meter}.
 
-The initial potential temperature field has $\theta(z = 0) = \SI{288}{\kelvin}$ and a constant static stability with Brunt-V\"ais\"al\"a frequency $N = \SI{0.01}{\per\second}$ everywhere, except for a more stable layer of $N = \SI{0.02}{\per\second}$ between $\SI{2}{\kilo\meter} \leq z \leq \SI{3}{\kilo\meter}$.  The Exner function of pressure is calculated so that it is in discrete hydrostatic balance in the vertical direction \citep{weller-shahrokhi2014}.  The damping function \(\mu\) is set to \SI{0}{\per\second}.  Unlike \citet{klemp2011}, there is no eddy diffusion in the equation set.
+The initial potential temperature field has a nonlinear vertical profile in the lower atmosphere, with $\theta(z = 0) = \SI{288}{\kelvin}$ and a constant static stability with Brunt-V\"ais\"al\"a frequency $N = \SI{0.01}{\per\second}$ everywhere, except for a more stable layer of $N = \SI{0.02}{\per\second}$ between $\SI{2}{\kilo\meter} \leq z \leq \SI{3}{\kilo\meter}$.
+The Exner function of pressure is calculated so that it is in discrete hydrostatic balance in the vertical direction \citep{weller-shahrokhi2014}.  The damping function \(\mu\) is set to \SI{0}{\per\second}.  Unlike \citet{klemp2011}, there is no eddy diffusion in the equation set.
 
 \begin{figure}
 	\centering
@@ -28,7 +29,7 @@ The initial potential temperature field has $\theta(z = 0) = \SI{288}{\kelvin}$ 
 		\phantomsubcaption\label{fig:slanted:resting:w:max}
 	\end{subfigure}
 	\caption{Spurious vertical velocities in the resting atmosphere test using BTF, SLEVE, cut cell and slanted cell meshes.
-	(\subcaptionref{fig:slanted:resting:w:timeseries}) Time series of spurious vertical velocities, with the maximum absolute value calculated at each time-step. 
+	(\subcaptionref{fig:slanted:resting:w:timeseries}) Time series of spurious vertical velocities for a peak mountain height $h_0 = \SI{1}{\kilo\meter}$, with the maximum absolute value calculated at each time-step. 
 	(\subcaptionref{fig:slanted:resting:w:max}) Sensitivity to peak mountain height $h_0$, with the maximum absolute value calculated across all time-steps.
 	}
 	\label{fig:slanted:resting:w}
