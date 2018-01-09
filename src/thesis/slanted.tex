@@ -12,7 +12,7 @@
 
 Two sources of numerical error receive particular attention in atmospheric models: errors associated with transport terms and errors associated with the pressure gradient term.
 The previous chapter developed the cubicFit transport scheme that reduces numerical errors associated with transport over mountains.
-This chapter seeks to reduce errors associated with the balance between the pressure gradient and gravity by representing the atmosphere above terrain using a new type of mesh, the slanted cell mesh.
+This chapter seeks to reduce errors associated with the balance between the pressure gradient and gravity by representing the atmosphere above terrain by introducing a new type of mesh, the `slanted cell' mesh.
 
 Pressure gradient errors result in spurious flows that are especially apparent for diurnal valley flows where synoptic-scale winds are weak \citep{fast2003}, and even small velocity errors can produce large errors in derived quantities such as relative vorticity and potential vorticity \citep{hoinka-zaengl2004}.
 These numerical errors are particularly large using terrain-following meshes with steeply sloping terrain \citep{zaengl2012}.
@@ -23,7 +23,8 @@ Terrain-following meshes are typically implemented using a coordinate transform 
 	\left. \frac{\partial z^\star}{\partial x} \right|_z
 	\frac{\partial p}{\partial z^\star} \label{eqn:slanted:dpdx}
 \end{align}
-where $\left. \partial / \partial x \right|_z$ denotes a horizontal derivative at a fixed height in the physical domain, and $\left. \partial / \partial x \right|_{z^\star}$ denotes a horizontal derivative at a fixed model level in the computational domain.  The first term on the right hand side of equation~\eqref{eqn:slanted:dpdx} is the change in pressure along the terrain-following coordinate surfacee, and the second term corrects for the vertical contribution in the first.
+where $\left. \partial / \partial x \right|_z$ denotes a horizontal derivative at a fixed height in the physical domain, and $\left. \partial / \partial x \right|_{z^\star}$ denotes a horizontal derivative at a fixed model level in the computational domain, with $z^\star$ held constant.
+The first term on the right hand side of equation~\eqref{eqn:slanted:dpdx} is the change in pressure along the terrain-following coordinate surfacee, and the second term corrects for the vertical contribution in the first.
 These terms tend to be large and of opposite sign over steep terrain, and cancellation errors between the two terms result in pressure gradients errors that drive spurious flows.
 
 \begin{figure}
@@ -58,7 +59,7 @@ The transformation is defined as \citep{leuenberger2010}
 	b_i &= \frac{\sinh \left( \left( H / s_i \right)^n - \left( z^\star / s_i \right)^n \right)}{\sinh \left( H / s_i \right)^n}
 \end{align}
 and \(s_1\) and \(s_2\) are the scale heights of coarse-scale and fine-scale terrain respectively.
-The exponent \(n\) was introduced by \citet{leuenberger2010} in order to increase cell thickness in the layers nearest the ground, allowing longer timesteps.  \citet{leuenberger2010} found the exponent has an optimal value of \(n = 1.35\).  Choosing \(n = 1\) gives the decay functions used by \citet{schaer2002}.
+The exponent \(n\) was introduced by \citet{leuenberger2010} in order to increase cell thickness in the layers nearest the ground, allowing longer timesteps.  In their experiments, \citet{leuenberger2010} found the exponent to have an optimal value of \(n = 1.35\).  Choosing \(n = 1\) gives the decay functions used by \citet{schaer2002}.
 While SLEVE can produce very smooth meshes, the coordinate transform becomes non-monotonic and the SLEVE mesh becomes tangled if parameter values are chosen poorly \citep{schaer2002,leuenberger2010}, making it difficult to produce a very smooth global mesh with real terrain (C. K\"{u}hnlein 2015, personal communication).
 Many operational atmospheric models use some form of coordinate smoothing \citep{eckermann2009}, and this approach has been found to reduce pressure gradient errors \citep{schaer2002,leuenberger2010,klemp2011}.
 

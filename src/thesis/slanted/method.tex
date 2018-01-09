@@ -23,8 +23,11 @@ The slanted cell method is straightforward, and slanted cell meshes are always f
 Starting from a uniform rectangular mesh, all cell vertices that lie beneath the orography are moved up to the surface.
 Additionally, to avoid creating very thin cells, all vertices up to $2 \Delta z/5$ above the orography can be moved down to the surface.
 Where all four of a cell's vertices are moved, the cell has zero volume and so it is removed.  Where two vertices at the same horizontal location are moved up to the surface they will occupy the same point; this results in a zero-length edge that is removed to create a triangular cell.
-Figure~\ref{fig:slanted:construct-mesh} shows how a $2 \times 3$-cell, uniform rectangular mesh is transformed into a slanted cell mesh.  Cells $c_5$ and $c_6$ are removed because they have zero volume, and the zero-length edge at point $q$ is removed to create a triangular cell, $c_3$.
+Figure~\ref{fig:slanted:construct-mesh} shows how a $2 \times 3$-cell, uniform rectangular mesh is transformed into a slanted cell mesh.  Cells $c_5$ and $c_6$ are removed because they have zero volume, and the zero-length edge at point $q$ is removed to create a triangular cell, $c_4$.
 Point $p$ is moved down because it is within $2\Delta z/5$ of the surface, avoiding the creation of a very thin cell.
+We have not explored the sensitivity of results using values other than $2\Delta z/5$, but we did find that this approach reduces numerical errors on some meshes with very thin slanted cells.
 
-The slanted cell method does generate some small cells but, unlike the cut cell method, the width of slanted cells is never altered.  Hence, slanted cell meshes should not suffer from severe time-step constraints associated with arbitrarily small cut cells because slanted cells are never shortened in the direction of flow.
+The slanted cell method does generate some small cells but, unlike the cut cell method, the width of slanted cells is never altered.
+Since a no normal flow condition is imposed at the lower boundary, flow must be parallel to the surface and there is only very weak flow across the long, upper face of slanted cells.
+Hence, slanted cell meshes should not suffer from severe time-step constraints associated with arbitrarily small cut cells because slanted cells are never shortened in the direction of flow.
 An example of a slanted cell mesh is illustrated in figure~\ref{fig:slanted:resting:meshes:slantedCell} for comparison with the equivalent BTF (figure~\ref{fig:slanted:resting:meshes:btf}), SLEVE (figure~\ref{fig:slanted:resting:meshes:sleve}), and cut cell (figure~\ref{fig:slanted:resting:meshes:cutCell}) meshes, with the same mesh spacing and mountain profile used for all meshes.

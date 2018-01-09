@@ -27,7 +27,7 @@ Only the lowest \SI{10}{\kilo\meter} for the central region of the domain is sho
 	\label{fig:slanted:mountainAdvect:meshes}
 \end{figure}
 
-A velocity field is chosen that follows the terrain at the surface and becomes entirely horizontal above $H_1 = \SI{10}{\kilo\meter}$.
+A velocity field is prescribed using equation~\eqref{eqn:streamfunc-btf} so that the flow follows the terrain at the surface and becomes entirely horizontal above $H_1 = \SI{10}{\kilo\meter}$.
 The value of $H_1$ is chosen to be much smaller than the domain height $H$ in equation~\eqref{eqn:btf} so that flow crosses the surfaces of the BTF mesh.
 This is evident in figure~\ref{fig:slanted:mountainAdvect:meshes:btf} where the the velocity streamlines are tangential to the mesh only at the ground.
 The flow is deliberately misaligned with the BTF, cut cell and slanted cell meshes away from the ground (figure~\ref{fig:slanted:mountainAdvect:meshes}) to ensure that flow always crosses mesh surfaces in order to challenge the transport schemes.
@@ -128,7 +128,7 @@ The cubicFit scheme yields stable results in all tests, and cubicFit is more acc
 
 A final series of tests were performed to determine the stability limit of the cubicFit scheme with the two-stage Heun time-stepping scheme (equation~\ref{eqn:heun}).
 The tracer was transported on BTF, slanted cell and cut cell meshes with a variety of mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{125}{\meter}$.  $\Delta z$ was chosen so that a constant aspect ratio is preserved such that $\Delta x / \Delta z = 2$.
-For each test, the time-step was increased until the result became unstable.  The largest stable time-steps, $\Delta t_\mathrm{max}$, are presented in figure~\ref{fig:slanted:mountainAdvect:maxdt:dt}.
+For each test, the time-step was adjusted in order to find the largest stable time-step, $\Delta t_\mathrm{max}$, presented in figure~\ref{fig:slanted:mountainAdvect:maxdt:dt}.
 BTF meshes permit the longest time-steps of all three mesh types since cells are almost uniform in volume.  As expected, the longest stable time-step scales linearly with BTF mesh spacing.
 There is no such linear scaling on cut cell meshes because these meshes can have arbitrarily small cells.  The time-step constraints on cut cell meshes are the most severe of the three mesh types.  Slanted cell meshes have a slightly more stringent time-step constraint than BTF meshes but still exhibit similar linear scaling with mesh spacing.
 

@@ -13,7 +13,7 @@ The finite volume model of the fully compressible Euler equations is taken from 
 \end{subequations}
 where \(\rho\) is the density, \(\vect{u}\) is the velocity field, \(\vect{g}\) is the gravitational acceleration, \(c_p\) is the heat capacity at constant pressure, \(\theta = T \left(p_0/p\right)^\kappa\) is the potential temperature, \(T\) is the temperature, \(p\) is the pressure, \(p_0 = \SI{1000}{\hecto\pascal}\) is a reference pressure, \(\Pi = \left(p / p_0 \right)^\kappa\) is the Exner function of pressure, and \(\kappa = R/c_p\) is the gas constant to heat capacity ratio.  \(\mu\) is a damping function that can be used to absorb momentum in a sponge layer near the upper boundary.
 
-The model uses the C-grid staggering in the horizontal and the Lorenz staggering in the vertical such that $\theta$, $\rho$ and $\Pi$ are stored at cell centroids and the covariant component of velocity at cell faces.  The model is configured without Coriolis forces.
+The model uses the C-grid staggering in the horizontal and the Lorenz staggering in the vertical such that $\theta$, $\rho$ and $\Pi$ are stored at cell centroids and the covariant component of velocity at cell faces.  The model is configured in an inertial frame without Coriolis forces.
 
 Acoustic and gravity waves are treated implicitly and transport terms are treated explicitly.
 The trapezoidal implicit treatment of fast waves and the Hodge operator suitable for non-orthogonal meshes are described in the appendix to \citet{shaw-weller2016}.
