@@ -1,4 +1,4 @@
-\documentclass[a4paper,oneside]{memoir}
+\documentclass[a4paper]{memoir}
 \usepackage{standalone}
 \usepackage[utf8]{inputenc}
 \usepackage[british]{babel}
@@ -52,6 +52,8 @@
 % https://tex.stackexchange.com/q/156048/23339
 % https://tex.stackexchange.com/q/207905/23339
 \newcommand{\inputval}[1]{\protect\input{#1}\ignorespaces}
+
+\setlength{\bibsep}{0.4em plus 0.1ex}
 
 \newcommand{\TODO}[1]{\textcolor{purple}{TODO: \emph{#1}}}
 \input{math}

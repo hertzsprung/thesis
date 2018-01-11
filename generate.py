@@ -66,6 +66,7 @@ class Thesis:
                         'src/thesis/slanted/exnerFoamH.tex',
                         'src/thesis/slanted/resting.tex',
                         'src/thesis/cp.tex',
+                        'src/thesis/cp/method.tex',
                         'src/thesis/cp/schaerWaves.tex',
                         'src/thesis/cp/arakawaKonor.tex']
                         + stabilisation.outputs()

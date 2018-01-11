@@ -1,6 +1,15 @@
 \chapter{A new test case for exciting the Lorenz computational mode}
 \label{ch:cp}
 
+\begin{highlights}
+{\Large Highlights}
+\begin{itemize}
+	\item A new idealised two-dimensional test case reveals spurious grid-scale waves excited by the Lorenz computational mode
+	\item The Charney--Phillips staggering is generalised for arbitrary meshes that reduces to classical Charney--Phillips on traditional meshes
+	\item A new fully compressible Euler model that implements the generalised Charney--Phillips formulation is free from spurious grid-scale waves
+\end{itemize}
+\end{highlights}
+
 The Lorenz computational mode arises from having one too many degrees of freedom in the Lorenz staggering of variables, and it is often excited by thermal forcing, producing spurious, vertical, grid-scale waves \citep{schneider1987,arakawa-konor1996}.
 In the Lorenz staggering, the pressure and vertical velocity variables are staggered, with the thermodynamic variable collocated with the pressure variable \citep{lorenz1960}.
 Vertical averaging of the thermodynamic variable in calculating vertical momentum means that these grid-scale waves persist because they become invisible to the model \citep{arakawa-konor1996}.
@@ -23,24 +32,17 @@ The new test cases were performed using an idealised, vertically discrete model 
 Based on the work of \citet{arakawa-konor1996}, \citet{untch-hortal2004} developed a new test case, using thermal forcing to excite spurious grid-scale waves in a 600-day integration of a global, 3D model.
 
 We propose a new, idealised two-dimensional test case, also based on the work of \citet{arakawa-konor1996}, to compare the accuracy of models using Lorenz or Charney--Phillips staggerings.  The new test case intended to aid in the development and intercomparison of modern, nonhydrostatic dynamical cores, and uses a coarse two-dimensional mesh specified in Cartesian coordinates.
+We compare test results between the fully compressible Euler model with a Lorenz staggering (section~\ref{sec:slanted:exnerFoamH}), and a variant of this same more that includes a new generalisation of the Charney--Phillips staggering for arbitrary meshes.
 
-\TODO{say some more about the model formulation we'll use and the test cases we'll perform}
+After describing the generalised Charney--Phillips formulation in section~\ref{sec:cp:method}, we compare Lorenz and generalised Charney--Phillips model variants in section~\ref{sec:cp:schaerWaves} using the standard mountain waves test case specified by \citet{schaer2002}.
+Section~\ref{sec:cp:arakawaKonor} presents the new test case based on \citet{arakawa-konor1996}. We verify that the Lorenz computational mode is excited using the fully compressible Euler model with a Lorenz staggering.  Using the generalised Charney--Phillips model variant, the sensitivity to mesh distortions is explored.  Finally, in section~\ref{sec:cp:advection}, we extract the transport scheme from the generalised Charney--Phillips model variant and examine numerical errors using transport tests on distorted and undistorted meshes.
 
-\section{Generalising the Charney–Phillips staggering for arbitrary meshes}
-The generalisation of the Lorenz staggering for arbitrary meshes is straightforward \citep{weller-shahrokhi2014} but this is not true for the Charney--Phillips staggering, which is only suitable for structured meshes with cells stacked in coluns.
-On a finite volume mesh, variables are ordinarily placed at cell centres or cell faces.
-In the Charney--Phillips staggering, the thermodynamic variable is placed at only those cell faces that lie on the vertical coordinate surfaces, and vertically-oriented faces have no thermodynamic information.
-This existing staggering is unsuitable for arbitrary finite volume meshes because faces can have any orientation.
-
+\input{cp/method.tex}
 \input{cp/schaerWaves.tex}
-
-\section{Advective-form transport for arbitrary Charney--Phillips meshes}
-
-\TODO{describe the CP advection scheme: interpGrad+fvcReconstructCP (advective form)}
-
 \input{cp/arakawaKonor.tex}
 
 \section{Horizontal transport on distorted Charney--Phillips meshes}
+\label{sec:cp:advection}
 \TODO{
 \begin{itemize}
 	\item Test: horizontal advection; advectiveFoamF, advectionFoam with linear interp, advectionFoam with linearUpwind interp; measure l2 and linf errors (s.t. they can be compared with cell-centred, C-grid results); uniform and edgeGraded meshes
