@@ -6,3 +6,16 @@ On a finite volume mesh, variables are ordinarily placed at cell centres or cell
 In the Charney--Phillips staggering, the thermodynamic variable is placed at only those cell faces that lie on the vertical coordinate surfaces, and vertically-oriented faces have no thermodynamic information.
 This existing staggering is unsuitable for arbitrary finite volume meshes because faces can have any orientation.
 
+A generalised Charney--Phillip staggering will be particularly relevant to atmospheric models that use vertical mesh refinement techniques; an area of research that has so far received little attention.
+Controlling the vertical mesh spacing near the ground is straightforward using terrain-following meshes because the mesh is organised in rows of cells that are uninterrupted by mountain peaks.
+With other mesh types such as cut cell meshes and slanted cell meshes, controlling the vertical mesh spacing is less straightforward because mountain peaks interrupt the rows of cells nearest sea level.
+On such meshes, if fine vertical mesh spacing was used near sea level and coarse mesh spacing used aloft, then the mesh above a high-altitude mountain range would have coarse spacing and boundary layer processes would be poorly resolved.
+
+Mesh refinement could help to better resolve the boundary layer above high-altitude mountain ranges represented by cut cell meshes and slanted cell meshes.
+Mesh refinement has received growing attention in atmospheric modelling literature because it could enable atmospheric models to produce more accurate forecasts with less computation \citep{behrens2006,jablonowski2009}.
+While much of the literature concentrates on horizontal mesh refinement, some investigations have been made into vertical refinement on two-dimensional $x$--$z$ Cartesian planes:
+\citet{mueller2013} have used conforming refinement of triangular meshes for simulating the standard rising bubble and density current test cases, and \citet{yamazaki-satomura2012} have used nonconforming block-refinement to better resolve the atmosphere immediately above idealised mountains.
+
+According to \citet{thuburn-woolings2005}, the vertical discretisation used by \citet{yamazaki-satomura2012} supports computational modes and instabilities, although these errors were not excited by the test cases performed by \citet{yamazaki-satomura2012}.
+The Charney--Phillips staggering is unsusceptible to such errors, but we are not aware of any existing literature that combines mesh refinement with a Charney--Phillips staggering.
+By allowing for any mesh structure, a generalised Charney--Phillips formulation should be suitable for any type of mesh, including conforming and non-conforming mesh refinement, terrain-following meshes, cut cell meshes and slanted cell meshes.
