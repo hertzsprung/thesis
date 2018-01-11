@@ -6,7 +6,7 @@ On a finite volume mesh, variables are ordinarily placed at cell centres or cell
 In the Charney--Phillips staggering, the thermodynamic variable is placed at only those cell faces that lie on the vertical coordinate surfaces, and vertically-oriented faces have no thermodynamic information.
 This existing staggering is unsuitable for arbitrary finite volume meshes because faces can have any orientation.
 
-A generalised Charney--Phillip staggering will be particularly relevant to atmospheric models that use vertical mesh refinement techniques; an area of research that has so far received little attention.
+A generalised Charney--Phillips staggering will be particularly relevant to atmospheric models that use vertical mesh refinement techniques; an area of research that has so far received little attention.
 Controlling the vertical mesh spacing near the ground is straightforward using terrain-following meshes because the mesh is organised in rows of cells that are uninterrupted by mountain peaks.
 With other mesh types such as cut cell meshes and slanted cell meshes, controlling the vertical mesh spacing is less straightforward because mountain peaks interrupt the rows of cells nearest sea level.
 On such meshes, if fine vertical mesh spacing was used near sea level and coarse mesh spacing used aloft, then the mesh above a high-altitude mountain range would have coarse spacing and boundary layer processes would be poorly resolved.
