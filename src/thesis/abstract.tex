@@ -1,6 +1,23 @@
 \null\vfil
 \begin{abstract}
-\blindtext
+% word limit 300
+Numerical weather and climate models are using increasingly fine meshes that resolve small-scale, steeply-sloping terrain.
+Terrain-following meshes become highly distorted above such steep slopes, degrading the numerical balance between the pressure gradient and gravity.
+Furthermore, existing models often prefer dimensionally-split transport schemes for their computational efficiency, but such schemes can suffer from splitting errors above steep slopes.
+The cut cell method offers an alternative that avoids most mesh distortions, but arbitrarily small cut cells can impose severe time-step constraints on explicit transport schemes.
+This thesis makes three contributions to improve atmospheric simulations, particularly in the vicinity of steeply-sloping terrain.
+
+First, a new type of mesh, the `slanted cell mesh', avoids severe mesh distortions associated with terrain-following meshes and avoids severe time-step constraints associated with cut cells.
+Numerical experiments to compare terrain-following, cut cell, and slanted cell meshes reveal that the slanted cell mesh simultaneously achieves an accurate balance between the pressure gradient and gravity, and avoids severe time-step constraints. 
+
+Second, a new two-dimensional test case is proposed that excites the Lorenz computational mode.
+The new test is used to compare results from a nonhydrostatic model with Lorenz staggering with those from a model variant with a newly-developed generalised Charney–Phillips staggering for arbitrary meshes.
+
+Third, a multidimensional transport scheme is formulated to obtain accurate solutions on arbitrary, highly-distorted meshes.
+Stability conditions derived from a von Neumann analysis are imposed during model initialisation to obtain stability and improve accuracy near steeply-sloping lower boundaries.
+Reconstruction calculations depend upon the mesh only, needing just one vector multiply per face per time-stage irrespective of the velocity field.
+The scheme achieves second-order convergence across a series of tests using highly-distorted terrain-following meshes, cut cell and slanted cell meshes.
+The scheme is extended to achieve high-order accuracy on distorted meshes without increasing the computational cost during integration.
 \end{abstract}
 \vfil
 
