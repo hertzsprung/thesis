@@ -1,29 +1,32 @@
 \chapter{Introduction}
 
+Atmospheric models are using increasingly fine mesh spacing to resolve small-scale processes and improve weather and climate forecasts \citep{wedi2014}.
+These finer meshes resolve small-scale, steeply-sloping terrain that is poorly represented by traditional terrain-following meshes \citep{schaer2002}, motivating research into alterative vertical meshes including improved terrain-following meshes \citep{schaer2002,klemp2011} and cut cell meshes \citep{jaehn2015,yamazaki2016}, and improved numerical methods \citep{zaengl2012,steppeler-klemp2017}.
 
-% everything stems from mesh spacing
-% steep slopes become resolved
-% lit review of problems caused by steep slopes
-% - numerical stability? grid point storms?
-% - numerical diffusion
-% - numerical dispersion/spurious oscillations
-% - horizontal pressure gradient errors
+Terrain-following meshes have been in widespread operational use since atmospheric models first included a numerical representation of terrain, with the basic terrain following mesh having been formulated by \citet{galchen-somerville1975a}.
+Basic terrain following meshes distort every model layer above sloping terrain, with only the upper boundary being entirely horizontal.
+These mesh distortions become more severe with increasingly steep slopes, reducing the numerical accuracy of transport schemes and pressure gradient calculations in particular.
+
+\citet{schaer2002} found that lower-order transport schemes are inaccurate in the presence of mesh distortions, with the transported tracer exhibiting spurious numerical diffusion and grid-scale oscillations.
+In a mesoscale model forecast over the Alps, numerical diffusion spoiled the solution of water vapour and relative vorticity fields near the tropopause where vertical gradients are strong \citep{hoinka-zaengl2004}.
+A model intercomparison by \citet{kent2014} highlighted the detrimental effects of horizontal-vertical splitting in idealised three-dimensional transport tests over terrain.
+\TODO{numerical diffusion errors:
+Spurious oscillations found in many variables: in OLAM \citep{walko-avissar2008b}, MC2 \citep{schaer2002} and MM5 \citep{hoinka-zaengl2004}.  Also problematic in ocean/sea-ice modelling \citep{naughten2017}}
+
+\TODO{pressure gradient errors}
+
+\TODO{BTF alternatives: SLEVE etc, cut cells (small cells and alleviations)}
+
+%Furthermore, with increasingly fine mesh spacing in global atmospheric models, quasi-uniform spherical meshes become more computationally efficient than traditional latitude-longitude meshes by avoiding the pole singularity \citep{staniforth-thuburn2012}, and mesh refinement and adaptive mesh generation become increasingly necessary to limit the growing number of degrees of freedom \TODO{good citations}.
+% some nice text in MC#5
+
+\TODO{our solutions: cubicFit+highOrderFit, slanted cells, C--P}
 
 % more mesh flexibility is desirable (see refs in MC#3)
-% brief review of mesh types (covered more fully in slanted chapter intro)
 
 % cubicFit
 % - should I mention horizontal meshes, too?  relevant only for cubicFit
 % slanted cells
 % highOrderFit
 % C--P
-
-\TODO{it would be nice to have a citation for each desirable properties demonstrating what can happen if that property is absent
-\begin{description}
-	\item[Conservation]{Conserve mass for climate runs, conserve moisture to avoid Met Office's `eternal fountain'}
-	\item[Numerical stability]{grid-point storms when CFL is violated -- not really the fault of the advection scheme, though!}
-	\item[Numerical diffusion]{\citet{schaer2002, kent2014} show it happens with horizontal flow on TF meshes.  \citet{hoinka-zaengl2004} show it happens for moisture and momentum advection.  How about spurious smoothing of fronts? stable isotopes of water, important for paleoclimate simulations \citep{cauquoin-risi2017}}
-	\item[Numerical dispersion/spurious oscillations]{Spurious oscillations found in many variables: in OLAM \citep{walko-avissar2008b}, MC2 \citep{schaer2002} and MM5 \citep{hoinka-zaengl2004}.  Also problematic in ocean/sea-ice modelling \citep{naughten2017}.}
-\end{description}
-Can use OLAM as an example for motivating numerical methods for arbitrary meshes: think about choice of horizontal and vertical meshes and their combination}
 
