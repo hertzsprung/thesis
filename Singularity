@@ -58,6 +58,7 @@ From:ubuntu:17.04
                texlive-latex-base \
                texlive-latex-recommended \
                texlive-latex-extra \
+	       texlive-extra-utils \
                texlive-fonts-recommended \
                texlive-fonts-extra \
                texlive-font-utils \

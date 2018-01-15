@@ -7,15 +7,21 @@ Terrain-following meshes have been in widespread operational use since atmospher
 Basic terrain following meshes distort every model layer above sloping terrain, with only the upper boundary being entirely horizontal.
 These mesh distortions become more severe with increasingly steep slopes, reducing the numerical accuracy of transport schemes and pressure gradient calculations in particular.
 
-\citet{schaer2002} found that lower-order transport schemes are inaccurate in the presence of mesh distortions, with the transported tracer exhibiting spurious numerical diffusion and grid-scale oscillations.
-In a mesoscale model forecast over the Alps, numerical diffusion spoiled the solution of water vapour and relative vorticity fields near the tropopause where vertical gradients are strong \citep{hoinka-zaengl2004}.
-A model intercomparison by \citet{kent2014} highlighted the detrimental effects of horizontal-vertical splitting in idealised three-dimensional transport tests over terrain.
-\TODO{numerical diffusion errors:
-Spurious oscillations found in many variables: in OLAM \citep{walko-avissar2008b}, MC2 \citep{schaer2002} and MM5 \citep{hoinka-zaengl2004}.  Also problematic in ocean/sea-ice modelling \citep{naughten2017}}
+In a mesoscale model forecast over the Alps, transport across terrain-following mesh layers produced spurious numerical diffusion that spoiled the solution of water vapour and relative vorticity fields near the tropopause where vertical gradients are strong \citep{hoinka-zaengl2004}.
+\citet{schaer2002} found that lower-order transport schemes are inaccurate in the presence of basic terrain following mesh distortions, with the transported tracer exhibiting numerical diffusion and grid-scale oscillations.
+Furthermore, such errors are not confined to atmospheric models: in coupled ocean/sea-ice model experiments performed by \citet{naughten2017}, an inaccurate transport scheme produced numerical oscillations, leading to supercooling and spurious sea-ice production.
 
-\TODO{pressure gradient errors}
+Pressure gradient errors near steep slopes result in spurious circulations that can degrade simulated slow flows, along-valley flows, orographically-induced precipitation and cold air pools \citep{zaengl2004a}.
+Comparing model simulations with field campaign observations in the Salt Lake valley, \citet{fast2003} found that simulated winds were too strong at night, when observed winds were weak and cold air pools formed.
+\citet{zaengl2004a} performed a model intercomparison using an idealised test with a stratified atmosphere initially at rest above an isolated mountain with steep slopes.
+After one simulated day, pressure gradient errors produced maximum spurious vertical velocities between \SI{0.4}{\meter\per\second} and \SI{3}{\meter\per\second} across different models.
+Pressure gradient errors are also problematic using terrain-following meshes to represent steep ocean bathymetry.  
+\citet{luo2002} simulated an ocean initially at rest above an isolated seamount, and found that spurious vertical velocities increased with steeper seamount slopes.
+
 
 \TODO{BTF alternatives: SLEVE etc, cut cells (small cells and alleviations)}
+
+% walko-avissar2008b has spurious oscillations due to advection through cut cells
 
 %Furthermore, with increasingly fine mesh spacing in global atmospheric models, quasi-uniform spherical meshes become more computationally efficient than traditional latitude-longitude meshes by avoiding the pole singularity \citep{staniforth-thuburn2012}, and mesh refinement and adaptive mesh generation become increasingly necessary to limit the growing number of degrees of freedom \TODO{good citations}.
 % some nice text in MC#5
