@@ -5,7 +5,7 @@ These finer meshes resolve small-scale, steeply-sloping terrain that is poorly r
 
 Terrain-following meshes have been in widespread operational use since atmospheric models first included a numerical representation of terrain, with the basic terrain following mesh having been formulated by \citet{galchen-somerville1975a}.
 Basic terrain following meshes distort every model layer above sloping terrain, with only the upper boundary being entirely horizontal.
-These mesh distortions become more severe with increasingly steep slopes, reducing the numerical accuracy of transport schemes and pressure gradient calculations in particular.
+Terrain-following mesh distortions become more severe with increasingly steep slopes, reducing the numerical accuracy of transport schemes and pressure gradient calculations in particular.
 
 In a mesoscale model forecast over the Alps, transport across terrain-following mesh layers produced spurious numerical diffusion that spoiled the solution of water vapour and relative vorticity fields near the tropopause where vertical gradients are strong \citep{hoinka-zaengl2004}.
 \citet{schaer2002} found that lower-order transport schemes are inaccurate in the presence of basic terrain following mesh distortions, with the transported tracer exhibiting numerical diffusion and grid-scale oscillations.
@@ -18,10 +18,18 @@ After one simulated day, pressure gradient errors produced maximum spurious vert
 Pressure gradient errors are also problematic using terrain-following meshes to represent steep ocean bathymetry.  
 \citet{luo2002} simulated an ocean initially at rest above an isolated seamount, and found that spurious vertical velocities increased with steeper seamount slopes.
 
-
-\TODO{BTF alternatives: SLEVE etc, cut cells (small cells and alleviations)}
-
+To improve the accuracy of transport schemes and pressure gradient calculations, terrain following mesh layers can be smoothed so that mesh distortions are reduced.
+While the layers of a basic terrain following mesh are distorted throughout the domain, the layers of a hybrid terrain following mesh become purely horizontal at a specified height below the domain top \citep{simmons-burridge1981}.
+Compared to the basic terrain following mesh, the hybrid terrain following mesh has been found to improve forecasts, particularly in the stratosphere where hybrid terrain following mesh layers are horizontal \citep{eckermann2014}.
+Variants of the hybrid terrain following mesh have become widely adopted in atmospheric models \citep{davies2005,donner2011} as well as some ocean models \citep{burchard-petersen1997,halliwell2004}.
+More sophisticated methods have been developed that produce even smoother terrain following meshes, including the smooth level vertical (SLEVE) mesh \citep{schaer2002,leuenberger2010} used in the icosahedral nonhydrostatic ICON model \citep{zaengl2015}.
+% cut cells, small cells, alleviations
+% who uses cut cells? OLAM, ASAM
 % walko-avissar2008b has spurious oscillations due to advection through cut cells
+
+Another alternative method for representing terrain is the Eta coordinate \citep{mesinger1988}, which creates terrain profiles having a staircase pattern.
+\citet{mesinger1988} found that the Eta coordinate improves the accuracy of pressure gradient calculations compared to basic terrain following meshes, and \citet{mesinger2012} later refined the formulation to allow diagonal transport of momentum and temperature immediately above sloping terrain, making the Eta coordinate similar to the cut-cell method.
+
 
 %Furthermore, with increasingly fine mesh spacing in global atmospheric models, quasi-uniform spherical meshes become more computationally efficient than traditional latitude-longitude meshes by avoiding the pole singularity \citep{staniforth-thuburn2012}, and mesh refinement and adaptive mesh generation become increasingly necessary to limit the growing number of degrees of freedom \TODO{good citations}.
 % some nice text in MC#5
