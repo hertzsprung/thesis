@@ -68,9 +68,7 @@ Instead of calculating the horizontal pressure gradient in the computational dom
 
 \TODO{Another approach is to improve the balance between pressure gradient and gravity and reduce the spurious solenoidal term by using a curl-free gradient formulation \citep{weller-shahrokhi2014}.  I think I should describe this formulation and explain why errors can grow with increasing non-orthogonality.}
 
-Cut cell meshes are less distorted than any smoothed terrain-following mesh, and some studies have shown examples where cut cells produce more accurate results when compared to terrain-following meshes.
-Spurious winds seen using terrain-following meshes are not present with cut cells, and errors do not increase with steeper terrain \citep{good2014}.
-A comparison of terrain-following and cut cell meshes using real initial data by \citet{steppeler2013} found that 5-day forecasts of precipitation and wind over Asia in January 1989 were more accurate in the cut-cell model, although this result was dependent on using an old version of a model.
+Cut cell meshes are less distorted than any smoothed terrain-following mesh, and some studies have shown examples where cut cells produce more accurate results when compared to terrain-following meshes \citep{good2014,steppeler2013}.
 Although cut cell meshes are almost entirely undistorted, when explicit methods are used with cut cells, the small cell problem must be overcome in order to avoid severe time-step constraints.
 
 We seek a new type of mesh that improves the balance between the pressure gradient and gravity compared to terrain-following methods, and avoids the severe time-step constraints associated with arbitrarily small cut cells.  Section~\ref{sec:slanted:method} describes the slanted cell method which is designed to satisfy these criteria.
