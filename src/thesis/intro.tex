@@ -26,35 +26,45 @@ More sophisticated methods have been developed that produce even smoother terrai
 
 Despite their associated numerical errors, terrain-following meshes are attractive because their rectangular structure is simple to process by computer, they can be straightforwardly linked with parameterization schemes, and the boundary layer can be better resolved by using variable spacing of vertical layers \citep{schaer2002}.
 Nevertheless, terrain-following meshes cannot avoid distortions near the surface, and terrain-following cell volumes approach zero as sloping terrain approaches a \ang{90} cliff.
-The cut-cell mesh is an alternative in which the mesh does not follow the terrain but, instead, cells that lie entirely below the terrain are removed, and those that intersect the surface are modified in shape so that they more closely fit the terrain.
+The cut cell mesh is an alternative in which the mesh does not follow the terrain but, instead, cells that lie entirely below the terrain are removed, and those that intersect the surface are modified in shape so that they more closely fit the terrain.
 The resulting mesh is entirely undistorted except for cells that have been cut.
 
-The cut-cell method can create arbitrarily small cells that severely constrain the maximum time-step for explicit methods \citep{klein2009}, and several approaches have been tried to alleviate the problem.
+The cut cell method can create arbitrarily small cells that severely constrain the maximum time-step for explicit methods \citep{klein2009}, and several approaches have been tried to alleviate the problem.
 \citet{yamazaki-satomura2010} combine small cells with horizontally or vertically adjacent cells.
 \citet{steppeler2002} employ a thin-wall approximation to increase the computational volume of small cells without altering the terrain.
 \citet{jebens2011} avoid the time-step restriction associated with explicit schemes by using an implicit method for cut cells and a semi-explicit method elsewhere.
 
-In an idealised test with a stratified atmosphere initially at rest above a mountain, \citet{good2014} found that spurious circulations became increasingly severe with increasingly steep slopes represented by terrain-following meshes, but such errors were eliminated by using cut-cell meshes.
-In a comparison of terrain-following and cut-cell meshes using real initial data, \citet{steppeler2013} found that 5-day forecasts of precipitation and wind over Asia were more accurate in the cut-cell model, although this result was dependent on an old version of a model being used.
+In an idealised test with a stratified atmosphere initially at rest above a mountain, \citet{good2014} found that spurious circulations became increasingly severe with increasingly steep slopes represented by terrain-following meshes, but such errors were eliminated by using cut cell meshes.
+In a comparison of terrain-following and cut cell meshes using real initial data, \citet{steppeler2013} found that 5-day forecasts of precipitation and wind over Asia were more accurate in the cut cell model, although this result was dependent on an old version of a model being used.
 
 Another alternative method for representing terrain is the Eta coordinate \citep{mesinger1988}, which creates terrain profiles having a staircase pattern.
-\citet{mesinger1988} found that the Eta coordinate improves the accuracy of pressure gradient calculations compared to basic terrain-following meshes, and \citet{mesinger2012} later refined the formulation to allow diagonal transport of momentum and temperature immediately above sloping terrain, making the Eta coordinate similar to the cut-cell method.
+\citet{mesinger1988} found that the Eta coordinate improves the accuracy of pressure gradient calculations compared to basic terrain-following meshes, and \citet{mesinger2012} later refined the formulation to allow diagonal transport of momentum and temperature immediately above sloping terrain, making the Eta coordinate similar to the cut cell method.
 
 We have seen that increasingly fine vertical mesh spacing poses problems for traditional terrain-following meshes and traditional numerical methods, but further numerical and computational issues arise with finer horizontal meshes, too.
 Traditionally, global atmospheric models have used uniform latitude-longitude meshes to represent a spherical Earth but, with increasingly fine horizontal mesh spacing, the cells of latitude-longitude meshes become very small near the Earth’s poles, causing a bottleneck in parallel computation \citep{staniforth-thuburn2012} and placing severe time-step constraints on explicit methods.
 In addition to the small cell problem near the poles, computer storage and computation time increase dramatically when horizontal mesh spacing is reduced uniformly over a latitude-longitude mesh: halving the horizontal mesh spacing results in four times as many cells and simulations require a smaller time-step.
 
 In response to these problems, a variety of alternative horizontal representations have been proposed.
-Alternative, quasi-uniform meshes avoid small cells near the poles of latitude-longitude meshes \citep{staniforth-thuburn2012}, and some models are already using quasi-uniform meshes: the ICON model uses an icosahedral mesh \citep{zaengl2015}, the Global Environmental Multiscale model uses a yin-yang mesh comprising two overlapping sections arranged like a tennis ball \citep{qaddouri-lee2011}, and the Met Office are preferring a cubed-sphere mesh for their next-generation Gung-Ho model (Nigel Wood 2017, personal communication).
+Alternative, quasi-uniform meshes avoid small cells near the poles of latitude-longitude meshes \citep{staniforth-thuburn2012}, and some models are already using quasi-uniform meshes: the ICON model uses an icosahedral mesh \citep{zaengl2015}, the Global Environmental Multiscale model uses a yin-yang mesh comprising two overlapping sections arranged like a tennis ball \citep{qaddouri-lee2011}, and the Met Office are preferring a cubed-sphere mesh for their next-generation GungHo model (Nigel Wood 2017, personal communication).
 To improve the scalability of computational resources with finer mesh spacing, static mesh refinement and dynamic adaptive mesh techniques create meshes with fewer cells while retaining the numerical accuracy achieved with a uniformly fine mesh \citep{jablonowski2009}.
 
 These alternative meshes alleviate many of the computational and numerical problems that arise due to finer horizontal mesh spacing, but they introduce problems of their own. 
 Unlike latitude-longitude meshes, quasi-uniform meshes have non-zero skewness or non-orthogonality that produces grid imprinting errors and excites computational modes \citep{weller2012}.
 Mesh refinement and adaptive mesh techniques also create mesh geometries with non-orthogonalities or hanging nodes \citep{marras2016}.
 
+Some recent studies have applied mesh refinement and adaptive mesh techniques to vertical meshes to better resolve cloud processes \citep{mueller2013} and flows over mountains \citep{yamazaki-satomura2012}.  
+The vertical discretisation used by \citet{yamazaki-satomura2012} supports a computational mode \citep{thuburn-woolings2005} that can be avoided by using an alternative staggering of variables.
+The Charney--Phillips staggering is free from computational modes, but the Charney--Phillips staggering has yet to be generalised for arbitrary vertical meshes.
 
-% more mesh flexibility is desirable (see refs in MC#3)
-% then maybe use OLAM as an example where new fruity horizontal+vertical meshes are combined
+With such a wide choice of horizontal and vertical meshes and numerical schemes, it is important that next-generation atmospheric models are designed so that the choice of mesh and choices of numerical schemes can be deferred until later in the development process, or changed during operation as new techniques emerge \citep{ford2013, theurich2016}.
+This thesis makes three contributions to improve numerical accuracy for flows over steep slopes on arbitrary meshes: a new transport scheme, a new vertical mesh, and a new test case to excite the Lorenz computational mode.
 
-\TODO{our solutions: cubicFit+highOrderFit, slanted cells, C--P}
+Chapter~\ref{ch:cubicFit} formulates a new finite volume transport scheme to achieve numerical stability over steep terrain represented by highly-distorted, arbitrary meshes.
+It is second-order convergent on quasi-uniform spherical meshes, terrain-following and cut cell meshes.
+Chapter~\ref{ch:highOrder} proposes a modification to the formulation, using techniques from \citet{devendran2017} to achieve higher than second-order convergence in the interior of distorted meshes without increasing the computational cost during integration.
+Chapter~\ref{ch:slanted} introduces a new type of vertical mesh that simulateously avoids severe mesh distortions associated with traditional terrain-following meshes, while avoiding arbitrarily small cells associated with cut cell meshes.
+Numerical experiments verify that a more accurate balance is achieved between the pressure gradient and gravity, and we find that the new mesh permits maximum time-steps comparable to those permitted by terrain-following meshes.
+Chapter~\ref{ch:cp} extends the work of \citep{arakawa-konor1996} to create new two-dimensional test case that excites the Lorenz computational mode, enabling a more straightforward assessment of models using collocated variables, a Lorenz staggering or a Charney--Phillips staggering.
+Motivated by the emerging need for vertical mesh refinement and mesh adaptivity, the Charney--Phillips staggering is generalised for arbitrary meshes, and the formulation is assessed using the new two-dimensional test case.
+Closing remarks are made in chapter~\ref{ch:discussion}.
 
