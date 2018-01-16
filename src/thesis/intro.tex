@@ -24,7 +24,7 @@ Compared to the basic terrain-following mesh, the hybrid terrain-following mesh 
 Variants of the hybrid terrain-following mesh have become widely adopted in atmospheric models \citep{davies2005,donner2011} as well as some ocean models \citep{burchard-petersen1997,halliwell2004}.
 More sophisticated methods have been developed that produce even smoother terrain-following meshes, including the smooth level vertical (SLEVE) mesh \citep{schaer2002,leuenberger2010} used in the icosahedral nonhydrostatic ICON model \citep{zaengl2015}.
 
-Despite their associated numerical errors, terrain-following meshes are attractive because their rectangular structure is simple to process by computer, they can be straightforwardly linked with parameterization schemes, and boundary layer resolution can be increased using variable spacing of vertical layers \citep{schaer2002}.
+Despite their associated numerical errors, terrain-following meshes are attractive because their rectangular structure is simple to process by computer, they can be straightforwardly linked with parameterization schemes, and the boundary layer can be better resolved by using variable spacing of vertical layers \citep{schaer2002}.
 Nevertheless, terrain-following meshes cannot avoid distortions near the surface, and terrain-following cell volumes approach zero as sloping terrain approaches a \ang{90} cliff.
 The cut-cell mesh is an alternative in which the mesh does not follow the terrain but, instead, cells that lie entirely below the terrain are removed, and those that intersect the surface are modified in shape so that they more closely fit the terrain.
 The resulting mesh is entirely undistorted except for cells that have been cut.
@@ -40,12 +40,21 @@ In a comparison of terrain-following and cut-cell meshes using real initial data
 Another alternative method for representing terrain is the Eta coordinate \citep{mesinger1988}, which creates terrain profiles having a staircase pattern.
 \citet{mesinger1988} found that the Eta coordinate improves the accuracy of pressure gradient calculations compared to basic terrain-following meshes, and \citet{mesinger2012} later refined the formulation to allow diagonal transport of momentum and temperature immediately above sloping terrain, making the Eta coordinate similar to the cut-cell method.
 
-% talk about horizontal spherical meshes
+We have seen that increasingly fine vertical mesh spacing poses problems for traditional terrain-following meshes and traditional numerical methods, but further numerical and computational issues arise with finer horizontal meshes, too.
+Traditionally, global atmospheric models have used uniform latitude-longitude meshes to represent a spherical Earth but, with increasingly fine horizontal mesh spacing, the cells of latitude-longitude meshes become very small near the Earth’s poles, causing a bottleneck in parallel computation \citep{staniforth-thuburn2012} and placing severe time-step constraints on explicit methods.
+In addition to the small cell problem near the poles, computer storage and computation time increase dramatically when horizontal mesh spacing is reduced uniformly over a latitude-longitude mesh: halving the horizontal mesh spacing results in four times as many cells and simulations require a smaller time-step.
+
+In response to these problems, a variety of alternative horizontal representations have been proposed.
+Alternative, quasi-uniform meshes avoid small cells near the poles of latitude-longitude meshes \citep{staniforth-thuburn2012}, and some models are already using quasi-uniform meshes: the ICON model uses an icosahedral mesh \citep{zaengl2015}, the Global Environmental Multiscale model uses a yin-yang mesh comprising two overlapping sections arranged like a tennis ball \citep{qaddouri-lee2011}, and the Met Office are preferring a cubed-sphere mesh for their next-generation Gung-Ho model (Nigel Wood 2017, personal communication).
+To improve the scalability of computational resources with finer mesh spacing, static mesh refinement and dynamic adaptive mesh techniques create meshes with fewer cells while retaining the numerical accuracy achieved with a uniformly fine mesh \citep{jablonowski2009}.
+
+These alternative meshes alleviate many of the computational and numerical problems that arise due to finer horizontal mesh spacing, but they introduce problems of their own. 
+Unlike latitude-longitude meshes, quasi-uniform meshes have non-zero skewness or non-orthogonality that produces grid imprinting errors and excites computational modes \citep{weller2012}.
+Mesh refinement and adaptive mesh techniques also create mesh geometries with non-orthogonalities or hanging nodes \citep{marras2016}.
+
+
 % more mesh flexibility is desirable (see refs in MC#3)
 % then maybe use OLAM as an example where new fruity horizontal+vertical meshes are combined
-
-%Furthermore, with increasingly fine mesh spacing in global atmospheric models, quasi-uniform spherical meshes become more computationally efficient than traditional latitude-longitude meshes by avoiding the pole singularity \citep{staniforth-thuburn2012}, and mesh refinement and adaptive mesh generation become increasingly necessary to limit the growing number of degrees of freedom \TODO{good citations}.
-% some nice text in MC#5
 
 \TODO{our solutions: cubicFit+highOrderFit, slanted cells, C--P}
 
