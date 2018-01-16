@@ -8,7 +8,7 @@ The cut cell method offers an alternative that avoids most mesh distortions, but
 This thesis makes three contributions to improve atmospheric simulations, particularly in the vicinity of steeply-sloping terrain.
 
 First, a multidimensional transport scheme is formulated to obtain accurate solutions on arbitrary, highly-distorted meshes.
-Stability conditions derived from a von Neumann analysis are imposed during model initialisation to obtain stability and improve accuracy near steeply-sloping lower boundaries.
+Stability conditions derived from a von Neumann stability analysis are imposed during model initialisation to obtain stability and improve accuracy near steeply-sloping lower boundaries.
 Reconstruction calculations depend upon the mesh only, needing just one vector multiply per face per time-stage irrespective of the velocity field.
 The scheme achieves second-order convergence across a series of tests using highly-distorted terrain-following meshes and cut cell meshes.
 The scheme is extended to achieve high-order accuracy on distorted meshes without increasing the computational cost during integration.
