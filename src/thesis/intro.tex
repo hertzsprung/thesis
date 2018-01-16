@@ -1,17 +1,18 @@
 \chapter{Introduction}
+\vspace*{-1em}
 
 Atmospheric models are using increasingly fine mesh spacing to resolve small-scale processes and improve weather and climate forecasts \citep{wedi2014}.
 These finer meshes resolve small-scale, steeply-sloping terrain that is poorly represented by traditional terrain-following meshes \citep{schaer2002}, motivating research into alterative vertical meshes including improved terrain-following meshes \citep{schaer2002,klemp2011} and cut cell meshes \citep{jaehn2015,yamazaki2016}, and improved numerical methods \citep{zaengl2012,steppeler-klemp2017}.
 
 Terrain-following meshes have been in widespread operational use since atmospheric models first included a numerical representation of terrain \citep{steppeler2003}, with the basic terrain-following mesh having been formulated by \citet{galchen-somerville1975a}.
-Basic terrain-following meshes distort every model layer above sloping terrain, with only the upper boundary being entirely horizontal.
+Above sloping terrain, basic terrain-following meshes distort every model layer , with only the upper boundary being entirely horizontal.
 Terrain-following mesh distortions become more severe with increasingly steep slopes, reducing the numerical accuracy of transport schemes and pressure gradient calculations in particular.
 
 In a mesoscale model forecast over the Alps, transport across terrain-following mesh layers produced spurious numerical diffusion that spoiled the solution of water vapour and relative vorticity fields near the tropopause where vertical gradients are strong \citep{hoinka-zaengl2004}.
 \citet{schaer2002} found that lower-order transport schemes are inaccurate in the presence of basic terrain-following mesh distortions, with the transported tracer exhibiting numerical diffusion and grid-scale oscillations.
 Furthermore, such errors are not confined to atmospheric models: in coupled ocean/sea-ice model experiments performed by \citet{naughten2017}, an inaccurate transport scheme produced numerical oscillations, leading to supercooling and spurious sea-ice production.
 
-Pressure gradient errors near steep slopes result in spurious circulations that can degrade simulated slow flows, along-valley flows, orographically-induced precipitation and cold air pools \citep{zaengl2004a}.
+Pressure gradient errors near steep slopes result in spurious circulations that can degrade simulated slope flows, along-valley flows, orographically-induced precipitation and cold air pools \citep{zaengl2004a}.
 Comparing model simulations with field campaign observations in the Salt Lake valley, \citet{fast2003} found that simulated winds were too strong at night, when observed winds were weak and cold air pools formed.
 \citet{zaengl2004a} performed a model intercomparison using an idealised test with a stratified atmosphere initially at rest above an isolated mountain with steep slopes.
 After one simulated day, pressure gradient errors produced maximum spurious vertical velocities between \SI{0.4}{\meter\per\second} and \SI{3}{\meter\per\second} across different models.
@@ -24,23 +25,23 @@ Compared to the basic terrain-following mesh, the hybrid terrain-following mesh 
 Variants of the hybrid terrain-following mesh have become widely adopted in atmospheric models \citep{davies2005,donner2011} as well as some ocean models \citep{burchard-petersen1997,halliwell2004}.
 More sophisticated methods have been developed that produce even smoother terrain-following meshes, including the smooth level vertical (SLEVE) mesh \citep{schaer2002,leuenberger2010} used in the icosahedral nonhydrostatic ICON model \citep{zaengl2015}.
 
-Despite their associated numerical errors, terrain-following meshes are attractive because their rectangular structure is simple to process by computer, they can be straightforwardly linked with parameterization schemes, and the boundary layer can be better resolved by using variable spacing of vertical layers \citep{schaer2002}.
+Despite their associated numerical errors, terrain-following meshes are attractive because their rectangular structure is simple to process by computer, they can be straightforwardly linked with parameterization schemes, and the boundary layer resolution can be improved simply by using variable spacing of vertical layers \citep{schaer2002}.
 Nevertheless, terrain-following meshes cannot avoid distortions near the surface, and terrain-following cell volumes approach zero as sloping terrain approaches a \ang{90} cliff.
 The cut cell mesh is an alternative in which the mesh does not follow the terrain but, instead, cells that lie entirely below the terrain are removed, and those that intersect the surface are modified in shape so that they more closely fit the terrain.
 The resulting mesh is entirely undistorted except for cells that have been cut.
 
-The cut cell method can create arbitrarily small cells that severely constrain the maximum time-step for explicit methods \citep{klein2009}, and several approaches have been tried to alleviate the problem.
+The cut cell method can create arbitrarily small cells that severely constrain the maximum time-step for explicit methods \citep{klein2009}, and several approaches have been tried in order to alleviate the problem.
 \citet{yamazaki-satomura2010} combine small cells with horizontally or vertically adjacent cells.
 \citet{steppeler2002} employ a thin-wall approximation to increase the computational volume of small cells without altering the terrain.
 \citet{jebens2011} avoid the time-step restriction associated with explicit schemes by using an implicit method for cut cells and a semi-explicit method elsewhere.
 
 In an idealised test with a stratified atmosphere initially at rest above a mountain, \citet{good2014} found that spurious circulations became increasingly severe with increasingly steep slopes represented by terrain-following meshes, but such errors were eliminated by using cut cell meshes.
-In a comparison of terrain-following and cut cell meshes using real initial data, \citet{steppeler2013} found that 5-day forecasts of precipitation and wind over Asia were more accurate in the cut cell model, although this result was dependent on an old version of a model being used.
+In a comparison of terrain-following and cut cell meshes using real initial data, \citet{steppeler2013} found that 5-day forecasts of precipitation and wind over Asia were more accurate in the cut cell model, although this result depended upon an old version of a model being used.
 
 Another alternative method for representing terrain is the Eta coordinate \citep{mesinger1988}, which creates terrain profiles having a staircase pattern.
 \citet{mesinger1988} found that the Eta coordinate improves the accuracy of pressure gradient calculations compared to basic terrain-following meshes, and \citet{mesinger2012} later refined the formulation to allow diagonal transport of momentum and temperature immediately above sloping terrain, making the Eta coordinate similar to the cut cell method.
 
-We have seen that increasingly fine vertical mesh spacing poses problems for traditional terrain-following meshes and traditional numerical methods, but further numerical and computational issues arise with finer horizontal meshes, too.
+We have seen that increasingly fine vertical mesh spacing poses problems for traditional terrain-following meshes and traditional numerical methods, but further numerical and computational issues also arise with finer horizontal meshes.
 Traditionally, global atmospheric models have used uniform latitude-longitude meshes to represent a spherical Earth but, with increasingly fine horizontal mesh spacing, the cells of latitude-longitude meshes become very small near the Earth’s poles, causing a bottleneck in parallel computation \citep{staniforth-thuburn2012} and placing severe time-step constraints on explicit methods.
 In addition to the small cell problem near the poles, computer storage and computation time increase dramatically when horizontal mesh spacing is reduced uniformly over a latitude-longitude mesh: halving the horizontal mesh spacing results in four times as many cells and simulations require a smaller time-step.
 
@@ -64,7 +65,7 @@ It is second-order convergent on quasi-uniform spherical meshes, terrain-followi
 Chapter~\ref{ch:highOrder} proposes a modification to the formulation, using techniques from \citet{devendran2017} to achieve higher than second-order convergence in the interior of distorted meshes without increasing the computational cost during integration.
 Chapter~\ref{ch:slanted} introduces a new type of vertical mesh that simulateously avoids severe mesh distortions associated with traditional terrain-following meshes, while avoiding arbitrarily small cells associated with cut cell meshes.
 Numerical experiments verify that a more accurate balance is achieved between the pressure gradient and gravity, and we find that the new mesh permits maximum time-steps comparable to those permitted by terrain-following meshes.
-Chapter~\ref{ch:cp} extends the work of \citep{arakawa-konor1996} to create new two-dimensional test case that excites the Lorenz computational mode, enabling a more straightforward assessment of models using collocated variables, a Lorenz staggering or a Charney--Phillips staggering.
+Chapter~\ref{ch:cp} extends the work of \citep{arakawa-konor1996} to create a new two-dimensional test case that excites the Lorenz computational mode, enabling a more straightforward assessment of models using collocated variables, a Lorenz staggering or a Charney--Phillips staggering.
 Motivated by the emerging need for vertical mesh refinement and mesh adaptivity, the Charney--Phillips staggering is generalised for arbitrary meshes, and the formulation is assessed using the new two-dimensional test case.
 Closing remarks are made in chapter~\ref{ch:discussion}.
 
