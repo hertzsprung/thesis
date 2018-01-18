@@ -1,8 +1,6 @@
 \section{Sch\"{a}r mountain waves}
 \label{sec:cp:schaerWaves}
 
-\TODO{Should we test max(dt) again? we've not yet done so for a dynamical test.  I'd hope that slanted cells are much better than cut cells.}
-
 Chapter~\ref{ch:slanted} assessed a finite volume model of the fully compressible Euler equations with a Lorenz staggering using a test case with a stratified atmosphere initially at rest above an isolated mountain.
 We now turn our attention to a transport-dominated test case that presents a challenge to the transport schemes within the dynamical model.
 As specified by \citet{schaer2002}, the test prescribes flow over idealised terrain with small-scale and large-scale undulations that induce propagating and evanescent gravity waves.
@@ -24,6 +22,7 @@ For the Exner function of pressure, hydrostatic balance is prescribed on top and
 
 Sponge layers are added to the upper \SI{10}{\kilo\meter} and leftmost \SI{10}{\kilo\meter} at the inlet boundary to damp the reflection of waves.
 The damping function, \(\mu\), is adapted from \citet{melvin2010} such that
+\begin{subequations}
 \begin{align}
 	\mu(x, z) &= \mu_\mathrm{upper} + \mu_\mathrm{inlet} \\
 	\mu_\mathrm{upper}(z) &= \begin{cases}
@@ -35,6 +34,7 @@ The damping function, \(\mu\), is adapted from \citet{melvin2010} such that
 		0 & \text{otherwise}
 	\end{cases}
 \end{align}
+\end{subequations}
 where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer, $H = \SI{30}{\kilo\meter}$ is the top of the domain, $x_0 = \SI{-150}{\kilo\meter}$ is the leftmost limit of the domain and $x_I = \SI{-140}{\kilo\meter}$ is the rightmost extent of the inlet sponge layer.  The sponge layer is only active on faces whose normal is vertical so that it damps vertical momentum only.
 Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the purposes of generating BTF meshes, the domain height is set to \SI{20}{\kilo\meter} because the sponge layer occupies the uppermost \SI{10}{\kilo\meter}.
 
@@ -94,4 +94,4 @@ Furthermore, as evidenced by the density of vertical velocity contour lines in f
 In summary, accurate gravity wave solutions were obtained using the Lorenz model variant with cut cell meshes and slanted cell meshes, and accurate solutions were also obtained by transporting momentum and potential temperature on the BTF mesh using the cubicFit scheme.
 A less accurate solution was obtained on the BTF mesh using the generalised Charney--Phillips model variant, but all results were in good general agreement with the reference solution from \citet{melvin2010}.
 Knowing that an improved transport scheme was responsible for the improved gravity wave solution using the Lorenz model variant, we might conjecture that the generalised Charney--Phillips model variant produced less accurate results because the model uses a transport scheme that is insufficiently accurate.
-We return to this conjecture again in section~\ref{sec:cp:advection}, but next we will perform a further comparison between Lorenz and generalised Charney--Phillips model variants using a new test case to excite the Lorenz computational mode.
+In the next section we perform a further comparison between Lorenz and generalised Charney--Phillips model variants using a new test case to excite the Lorenz computational mode.

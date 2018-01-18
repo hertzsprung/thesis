@@ -4,7 +4,7 @@
 Atmospheric models are using increasingly fine mesh spacing to resolve small-scale processes and improve weather and climate forecasts \citep{wedi2014}.
 These finer meshes resolve small-scale, steeply-sloping terrain that is poorly represented by traditional terrain-following meshes \citep{schaer2002}, motivating research into alterative vertical meshes including improved terrain-following meshes \citep{schaer2002,klemp2011} and cut cell meshes \citep{jaehn2015,yamazaki2016}, and improved numerical methods \citep{zaengl2012,steppeler-klemp2017}.
 
-Terrain-following meshes have been in widespread operational use since atmospheric models first included a numerical representation of terrain \citep{steppeler2003}, with the basic terrain-following mesh having been formulated by \citet{galchen-somerville1975a}. \TODO{sigma coordinates \citep{phillips1957} came earlier than BTF but I'm not sure of the difference?}
+Terrain-following meshes have been in widespread operational use since atmospheric models first included a numerical representation of terrain \citep{steppeler2003}, with \citet{phillips1957} having formulated the $\sigma$ coordinate, also known as the basic terrain-following coordinate or basic terrain-following mesh \citep{galchen-somerville1975a}.
 Above sloping terrain, basic terrain-following meshes distort every model layer , with only the upper boundary being entirely horizontal.
 Terrain-following mesh distortions become more severe with increasingly steep slopes, reducing the numerical accuracy of transport schemes and pressure gradient calculations in particular.
 
@@ -58,8 +58,15 @@ The vertical discretisation used by \citet{yamazaki-satomura2012} supports a com
 The Charney--Phillips staggering is free from computational modes, but the Charney--Phillips staggering has yet to be generalised for arbitrary vertical meshes.
 
 With such a wide choice of horizontal and vertical meshes and numerical schemes, it is important that next-generation atmospheric models are designed so that the choice of mesh and choices of numerical schemes can be deferred until later in the development process, or changed during operation as new techniques emerge \citep{ford2013, theurich2016}.
-This thesis makes three contributions to improve numerical accuracy for flows over steep slopes on arbitrary meshes: a new transport scheme, a new vertical mesh, and a new test case to excite the Lorenz computational mode.
-\TODO{We use OpenFOAM [citation] to enable like-for-like comparisons between different model variants and different types of mesh.  Code and data are available at zenodo etc...}
+This thesis makes four contributions to improve numerical accuracy for flows over steep slopes:
+\begin{enumerate}
+\item a new approach for stabilising finite volume transport schemes on arbitrary meshes,
+\item a high-order finite volume formulation for transport on arbitrary meshes,
+\item a new vertical mesh for representing terrain,
+\item a new test case to excite the Lorenz computational mode.
+\end{enumerate}
+Throughout the thesis, we use the OpenFOAM software package \citepalias{openfoam} to implement numerical schemes and numerical experiments, enabling like-for-like comparisons between different model variants and different types of mesh.
+\TODO{Code and data are available at zenodo etc...}
 
 Chapter~\ref{ch:cubicFit} formulates a new finite volume transport scheme to achieve numerical stability over steep terrain represented by highly-distorted, arbitrary meshes.
 It is second-order convergent on quasi-uniform spherical meshes, terrain-following and cut cell meshes.
