@@ -19,6 +19,7 @@ Acoustic and gravity waves are treated implicitly and transport terms are treate
 The trapezoidal implicit treatment of fast waves and the Hodge operator suitable for non-orthogonal meshes are described in the appendix to \citet{shaw-weller2016}.
 To avoid time-splitting errors between transport and fast waves, transport is time-stepped using a three-stage, second-order Runge-Kutta scheme.
 The transport terms of the momentum equation \eqref{eqn:exnerFoam:momentum} and thermodynamic equation \eqref{eqn:exnerFoam:theta} are discretised in flux form using the cubicFit transport scheme.
+\TODO{say that the transport scheme is swappable, and can be linearUpwind or cubicFit.  in the resting atmosphere section, say that we choose cubicFit.}
 
 This model is suitable for arbitrary meshes and includes a curl-free pressure gradient formulation.
 In the next section, we use this model to compare the accuracy of hydrostatic balance calculations using terrain-following, cut cell and slanted cell meshes.

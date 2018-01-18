@@ -14,23 +14,33 @@
 \end{itemize}
 }
 
+% domain: 600km (between outermost faces), 30km high
+% 60x30 cells, dx=10km, dz=1km
+% periodic lateral boundaries
+% background theta
+% theta perturbation (so that the integral of theta over the domain is unaltered)
+% sponge layer
+
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.38\textwidth}
 		\includegraphics{arakawaKonor-uniform-lorenz/0/theta_diff.pdf}
-		\caption{\TODO{initial}}
+		\caption{Initial perturbation}
 		\label{fig:cp:arakawaKonor:theta_diff:initial}
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
 		\includegraphics{arakawaKonor-uniform-lorenz/172800/theta_diff.pdf}
-		\caption{\TODO{Lorenz}}
+		\caption{Lorenz solution}
 		\label{fig:cp:arakawaKonor:theta_diff:lorenz}
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
 		\includegraphics{arakawaKonor-uniform-cp/172800/theta_diff.pdf}
-		\caption{\TODO{Charney--Phillips}}
+		\caption{Generalised Charney--Phillips solution}
 		\label{fig:cp:arakawaKonor:theta_diff:cp}
 	\end{subfigure}
-	\caption{\TODO{theta diffs}}
+	\caption{Differences in potential temperature for the standing waves test case.
+	\TODO{}
+Only the lowest \SI{20}{\kilo\meter} in the central region of the domain is shown.  The entire domain is \SI{600}{\kilo\meter} wide and \SI{30}{\kilo\meter} high.
+	}
 	\label{fig:cp:arakawaKonor:theta_diff}
 \end{figure}
