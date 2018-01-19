@@ -1,4 +1,5 @@
-FoamFile {
+FoamFile
+{
     version         1.4;
     format          ascii;
 
@@ -11,14 +12,13 @@ FoamFile {
     object          gmtDict;
 }
 
-projection "X1.5i/1.5i";
+projection "X4.6i/1.4i";
 projection2D XZ;
-separateLegend true;
 plotBoundaryDots false;
 
 FieldsToPlot (
-    [theta_diff rawValues -0.6 0.6 0.1 "$GMTU/colours/red_white_blue.cpt"]
+    [none mesh "black"]
 );
 
-region "-120e3/120e3/0/22e3";
-boundaryMarks "100e3/5e3WSen";
+region "-300e3/300e3/0/30e3";
+boundaryMarks "150e3/10e3Wsen";
