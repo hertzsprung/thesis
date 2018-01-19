@@ -4,6 +4,8 @@
 Atmospheric models are using increasingly fine mesh spacing to resolve small-scale processes and improve weather and climate forecasts \citep{wedi2014}.
 These finer meshes resolve small-scale, steeply-sloping terrain that is poorly represented by traditional terrain-following meshes \citep{schaer2002}, motivating research into alterative vertical meshes including improved terrain-following meshes \citep{schaer2002,klemp2011} and cut cell meshes \citep{jaehn2015,yamazaki2016}, and improved numerical methods \citep{zaengl2012,steppeler-klemp2017}.
 
+\section{Vertical meshes to represent the atmosphere above terrain}
+
 Terrain-following meshes have been in widespread operational use since atmospheric models first included a numerical representation of terrain \citep{steppeler2003}, with \citet{phillips1957} having formulated the $\sigma$ coordinate, also known as the basic terrain-following coordinate or basic terrain-following mesh \citep{galchen-somerville1975a}.
 Above sloping terrain, basic terrain-following meshes distort every model layer , with only the upper boundary being entirely horizontal.
 Terrain-following mesh distortions become more severe with increasingly steep slopes, reducing the numerical accuracy of transport schemes and pressure gradient calculations in particular.
@@ -41,6 +43,8 @@ In a comparison of terrain-following and cut cell meshes using real initial data
 Another alternative method for representing terrain is the Eta coordinate \citep{mesinger1988}, which creates terrain profiles having a staircase pattern.
 \citet{mesinger1988} found that the Eta coordinate improves the accuracy of pressure gradient calculations compared to basic terrain-following meshes, and \citet{mesinger2012} later refined the formulation to allow diagonal transport of momentum and temperature immediately above sloping terrain, making the Eta coordinate similar to the cut cell method.
 
+\section{Horizontal meshes to represent a spherical Earth}
+
 We have seen that increasingly fine vertical mesh spacing poses problems for traditional terrain-following meshes and traditional numerical methods, but further numerical and computational issues also arise with finer horizontal meshes.
 Traditionally, global atmospheric models have used uniform latitude-longitude meshes to represent a spherical Earth but, with increasingly fine horizontal mesh spacing, the cells of latitude-longitude meshes become very small near the Earth’s poles, causing a bottleneck in parallel computation \citep{staniforth-thuburn2012} and placing severe time-step constraints on explicit methods.
 In addition to the small cell problem near the poles, computer storage and computation time increase dramatically when horizontal mesh spacing is reduced uniformly over a latitude-longitude mesh: halving the horizontal mesh spacing results in four times as many cells and simulations require a smaller time-step.
@@ -56,6 +60,8 @@ Mesh refinement and adaptive mesh techniques also create mesh geometries with no
 Some recent studies have applied mesh refinement and adaptive mesh techniques to vertical meshes to better resolve cloud processes \citep{mueller2013} and flows over mountains \citep{yamazaki-satomura2012}.  
 The vertical discretisation used by \citet{yamazaki-satomura2012} supports a computational mode \citep{thuburn-woolings2005} that can be avoided by using an alternative staggering of variables.
 The Charney--Phillips staggering is free from computational modes, but the Charney--Phillips staggering has yet to be generalised for arbitrary vertical meshes.
+
+\section{Project outline}
 
 With such a wide choice of horizontal and vertical meshes and numerical schemes, it is important that next-generation atmospheric models are designed so that the choice of mesh and choices of numerical schemes can be deferred until later in the development process, or changed during operation as new techniques emerge \citep{ford2013, theurich2016}.
 This thesis makes four contributions to improve numerical accuracy for flows over steep slopes:
