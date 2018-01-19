@@ -34,7 +34,7 @@ The potential temperature perturbation $\theta'$ is defined as
 \end{align}
 \end{subequations}
 with the maximum amplitude $\theta'_0 = \SI{0.5}{\kelvin}$ and the wavelength $\lambda = \SI{100}{\kilo\meter}$.
-Using a Lorenz staggering, this arrangement produces grid-scale waves in the central region of the domain in two adjacent layers near the ground (figure~\ref{fig:cp:arakawaKonor:theta_diff:initial}).
+Using a Lorenz staggering, this arrangement produces grid-scale waves in the central region of the domain in two adjacent layers near the ground (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:initial}).
 Using a generalised Charney--Phillips staggering, the perturbation is non-zero on the lowest two interior mesh layers above the lower boundary (not shown).
 The definition given by equation~\eqref{eqn:cp:arakawaKonor:theta-perturbation} ensures that the potential temperature perturbation integrated over the domain is zero.
 
@@ -55,26 +55,36 @@ The sponge layer is only active on faces whose normal is vertical so that it dam
 \begin{figure}
 	\centering
 	\begin{subfigure}{\textwidth}
-		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:initial}
-		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:lorenz}
-		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:cp}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:uniform:initial}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:uniform:lorenz}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:uniform:cp}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}
 		\includegraphics{thesis/cp/arakawaKonor/fig-theta_diff.pdf}
 	\end{subfigure}
 %
 	\caption{Differences in potential temperature for the standing waves test case.
-	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:initial}) a grid-scale potential temperature perturbation near the surface is added to an initial, stably-stratified profile.
-The difference between the initial, unperturbed, stably-stratified potential temperature profile and the final solution are shown using
-	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:lorenz}) the Lorenz model variant, and 
-	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:cp}) the generalised Charney--Phillips model variant.
-Only the lowest \SI{20}{\kilo\meter} in the central region of the domain is shown.  The entire domain is \SI{600}{\kilo\meter} wide and \SI{30}{\kilo\meter} high.
+	On the uniform mesh and the horizontally tilted mesh,
+	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:uniform:initial},
+	\subcaptionref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial})
+	a grid-scale potential temperature perturbation near the surface is added to an initial, stably-stratified profile;
+the difference between the initial, unperturbed, stably-stratified potential temperature profile and the final solution are shown using
+	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz},
+	\subcaptionref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz})
+	the Lorenz model variant, and 
+	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:uniform:cp},
+	\subcaptionref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp})
+	the generalised Charney--Phillips model variant.
+Only the lowest \SI{22}{\kilo\meter} in the central region of the domain is shown.  The entire domain is \SI{600}{\kilo\meter} wide and \SI{30}{\kilo\meter} high.
 	}
 	\label{fig:cp:arakawaKonor:theta_diff}
 \end{figure}
 
 The test is integrated forward by 48 hours using a time-step of $\Delta t = \SI{25}{\second}$.
 The initial potential temperature perturbation generates gravity waves that rapidly spread through the domain.
-In addition to these gravity waves, using the Lorenz model variant, a grid-scale standing wave slowly spreads vertically, occupying the entire depth of the atmosphere (figure~\ref{fig:cp:arakawaKonor:theta_diff:lorenz}), and the initial perturbation, though weakened in amplitude, persists throughout the duration of the simulation.
-No standing waves are produced by the generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:cp}).
+In addition to these gravity waves, using the Lorenz model variant, a grid-scale standing wave slowly spreads vertically, occupying the entire depth of the atmosphere (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz}), and the initial perturbation, though weakened in amplitude, persists throughout the duration of the simulation.
+No standing waves are produced by the generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:cp}).
 Hence, we conclude that the grid-scale standing waves seen only in the Lorenz model variant are a spurious feature excited by the Lorenz computational mode.
 
 \begin{figure}
@@ -89,8 +99,7 @@ Hence, we conclude that the grid-scale standing waves seen only in the Lorenz mo
 	\label{fig:cp:arakawaKonor:edgeGradedMesh}
 \end{figure}
 
-% define horizontal and vertical edge graded meshes
-% mention how initial conditions are define in physical domain, not computational domain
-% large-scale response on distorted meshes is very different from small-scale responses on uniform mesh
+\TODO{define horizontal and vertical edge graded meshes}
 
-\blindtext
+Using the horizontally tilted mesh, large-scale responses are produced by both the Lorenz model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}) and generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}), and these large-scale responses are very different from the small-scale gravity waves produced by models using the uniform mesh (figures~\ref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz} and \ref{fig:cp:arakawaKonor:theta_diff:uniform:cp}).
+Note that, since the initial potential temperature perturbation is defined in Cartesian coorinates and not relative to model layers, the initial potential temperature perturbation differs slightly between the uniform mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:initial}), horizontally tilted mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial}) and vertically tilted mesh (not shown).  \TODO{but we wouldn't expect this small change to produce such wildly different results}
