@@ -21,7 +21,7 @@ At the ground, fixed gradients are imposed by calculating the component of $\nab
 For the Exner function of pressure, hydrostatic balance is prescribed on top and bottom boundaries and the inlet and outlet are zero normal gradient.
 
 Sponge layers are added to the upper \SI{10}{\kilo\meter} and leftmost \SI{10}{\kilo\meter} at the inlet boundary to damp the reflection of waves.
-The damping function, \(\mu\), is adapted from \citet{melvin2010} such that
+The damping function \(\mu\) is adapted from \citet{melvin2010} such that
 \begin{subequations}
 \begin{align}
 	\mu(x, z) &= \mu_\mathrm{upper} + \mu_\mathrm{inlet} \\
@@ -35,7 +35,8 @@ The damping function, \(\mu\), is adapted from \citet{melvin2010} such that
 	\end{cases}
 \end{align}
 \end{subequations}
-where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer, $H = \SI{30}{\kilo\meter}$ is the top of the domain, $x_0 = \SI{-150}{\kilo\meter}$ is the leftmost limit of the domain and $x_I = \SI{-140}{\kilo\meter}$ is the rightmost extent of the inlet sponge layer.  The sponge layer is only active on faces whose normal is vertical so that it damps vertical momentum only.
+where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer, $H = \SI{30}{\kilo\meter}$ is the top of the domain, $x_0 = \SI{-150}{\kilo\meter}$ is the leftmost limit of the domain and $x_I = \SI{-140}{\kilo\meter}$ is the rightmost extent of the inlet sponge layer.
+The sponge layer is only active on faces whose normal is vertical so that it damps vertical momentum only.
 Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the purposes of generating BTF meshes, the domain height is set to \SI{20}{\kilo\meter} because the sponge layer occupies the uppermost \SI{10}{\kilo\meter}.
 
 \begin{figure}

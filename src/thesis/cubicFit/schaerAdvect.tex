@@ -73,7 +73,8 @@ A tracer with density $\phi$ is positioned upstream above the height of the terr
 \end{subequations}
 where $A_x = \SI{25}{\kilo\meter}$, $A_z = \SI{3}{\kilo\meter}$ are the horizontal and vertical half-widths respectively, and $\phi_0 = \SI{1}{\kilogram\per\meter\cubed}$ is the maximum density of the tracer.  At $t = \SI{0}{\second}$, the tracer is centred at $(x_0, z_0) = (\SI{-50}{\kilo\meter}, \SI{12}{\kilo\meter})$ so that the tracer is upwind of the mountain, in the region of uniform flow above $z_2$.
 
-Tests are integrated for \SI{10000}{\second} using s chosen for each mesh so that the maximum Courant number is about \num{0.4}.  This choice yields a time-step that is well below any stability limit, as recommended by \citet{lauritzen2012}.  By the end of integration the tracer is positioned downwind of the mountain.
+Tests are integrated for \SI{10000}{\second} using a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.
+This choice yields a time-step that is well below any stability limit, as recommended by \citet{lauritzen2012}.  By the end of integration the tracer is positioned downwind of the mountain.
 The analytic solution at $t = \SI{10000}{\second}$ is centred at $(x_0, z_0) = (\SI{50}{\kilo\meter}, \SI{12}{\kilo\meter})$ with its shape unchanged from the initial condition.
 
 \begin{figure}

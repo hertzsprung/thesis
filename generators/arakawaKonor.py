@@ -8,14 +8,17 @@ class ArakawaKonor:
                 'arakawaKonor-uniform-lorenz',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/cp/arakawaKonor/theta_diff.gmtdict'],
+                plots=[
+                    'src/thesis/cp/arakawaKonor/theta_diff.gmtdict',
+                    'src/thesis/cp/arakawaKonor/theta_diffS.gmtdict'
+                ],
                 files=['0/theta_diff', '172800/theta_diff'])
 
         self.uniformCP = GmtPlotCopyCase(
                 'arakawaKonor-uniform-cp',
                 source='$atmostests_builddir',
                 target='$builddir',
-                plots=['src/thesis/cp/arakawaKonor/theta_diff.gmtdict'],
+                plots=['src/thesis/cp/arakawaKonor/theta_diffS.gmtdict'],
                 files=['172800/theta_diff'])
 
         uniformLorenzCase = Case('arakawaKonor-uniform-lorenz')
@@ -26,18 +29,19 @@ class ArakawaKonor:
             plot='theta_diff',
             case=uniformLorenzCase,
             time=0,
-            data=['0/theta_diff'])
+            data=['0/theta_diff'],
+            colorBar='legends/theta_diff.eps')
 
         self.uniformLorenzThetaDiff = GmtPlot(
             'arakawaKonor-uniform-lorenz-theta_diff',
-            plot='theta_diff',
+            plot='theta_diffS',
             case=uniformLorenzCase,
             time=172800,
             data=['172800/theta_diff'])
 
         self.uniformCPThetaDiff = GmtPlot(
             'arakawaKonor-uniform-cp-theta_diff',
-            plot='theta_diff',
+            plot='theta_diffS',
             case=uniformCPCase,
             time=172800,
             data=['172800/theta_diff'])

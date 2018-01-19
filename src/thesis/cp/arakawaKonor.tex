@@ -1,46 +1,91 @@
-\section{A new test case to excite the Lorenz computational mode}
+\section{A two-dimensional standing waves test case}
 \label{sec:cp:arakawaKonor}
 
 \TODO{
 \begin{itemize}
-	\item Test: 2D vertical slice with initial $\theta$ perturbation, ExnerFoamH and ExnerFoamCP
-	\item Meshes: uniform, edgeGrading (sloping horizontal surfaces, sloping vertical faces)
 	\item Plot: horizontal edgeGrading, vertical edgeGrading
-	\item Plot: initial theta\_diff, final theta\_diff for ExnerFoamH and ExnerFoamCP
 	\item Plot: conservation of internal energy and total energy time series, ExnerFoamH and ExnerFoamCP, uniform mesh, horizontal edgeGrading, vertical edgeGrading
 	\item Conclusion: the test excites the Lorenz computational mode with ExnerFoamH
 	\item Conclusion: ExnerFoamCP eliminates computational mode
-	\item Conclusion: edgeGrading reveals lack of conservation... is it due to the advective form transport of $\theta$?  next test will try to provide an answer
+	\item Conclusion: edgeGrading reveals lack of conservation, due to advective form transport scheme?
 \end{itemize}
 }
 
-% domain: 600km (between outermost faces), 30km high
-% 60x30 cells, dx=10km, dz=1km
-% periodic lateral boundaries
-% background theta
-% theta perturbation (so that the integral of theta over the domain is unaltered)
-% sponge layer
+\TODO{a little intro.  say again that all this is based on the standing waves test case by \citet{arakawa-konor1996}.}
+
+The domain is \SI{30}{\kilo\meter} high and \SI{600}{\kilo\meter} wide between the outermost faces, and the mesh spacing is $\Delta x = \SI{10}{\kilo\meter}$ and $\Delta z = \SI{1}{\kilo\meter}$.  The lower boundary is flat with no mountain profile.
+The upper and lower boundaries are no normal flow, and the domain is horizontally periodic.
+
+The initial potential temperature profile is the sum of a stably-stratified profile and a grid-scale perturbation near the ground.
+The stably-stratified profile has $\theta(z = 0) = \SI{250}{\kelvin}$ and a constant static stability with Brunt-V\"ais\"al\"a frequency $N = \SI{0.02}{\per\second}$.
+The potential temperature perturbation $\theta'$ is defined as
+\begin{subequations}
+\label{eqn:cp:arakawaKonor:theta-perturbation}
+\begin{align}
+	\theta' &= \begin{cases} S \theta'_0 \sin(\frac{2 \pi x}{\lambda}) & \text{if } \Mag{x} \leq \frac{\lambda}{2} \\
+		0 & \text{otherwise} \\
+	\end{cases} \\
+\shortintertext{where}
+	S &= \begin{cases}
+		-1 & \text{if } \SI{1}{\kilo\meter} <= z < \SI{2}{\kilo\meter} \\
+		1 & \text{if } \SI{2}{\kilo\meter} <= z < \SI{3}{\kilo\meter} \\
+		0 & \text{otherwise} \\
+	\end{cases}
+\end{align}
+\end{subequations}
+and the maximum amplitude $\theta'_0 = \SI{0.5}{\kelvin}$ and the wavelength $\lambda = \SI{100}{\kilo\meter}$.
+Using a Lorenz staggering, this arrangement produces grid-scale waves in the central region of the domain in two layers near the ground (figure~\ref{fig:cp:arakawaKonor:theta_diff:initial}).
+Using a generalised Charney--Phillips staggering, the perturbation is non-zero on the lowest two interior mesh layers above the lower boundary (not shown).
+The definition given by equation~\eqref{eqn:cp:arakawaKonor:theta-perturbation} ensures that the potential temperature perturbation integrated over the domain is zero.
+
+At the upper and lower boundaries, zero gradients are imposed on the potential temperature field for the Lorenz model variant; for the Charney--Phillips model variant, fixed potential temperature values are prescribed using equation~\ref{eqn:cp:schaerWaves:thermal-profile}.
+The Exner function of pressure is calculated so that it is in discrete hydrostatic balance.
+
+A sponge layer is added to the upper \SI{10}{\kilo\meter}.  The damping function is given by
+\begin{align}
+	\mu(z) &= \begin{cases}
+		\overline{\mu} \sin^2 \left( \frac{\pi}{2} \frac{z - z_B}{H - z_B} \right) & \text{if } z \geq z_B \\
+		0 & \text{otherwise} \\
+	\end{cases}
+\end{align}
+where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer and $H = \SI{30}{\kilo\meter}$ is the top of the domain.
+The sponge layer is only active on faces whose normal is vertical so that it damps vertical momentum only.
+
+The test is integrated forward by 48 hours using a time-step of $\Delta t = \SI{25}{\second}$.
 
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.38\textwidth}
+		\vspace*{1.1em}
 		\includegraphics{arakawaKonor-uniform-lorenz/0/theta_diff.pdf}
-		\caption{Initial perturbation}
+		\caption{Initial perturbation with a Lorenz staggering}
 		\label{fig:cp:arakawaKonor:theta_diff:initial}
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
-		\includegraphics{arakawaKonor-uniform-lorenz/172800/theta_diff.pdf}
+		\includegraphics{arakawaKonor-uniform-lorenz/172800/theta_diffS.pdf}
 		\caption{Lorenz solution}
 		\label{fig:cp:arakawaKonor:theta_diff:lorenz}
 	\end{subfigure}
 	\begin{subfigure}{0.3\textwidth}
-		\includegraphics{arakawaKonor-uniform-cp/172800/theta_diff.pdf}
+		\vspace*{1.1em}
+		\includegraphics{arakawaKonor-uniform-cp/172800/theta_diffS.pdf}
 		\caption{Generalised Charney--Phillips solution}
 		\label{fig:cp:arakawaKonor:theta_diff:cp}
 	\end{subfigure}
+%
+\vspace{0.5em}
+\includegraphics[height=5in,angle=270]{arakawaKonor-uniform-lorenz/arakawaKonor-initial-theta_diff-colorBar.eps}
+%
 	\caption{Differences in potential temperature for the standing waves test case.
-	\TODO{}
+	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:initial}) a grid-scale potential temperature perturbation near the surface is added to an initial, stably-stratified profile.
+The difference between the initial, unperturbed, stably-stratified potential temperature profile and the final solution are shown using
+	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:lorenz}) the Lorenz model variant, and 
+	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:cp}) the generalised Charney--Phillips model variant.
 Only the lowest \SI{20}{\kilo\meter} in the central region of the domain is shown.  The entire domain is \SI{600}{\kilo\meter} wide and \SI{30}{\kilo\meter} high.
 	}
 	\label{fig:cp:arakawaKonor:theta_diff}
 \end{figure}
+
+\TODO{discuss uniform results}
+
+\TODO{introduce edgeGrading meshes: should we specify these with a Jacobian rather than OpenFOAM's edgeGrading notation?}
