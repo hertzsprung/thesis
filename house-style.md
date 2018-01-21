@@ -1,6 +1,7 @@
 # words
 
 - 'time-step', not 'timestep' or 'time step'
+- 'terrain-following', not 'terrain following'
 - 'cut cell', not 'cut-cell'
 - 'terrain', not 'orography'
 - 'transport', not 'advection'

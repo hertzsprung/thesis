@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage[paperwidth=5.9in,paperheight=4.9in,margin=0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[final,babel]{microtype}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{color}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\tikzset{>=latex}
+
+\graphicspath{{src/mc-report-2017-12/}{build/}}
+\makeatletter
+\def\input@path{{src/mc-report-2017-12/}{build/mc-report-2017-12/}{build/}}
+\makeatother
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\TPMargin{2pt}
+
+\begin{textblock*}{10.4em}(0.85in,0.4in)
+\small
+\textblockcolour{white}
+(a) Initial perturbation with a Lorenz staggering
+\end{textblock*}
+
+\begin{textblock*}{8em}(2.6in,0.4in)
+\small
+\textblockcolour{white}
+(b) Lorenz solution
+\end{textblock*}
+
+\begin{textblock*}{10.4em}(4.3in,0.4in)
+\small
+\textblockcolour{white}
+(c) Generalised Charney--Phillips solution
+\end{textblock*}
+
+\begin{textblock*}{10.4em}(0.85in,2.55in)
+\small
+\textblockcolour{white}
+(d) Initial perturbation with a Lorenz staggering
+\end{textblock*}
+
+\begin{textblock*}{8em}(2.6in,2.55in)
+\small
+\textblockcolour{white}
+(e) Lorenz solution
+\end{textblock*}
+
+\begin{textblock*}{10.4em}(4.3in,2.55in)
+\small
+\textblockcolour{white}
+(f) Generalised Charney--Phillips solution
+\end{textblock*}
+
+\begin{center}
+\normalsize
+Uniform mesh
+\end{center}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{%
+	\includegraphics{arakawaKonor-uniform-lorenz/0/theta_diffW.pdf}
+	\includegraphics{arakawaKonor-uniform-lorenz/172800/theta_diffSW.pdf}
+	\includegraphics{arakawaKonor-uniform-cp/172800/theta_diffSW.pdf}
+}
+
+\vspace*{0.5em}
+\begin{center}
+Mesh with tilted horizontal surfaces
+\end{center}
+
+$z$ (\si{\meter}) \raisebox{-.5\height}{%
+	\includegraphics{arakawaKonor-horizontalGrading-lorenz/0/theta_diff.pdf}
+	\includegraphics{arakawaKonor-horizontalGrading-lorenz/172800/theta_diffS.pdf}
+	\includegraphics{arakawaKonor-horizontalGrading-cp/172800/theta_diffS.pdf}
+}
+
+\vspace{0.5em}
+\hspace*{11em}$x$ (\si{\meter}) \hspace*{10em}$x$ (\si{\meter}) \hspace*{10em}$x$ (\si{\meter})
+
+\centering
+\includegraphics[height=5in,angle=270]{arakawaKonor-uniform-lorenz/arakawaKonor-uniform-initial-theta_diff-colorBar.eps}
+\end{document}

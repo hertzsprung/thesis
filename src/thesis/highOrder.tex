@@ -1,4 +1,5 @@
 \chapter{High-order transport for arbitrary meshes}
+\label{ch:highOrder}
 
 \TODO{
 Motivation
@@ -11,11 +12,9 @@ Motivation
 }
 \TODO{
 \begin{itemize}	
-\item Taylor series analyses of cubicFit/highOrderFit to show why cubicFit is limited to second-order convergence and highOrderFit is not
-\item test: solid body rotation in 2D on uniform and distorted meshes following \citet{leonard1996,chen2017}
+\item test: solid body rotation on 2D plane, uniform and distorted meshes following \citet{leonard1996,chen2017} (will need ghost cells for periodic BCs), \textbf{OR}
+\item test: solid body rotations on spherical shell, cubed-sphere and hexagonal icosahedra \citep{lauritzen2012}
 \item test: horizontal flow above a mountain on a basic terrain-following mesh \citep{schaer2002,shaw2017} -- the cosBell tracer field might be insufficiently smooth for high-order but still a useful comparison with cubicFit, and returns to the mountainous theme!
-\item test: deformational flow in 2D? \citep{lauritzen2012,chen2017} will need periodic BCs
-\item will I have to transport a very smooth initial condition in order to see high-order convergence?
 \end{itemize}
 }
 \TODO{somewhere in chapter intro: We define \textit{high-order convergence} as any rate of convergence beyond second-order.}

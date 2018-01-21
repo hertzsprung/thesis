@@ -1,4 +1,4 @@
-\chapter{A new test case for exciting the Lorenz computational mode}
+\chapter{A new test case to excite the Lorenz computational mode}
 \label{ch:cp}
 
 \begin{highlights}
@@ -36,22 +36,9 @@ We compare test results between the fully compressible Euler model with a Lorenz
 
 After describing the generalised Charney--Phillips formulation in section~\ref{sec:cp:method}, we compare Lorenz and generalised Charney--Phillips model variants in section~\ref{sec:cp:schaerWaves} using the standard mountain waves test case specified by \citet{schaer2002}.
 Section~\ref{sec:cp:arakawaKonor} presents the new test case based on the original test specified by \citet{arakawa-konor1996}.
-We verify that the Lorenz computational mode is excited using the fully compressible Euler model with a Lorenz staggering, and we verify that the Charney--Phillips model variant is free of spurious grid-scale waves.  Using the generalised Charney--Phillips model variant, the sensitivity to mesh distortions is explored.  Finally, in section~\ref{sec:cp:advection}, we extract the transport scheme from the generalised Charney--Phillips model variant and examine numerical errors using transport tests on distorted and undistorted meshes.
+We verify that the Lorenz computational mode is excited using the fully compressible Euler model with a Lorenz staggering, and we verify that the Charney--Phillips model variant is free of spurious grid-scale waves.  Finally, we explore the sensitivity to mesh distortions using the generalised Charney--Phillips model variant.
 
 \input{cp/method.tex}
 \input{cp/schaerWaves.tex}
 \input{cp/arakawaKonor.tex}
-
-\section{Horizontal transport on distorted Charney--Phillips meshes}
-\label{sec:cp:advection}
-\TODO{
-\begin{itemize}
-	\item Test: horizontal advection; advectiveFoamF, advectionFoam with linear interp, advectionFoam with linearUpwind interp; measure l2 and linf errors (s.t. they can be compared with cell-centred, C-grid results); uniform and edgeGraded meshes
-	\item Plot: error fields, analytic+numerical contours of final solution, which schemes and which meshes? too many combinations to plot all of them
-	\item Plot: time-series of conservation, ExnerFoamH and ExnerFoamCP, uniform mesh, horizontal edgeGrading, vertical edgeGrading
-	\item Conclusion: advection is conservative on uniform meshes, non-conservative on non-uniform meshes
-	\item Conclusion: advectiveFoamF errors are comparable to advectionFoam with linear interpolation?
-	\item Conclusion: advectiveFoamF errors are worse than advectionFoam with linearUpwind interpolation?
-\end{itemize}
-}
 

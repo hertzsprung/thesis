@@ -1,36 +1,105 @@
-\section{A new test case to excite the Lorenz computational mode}
+\section{A two-dimensional standing waves test case}
 \label{sec:cp:arakawaKonor}
 
 \TODO{
 \begin{itemize}
-	\item Test: 2D vertical slice with initial $\theta$ perturbation, ExnerFoamH and ExnerFoamCP
-	\item Meshes: uniform, edgeGrading (sloping horizontal surfaces, sloping vertical faces)
-	\item Plot: horizontal edgeGrading, vertical edgeGrading
-	\item Plot: initial theta\_diff, final theta\_diff for ExnerFoamH and ExnerFoamCP
 	\item Plot: conservation of internal energy and total energy time series, ExnerFoamH and ExnerFoamCP, uniform mesh, horizontal edgeGrading, vertical edgeGrading
-	\item Conclusion: the test excites the Lorenz computational mode with ExnerFoamH
-	\item Conclusion: ExnerFoamCP eliminates computational mode
-	\item Conclusion: edgeGrading reveals lack of conservation... is it due to the advective form transport of $\theta$?  next test will try to provide an answer
+	\item Conclusion: edgeGrading reveals lack of conservation, due to advective form transport scheme?
 \end{itemize}
 }
 
+Having verified that the generalised Charney--Phillips formulation produces a reasonable mountain waves solution, we must also verify that the formulation is free from the Lorenz computational mode.
+Therefore, we design a new, two-dimensional standing waves test case, based on the original specification by \citet{arakawa-konor1996}.
+Results are compared between Lorenz and generalised Charney--Phillips model variants.
+To explore the applicability of the generalised Charney--Phillips formulation to arbitrary vertical meshes, we also compare results between distorted and undistorted meshes.
+
+The domain is \SI{30}{\kilo\meter} high and \SI{600}{\kilo\meter} wide between the outermost faces, and the mesh spacing is $\Delta x = \SI{10}{\kilo\meter}$ and $\Delta z = \SI{1}{\kilo\meter}$.  The lower boundary is flat with no mountain profile.
+The upper and lower boundaries are no normal flow, and the domain is horizontally periodic.
+
+The initial potential temperature profile is the sum of a stably-stratified profile and a grid-scale perturbation near the ground.
+The stably-stratified profile has $\theta(z = 0) = \SI{250}{\kelvin}$ and a constant static stability with Brunt-V\"ais\"al\"a frequency $N = \SI{0.02}{\per\second}$.
+The potential temperature perturbation $\theta'$ is defined as
+\begin{subequations}
+\label{eqn:cp:arakawaKonor:theta-perturbation}
+\begin{align}
+	\theta' &= \begin{cases} S \theta'_0 \sin(\frac{2 \pi x}{\lambda}) & \text{if } \Mag{x} \leq \frac{\lambda}{2} \\
+		0 & \text{otherwise} \\
+	\end{cases} \\
+\shortintertext{where}
+	S &= \begin{cases}
+		-1 & \text{if } \SI{1}{\kilo\meter} <= z < \SI{2}{\kilo\meter} \\
+		1 & \text{if } \SI{2}{\kilo\meter} <= z < \SI{3}{\kilo\meter} \\
+		0 & \text{otherwise} \\
+	\end{cases}
+\end{align}
+\end{subequations}
+with the maximum amplitude $\theta'_0 = \SI{0.5}{\kelvin}$ and the wavelength $\lambda = \SI{100}{\kilo\meter}$.
+Using a Lorenz staggering, this arrangement produces grid-scale waves in the central region of the domain in two adjacent layers near the ground (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:initial}).
+Using a generalised Charney--Phillips staggering, the perturbation is non-zero on the lowest two interior mesh layers above the lower boundary (not shown).
+The definition given by equation~\eqref{eqn:cp:arakawaKonor:theta-perturbation} ensures that the potential temperature perturbation integrated over the domain is zero.
+
+At the upper and lower boundaries, zero gradients are imposed on the potential temperature field for the Lorenz model variant; for the Charney--Phillips model variant, fixed potential temperature values are prescribed using equation~\ref{eqn:cp:schaerWaves:thermal-profile}.
+The Exner function of pressure is calculated so that it is in discrete hydrostatic balance.
+
+A sponge layer is added to the upper \SI{10}{\kilo\meter}.  The damping function is given by
+\begin{align}
+	\mu(z) &= \begin{cases}
+		\overline{\mu} \sin^2 \left( \frac{\pi}{2} \frac{z - z_B}{H - z_B} \right) & \text{if } z \geq z_B \\
+		0 & \text{otherwise} \\
+	\end{cases}
+\end{align}
+where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer and $H = \SI{30}{\kilo\meter}$ is the top of the domain.
+The sponge layer is only active on faces whose normal is vertical so that it damps vertical momentum only.
+
+
 \begin{figure}
 	\centering
-	\begin{subfigure}{0.38\textwidth}
-		\includegraphics{arakawaKonor-uniform-lorenz/0/theta_diff.pdf}
-		\caption{\TODO{initial}}
-		\label{fig:cp:arakawaKonor:theta_diff:initial}
+	\begin{subfigure}{\textwidth}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:uniform:initial}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:uniform:lorenz}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:uniform:cp}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}
+		\includegraphics{thesis/cp/arakawaKonor/fig-theta_diff.pdf}
 	\end{subfigure}
-	\begin{subfigure}{0.3\textwidth}
-		\includegraphics{arakawaKonor-uniform-lorenz/172800/theta_diff.pdf}
-		\caption{\TODO{Lorenz}}
-		\label{fig:cp:arakawaKonor:theta_diff:lorenz}
-	\end{subfigure}
-	\begin{subfigure}{0.3\textwidth}
-		\includegraphics{arakawaKonor-uniform-cp/172800/theta_diff.pdf}
-		\caption{\TODO{Charney--Phillips}}
-		\label{fig:cp:arakawaKonor:theta_diff:cp}
-	\end{subfigure}
-	\caption{\TODO{theta diffs}}
+%
+	\caption{Differences in potential temperature for the standing waves test case.
+	On the uniform mesh and the horizontally tilted mesh,
+	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:uniform:initial},
+	\subcaptionref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial})
+	a grid-scale potential temperature perturbation near the surface is added to an initial, stably-stratified profile;
+the difference between the initial, unperturbed, stably-stratified potential temperature profile and the final solution are shown using
+	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz},
+	\subcaptionref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz})
+	the Lorenz model variant, and 
+	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:uniform:cp},
+	\subcaptionref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp})
+	the generalised Charney--Phillips model variant.
+Only the lowest \SI{22}{\kilo\meter} in the central region of the domain is shown.  The entire domain is \SI{600}{\kilo\meter} wide and \SI{30}{\kilo\meter} high.
+	}
 	\label{fig:cp:arakawaKonor:theta_diff}
 \end{figure}
+
+The test is integrated forward by 48 hours using a time-step of $\Delta t = \SI{25}{\second}$.
+The initial potential temperature perturbation generates gravity waves that rapidly spread through the domain.
+In addition to these gravity waves, using the Lorenz model variant, a grid-scale standing wave slowly spreads vertically, occupying the entire depth of the atmosphere (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz}), and the initial perturbation, though weakened in amplitude, persists throughout the duration of the simulation.
+No standing waves are produced by the generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:cp}).
+Hence, we conclude that the grid-scale standing waves seen only in the Lorenz model variant are a spurious feature excited by the Lorenz computational mode.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{\textwidth}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:edgeGradedMesh:h}
+		\phantomsubcaption\label{fig:cp:arakawaKonor:edgeGradedMesh:v}
+		\includegraphics{thesis/cp/arakawaKonor/fig-meshes.pdf}
+	\end{subfigure}
+%
+	\caption{\TODO{horizontal and vertical edge graded meshes}}
+	\label{fig:cp:arakawaKonor:edgeGradedMesh}
+\end{figure}
+
+\TODO{define horizontal and vertical edge graded meshes}
+
+Using the horizontally tilted mesh, large-scale responses are produced by both the Lorenz model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}) and generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}), and these large-scale responses are very different from the small-scale gravity waves produced by models using the uniform mesh (figures~\ref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz} and \ref{fig:cp:arakawaKonor:theta_diff:uniform:cp}).
+Note that, since the initial potential temperature perturbation is defined in Cartesian coorinates and not relative to model layers, the initial potential temperature perturbation differs slightly between the uniform mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:initial}), horizontally tilted mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial}) and vertically tilted mesh (not shown).  \TODO{but we wouldn't expect this small change to produce such wildly different results}
