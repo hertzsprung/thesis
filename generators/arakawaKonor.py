@@ -17,7 +17,7 @@ class ArakawaKonor:
             case=uniformLorenzCase,
             time=0,
             data=['0/theta_diff'],
-            colorBar='legends/theta_diff.eps')
+            colorBar='legends/theta_diffW_theta_diff.eps')
 
         self.uniformLorenzThetaDiff = GmtPlot(
             'arakawaKonor-uniform-lorenz-theta_diff',
