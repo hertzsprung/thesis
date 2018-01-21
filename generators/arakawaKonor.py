@@ -1,4 +1,4 @@
-from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, PDFLaTeXFigure
+from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, Gnuplot, PDFLaTeXFigure
 
 import os
 
@@ -75,6 +75,19 @@ class ArakawaKonor:
                            self.verticalGradedMesh.outputs()
         )
 
+        self.conservation = Gnuplot(
+                'arakawaKonor-conservation',
+                output=os.path.join('thesis/cp/arakawaKonor/conservation'),
+                plot=os.path.join('src/thesis/cp/arakawaKonor/conservation.plt'),
+                data=[
+                    '$atmostests_builddir/arakawaKonor-uniform-lorenz/energy.dat',
+                    '$atmostests_builddir/arakawaKonor-uniform-cp/energy.dat',
+                    '$atmostests_builddir/arakawaKonor-horizontalGrading-lorenz/energy.dat',
+                    '$atmostests_builddir/arakawaKonor-horizontalGrading-cp/energy.dat',
+                    '$atmostests_builddir/arakawaKonor-verticalGrading-lorenz/energy.dat',
+                    '$atmostests_builddir/arakawaKonor-verticalGrading-cp/energy.dat'
+        ])
+
     def copyCases(self):
         self.uniformLorenz = GmtPlotCopyCase(
                 'arakawaKonor-uniform-lorenz',
@@ -134,7 +147,8 @@ class ArakawaKonor:
 
     def outputs(self):
         return self.thetaDiffFigure.outputs() + \
-               self.meshesFigure.outputs()
+               self.meshesFigure.outputs() + \
+               self.conservation.outputs()
 
     def addTo(self, build):
         build.add(self.uniformLorenz)
@@ -154,3 +168,5 @@ class ArakawaKonor:
         build.add(self.horizontalGradedMesh)
         build.add(self.verticalGradedMesh)
         build.add(self.meshesFigure)
+
+        build.add(self.conservation)

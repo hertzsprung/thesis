@@ -1,13 +1,6 @@
 \section{A two-dimensional standing waves test case}
 \label{sec:cp:arakawaKonor}
 
-\TODO{
-\begin{itemize}
-	\item Plot: conservation of internal energy and total energy time series, ExnerFoamH and ExnerFoamCP, uniform mesh, horizontal edgeGrading, vertical edgeGrading
-	\item Conclusion: edgeGrading reveals lack of conservation, due to advective form transport scheme?
-\end{itemize}
-}
-
 Having verified that the generalised Charney--Phillips formulation produces a reasonable mountain waves solution, we must also verify that the formulation is free from the Lorenz computational mode.
 Therefore, we design a new, two-dimensional standing waves test case, based on the original specification by \citet{arakawa-konor1996}.
 Results are compared between Lorenz and generalised Charney--Phillips model variants.
@@ -101,5 +94,17 @@ Hence, we conclude that the grid-scale standing waves seen only in the Lorenz mo
 
 \TODO{define horizontal and vertical edge graded meshes}
 
-Using the horizontally tilted mesh, large-scale responses are produced by both the Lorenz model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}) and generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}), and these large-scale responses are very different from the small-scale gravity waves produced by models using the uniform mesh (figures~\ref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz} and \ref{fig:cp:arakawaKonor:theta_diff:uniform:cp}).
+Using the horizontally tilted mesh, large-scale responses are produced by both the Lorenz model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}) and generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}), and these large-scale responses are very different from the small-scale gravity waves produced by the Lorenz and generalised Charney--Phillips models using the uniform mesh (figures~\ref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz} and \ref{fig:cp:arakawaKonor:theta_diff:uniform:cp} respectively).
 Note that, since the initial potential temperature perturbation is defined in Cartesian coorinates and not relative to model layers, the initial potential temperature perturbation differs slightly between the uniform mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:initial}), horizontally tilted mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial}) and vertically tilted mesh (not shown).  \TODO{but we wouldn't expect this small change to produce such wildly different results}
+
+\begin{figure}
+	\centering
+	\input{cp/arakawaKonor/conservation}
+	%
+	\caption{\TODO{conservation}}
+	\label{fig:cp:arakawaKonor:conservation}
+\end{figure}
+
+\TODO{
+Conclusion: edgeGrading reveals lack of conservation, due to advective form transport scheme?
+}
