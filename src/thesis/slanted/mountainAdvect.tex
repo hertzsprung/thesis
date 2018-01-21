@@ -137,7 +137,7 @@ On basic terrain-following meshes, the maximum Courant number tends towards abou
 No such trend is found on cut cell or slanted cell meshes.
 Cut cell meshes permit the largest maximum Courant numbers of around \num{3}, but the largest stable time-steps on cut cell meshes are still smaller than corresponding time-steps on basic terrain-following and slanted cell meshes.
 
-This thesis focuses on the spatial discretisation of the cubicFit scheme, but the stability limit depends also upon the choice of time-stepping.  We have not calculated a theoretical Courant number limit, although such an analysis should be possible using the techniques in \citep{baldauf2008}.
+This thesis focuses on the spatial discretisation of the cubicFit scheme, but the stability limit depends also upon the choice of time-stepping.  We have not calculated a theoretical Courant number limit, although such an analysis should be possible using the techniques of \citet{baldauf2008}.
 
 This new test case demonstrates that the cubicFit transport scheme is more accurate than the linearUpwind scheme on all meshes, and only the cubicFit scheme can achieve stable results on slanted cell meshes with very steep slopes.
 The slanted cell method exhibits a time-step constraint that scales linearly with mesh spacing, and slanted cells avoid severe time-step constraints associated with arbitrarily small cut cells.
