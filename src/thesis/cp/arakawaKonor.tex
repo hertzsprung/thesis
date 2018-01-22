@@ -100,16 +100,27 @@ For the left-hand block of the horizontally tilted mesh, horizontal surfaces are
 The vertically tilted mesh is constructed a similar manner, with a ratio of minimum and maximum horizontal edge lengths at $z = \SI{0}{\kilo\meter}$ of \TODO{1:1.1}, and a ratio at $z = \SI{30}{\kilo\meter}$ of \TODO{1.1:1}.
 
 Using the horizontally tilted mesh, large-scale responses are produced by both the Lorenz model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}) and generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}), and these large-scale responses are very different from the small-scale gravity waves produced by the Lorenz and generalised Charney--Phillips models using the uniform mesh (figures~\ref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz} and \ref{fig:cp:arakawaKonor:theta_diff:uniform:cp} respectively).
-Note that, since the initial potential temperature perturbation is defined in Cartesian coorinates and not relative to model layers, the initial potential temperature perturbation differs slightly between the uniform mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:initial}), horizontally tilted mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial}) and vertically tilted mesh (not shown).  \TODO{but we wouldn't expect this small change to produce such wildly different results}
+Using the Lorenz model variant and the horizontally tilted mesh, a vertical tripole structure is seen in the final potential temperature field, with some grid-scale features visible near the centre of the domain throughout the depth of the atmosphere (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}).
+A similar solution is produced by the Lorenz model variant using the vertically tilted mesh (not shown).
+In contrast to the solutions produced by the Lorenz model variant, using the generalised Charney--Phillips model variant and the horizontally tilted mesh produces that is everywhere too warm (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}).
+Using the generalised Charney--Phillips model variant and the vertically tilted mesh, the atmosphere warms rapidly before the model becomes unstable after about \num{2.5} hours.
+Note that, since the initial potential temperature perturbation is defined in Cartesian coorinates and not relative to model layers, the discrete initial potential temperature perturbation differs slightly between the uniform mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:initial}), horizontally tilted mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial}) and vertically tilted mesh (not shown).
+However, we do not expect this slight initial difference to result in such dramatically different solutions.
 
 \begin{figure}
 	\centering
 	\input{cp/arakawaKonor/conservation}
 	%
-	\caption{\TODO{conservation}}
+	\caption{Total normalised energy changes for the standing waves test case using Lorenz and generalised Charney--Phillips model variants on a uniform mesh, a horizontally tilted mesh and a vertical tilted mesh.
+	Energy changes are negligible using the Lorenz model variant on all meshes, and using the generalised Charney--Phillips model variant on the uniform mesh.}
 	\label{fig:cp:arakawaKonor:conservation}
 \end{figure}
 
-\TODO{
-Conclusion: edgeGrading reveals lack of conservation, due to advective form transport scheme?
-}
+To better examine the temperature errors produced by the generalised Charney--Phillips model variant, we calculate total energy change over time, normalised by the initial total energy, where the total energy is the sum of the kinetic energy, potential energy and internal energy (figure~\ref{fig:cp:arakawaKonor:conservation}).
+Energy changes are negligible using the Lorenz model variant on all meshes, and using the generalised Charney--Phillips model variant on the uniform mesh.
+Using the generalised Charney--Phillips model and the horizontally tilted mesh, total energy increases linearly with time, which corresponds with the spurious warm atmosphere seen in figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}.
+Using the vertically tilted mesh, a rapid increase in total energy is observed at about $t=2.5$ hours, just before the model becomes unstable.
+Since the generalised Charney--Phillips model variant transports potential temperature using an advective-form scheme and not a flux-form scheme, it is likely that the observed potential temperature errors are due to a lack of conservation on distorted meshes.
+
+In summary, the new standing waves test case has been used to clearly excite the Lorenz computational mode, and we have demonstrated that the generalised Charney--Phillips model variant is free from the Lorenz computational mode on a uniform mesh.
+The generalised Charney--Phillips model variant suffers from inaccurate or unstable solutions on distorted meshes, but we expect that a more accurate transport scheme would avoid such a severe lack of conservation and improve solutions on distorted meshes.
