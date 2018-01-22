@@ -88,11 +88,16 @@ Hence, we conclude that the grid-scale standing waves seen only in the Lorenz mo
 		\includegraphics{thesis/cp/arakawaKonor/fig-meshes.pdf}
 	\end{subfigure}
 %
-	\caption{\TODO{horizontal and vertical edge graded meshes}}
+	\caption{Distorted meshes used for the standing waves test with
+	(\subcaptionref{fig:cp:arakawaKonor:edgeGradedMesh:h}) horizontally tilted and
+	(\subcaptionref{fig:cp:arakawaKonor:edgeGradedMesh:v}) vertically tilted surfaces.}
 	\label{fig:cp:arakawaKonor:edgeGradedMesh}
 \end{figure}
 
-\TODO{define horizontal and vertical edge graded meshes}
+To assess the suitability of the generalised Charney--Phillips formulation for arbitrary vertical meshes, we perform the same standing waves test case on rectangular domains with horizontally tilted surfaces (figure~\ref{fig:cp:arakawaKonor:edgeGradedMesh:v}) and vertically tilted surfaces (figure~\ref{fig:cp:arakawaKonor:edgeGradedMesh:h}).
+To allow for periodic lateral boundaries, each mesh is split into left and right blocks of equal size, with the right block mirroring the left.
+For the left-hand block of the horizontally tilted mesh, horizontal surfaces are distorted such that the ratio of minumum and maximum vertical edge lengths at $x = \SI{-300}{\kilo\meter}$ is \TODO{1:4}, and the ratio at $x = \SI{0}{\kilo\meter}$ is \TODO{4:1}.
+The vertically tilted mesh is constructed a similar manner, with a ratio of minimum and maximum horizontal edge lengths at $z = \SI{0}{\kilo\meter}$ of \TODO{1:1.1}, and a ratio at $z = \SI{30}{\kilo\meter}$ of \TODO{1.1:1}.
 
 Using the horizontally tilted mesh, large-scale responses are produced by both the Lorenz model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}) and generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}), and these large-scale responses are very different from the small-scale gravity waves produced by the Lorenz and generalised Charney--Phillips models using the uniform mesh (figures~\ref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz} and \ref{fig:cp:arakawaKonor:theta_diff:uniform:cp} respectively).
 Note that, since the initial potential temperature perturbation is defined in Cartesian coorinates and not relative to model layers, the initial potential temperature perturbation differs slightly between the uniform mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:uniform:initial}), horizontally tilted mesh (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial}) and vertically tilted mesh (not shown).  \TODO{but we wouldn't expect this small change to produce such wildly different results}
