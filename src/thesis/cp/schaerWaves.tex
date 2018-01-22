@@ -7,7 +7,7 @@ As specified by \citet{schaer2002}, the test prescribes flow over idealised terr
 We use the test to compare results from the two finite volume model variants with Lorenz and generalised Charney--Phillips staggerings against the reference solution from \citet{melvin2010}.
 
 Following \citet{melvin2010}, the domain is \SI{300}{\kilo\meter} wide and \SI{30}{\kilo\meter} high, and the mesh spacing is $\Delta x = \SI{500}{\meter}$ and $\Delta z^\star = \SI{300}{\meter}$.
-The mountain profile has the same form as equation~\eqref{eqn:resting:mountain}, but the mountain waves test has a lower peak mountain height of $h_0 = \SI{250}{\meter}$.  As in the resting atmosphere test, $a = \SI{5}{\kilo\meter}$ is the mountain half-width and $\lambda = \SI{4}{\kilo\meter}$ is the wavelength.
+The mountain profile has the same form as equation~\eqref{eqn:resting:mountain}, but the mountain waves test has a lower peak mountain height of $h_0 = \SI{250}{\meter}$.  As in the resting atmosphere test (section~\ref{sec:slanted:resting}), $a = \SI{5}{\kilo\meter}$ is the mountain half-width and $\lambda = \SI{4}{\kilo\meter}$ is the wavelength.
 
 A uniform horizontal wind $(u, w) = (10, 0)\:\si{\meter\per\second}$ is prescribed in the interior domain and at the inlet boundary.  No normal flow is imposed at the top and bottom boundaries and the velocity field has a zero gradient outlet boundary condition.
 
@@ -79,20 +79,20 @@ Only the lowest \SI{12}{\kilo\meter} in the central region of the domain is show
 \end{figure}
 
 The test is integrated forward by five hours using a time-step of \SI{8}{\second}.  At the end of the simulation, gravity waves are apparent in the contours of vertical velocity (figure~\ref{fig:cp:schaerWaves:w}).
-Results are presented for the finite volume model with a Lorenz staggering, with momentum and potential temperature being transported using the linearUpwind scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}) and the cubicFit scheme (figure~\ref{fig:cp:schaerWaves:w:cubicFit}), and for the finite volume model with generalised Charney--Phillips staggering (figure~\ref{fig:cp:schaerWaves:w:cp}), and all are in general agreement with the reference solution from \citet{melvin2010}, reproduced in figure~\ref{fig:cp:schaerWaves:w:melvin}.
+Results are presented for the Lorenz model variant, with momentum and potential temperature being transported using the linearUpwind scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}) and the cubicFit scheme (figure~\ref{fig:cp:schaerWaves:w:cubicFit}), and for the generalised Charney--Phillips model variant (figure~\ref{fig:cp:schaerWaves:w:cp}), and all are in general agreement with the reference solution from \citet{melvin2010}, reproduced in figure~\ref{fig:cp:schaerWaves:w:melvin}.
 All four results presented in figure~\ref{fig:cp:schaerWaves:w} were all obtained using the same BTF mesh.
 
-Spurious distortions are visible in the vertical velocity contours using the model variant with a Lorenz staggering and the linearUpwind transport scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}), and similar error structures have been found in previous studies and were attributed to numerical errors associated with BTF mesh distortions \citep{schaer2002,klemp2003}.
-Spurious gravity wave distortions can be avoided by switching from a BTF mesh to a slanted cell mesh or cut cell mesh (results not shown).
-Spurious gravity wave distortions can also be avoided by transporting momentum and potential temperature using the cubicFit scheme (figure~\ref{fig:cp:schaerWaves:w:cubicFit}).
+Spurious distortions are visible in the vertical velocity contours using the Lorenz model variant and the linearUpwind transport scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}), and similar error structures have been found in previous studies that were attributed to numerical errors associated with BTF mesh distortions \citep{schaer2002,klemp2003}.
+In agreement with these previous findings, we find that spurious gravity wave distortions can be avoided by switching from a BTF mesh to a slanted cell mesh or cut cell mesh (results not shown).
+We also find that spurious gravity wave distortions can be avoided by transporting momentum and potential temperature on a BTF mesh using the cubicFit scheme (figure~\ref{fig:cp:schaerWaves:w:cubicFit}).
 Avoiding such spurious gravity waves distortions using either approach produces solutions that closely match the reference solution (figure~\ref{fig:cp:schaerWaves:w:melvin}).
 Given these results, we can attribute spurious gravity wave distortions to transport scheme errors associated with flow that is misaligned with mesh layers.
 Unlike the results obtained by \citet{shaw-weller2016} that used an older formulation of the cubicFit scheme, potential temperature errors are negligible for all types of mesh when using the most recent formulation of the cubicFit scheme documented in chapter~\ref{ch:cubicFit}.
 
 As seen in figure~\ref{fig:cp:schaerWaves:w:cp}, the generalised Charney--Phillips model variant produces gravity waves with spurious distorted structures similar to those obtained using the Lorenz model variant with the linearUpwind scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}).
-Furthermore, as evidenced by the density of vertical velocity contour lines in figure~\ref{fig:cp:schaerWaves:w:cp}, the generalised Charney--Phillips model variant produces gravity wave amplitudes that are too large compared to the reference solution.
+In addition, as evidenced by the density of vertical velocity contour lines in figure~\ref{fig:cp:schaerWaves:w:cp}, the generalised Charney--Phillips model variant produces gravity wave amplitudes that are too large compared to the reference solution.
 
 In summary, accurate gravity wave solutions were obtained using the Lorenz model variant with cut cell meshes and slanted cell meshes, and accurate solutions were also obtained by transporting momentum and potential temperature on the BTF mesh using the cubicFit scheme.
-A less accurate solution was obtained on the BTF mesh using the generalised Charney--Phillips model variant, but all results were in good general agreement with the reference solution from \citet{melvin2010}.
-Knowing that an improved transport scheme was responsible for the improved gravity wave solution using the Lorenz model variant, we might conjecture that the generalised Charney--Phillips model variant produced less accurate results because the model uses a transport scheme that is insufficiently accurate.
+A less accurate solution was obtained on the BTF mesh using the generalised Charney--Phillips model variant, but all results were in general agreement with the reference solution from \citet{melvin2010}.
+Knowing that an improved transport scheme was responsible for the improved gravity wave solution using the Lorenz model variant, we conjecture that the generalised Charney--Phillips model variant produces less accurate results because the model uses a transport scheme that is insufficiently accurate.
 In the next section we perform a further comparison between Lorenz and generalised Charney--Phillips model variants using a new test case to excite the Lorenz computational mode.
