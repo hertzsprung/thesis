@@ -104,9 +104,10 @@ Error norms are calculated by subtracting the analytic solution from the numeric
 where $\phi$ is the numerical value, $\phi_T$ is the analytic value, $\sum_c$ denotes a summation over all cells $c$ in the domain, and $\max_c$ denotes a maximum value of any cell.
 The linearUpwind and cubicFit schemes are second-order convergent in the $\ell_2$ norm (figure~\ref{fig:cubicFit:schaerAdvect:convergence:l2}) and $\ell_\infty$ norm (figure~\ref{fig:cubicFit:schaerAdvect:convergence}) at all but the coarsest mesh spacings where errors are saturated for both schemes.
 
+We can estimate the computational cost of the cubicFit scheme relative to the linearUpwind scheme by considering the mesh spacing necessary for a given $\ell_2$ error, and the size of the stencil used by each scheme.
 The cubicFit scheme achieves a given $\ell_2$ error using a mesh spacing that is almost twice as coarse as that needed by the linearUpwind scheme.  Doubling the mesh spacing results in a coarser mesh with four times fewer cells because the $\Delta x \mathbin{:} \Delta z$ aspect ratio is fixed.
 Recall that the stencil for the cubicFit scheme has about twice as many cells as the stencil for the linearUpwind scheme.
-Hence, for a given $\ell_2$ error, the computational cost during integration of the cubicFit scheme is about half the computational cost of the linearUpwind scheme.
+Hence, for a given $\ell_2$ error, the computational cost of the cubicFit scheme per time-stage is about half the computational cost of the linearUpwind scheme.
 
 \begin{figure}
 	\centering

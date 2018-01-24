@@ -21,3 +21,37 @@ The Charney--Phillips staggering is unsusceptible to such errors, but we are not
 By allowing for any mesh structure, a generalised Charney--Phillips formulation should be suitable for any type of mesh, including conforming and non-conforming mesh refinement, terrain-following meshes, cut cell meshes and slanted cell meshes.
 
 \TODO{document formulation}
+
+\begin{figure}
+	\centering
+	%\input{cp-variables}
+	\caption{A quadrilateral cell with the prognostic thermodynamic variable $b_f$ stored at face centres marked by open circles.
+	$b_f$ is calculated from the potential temperature $\theta_f$ such that $b_f = \theta_f \unitg \cdot \unitn_f$ where $\unitn_f$ is the unit vector outward normal to face $f$, and $\unitg$ is the unit vector of gravitational acceleration.
+	The potential temperature at the cell centre, $\theta_C$, is reconstructed from surrounding values of $b_f$ using equation~\eqref{eqn:cp:reconstruct}.}
+	\label{fig:cp:staggering}
+\end{figure}
+
+The prognostic thermodynamic variable $b_f$ is stored at all cell faces such that $b_f = \theta_f \unitg \cdot \unitn_f$ where $f$ is a face, $\theta_f$ is the potential temperature at the face, $\unitg$ is the unit vector of gravitational acceleration and $\unitn_f$ is the unit vector that is outward normal to the face.
+This arrangement is illustrated in figure~\ref{fig:cp:staggering}.
+To transport the thermal field, first, potential temperature is transported in advective form,
+\begin{align}
+	\theta_f^{n+1} &= \theta_f^{\ell} - \Delta t \uf \cdot \left( \nabla_c \theta_f \right)_F
+\end{align}
+where $\theta_f^{n+1}$ is the value of $\theta_f$ at the new time-step, $\theta_f^\ell$ is the lagged value from the previous solver iteration, $\uf$ is the wind, $\left( \cdot \right)_F$ denotes an interpolation from cell centres to faces, and $\nabla_c$ denotes a cell centre gradient \citep{weller-shahrokhi2014}.
+Next, $b_f$ is calculated such that $b_f = \theta_f \unitg \cdot \unitn_f$.  
+On a Cartesian mesh with no diagonal faces, $b_f$ is zero for entirely vertical faces and $b_f = \theta_f$ for entirely horizontal faces.
+
+Where potential temperature is required at the cell centre, it is reconstructed from bordering faces,
+\begin{align}
+	\theta_C &= \unitg \cdot \left( \sum_{f \in c} \unitn_f \Sf \right)^{-1} \cdot \sum_{f \in c} \Sf b_f \label{eqn:cp:reconstruct}
+\end{align}
+where $\theta_C$ is the reconstructed potential temperature.  On a Cartesian mesh with no diagonal faces, $\theta_C$ is simply a linear interpolation from the face values immediately above and below the cell centre.
+
+Finally, $\theta_f$ is recalculated from $b_f$ and $\theta_C$,
+\begin{align}
+	\theta_f &= \Mag{ \unitg \cdot \unitn_f \theta_f} + \left( 1 - \Mag{\unitg \cdot \unitn_f } \right) \left( \theta_C \right)_F \text{.}
+\end{align}
+This ensures that values of $\theta_f$ on vertical faces is calculated from nearby $b_f$ values and is not retained across time-steps.
+
+% explicit gravity waves
+% any other changes from ExnerFoamH?

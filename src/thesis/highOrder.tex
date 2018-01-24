@@ -26,12 +26,12 @@ Since it has much in common with the cubicFit transport scheme, we name this hig
 
 Integrating the flux-form transport equation \eqref{eqn:advection} over a volume $\vol$ and using Gauss's divergence theorem,
 \begin{align}
-	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \int_{\partial \vol} \phi \vect{u} \cdot \nvect dA \label{eqn:highOrder:integrated-advection}
+	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \int_{\partial \vol} \phi \vect{u} \cdot \unitn dA \label{eqn:highOrder:integrated-advection}
 \end{align}
-where $\nvect$ is the outward unit normal vector.
+where $\unitn$ is the outward unit normal vector.
 For a polygonal cell with faces $f$ equation~\eqref{eqn:highOrder:integrated-advection} becomes
 \begin{align}
-	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \sum_f \int_{\area_f} \phi \vect{u} \cdot \nvect d\area_f \label{eqn:highOrder:advection}
+	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \sum_f \int_{\area_f} \phi \vect{u} \cdot \unitn d\area_f \label{eqn:highOrder:advection}
 \end{align}
 where $\area_f$ is the area of face $f$.
 If $\phi$ is a sufficiently smooth field then it can be approximated to $P$-order accuracy by replacing $\phi$ with a polynomial interpolant $\psi$,
@@ -50,7 +50,7 @@ As an example, the exponents $\vect{p}$ in two dimensions $(x, y)$ with $\Mag{\v
 \end{align}
 Replacing $\phi$ in \eqref{eqn:highOrder:advection} with $\psi$ in \eqref{eqn:highOrder:interpolant} we obtain an expression for the face flux,
 \begin{align}
-	\int_\area \phi \vect{u} \cdot \nvect d\area = \vect{u} \cdot \nvect \sum_{\Mag{\vect{p}} \leq P} a_{\vect{p}} \moment_\area^\vect{p} \label{eqn:highOrder:face-flux}
+	\int_\area \phi \vect{u} \cdot \unitn d\area = \vect{u} \cdot \unitn \sum_{\Mag{\vect{p}} \leq P} a_{\vect{p}} \moment_\area^\vect{p} \label{eqn:highOrder:face-flux}
 \end{align}
 where $\moment_\area^\vect{p} = \int_\area \left( \vect{x} - \vect{x}_0 \right)^\vect{p} d \area$ is the $\vect{p}$-th moment of area $\area$.
 Therefore, the face flux can be calculated by finding the the polynomial coefficients $a_\vect{p}$.
