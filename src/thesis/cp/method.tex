@@ -20,11 +20,12 @@ According to \citet{thuburn-woolings2005}, the vertical discretisation used by \
 The Charney--Phillips staggering is unsusceptible to such errors, but we are not aware of any existing literature that combines mesh refinement with a Charney--Phillips staggering.
 By allowing for any mesh structure, a generalised Charney--Phillips formulation should be suitable for any type of mesh, including conforming and non-conforming mesh refinement, terrain-following meshes, cut cell meshes and slanted cell meshes.
 
+\subsection{Generalised Charney--Phillips formulation}
 \TODO{document formulation}
 
 \begin{figure}
 	\centering
-	%\input{cp-variables}
+	\input{cp/variables}
 	\caption{A quadrilateral cell with the prognostic thermodynamic variable $b_f$ stored at face centres marked by open circles.
 	$b_f$ is calculated from the potential temperature $\theta_f$ such that $b_f = \theta_f \unitg \cdot \unitn_f$ where $\unitn_f$ is the unit vector outward normal to face $f$, and $\unitg$ is the unit vector of gravitational acceleration.
 	The potential temperature at the cell centre, $\theta_C$, is reconstructed from surrounding values of $b_f$ using equation~\eqref{eqn:cp:reconstruct}.}

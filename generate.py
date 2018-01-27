@@ -67,6 +67,7 @@ class Thesis:
                         'src/thesis/slanted/resting.tex',
                         'src/thesis/cp.tex',
                         'src/thesis/cp/method.tex',
+                        'src/thesis/cp/variables.tex',
                         'src/thesis/cp/schaerWaves.tex',
                         'src/thesis/cp/arakawaKonor.tex',
                         'src/thesis/discussion.tex']
