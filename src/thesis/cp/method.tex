@@ -21,7 +21,6 @@ The Charney--Phillips staggering is unsusceptible to such errors, but we are not
 By allowing for any mesh structure, a generalised Charney--Phillips formulation should be suitable for any type of mesh, including conforming and non-conforming mesh refinement, terrain-following meshes, cut cell meshes and slanted cell meshes.
 
 \subsection{Generalised Charney--Phillips formulation}
-\TODO{document formulation}
 
 \begin{figure}
 	\centering
@@ -32,7 +31,8 @@ By allowing for any mesh structure, a generalised Charney--Phillips formulation 
 	\label{fig:cp:staggering}
 \end{figure}
 
-The prognostic thermodynamic variable $b_f$ is stored at all cell faces such that $b_f = \theta_f \unitg \cdot \unitn_f$ where $f$ is a face, $\theta_f$ is the potential temperature at the face, $\unitg$ is the unit vector of gravitational acceleration and $\unitn_f$ is the unit vector that is outward normal to the face.
+The generalised Charney--Phillips model is a variant of the fully compressible Euler model with a Lorenz staggering, as documented by \citet{weller-shahrokhi2014} and summarised in section~\ref{sec:slanted:exnerFoamH}.
+The primary difference between the models is their treatment of the prognostic thermodynamic variable: the generalised Charney--Phillips formulation stores the prognostic thermodynamic variable $b_f$ at all cell faces such that $b_f = \theta_f \unitg \cdot \unitn_f$ where $f$ is a face, $\theta_f$ is the potential temperature at the face, $\unitg$ is the unit vector of gravitational acceleration and $\unitn_f$ is the unit vector that is outward normal to the face.
 This arrangement is illustrated in figure~\ref{fig:cp:staggering}.
 To transport the thermal field, first, potential temperature is transported in advective form,
 \begin{align}
@@ -54,5 +54,5 @@ Finally, $\theta_f$ is recalculated from $b_f$ and $\theta_C$,
 \end{align}
 This ensures that values of $\theta_f$ on vertical faces is calculated from nearby $b_f$ values and is not retained across time-steps.
 
-% explicit gravity waves
-% any other changes from ExnerFoamH?
+The generalised Charney--Phillips model variant makes two other modifications to the Lorenz model variant in order to simplify implementation: first, gravity waves are treated explicitly and, second, first-order Euler semi-implicit time-stepping is used with deferred correction of explicit terms.
+
