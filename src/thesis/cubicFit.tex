@@ -52,6 +52,7 @@ This chapter presents a new multidimensional method-of-lines scheme, `cubicFit',
 The implementation uses stability conditions derived from a von Neumann stability analysis to select appropriate polynomial fits for stencils in highly-distorted mesh regions.
 This stabilisation procedure has similarities to the Multidimensional Optimal Order Detection (MOOD) method \citep{clain2011,diot2013}.
 However, MOOD is an \textit{a posteriori} method that detects discontinuities in the solution.  In contrast, the cubicFit stabilisation procedure is an \textit{a priori} method that depends upon the mesh geometry only, and reconstruction weights can be precomputed without knowledge of the velocity field or tracer field.
+\TODO{another alternative might be matrix regularisation... a regularised moving least squares technique suitable for poor-quality meshes is formulated by \citet{wang2018}, but hasn't been applied to a PDE, just used for surface reconstruction?}
 Hence, the computational cost of the cubicFit scheme is lower than most swept-area schemes that require a matrix-vector multiply per face per time-stage \TODO{how big is the matrix?}.  Instead, the computational cost is more comparable to dimensionally-split schemes, with the cubicFit scheme requiring only $n$ multiplies per face per time-stage where $n$ is the size of the stencil.
 
 The remainder of this chapter is organised as follows.

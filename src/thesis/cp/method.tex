@@ -1,6 +1,8 @@
 \section{Generalising the Charney–Phillips staggering for arbitrary meshes}
 \label{sec:cp:method}
 
+\TODO{could move this additional introductory material into the chapter introduction}
+
 The generalisation of the Lorenz staggering for arbitrary meshes is straightforward \citep{weller-shahrokhi2014} but this is not true for the Charney--Phillips staggering, which is only suitable for structured meshes with cells stacked in columns.
 On a finite volume mesh, variables are ordinarily placed at cell centres or cell faces.
 In the Charney--Phillips staggering, the thermodynamic variable is placed at only those cell faces that lie on the vertical coordinate surfaces, and vertically-oriented faces have no thermodynamic information.
@@ -11,7 +13,7 @@ Controlling the vertical mesh spacing near the ground is straightforward using t
 With other mesh types such as cut cell meshes and slanted cell meshes, controlling the vertical mesh spacing is less straightforward because mountain peaks interrupt the rows of cells nearest sea level.
 On such meshes, if fine vertical mesh spacing was used near sea level and coarse mesh spacing used aloft, then the mesh above a high-altitude mountain range would have coarse spacing and boundary layer processes would be poorly resolved.
 
-Mesh refinement could help to better resolve the boundary layer above high-altitude mountain ranges represented by cut cell meshes and slanted cell meshes.
+\TODO{this sentence doesn't belong here, need to reorganise a bit... Mesh refinement could help to better resolve the boundary layer above high-altitude mountain ranges represented by cut cell meshes and slanted cell meshes.}
 Mesh refinement has received growing attention in atmospheric modelling literature because it could enable atmospheric models to produce more accurate forecasts with less computation \citep{behrens2006,jablonowski2009}.
 While much of the literature concentrates on horizontal mesh refinement, some investigations have been made into vertical refinement on two-dimensional $x$--$z$ Cartesian planes:
 \citet{mueller2013} have used conforming refinement of triangular meshes for simulating the standard rising bubble and density current test cases, and \citet{yamazaki-satomura2012} have used nonconforming block-refinement to better resolve the atmosphere immediately above idealised mountains.
@@ -34,15 +36,15 @@ By allowing for any mesh structure, a generalised Charney--Phillips formulation 
 The generalised Charney--Phillips model is a variant of the fully compressible Euler model with a Lorenz staggering, as documented by \citet{weller-shahrokhi2014} and summarised in section~\ref{sec:slanted:exnerFoamH}.
 The primary difference between the models is their treatment of the prognostic thermodynamic variable: the generalised Charney--Phillips formulation stores the prognostic thermodynamic variable $b_f$ at all cell faces such that $b_f = \theta_f \unitg \cdot \unitn_f$ where $f$ is a face, $\theta_f$ is the potential temperature at the face, $\unitg$ is the unit vector of gravitational acceleration and $\unitn_f$ is the unit vector that is outward normal to the face.
 This arrangement is illustrated in figure~\ref{fig:cp:staggering}.
-To transport the thermal field, first, potential temperature is transported in advective form,
+To transport the thermal field, first, potential temperature is transported in advective form using first-order time-stepping,
 \begin{align}
-	\theta_f^{n+1} &= \theta_f^{\ell} - \Delta t \uf \cdot \left( \nabla_c \theta_f \right)_F
+	\theta_f^{n+1} &= \theta_f^n - \Delta t \uf \cdot \left( \nabla_c \theta_f^{\ell} \right)_F \label{eqn:cp:advection}
 \end{align}
-where $\theta_f^{n+1}$ is the value of $\theta_f$ at the new time-step, $\theta_f^\ell$ is the lagged value from the previous solver iteration, $\uf$ is the wind, $\left( \cdot \right)_F$ denotes an interpolation from cell centres to faces, and $\nabla_c$ denotes a cell centre gradient \citep{weller-shahrokhi2014}.
+where $\theta_f^{n+1}$ is the value of $\theta_f$ at the new time-step, $\theta_f^\ell$ is the lagged value from the previous time-stepping iteration, $\uf$ is the wind, $\left( \cdot \right)_F$ denotes an interpolation from cell centres to faces, and $\nabla_c$ denotes a cell centre gradient \citep{weller-shahrokhi2014}.
 Next, $b_f$ is calculated such that $b_f = \theta_f \unitg \cdot \unitn_f$.  
 On a Cartesian mesh with no diagonal faces, $b_f$ is zero for entirely vertical faces and $b_f = \theta_f$ for entirely horizontal faces.
 
-Where potential temperature is required at the cell centre, it is reconstructed from bordering faces,
+Potential temperature at the cell centre is reconstructed from bordering faces,
 \begin{align}
 	\theta_C &= \unitg \cdot \left( \sum_{f \in c} \unitn_f \Sf \right)^{-1} \cdot \sum_{f \in c} \Sf b_f \label{eqn:cp:reconstruct}
 \end{align}
@@ -54,5 +56,5 @@ Finally, $\theta_f$ is recalculated from $b_f$ and $\theta_C$,
 \end{align}
 This ensures that values of $\theta_f$ on vertical faces is calculated from nearby $b_f$ values and is not retained across time-steps.
 
-The generalised Charney--Phillips model variant makes two other modifications to the Lorenz model variant in order to simplify implementation: first, gravity waves are treated explicitly and, second, first-order Euler semi-implicit time-stepping is used with deferred correction of explicit terms.
+The generalised Charney--Phillips model variant makes two other modifications to the Lorenz model variant in order to simplify implementation: first, gravity waves are treated explicitly and, second, first-order Euler semi-implicit time-stepping is used with deferred correction of explicit terms (equation~\ref{eqn:cp:advection}).
 

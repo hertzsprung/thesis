@@ -21,7 +21,7 @@ At the ground, fixed gradients are imposed by calculating the component of $\nab
 For the Exner function of pressure, hydrostatic balance is prescribed on top and bottom boundaries and the inlet and outlet are zero normal gradient.
 
 Sponge layers are added to the upper \SI{10}{\kilo\meter} and leftmost \SI{10}{\kilo\meter} at the inlet boundary to damp the reflection of waves.
-The damping function \(\mu\) is adapted from \citet{melvin2010} such that
+The damping term \(\mu\) in the momentum equation \eqref{eqn:exnerFoam:momentum} is a function adapted from \citet{melvin2010} such that
 \begin{subequations}
 \begin{align}
 	\mu(x, z) &= \mu_\mathrm{upper} + \mu_\mathrm{inlet} \\
@@ -92,7 +92,10 @@ Unlike the results obtained by \citet{shaw-weller2016} that used an older formul
 As seen in figure~\ref{fig:cp:schaerWaves:w:cp}, the generalised Charney--Phillips model variant produces gravity waves with spurious distorted structures similar to those obtained using the Lorenz model variant with the linearUpwind scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}).
 In addition, as evidenced by the density of vertical velocity contour lines in figure~\ref{fig:cp:schaerWaves:w:cp}, the generalised Charney--Phillips model variant produces gravity wave amplitudes that are too large compared to the reference solution.
 
+\TODO{This is not a summary of the results presented...}
 In summary, accurate gravity wave solutions were obtained using the Lorenz model variant with cut cell meshes and slanted cell meshes, and accurate solutions were also obtained by transporting momentum and potential temperature on the BTF mesh using the cubicFit scheme.
 A less accurate solution was obtained on the BTF mesh using the generalised Charney--Phillips model variant, but all results were in general agreement with the reference solution from \citet{melvin2010}.
 Knowing that an improved transport scheme was responsible for the improved gravity wave solution using the Lorenz model variant, we conjecture that the generalised Charney--Phillips model variant produces less accurate results because the model uses a transport scheme that is insufficiently accurate.
 In the next section we perform a further comparison between Lorenz and generalised Charney--Phillips model variants using a new test case to excite the Lorenz computational mode.
+
+\TODO{Would it be worth showing that the CP model can produce the correct result by using a smoother terrain-following mesh?}
