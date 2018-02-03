@@ -7,6 +7,7 @@ import os
 class Thesis:
     def __init__(self):
         self.build = Build([
+            'generators/deformationPlane.py',
             'generators/deformationSphere.py',
             'generators/mountainAdvect.py',
             'generators/resting.py',
@@ -21,6 +22,7 @@ class Thesis:
 
         schaerAdvect = generators.SchaerAdvect()
         deformationSphere = generators.DeformationSphere()
+        deformationPlane = generators.DeformationPlane()
         mountainAdvect = generators.MountainAdvect()
         resting = generators.Resting()
         schaerWaves = generators.SchaerWaves()
@@ -58,7 +60,8 @@ class Thesis:
                         'src/thesis/cubicFit/double-upwind-stencil.tex',
                         'src/thesis/cubicFit/boundary-stencils.tex',
                         'src/thesis/cubicFit/spherical.tex',
-                        'src/thesis/highOrder.tex',
+                        'src/thesis/highOrderFit.tex',
+                        'src/thesis/highOrderFit/scheme.tex',
                         'src/thesis/slanted.tex',
                         'src/thesis/slanted/method.tex',
                         'src/thesis/slanted/construct-mesh.tex',
@@ -74,6 +77,7 @@ class Thesis:
                         + stabilisation.outputs()
                         + schaerAdvect.outputs()
                         + deformationSphere.outputs()
+                        + deformationPlane.outputs()
                         + mountainAdvect.outputs()
                         + resting.outputs()
                         + schaerWaves.outputs()

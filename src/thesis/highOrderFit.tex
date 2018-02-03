@@ -1,0 +1,28 @@
+\chapter{High-order transport for arbitrary meshes}
+\label{ch:highOrder}
+
+\TODO{
+Motivation
+\begin{itemize}	
+	\item cubicFit is suitable for flows over steep terrain but it is only second-order convergent despite having a large stencil and a cubic/quadratic polynomial
+	\item high-order schemes on coarser meshes can be more computationally efficient than lower-order schemes on finer meshes... sure I saw a citation for this recently
+	\item existing high-order FV schemes exist, but are they more computationally expensive? or unsuitable for arbitrary meshes? identify applications of high-order FV schemes to atmospheric models
+	\item we want to retain the low computational cost of cubicFit but achieve high-order convergence at the same time
+\end{itemize}
+}
+\TODO{
+\begin{itemize}	
+\item test: solid body rotation on 2D plane, uniform and distorted meshes following \citet{leonard1996,chen2017} (will need ghost cells for periodic BCs), \textbf{OR}
+\item test: solid body rotations on spherical shell, cubed-sphere and hexagonal icosahedra \citep{lauritzen2012}
+\item test: horizontal flow above a mountain on a basic terrain-following mesh \citep{schaer2002,shaw2017} -- the cosBell tracer field might be insufficiently smooth for high-order but still a useful comparison with cubicFit, and returns to the mountainous theme!
+\end{itemize}
+}
+\TODO{somewhere in chapter intro: We define \textit{high-order convergence} as any rate of convergence beyond second-order.}
+
+The cubicFit transport scheme acheives only second-order convergence even though it includes high-order polynomial terms.  The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
+\citet{devendran2017} developed a high-order finite volume scheme for solving Poisson’s equation, and they achieved high-order convergence by constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
+We apply their approach to obtain a transport scheme with high-order convergence.
+Since it has much in common with the cubicFit transport scheme, we name this high-order transport scheme `highOrderFit'.
+
+\input{highOrderFit/scheme}
+\input{highOrderFit/deformationPlane.tex}

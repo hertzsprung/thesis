@@ -20,6 +20,7 @@
 - slanted cells blue, triangles (lc 3) lt 8/9
 - cubicFit: solid lines, filled markers
 - linearUpwind: dashed lines, outline markers (dt 2)
+- highOrderFit: dot-dash lines, what markers? (dt 4?)
 
 - numerical solid contours
 - analytic dotted contours
