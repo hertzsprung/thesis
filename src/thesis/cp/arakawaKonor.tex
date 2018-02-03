@@ -17,14 +17,15 @@ The potential temperature perturbation $\theta'$ is defined as
 \begin{subequations}
 \label{eqn:cp:arakawaKonor:theta-perturbation}
 \begin{align}
-	\theta' &= \begin{cases} S \theta'_0 \sin(\frac{2 \pi x}{\lambda}) & \text{if } \Mag{x} \leq \frac{\lambda}{2} \\
-		0 & \text{otherwise} \\
+	\theta' &= \begin{cases}
+		S \theta'_0 \sin(\frac{2 \pi x}{\lambda}) & \enskip \text{if $\Mag{x} \leq \frac{\lambda}{2}$,} \\
+		0 & \enskip \text{otherwise,} \\
 	\end{cases} \\
-\shortintertext{where}
+\shortintertext{where $S$ is given by}
 	S &= \begin{cases}
-		-1 & \text{if } \SI{1}{\kilo\meter} <= z < \SI{2}{\kilo\meter} \\
-		1 & \text{if } \SI{2}{\kilo\meter} <= z < \SI{3}{\kilo\meter} \\
-		0 & \text{otherwise} \\
+		-1 & \enskip \text{if $\SI{1}{\kilo\meter} <= z < \SI{2}{\kilo\meter}$,} \\
+		1 & \enskip \text{if $\SI{2}{\kilo\meter} <= z < \SI{3}{\kilo\meter}$,} \\
+		0 & \enskip \text{otherwise,} \\
 	\end{cases}
 \end{align}
 \end{subequations}

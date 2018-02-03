@@ -33,3 +33,7 @@
 - convergence lines black
 - 1st order convergence solid line
 - 2nd order convergence dashed line
+
+# LaTeX
+
+- math cases environment, use \enskip before condition text

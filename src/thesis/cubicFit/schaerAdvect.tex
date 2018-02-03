@@ -35,31 +35,33 @@ where $z$ is the geometric height, $H$ is the height of the domain, $h(x)$ is th
 
 A velocity field is prescribed with uniform horizontal flow aloft and zero flow near the ground,
 \begin{align}
-	u(z) = u_0 \left\{ \begin{array}{l l}
-		1 & \enskip \text{if $z \geq z_2$} \\
-		\sin^2 \left( \frac{\pi}{2} \frac{z - z_1}{z_2 - z_1} \right) & \enskip \text{if $z_1 < z < z_2$} \\
-		0 & \enskip \text{otherwise}
-	\end{array} \right.	
+	u(z) = u_0 \begin{cases}
+		1 & \enskip \text{if $z \geq z_2$,} \\
+		\sin^2 \left( \frac{\pi}{2} \frac{z - z_1}{z_2 - z_1} \right) & \enskip \text{if $z_1 < z < z_2$,} \\
+		0 & \enskip \text{otherwise,}
+	\end{cases}
 \end{align}
 where $u_0 = \SI{10}{\meter\per\second}$, $z_1 = \SI{7}{\kilo\meter}$ and $z_2 = \SI{8}{\kilo\meter}$.
 This results in a constant wind above $z_2$, and zero flow at \SI{7}{\kilo\meter} and below.
 
-The discrete velocity field is defined using a streamfunction, \(\Psi\).  Given that \(u = -\partial \Psi / \partial z\), the streamfunction is found by vertical integration of the velocity profile:
+The discrete velocity field is defined using a streamfunction, \(\Psi\).  Given that \(u = -\partial \Psi / \partial z\), the streamfunction is found by vertical integration of the velocity profile,
 \begin{align}
-	\Psi(z) &= -\frac{u_0}{2} \left\{ \begin{array}{l l}
-		\left( 2z - z_1 - z_2 \right) & \enskip \text{if $z > z_2$} \\
-		z - z_1 - \frac{z_2 - z_1}{\pi} \sin \left(\pi \frac{z - z_1}{z_2-z_1}\right) & \enskip \text{if $z_1 < z \leq z_2$} \\
-		0 & \enskip \text{if $z \leq z_1$}
-	\end{array} \right.
+	\Psi(z) &= -\frac{u_0}{2}
+	\begin{cases}
+		\left( 2z - z_1 - z_2 \right) & \enskip \text{if $z > z_2$,} \\
+		z - z_1 - \frac{z_2 - z_1}{\pi} \sin \left(\pi \frac{z - z_1}{z_2-z_1}\right) & \enskip \text{if $z_1 < z \leq z_2$,} \\
+		0 & \enskip \text{otherwise.}
+	\end{cases}
 \end{align}
 
 A tracer with density $\phi$ is positioned upstream above the height of the terrain.  It has the shape
 \begin{subequations}
 \begin{align}
-	\phi(x, z) &= \phi_0 \left\{ \begin{array}{l l}
-		\cos^2 \left( \frac{\pi r}{2} \right) & \enskip \text{if $r \leq 1$} \\
-		0 & \enskip \text{otherwise}
-	\end{array} \right.
+	\phi(x, z) &= \phi_0 
+	\begin{cases}
+		\cos^2 \left( \frac{\pi r}{2} \right) & \enskip \text{if $r \leq 1$,} \\
+		0 & \enskip \text{otherwise,}
+	\end{cases}
 %
 \intertext{with radius $r$ given by}
 %

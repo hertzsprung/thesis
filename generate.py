@@ -62,6 +62,7 @@ class Thesis:
                         'src/thesis/cubicFit/spherical.tex',
                         'src/thesis/highOrderFit.tex',
                         'src/thesis/highOrderFit/scheme.tex',
+                        'src/thesis/highOrderFit/deformationPlane.tex',
                         'src/thesis/slanted.tex',
                         'src/thesis/slanted/method.tex',
                         'src/thesis/slanted/construct-mesh.tex',

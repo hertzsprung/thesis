@@ -26,12 +26,12 @@ The damping term \(\mu\) in the momentum equation \eqref{eqn:exnerFoam:momentum}
 \begin{align}
 	\mu(x, z) &= \mu_\mathrm{upper} + \mu_\mathrm{inlet} \\
 	\mu_\mathrm{upper}(z) &= \begin{cases}
-		\overline{\mu} \sin^2 \left( \frac{\pi}{2} \frac{z - z_B}{H - z_B} \right) & \text{if } z \geq z_B \\
-		0 & \text{otherwise} \\
+		\overline{\mu} \sin^2 \left( \frac{\pi}{2} \frac{z - z_B}{H - z_B} \right) & \enskip \text{if $z \geq z_B$,} \\
+		0 & \enskip \text{otherwise,} \\
 	\end{cases} \\
 	\mu_\mathrm{inlet}(x) &= \begin{cases}
-		\overline{\mu} \sin^2 \left( \frac{\pi}{2} \frac{x_I - x}{x_I - x_0} \right) & \text{if } x < x_I \\
-		0 & \text{otherwise}
+		\overline{\mu} \sin^2 \left( \frac{\pi}{2} \frac{x_I - x}{x_I - x_0} \right) & \enskip \text{if $x < x_I$,} \\
+		0 & \enskip \text{otherwise,}
 	\end{cases}
 \end{align}
 \end{subequations}
