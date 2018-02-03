@@ -74,3 +74,5 @@ plot "`echo $atmostests_builddir`/tfAdvect-btf-linearUpwind-collated/10000/linfe
      x * 5e-4 lc rgbcolor "black" dt 1 lw 1 notitle, \
      x**2 * 2e-7 lc rgbcolor "black" dt 3 lw 3 notitle, \
      x**2 * 1e-8 lc rgbcolor "black" dt 3 lw 3 notitle
+
+unset multiplot

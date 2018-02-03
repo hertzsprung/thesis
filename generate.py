@@ -88,6 +88,7 @@ class Thesis:
         build.add(stabilisation)
         schaerAdvect.addTo(build)
         deformationSphere.addTo(build)
+        deformationPlane.addTo(build)
         mountainAdvect.addTo(build)
         resting.addTo(build)
         schaerWaves.addTo(build)
