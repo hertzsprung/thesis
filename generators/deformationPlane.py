@@ -7,7 +7,12 @@ class DeformationPlane:
                 'highOrderFit-deformationPlane-convergence',
                 output=os.path.join('thesis/highOrderFit/deformationPlane/convergence'),
                 plot=os.path.join('src/thesis/highOrderFit/deformationPlane/convergence.plt'),
-                data=[])
+                data=[
+                    '$atmostests_builddir/deformationPlane-uniform-cubicFit-collated/5/l2errorT.txt',
+                    '$atmostests_builddir/deformationPlane-uniform-cubicFit-collated/5/linferrorT.txt',
+                    '$atmostests_builddir/deformationPlane-uniform-highOrderFit-collated/5/l2errorT.txt',
+                    '$atmostests_builddir/deformationPlane-uniform-highOrderFit-collated/5/linferrorT.txt'
+                ])
 
     def outputs(self):
         return self.convergence.outputs()

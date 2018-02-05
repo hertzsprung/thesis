@@ -7,7 +7,7 @@ set format y "$10^{%L}$"
 
 set key tmargin
 
-set xlabel "$\\Delta \\lambda$" offset 0,0.5
+set xlabel "$\\Delta \\lambda$ (\\si{\\degree})" offset 0,0.5
 
 set xrange [10:0.2]
 set yrange [3e-3:1]
