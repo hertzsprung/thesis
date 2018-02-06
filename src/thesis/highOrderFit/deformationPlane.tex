@@ -4,8 +4,30 @@
 \TODO{motivate and introduce test case}
 
 Following \citet{chen2017}, the domain is defined on a rectangular $x$--$y$ plane that is $2\pi$ wide and $\pi$ tall.  The domain is periodic in the $x$ direction with no normal flow imposed at the upper and lower boundaries.
-Tests are performed on a uniform mesh with square cells, and on a mesh that is distorted so that it resembles a cubed-sphere mesh.
-The distorted mesh is defined by the coordinate transform,
+The discrete velocity field is defined using the streamfunction,
+\begin{align}
+	\Psi = \frac{\hat{\Psi}}{T} \sin^2 \left( 2 \pi \left( \frac{x}{2\pi} - \frac{t}{T} \right) \right) \cos^2(y) \cos \left( \frac{\pi t}{T} \right) - \frac{2\pi y}{T},
+\end{align}
+where $\hat{\Psi} = 10$, and $T = 5$ is the duration of integration, after which time the analytic solution is equal to the initial condition.
+\TODO{in \citet{chen2017} equation 41, there is a term $\left( L_x / (2\pi) \right)^2$, but this is equal to one since $L_x = 2 \pi$!  What's that about?}
+
+The initial tracer density $\phi$ is defined as the sum of two Gaussian hills,
+\begin{align}
+	\phi = \phi_1(x,y) + \phi_2(x,y) \text{ ,}
+\end{align}
+where an individual hill $\phi_i$ is given by
+\begin{align}
+	\phi_i(x,y) = \phi_0 \exp \left( -b \left( \Mag{\vect{x} - \vect{x}_i} \right)^2 \right)
+\end{align}
+where $\phi_0 = \SI{0.95}{\kilo\gram\per\meter\cubed}$ and $b = 5$.
+The initial tracer field has two hills centred at 
+\begin{align}
+	(x_1,y_1) &= (5 \pi /6, 0) \text{ ,} \\
+	(x_2,y_2) &= (7 \pi /6, 0) \text{ .}
+\end{align}
+Tests were performed using the cubicFit and highOrderFit schemes using uniform meshes and meshes with distortions similar to a cubed-sphere mesh.
+Uniform meshes comprise square cells so that $\Delta x \mathbin{:} \Delta y = 1\mathbin{:}1$.
+Distorted meshes modify the corresponding uniform mesh using a coordinate transform,
 \begin{align}
 	X = x, \quad
 	Y = 
@@ -22,35 +44,16 @@ The distorted mesh is defined by the coordinate transform,
 		\tan(\ang{30}) \left( \Mag{x} - \frac{3\pi}{4} \right) & \text{otherwise.} \\
 	\end{cases}
 \end{align}
-
-The discrete velocity field is defined using the streamfunction,
-\begin{align}
-	\Psi = \frac{\hat{\Psi}}{T} \sin^2 \left( 2 \pi \left( \frac{x}{2\pi} - \frac{t}{T} \right) \right) \cos^2(y) \cos \left( \frac{\pi t}{T} \right) - \frac{2\pi y}{T},
-\end{align}
-where $\hat{\Psi} = 10$ and $T = 5$ is the duration of integration. 
-\TODO{in \citet{chen2017} equation 41, there is a term $\left( L_x / (2\pi) \right)^2$, but this is equal to one since $L_x = 2 \pi$!  What's that about?}
-
-The initial tracer density $\phi$ is defined as the sum of two Gaussian hills,
-\begin{align}
-	\phi = \phi_1(x,y) + \phi_2(x,y) \text{ .}
-\end{align}
-An individual hill $\phi_i$ is given by
-\begin{align}
-	\phi_i(x,y) = \phi_0 \exp \left( -b \left( \Mag{\vect{x} - \vect{x}_i} \right)^2 \right)
-\end{align}
-where $\phi_0 = \SI{0.95}{\kilo\gram\per\meter\cubed}$ and $b = 5$.
-Two hills are centred at 
-\begin{align}
-	(x_1,y_1) &= (5 \pi /6, 0) \text{ ,} \\
-	(x_2,y_2) &= (7 \pi /6, 0) \text{ .}
-\end{align}
+Figure~\ref{fig:highOrderFit:deformationPlane:mesh} illustrates a resulting distorted mesh with $60 \times 30$ cells.
+Tests are integrated using a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
+To measure numerical convergence, a range of mesh spacings are chosen between \TODO{$\Delta x = \ang{0.375}$} and $\Delta x = \ang{6}$.
 
 \begin{figure}
 	\centering
 	%
 	\includegraphics{thesis/highOrderFit/deformationPlane/fig-meshes.pdf}
 	%
-	\caption{\TODO{coarse nonortho mesh (maybe with initial condition and velocity field superimposed?)}}
+	\caption{A distorted mesh on a Cartesian plane that has distortions similar to a cubed-sphere mesh.  This coarse distorted mesh has $60 \times 30$ cells such that $\Delta x = \ang{6}$.}
 	\label{fig:highOrderFit:deformationPlane:mesh}
 \end{figure}
 
@@ -59,7 +62,8 @@ Two hills are centred at
 	%
 	\input{highOrderFit/deformationPlane/convergence}
 	%
-	\caption{\TODO{l2 and linf convergence, compare highOrderFit with cubicFit, and maybe linearUpwind, too}}
+	\caption{Numerical convergence of the deformational flow test on a Cartesian plane.
+	$\ell_2$ (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \TODO{\ang{0.375}} and \ang{6} using cubicFit and highOrderFit transport schemes on uniform and distorted meshes.}
 	\label{fig:highOrderFit:deformationPlane:convergence}
 \end{figure}
 
