@@ -1,8 +1,26 @@
-from ninjaopenfoam import Case, Gnuplot
+from ninjaopenfoam import Case, GmtPlot, GmtPlotCopyCase, Gnuplot, PDFLaTeXFigure
 import os
 
 class DeformationPlane:
     def __init__(self):
+        self.distortedMeshCase = GmtPlotCopyCase(
+                'deformationPlane-mesh-distorted-6',
+                source='$atmostests_builddir',
+                target='$builddir',
+                plots=['src/thesis/highOrderFit/deformationPlane/mesh.gmtdict'])
+
+        self.distortedMesh = GmtPlot(
+            'deformationPlane-distortedMesh',
+            plot='mesh',
+            case=Case('deformationPlane-mesh-distorted-6'),
+            time='constant')
+
+        self.meshesFigure = PDFLaTeXFigure(
+                'deformationPlane-fig-meshes',
+                output=os.path.join('thesis/highOrderFit/deformationPlane/fig-meshes'),
+                figure=os.path.join('src/thesis/highOrderFit/deformationPlane/fig-meshes'),
+                components=self.distortedMesh.outputs())
+
         self.convergence = Gnuplot(
                 'highOrderFit-deformationPlane-convergence',
                 output=os.path.join('thesis/highOrderFit/deformationPlane/convergence'),
@@ -15,7 +33,11 @@ class DeformationPlane:
                 ])
 
     def outputs(self):
-        return self.convergence.outputs()
+        return self.meshesFigure.outputs() + \
+                self.convergence.outputs()
 
     def addTo(self, build):
+        build.add(self.distortedMeshCase)
+        build.add(self.distortedMesh)
+        build.add(self.meshesFigure)
         build.add(self.convergence)
