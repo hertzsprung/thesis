@@ -29,7 +29,11 @@ class DeformationPlane:
                     '$atmostests_builddir/deformationPlane-uniform-cubicFit-collated/5/l2errorT.txt',
                     '$atmostests_builddir/deformationPlane-uniform-cubicFit-collated/5/linferrorT.txt',
                     '$atmostests_builddir/deformationPlane-uniform-highOrderFit-collated/5/l2errorT.txt',
-                    '$atmostests_builddir/deformationPlane-uniform-highOrderFit-collated/5/linferrorT.txt'
+                    '$atmostests_builddir/deformationPlane-uniform-highOrderFit-collated/5/linferrorT.txt',
+                    '$atmostests_builddir/deformationPlane-distorted-cubicFit-collated/5/l2errorT.txt',
+                    '$atmostests_builddir/deformationPlane-distorted-cubicFit-collated/5/linferrorT.txt',
+                    '$atmostests_builddir/deformationPlane-distorted-highOrderFit-collated/5/l2errorT.txt',
+                    '$atmostests_builddir/deformationPlane-distorted-highOrderFit-collated/5/linferrorT.txt'
                 ])
 
     def outputs(self):
