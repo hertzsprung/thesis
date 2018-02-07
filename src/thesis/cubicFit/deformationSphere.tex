@@ -92,7 +92,7 @@ By $t=T$ the tracer has almost returned to its original distribution except for 
 \end{figure}
 
 To determine the order of convergence and relative accuracy of the linearUpwind and cubicFit schemes, the same test was performed at a variety of mesh spacings betweeen $\Delta \lambda = \inputval{deformationSphere-mesh-hex-4/averageEquatorialSpacing}$ and $\Delta \lambda = \inputval{deformationSphere-mesh-hex-9/averageEquatorialSpacing}$ on hexagonal-icosahedral meshes and cubed-sphere meshes.  The results are shown in figure~\ref{fig:cubicFit:deformationSphere-gaussian-convergence}.
-The solution is slow to converge at coarse resolutions, and this behaviour agrees with the results from \citet{lauritzen2012}.  Both linearUpwind and cubicFit schemes achieve second-order accuracy at smaller mesh spacings. 
+The solution is slow to converge on coarser meshes, and this behaviour agrees with the results from \citet{lauritzen2012}.  Both linearUpwind and cubicFit schemes achieve second-order convergence at finer mesh spacings. 
 For any given mesh type and mesh spacing, the cubicFit scheme is more accurate than the linearUpwind scheme.
 Results are more accurate using hexagonal-icosahedral meshes compared to cubed-sphere meshes.  It is not known whether the larger errors on cubed-sphere meshes are due to mesh non-uniformities at panel corners but there is no evidence of grid imprinting in the error fields (not shown).
 

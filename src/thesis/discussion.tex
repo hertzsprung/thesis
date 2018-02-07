@@ -10,6 +10,7 @@
 \item I'm still unaware of mathematical theory that tells use: for a given mesh geometry, what polynomial should we attempt to use as an approximation? this all seems wrapped up with linear algebra: full-rank matrices and condition numbers etc, but also have to think in terms of the stability of the discretisation?
 \item put flux stabilisation from cubicFit into highOrderFit: expect that it would stabilise schaerAdvect for coarse BTF meshes
 \item an accurate transport scheme walks the line between damping and instability.  \citet{devendran2017} note that the multipliers that go into the weighted least squares fit are extra degrees of freedom that could be optimised (somehow).  We do make some attempt at this by adjusting multipliers in cubicFit stabilisation procedure, but I'm not aware of any previous research into how to optimise these weights.  We want to approach $A=1$ from below to guarantee stability with minimal damping.
+\item highOrderFit coefficients sometimes mildly violate the cubicFit stability constraints.  Could we do a new 1D stability analysis using the cell-average approach of highOrderFit instead of the point-wise approach of cubicFit that would provide slightly more permissive stability constraints?
 \end{itemize}
 }
 

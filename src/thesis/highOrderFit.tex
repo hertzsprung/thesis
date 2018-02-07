@@ -23,4 +23,16 @@ We apply their approach to obtain a transport scheme with high-order convergence
 Since it has much in common with the cubicFit transport scheme, we name this high-order transport scheme `highOrderFit'.
 
 \input{highOrderFit/scheme}
+
+\section{Transport over mountains}
+
+\TODO{
+\begin{itemize}
+\item Rerun section~\ref{sec:cubicFit:schaerAdvect} (and section~\ref{sec:cubicFit:tfAdvect}?)
+\item Plot highOrderFit results directly onto figure~\ref{fig:cubicFit:schaerAdvect:convergence} (even though it's in the previous chapter)?
+\item We should get fourth-order convergence at least on cut cell meshes if not BTF meshes, hopefully for both horizontal and terrain-following velocity fields
+\item highOrderFit is unstable/inaccurate on BTF meshes right now, likely because it's missing cubicFit's stabilisation method
+\end{itemize}
+}
+
 \input{highOrderFit/deformationPlane.tex}
