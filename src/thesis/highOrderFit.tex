@@ -24,15 +24,33 @@ Since it has much in common with the cubicFit transport scheme, we name this hig
 
 \input{highOrderFit/scheme}
 
+\section{Horizontal transport on distorted meshes}
+\TODO{
+\begin{itemize}
+	\item Test: horizontal flow on uniform and cubed-sphere-style Cartesian planes with Gaussian blob, periodic lateral boundary (use the same setup as deformationPlane, just change the velocity field)
+	\item Plot: l2/linf convergence plot, cubicFit and highOrderFit
+	\item Conclusion: should get fourth-order convergence
+\end{itemize}
+}
+
+\begin{figure}
+	\centering
+	%
+	\includegraphics{thesis/highOrderFit/deformationPlane/fig-meshes.pdf}
+	%
+	\caption{A distorted mesh on a Cartesian plane that has distortions similar to a cubed-sphere mesh.  This coarse distorted mesh has $60 \times 30$ cells such that $\Delta x = \ang{6}$.}
+	\label{fig:highOrderFit:deformationPlane:mesh}
+\end{figure}
+
+\input{highOrderFit/deformationPlane.tex}
+
 \section{Transport over mountains}
 
 \TODO{
 \begin{itemize}
 \item Rerun section~\ref{sec:cubicFit:schaerAdvect} (and section~\ref{sec:cubicFit:tfAdvect}?)
 \item Plot highOrderFit results directly onto figure~\ref{fig:cubicFit:schaerAdvect:convergence} (even though it's in the previous chapter)?
-\item We should get fourth-order convergence at least on cut cell meshes if not BTF meshes, hopefully for both horizontal and terrain-following velocity fields
+\item Using a cos squared tracer we'll only get second-order convergence but maybe absolute accuracy will be improved?
 \item highOrderFit is unstable/inaccurate on BTF meshes right now, likely because it's missing cubicFit's stabilisation method
 \end{itemize}
 }
-
-\input{highOrderFit/deformationPlane.tex}
