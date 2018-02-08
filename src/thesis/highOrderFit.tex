@@ -1,14 +1,7 @@
 \chapter{High-order transport for arbitrary meshes}
 \label{ch:highOrder}
 
-\TODO{
-Motivation
-\begin{itemize}	
-	\item cubicFit is suitable for flows over steep terrain but it is only second-order convergent despite having a large stencil and a cubic/quadratic polynomial
-	\item existing high-order FV schemes exist, but are they more computationally expensive? or unsuitable for arbitrary meshes? identify applications of high-order FV schemes to atmospheric models
-	\item we want to retain the low computational cost of cubicFit but achieve high-order convergence at the same time
-\end{itemize}
-}
+\TODO{existing high-order FV schemes exist, but are they more computationally expensive? or unsuitable for arbitrary meshes? identify applications of high-order FV schemes to atmospheric models}
 
 Atmospheric models are using increasingly fine meshes to make more accurate forecasts, but high-order numerical schemes offer another possible route to improving accuracy.
 Choosing a higher-order scheme can be more computationally efficient than choosing a finer mesh \citep{waruszewski2018}, and numerical experiments performed by \citet{ullrich2014} identify fourth-order transport schemes as the `sweet spot'  where computational efficiency is maximised.
@@ -22,14 +15,20 @@ Such schemes are often called `compact schemes' because sub-grid reconstructions
 Hence, compact schemes have near-optimal parallel scalability, making them attractive for massively parallel atmospheric simulations \citep{ullrich2014}.
 Discontinuous Galerkin (DG) schemes belong to the class of compact schemes, and DG schemes have been tried in some atmospheric research models \citep{nair2005,giraldo-restelli2008}.
 High-order DG schemes prognose values at Gauss points within each cell in order to approximate integral values using Gaussian quadrature.
-The position of Gauss points are straightforwardly calculated for tetrahedral and hexahedral reference cells, but no straightforward method is available for arbitrary polyhedra \citep{costa2017}.
+The position of Gauss points can be straightforwardly calculated for tetrahedral and hexahedral reference cells, but no straightforward method is available for arbitrary polyhedra \citep{costa2017}.
 Furthermore, numerical quadrature calculations in DG schemes can be expensive \citep{dumbser2007}, motivating alternative, quadrature-free DG schemes \citep{atkins-shu1998,nair2015}.
 Another quadrature-free compact scheme is the multi-moment constrained finite volume formulation which achieves high-order accuracy by storing several, prognostic moments collocated at cell centres \citep{ii-xiao2009}.
-Regardless of the particular formulation, transporting a tracer using a compact scheme requires the storage of multiple values per cell, and these storage requirements increase with the order of accuracy.
+Regardless of the particular formulation, transporting a tracer using a compact scheme requires the storage of multiple values per cell, and these storage requirements increase with the order of accuracy, with a fourth-order accurate DG scheme requiring the storage of up to 10 values per cell \citep{ullrich2010}.
 
-In contrast, non-compact schemes ...
-\TODO{k-exact formulation \citep{barth1995} is non-compact}
-\TODO{\citet{sjoegreen2012} implements k-exact transport scheme on a spherical shell, 3rd-order upwind-biased stencil}
+In contrast, non-compact schemes store only cell average values, and high-order reconstructions are obtained by using a larger stencil of cells.
+\TODO{Godunov-type schemes are also non-compact, high-order reconstruction over larger stencil of cell averages.  \citet{ullrich2010} is one such scheme.  Riemann solvers are needed for upwinding and matching owner/neighbour fluxes?  Are Riemann solvers computationally expensive?}
+\TODO{
+\begin{itemize}
+\item k-exact formulation \citep{barth1995} is non-compact
+\item \citet{sjoegreen2012} implements k-exact transport scheme on a spherical shell, 3rd-order upwind-biased stencil but doesn't present convergence results
+\item \citet{devendran2017} also use k-exact formulation for solving Poisson's equation
+\end{itemize}
+}
 
 %The MPDATA scheme, a multidimensional, second-order scheme for arbitrary meshes was recently extended to achieve third-order convergence \citep{waruszewski2018}.
 
@@ -40,13 +39,11 @@ In contrast, non-compact schemes ...
 % - 3D multidimensional
 % - same, cheap computational cost as cubicFit
 
-% Ullrich et al. 2010
-% Godunov-type method
-
-The cubicFit transport scheme acheives only second-order convergence even though it includes high-order polynomial terms.  The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
+The cubicFit transport scheme acheives only second-order convergence even though it includes high-order polynomial terms.
+The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
 \citet{devendran2017} developed a high-order finite volume scheme for solving Poisson’s equation, and they achieved high-order convergence by constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
-We apply their approach to obtain a transport scheme with high-order convergence.
-Since it has much in common with the cubicFit transport scheme, we name this high-order transport scheme `highOrderFit'.
+We apply their approach to obtain a transport scheme with high-order convergence whilst retaining the low computational cost of the cubicFit transport scheme.
+Since it has much in common with the cubicFit scheme, we name this high-order transport scheme `highOrderFit'.
 
 \input{highOrderFit/scheme}
 

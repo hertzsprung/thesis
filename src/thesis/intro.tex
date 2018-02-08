@@ -78,7 +78,7 @@ Throughout the thesis, we use the OpenFOAM software package \citepalias{openfoam
 
 Chapter~\ref{ch:cubicFit} formulates a new finite volume transport scheme to achieve numerical stability over steep terrain represented by highly-distorted, arbitrary meshes.
 It is second-order convergent on quasi-uniform spherical meshes, terrain-following and cut cell meshes.
-Chapter~\ref{ch:highOrder} proposes a modification to the formulation, using techniques from \citet{devendran2017} to achieve higher than second-order convergence in the interior of distorted meshes without increasing the computational cost during integration.
+Chapter~\ref{ch:highOrder} proposes a modification to the formulation, using techniques from \citet{devendran2017} \TODO{k-exact method is much older, maybe cite \citet{barth1995}, too} to achieve higher than second-order convergence in the interior of distorted meshes without increasing the computational cost during integration.
 Chapter~\ref{ch:slanted} introduces a new type of vertical mesh that simulateously avoids severe mesh distortions associated with traditional terrain-following meshes, while avoiding arbitrarily small cells associated with cut cell meshes.
 Numerical experiments verify that a more accurate balance is achieved between the pressure gradient and gravity, and we find that the new mesh permits maximum time-steps comparable to those permitted by terrain-following meshes.
 Chapter~\ref{ch:cp} extends the work of \citep{arakawa-konor1996} to create a new two-dimensional test case that excites the Lorenz computational mode, enabling a more straightforward assessment of models using collocated variables, a Lorenz staggering or a Charney--Phillips staggering.
