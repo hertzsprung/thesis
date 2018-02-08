@@ -1,5 +1,6 @@
 @STRING{ACME      = "Arch.\ Comput.\ Method.\ E."}
 @STRING{ACTAGEO   = "Acta\ Geophys."}
+@STRING{AIAA      = "AIAA\ J."}
 @STRING{AMC       = "Appl.\ Math.\ Comput."}
 @STRING{AO        = "Atmos.-Ocean"}
 @STRING{ASL       = "Atmos. Sci. Lett."}
@@ -13,7 +14,7 @@
 @STRING{JC        = "J.\ Clim."}
 @STRING{JM        = "J.\ Meteor."}
 @STRING{JO        = "J.\ Oceanogr."}
-@STRING{JSC       = "SIAM J.\ Sci.\ Comput."}
+@STRING{JSC       = "J.\ Sci.\ Comput."}
 @STRING{MAP       = "Meteor.\ Atmos.\ Phys."}
 @STRING{METZEIT   = "Meteor.\ Z."}
 @STRING{MWR       = "Mon.\ Wea.\ Rev."}
@@ -22,7 +23,19 @@
 @STRING{PTRSA     = "Philos.\ Trans.\ Roy.\ Soc.\ A"}
 @STRING{QJRMS     = "Quart.\ J.\ Roy.\ Meteor.\ Soc."}
 @STRING{SCSDES    = "Sci.\ China\ Ser.\ D\ Earth\ Sci."}
+@STRING{SISC      = "SIAM J.\ Sci.\ Comput."}
 @STRING{WF        = "Wea.\ Forecasting"}
+
+@article{atkins-shu1998,
+	title={Quadrature-free implementation of discontinuous {Galerkin} method for hyperbolic equations},
+	author={Atkins, Harold L and Shu, Chi-Wang},
+	journal=AIAA,
+	volume={36},
+	number={5},
+	pages={775--782},
+	year={1998},
+	doi={10.2514/2.436}
+}
 
 @article{arakawa-konor1996,
 	title={Vertical Differencing of the Primitive Equations Based on the {Charney-Phillips} Grid in Hybrid $\sigma$--$p$ Vertical Coordinates},
@@ -56,6 +69,14 @@
 	year={2008},
 	publisher={Elsevier},
 	doi={10.1016/j.jcp.2008.03.025}
+}
+
+@misc{barth1995,
+	title={Aspects of Unstructured Grids and Finite-Volume Solvers for the {Euler} and {Navier--Stokes} Equations},
+	author={Barth, Timothy J.},
+	year={1995},
+	publisher={NASA},
+	note={1994--05 Lecture Series, von Karman Institute for Fluid Dynamics}
 }
 
 @book{behrens2006,
@@ -141,6 +162,17 @@
 	doi={10.1016/j.jcp.2011.02.026}
 }
 
+@article{costa2017,
+	title={A sixth-order finite volume scheme for the steady-state incompressible {Stokes} equations on staggered unstructured meshes},
+	author={Costa, Ricardo and Clain, St{\'e}phane and Machado, Gaspar J},
+	journal=JCP,
+	volume={349},
+	pages={501--527},
+	year={2017},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2017.07.047}
+}
+
 @article{cuetofelgueroso2006,
 	title={High-order finite volume schemes on unstructured grids using moving least-squares reconstruction. {Application} to shallow water dynamics},
 	author={Cueto-Felgueroso, L and Colominas, I and Fe, J and Navarrina, F and Casteleiro, M},
@@ -224,6 +256,18 @@
 	doi={10.1175/2011JCLI3955.1}
 }
 
+@article{dumbser2007,
+	title={Quadrature-free non-oscillatory finite volume schemes on unstructured meshes for nonlinear hyperbolic systems},
+	author={Dumbser, Michael and K{\"a}ser, Martin and Titarev, Vladimir A and Toro, Eleuterio F},
+	journal=JCP,
+	volume={226},
+	number={1},
+	pages={204--243},
+	year={2007},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2007.04.004}
+}
+
 @book{durran2013,
 	title={Numerical methods for wave equations in geophysical fluid dynamics},
 	author={Durran, Dale R},
@@ -287,7 +331,7 @@
 }
 
 @article{galchen-somerville1975a,
-	title={On the Use of a Coordinate Transformation for the Solution of the {Navier-Stokes} Equations},
+	title={On the Use of a Coordinate Transformation for the Solution of the {Navier--Stokes} Equations},
 	author={Gal-Chen, Tzvi and Somerville, Richard CJ},
 	journal=JCP,
 	volume={17},
@@ -306,6 +350,18 @@
 	pages={223--233},
 	year={1973},
 	doi={10.1175/1520-0469(1973)030<0223:EOTEIT>2.0.CO;2}
+}
+
+@article{giraldo-restelli2008,
+	title={A study of spectral element and discontinuous {Galerkin} methods for the {Navier--Stokes} equations in nonhydrostatic mesoscale atmospheric modeling: Equation sets and test cases},
+	author={Giraldo, Francis X and Restelli, Marco},
+	journal=JCP,
+	volume={227},
+	number={8},
+	pages={3849--3877},
+	year={2008},
+	publisher={Elsevier},
+	doi={10.1016/j.jcp.2007.12.009}
 }
 
 @article{girard2014,
@@ -812,6 +868,28 @@
 	doi={10.1016/j.jcp.2012.10.038}
 }
 
+@article{nair2005,
+	title={A discontinuous {Galerkin} transport scheme on the cubed sphere},
+	author={Nair, Ramachandran D and Thomas, Stephen J and Loft, Richard D},
+	journal=MWR,
+	volume={133},
+	number={4},
+	pages={814--828},
+	year={2005},
+	doi={10.1175/MWR2890.1}
+}
+
+@article{nair2015,
+	title={Quadrature-Free Implementation of a Discontinuous {Galerkin} Global Shallow-Water Model via Flux Correction Procedure},
+	author={Nair, Ramachandran D},
+	journal=MWR,
+	volume={143},
+	number={4},
+	pages={1335--1346},
+	year={2015},
+	doi={10.1175/MWR-D-14-00174.1}
+}
+
 @article{naughten2017,
 	title={Spurious sea ice formation caused by oscillatory ocean tracer advection schemes},
 	author={Naughten, Kaitlin A and Galton-Fenzi, Benjamin K and Meissner, Katrin J and England, Matthew H and Brassington, Gary B and Colberg, Frank and Hattermann, Tore and Debernard, Jens B},
@@ -924,6 +1002,18 @@
 	pages={758--766},
 	year={1981},
 	doi={10.1175/1520-0493(1981)109<0758:AEAAMC>2.0.CO;2}
+}
+
+@article{sjoegreen2012,
+	title={High order finite difference and finite volume methods for advection on the sphere},
+	author={Sj{\"o}green, Bj{\"o}rn},
+	journal=JSC,
+	volume={51},
+	number={3},
+	pages={703--732},
+	year={2012},
+	publisher={Springer},
+	doi={10.1007/s10915-011-9527-x}
 }
 
 @article{skamarock-gassmann2011,
@@ -1169,7 +1259,8 @@
 	journal=JCP,
 	year={2018},
 	publisher={Elsevier},
-	doi={10.1016/j.jcp.2018.01.005}
+	doi={10.1016/j.jcp.2018.01.005},
+	note={Accepted}
 }
 
 @article{wedi2014,
@@ -1220,7 +1311,7 @@
 	title={Flow Simulation in Heterogeneous Porous Media With the Moving Least-Squares Method},
 	author={Laurent White and Rohan Panchadhara and Dimitar Trenev},
 	year={2017},
-	journal=JSC,
+	journal=SISC,
 	volume={39},
 	number={2},
 	pages={B323--B351},

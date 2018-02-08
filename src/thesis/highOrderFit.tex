@@ -10,30 +10,38 @@ Motivation
 \end{itemize}
 }
 
+Atmospheric models are using increasingly fine meshes to make more accurate forecasts, but high-order numerical schemes offer another possible route to improving accuracy.
+Choosing a higher-order scheme can be more computationally efficient than choosing a finer mesh \citep{waruszewski2018}, and numerical experiments performed by \citet{ullrich2014} identify fourth-order transport schemes as the `sweet spot'  where computational efficiency is maximised.
+
 A high-order transport scheme is ordinarily defined as one with a formal accuracy greater than second-order.
-The order of convergence observed in numerical experiments may be less than the formal order of accuracy if the tracer field \TODO{ or velocity field?} is insufficiently smooth, and strong gradients in the form of weather fronts and temperature inversions mean that atmospheric fields are generally not smooth enough to obtain high-order convergence \citep{holdaway2008}. 
-Even if high-order convergence is unattainable, high-order schemes can offer other advantages over second-order schemes: high-order schemes can reduce dispersion and diffusion errors \citep{ullrich-jablonowski2012,waruszewski2018}, reduce grid imprinting \citep{mccorquodale2015}, and increase the effective resolution of the scheme \citep{ullrich2014}.
+The order of convergence observed in numerical experiments may be less than the formal order of accuracy if the transported field is insufficiently smooth, and strong gradients in the form of weather fronts and temperature inversions mean that atmospheric fields are generally not smooth enough to obtain high-order convergence \citep{holdaway2008}. 
+Even if high-order convergence is unattainable, high-order schemes offer other advantages over second-order schemes: high-order schemes can reduce dispersion and diffusion errors \citep{ullrich-jablonowski2012,waruszewski2018}, reduce grid imprinting \citep{mccorquodale2015}, and increase the effective resolution of the scheme \citep{ullrich2014}.
+
+High-order schemes are often formulated by introducing additional degrees of freedom within each cell.
+Such schemes are often called `compact schemes' because sub-grid reconstructions are performed within each cell, only requiring data exchange with immediately adjacent cells.
+Hence, compact schemes have near-optimal parallel scalability, making them attractive for massively parallel atmospheric simulations \citep{ullrich2014}.
+Discontinuous Galerkin (DG) schemes belong to the class of compact schemes, and DG schemes have been tried in some atmospheric research models \citep{nair2005,giraldo-restelli2008}.
+High-order DG schemes prognose values at Gauss points within each cell in order to approximate integral values using Gaussian quadrature.
+The position of Gauss points are straightforwardly calculated for tetrahedral and hexahedral reference cells, but no straightforward method is available for arbitrary polyhedra \citep{costa2017}.
+Furthermore, numerical quadrature calculations in DG schemes can be expensive \citep{dumbser2007}, motivating alternative, quadrature-free DG schemes \citep{atkins-shu1998,nair2015}.
+Another quadrature-free compact scheme is the multi-moment constrained finite volume formulation which achieves high-order accuracy by storing several, prognostic moments collocated at cell centres \citep{ii-xiao2009}.
+Regardless of the particular formulation, transporting a tracer using a compact scheme requires the storage of multiple values per cell, and these storage requirements increase with the order of accuracy.
+
+In contrast, non-compact schemes ...
+\TODO{k-exact formulation \citep{barth1995} is non-compact}
+\TODO{\citet{sjoegreen2012} implements k-exact transport scheme on a spherical shell, 3rd-order upwind-biased stencil}
+
+%The MPDATA scheme, a multidimensional, second-order scheme for arbitrary meshes was recently extended to achieve third-order convergence \citep{waruszewski2018}.
 
 % TODO: review existing high-order schemes
 % what advantages does highOrderFit have?
 % - arbitrary meshes
 % - natural generalisation to 3D
+% - 3D multidimensional
 % - same, cheap computational cost as cubicFit
-
-% Waruszewski et al. 2018
-% 3rd-order MPDATA
-% Lax-Wendroff
-% - tested on lat-lon meshes and 3D Cartesian meshes
-
-% Li et al. 2013
-% multi-moment constrained finite volume
 
 % Ullrich et al. 2010
 % Godunov-type method
-
-% Sjögreen 2012 
-% 3rd order upwind-biased stencil
-% k-exact method
 
 The cubicFit transport scheme acheives only second-order convergence even though it includes high-order polynomial terms.  The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
 \citet{devendran2017} developed a high-order finite volume scheme for solving Poisson’s equation, and they achieved high-order convergence by constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
