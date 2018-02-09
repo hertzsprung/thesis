@@ -24,6 +24,7 @@ In contrast, non-compact schemes store only cell average values, and high-order 
 \TODO{Godunov-type schemes are also non-compact, high-order reconstruction over larger stencil of cell averages.  \citet{ullrich2010} is one such scheme.  Riemann solvers are needed for upwinding and matching owner/neighbour fluxes?  Are Riemann solvers computationally expensive?}
 \TODO{
 \begin{itemize}
+\item mention \citet{skamarock-gassmann2011} formulations that are 3rd/4th-order accurate on uniform meshes, but only 1st-order accurate on distorted meshes
 \item k-exact formulation \citep{barth1995} is non-compact
 \item \citet{sjoegreen2012} implements k-exact transport scheme on a spherical shell, 3rd-order upwind-biased stencil but doesn't present convergence results
 \item \citet{devendran2017} also use k-exact formulation for solving Poisson's equation
