@@ -1,0 +1,21 @@
+\section{Transport over mountains}
+\label{sec:highOrderFit:schaerAdvectSmooth}
+
+\TODO{
+\begin{itemize}
+\item Use $\cos^4$ tracer (as justified by \citet{holdaway2008})
+\item Use original setup by \citet{schaer2002}: $h_0 = \SI{3}{\kilo\meter}$ and the original velocity field, test on BTF and cut cells, compare cubicFit and highOrderFit, RK4 throughout, max Co = 0.4ish
+\item Conclusion: 4th-order convergence on uniform mesh with $\cos^4$ and highOrderFit
+\item Conclusion: 3rd-order convergence on BTF mesh with $\cos^4$ with both schemes?  This is a surprise result for cubicFit!  Can we guess why this happens?
+\item Should I present $cos^2$ results here, too?  Those results support the theory of \citet{holdaway2008} but don't tell us much else.  They also make the convergence plots kinda messy.
+\end{itemize}
+}
+
+\begin{figure}
+	\centering
+	%
+	\input{highOrderFit/schaerAdvectSmooth/convergence}
+	%
+	\caption{\TODO{convergence}}
+	\label{fig:highOrderFit:schaerAdvectSmooth:convergence}
+\end{figure}

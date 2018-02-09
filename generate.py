@@ -12,6 +12,7 @@ class Thesis:
             'generators/mountainAdvect.py',
             'generators/resting.py',
             'generators/schaerAdvect.py',
+            'generators/schaerAdvectSmooth.py',
             'generators/schaerWaves.py',
             'generators/tfAdvect.py',
             'generators/arakawaKonor.py'
@@ -23,6 +24,7 @@ class Thesis:
         schaerAdvect = generators.SchaerAdvect()
         deformationSphere = generators.DeformationSphere()
         deformationPlane = generators.DeformationPlane()
+        schaerAdvectSmooth = generators.SchaerAdvectSmooth()
         mountainAdvect = generators.MountainAdvect()
         resting = generators.Resting()
         schaerWaves = generators.SchaerWaves()
@@ -63,6 +65,7 @@ class Thesis:
                         'src/thesis/highOrderFit.tex',
                         'src/thesis/highOrderFit/scheme.tex',
                         'src/thesis/highOrderFit/deformationPlane.tex',
+                        'src/thesis/highOrderFit/schaerAdvectSmooth.tex',
                         'src/thesis/slanted.tex',
                         'src/thesis/slanted/method.tex',
                         'src/thesis/slanted/construct-mesh.tex',
@@ -79,6 +82,7 @@ class Thesis:
                         + schaerAdvect.outputs()
                         + deformationSphere.outputs()
                         + deformationPlane.outputs()
+                        + schaerAdvectSmooth.outputs()
                         + mountainAdvect.outputs()
                         + resting.outputs()
                         + schaerWaves.outputs()
@@ -90,6 +94,7 @@ class Thesis:
         schaerAdvect.addTo(build)
         deformationSphere.addTo(build)
         deformationPlane.addTo(build)
+        schaerAdvectSmooth.addTo(build)
         mountainAdvect.addTo(build)
         resting.addTo(build)
         schaerWaves.addTo(build)

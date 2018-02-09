@@ -1,6 +1,7 @@
 from .arakawaKonor import ArakawaKonor
 from .deformationSphere import DeformationSphere
 from .deformationPlane import DeformationPlane
+from .schaerAdvectSmooth import SchaerAdvectSmooth
 from .mountainAdvect import MountainAdvect
 from .resting import Resting
 from .schaerAdvect import SchaerAdvect
