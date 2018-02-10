@@ -288,7 +288,7 @@ The three stability conditions (equations~\ref{eqn:vonNeumann:upwind}, \ref{eqn:
 	0.5 \leq w_u \leq 1 \label{eqn:cubicFit:stabilityU} \\
 	0 \leq w_d \leq 0.5 \label{eqn:cubicFit:stabilityD} \\
 	w_u - w_d \geq \max_{p\:\in\:P}(|w_p|)
-\end{align}
+\end{align}%
 \end{subequations}
 where $w_u$ and $w_d$ are the weights for the upwind and downwind cells respectively.  The \textit{peripheral points} $P$ are the cells in the stencil that are not the upwind or downwind cells, and $w_p$ is the weight for a given peripheral point $p$.
  The upwind, downwind and peripheral weights sum to one such that $w_u + w_d + \sum_{p \in P} w_p = 1$.

@@ -33,7 +33,7 @@ The damping term \(\mu\) in the momentum equation \eqref{eqn:exnerFoam:momentum}
 		\overline{\mu} \sin^2 \left( \frac{\pi}{2} \frac{x_I - x}{x_I - x_0} \right) & \enskip \text{if $x < x_I$,} \\
 		0 & \enskip \text{otherwise,}
 	\end{cases}
-\end{align}
+\end{align}%
 \end{subequations}
 where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer, $H = \SI{30}{\kilo\meter}$ is the top of the domain, $x_0 = \SI{-150}{\kilo\meter}$ is the leftmost limit of the domain and $x_I = \SI{-140}{\kilo\meter}$ is the rightmost extent of the inlet sponge layer.
 The sponge layer is only active on faces whose normal is vertical so that it damps vertical momentum only.

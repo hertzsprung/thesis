@@ -45,7 +45,7 @@ Distorted meshes modify the corresponding uniform mesh using a coordinate transf
 	\end{cases}
 \end{align}
 Figure~\ref{fig:highOrderFit:deformationPlane:mesh} illustrates a resulting distorted mesh with $60 \times 30$ cells.
-The classical fourth-order Runge–Kutta timestepping scheme \citep[p. 53]{durran2013} is used for both cubicFit and highOrderFit transport schemes, and tests are integrated using a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
+The classical fourth-order Runge–Kutta time-stepping scheme is used for both cubicFit and highOrderFit transport schemes, and tests are integrated using a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
 
 \begin{figure}
 	\centering
@@ -62,7 +62,7 @@ The classical fourth-order Runge–Kutta timestepping scheme \citep[p. 53]{durra
 	\input{highOrderFit/deformationPlane/convergence}
 	%
 	\caption{Numerical convergence of the deformational flow test on a Cartesian plane.
-	$\ell_2$ (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \ang{0.375} and \ang{6} using cubicFit and highOrderFit transport schemes on uniform and distorted meshes.}
+	$\ell_2$ (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \ang{6} and \ang{0.375} using cubicFit and highOrderFit transport schemes on uniform and distorted meshes.}
 	\label{fig:highOrderFit:deformationPlane:convergence}
 \end{figure}
 

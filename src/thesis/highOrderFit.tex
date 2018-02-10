@@ -33,20 +33,19 @@ In contrast, non-compact schemes store only cell average values, and high-order 
 
 %The MPDATA scheme, a multidimensional, second-order scheme for arbitrary meshes was recently extended to achieve third-order convergence \citep{waruszewski2018}.
 
-% TODO: review existing high-order schemes
 % what advantages does highOrderFit have?
 % - arbitrary meshes
 % - natural generalisation to 3D
 % - 3D multidimensional
 % - same, cheap computational cost as cubicFit
 
-The cubicFit transport scheme acheives only second-order convergence even though it includes high-order polynomial terms.
+For the numerical experiments presented in chapter~\ref{ch:cubicFit}, the cubicFit transport scheme acheives only second-order convergence even though it includes high-order polynomial terms.
 The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
-\citet{devendran2017} developed a high-order finite volume scheme for solving Poisson’s equation, and they achieved high-order convergence by constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
+\TODO{the k-exact technique predates \citet{devendran2017} ... } developed a high-order finite volume scheme for solving Poisson’s equation, and they achieved high-order convergence by constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
 We apply their approach to obtain a transport scheme with high-order convergence whilst retaining the low computational cost of the cubicFit transport scheme.
 Since it has much in common with the cubicFit scheme, we name this high-order transport scheme `highOrderFit'.
 
 \input{highOrderFit/scheme}
-\input{highOrderFit/deformationPlane.tex}
 \input{highOrderFit/schaerAdvectSmooth.tex}
+\input{highOrderFit/deformationPlane.tex}
 

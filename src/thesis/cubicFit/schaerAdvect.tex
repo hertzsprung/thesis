@@ -23,6 +23,7 @@ The terrain is wave-shaped, specified by the surface elevation $h$ such that
 	0 & \enskip \text{otherwise}
     \end{array} \right.
 \end{align}
+\label{eqn:cubicFit:schaerAdvect:mountain}%
 \end{subequations}
 where $a = \SI{25}{\kilo\meter}$ is the mountain envelope half-width, $h_0 = \SI{6}{\kilo\meter}$ is the maximum mountain height, $\lambda = \SI{8}{\kilo\meter}$ is the wavelength, \(\alpha = \pi / \lambda\) and \(\beta = \pi / (2a)\).  Note that, in order to make this test more challenging, the mountain height $h_0$ is double the mountain height used by \citet{schaer2002}.
 
@@ -40,6 +41,7 @@ A velocity field is prescribed with uniform horizontal flow aloft and zero flow 
 		\sin^2 \left( \frac{\pi}{2} \frac{z - z_1}{z_2 - z_1} \right) & \enskip \text{if $z_1 < z < z_2$,} \\
 		0 & \enskip \text{otherwise,}
 	\end{cases}
+	\label{eqn:cubicFit:schaerAdvect:velocity}
 \end{align}
 where $u_0 = \SI{10}{\meter\per\second}$, $z_1 = \SI{7}{\kilo\meter}$ and $z_2 = \SI{8}{\kilo\meter}$.
 This results in a constant wind above $z_2$, and zero flow at \SI{7}{\kilo\meter} and below.
@@ -59,7 +61,7 @@ A tracer with density $\phi$ is positioned upstream above the height of the terr
 \begin{align}
 	\phi(x, z) &= \phi_0 
 	\begin{cases}
-		\cos^2 \left( \frac{\pi r}{2} \right) & \enskip \text{if $r \leq 1$,} \\
+		\cos^\rhoexp \left( \frac{\pi r}{2} \right) & \enskip \text{if $r \leq 1$,} \\
 		0 & \enskip \text{otherwise,}
 	\end{cases}
 %
@@ -69,11 +71,9 @@ A tracer with density $\phi$ is positioned upstream above the height of the terr
 		\left( \frac{x - x_0}{A_x} \right)^2 + 
 		\left( \frac{z - z_0}{A_z} \right)^2
 	}
-\end{align}
-%
-\label{eqn:cubicFit:schaerAdvect:tracer}
+\end{align} \label{eqn:cubicFit:schaerAdvect:tracer}%
 \end{subequations}
-where $A_x = \SI{25}{\kilo\meter}$, $A_z = \SI{3}{\kilo\meter}$ are the horizontal and vertical half-widths respectively, and $\phi_0 = \SI{1}{\kilogram\per\meter\cubed}$ is the maximum density of the tracer.  At $t = \SI{0}{\second}$, the tracer is centred at $(x_0, z_0) = (\SI{-50}{\kilo\meter}, \SI{12}{\kilo\meter})$ so that the tracer is upwind of the mountain, in the region of uniform flow above $z_2$.
+where $A_x = \SI{25}{\kilo\meter}$, $A_z = \SI{3}{\kilo\meter}$ are the horizontal and vertical half-widths respectively, $\phi_0 = \SI{1}{\kilogram\per\meter\cubed}$ is the maximum density of the tracer, and the exponent $\rhoexp = 2$.  At $t = \SI{0}{\second}$, the tracer is centred at $(x_0, z_0) = (\SI{-50}{\kilo\meter}, \SI{12}{\kilo\meter})$ so that the tracer is upwind of the mountain, in the region of uniform flow above $z_2$.
 
 Tests are integrated for \SI{10000}{\second} using a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.
 This choice yields a time-step that is well below any stability limit, as recommended by \citet{lauritzen2012}.  By the end of integration the tracer is positioned downwind of the mountain.
@@ -92,7 +92,7 @@ The analytic solution at $t = \SI{10000}{\second}$ is centred at $(x_0, z_0) = (
 	\caption{Numerical convergence of the two-dimensional tracer transport tests over mountains using
 	(\subcaptionref{fig:cubicFit:schaerAdvect:convergence:l2}, \subcaptionref{fig:cubicFit:schaerAdvect:convergence:linf}) horizontal and
 	(\subcaptionref{fig:cubicFit:tfAdvect:convergence:l2}, \subcaptionref{fig:cubicFit:tfAdvect:convergence:linf}) terrain-following velocity fields.
-	$\ell_2$ errors (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \SI{5000}{\meter} and \SI{250}{\meter} using linearUpwind and cubicFit transport schemes on basic terrain-following and cut cell meshes.}
+	$\ell_2$ errors (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{250}{\meter}$ using linearUpwind and cubicFit transport schemes on basic terrain-following and cut cell meshes.}
 	\label{fig:cubicFit:schaerAdvect:convergence}
 \end{figure}
 
