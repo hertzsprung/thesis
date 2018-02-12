@@ -1,15 +1,9 @@
 \section{High-order transport over mountains}
 \label{sec:highOrderFit:schaerAdvectSmooth}
 
-\TODO{
-\begin{itemize}
-\item test on BTF and cut cells, compare cubicFit and highOrderFit
-\item Conclusion: 2nd-order convergence on uniform mesh with cubicFit
-\item Conclusion: 4th-order convergence on uniform mesh with highOrderFit
-\item Conclusion: 3rd-order convergence on BTF mesh with both schemes.  This is a surprise result for cubicFit!  Can we guess why this happens?
-\item highOrderFit is unstable with more highly-distorted domains with more steeply sloping terrain, and this might well be because the stabilisation procedure from cubicFit is needed to remove high-order terms.
-\end{itemize}
-}
+Section~\ref{sec:cubicFit:schaerAdvect} presented a more challenging variant of the standard two-dimensional transport test formulated by \citet{schaer2002} to assess the numerical accuracy of the cubicFit scheme transporting a tracer horizontally above very steep slopes represented by highly-distorted terrain-following meshes.
+In this section, we use the original test as specified by \citet{schaer2002} that has shallower slopes.  We make only one modification to the original test, choosing a smoother initial tracer to allow high-order convergence to be achieved \citep{holdaway2008}.
+This test is used to measure the order of convergence of the cubicFit scheme and the highOrderFit scheme on undistorted cut cell meshes and distorted terrain-following meshes.
 
 The test follows the specification by \citet{schaer2002}, with the same domain size and boundary conditions as in section~\ref{sec:cubicFit:schaerAdvect}.
 The mountain profile is given by equation~\eqref{eqn:cubicFit:schaerAdvect:mountain} and the prescribed velocity field is given by equation~\eqref{eqn:cubicFit:schaerAdvect:velocity}.
@@ -21,7 +15,8 @@ All other tracer parameters are the same as those given in section~\ref{sec:cubi
 
 Tests are integrated for \SI{10000}{\second} using the classical fourth-order Runge–Kutta time-stepping scheme \citep[p. 53]{durran2013} with both cubicFit and highOrderFit transport schemes, and tests are integrated using a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
 The analytic solution at $t = \SI{10000}{\second}$ is centred at $(x_0, z_0) = (\SI{50}{\kilo\meter}, \SI{9}{\kilo\meter})$.
-
+To measure the order of convergence of the cubicFit scheme and the highOrderFit scheme, tests are performed using mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{250}{\meter}$.
+The vertical mesh spacing $\Delta z$ is chosen so that $\Delta x \mathbin{:} \Delta z = 2\mathbin{:}1$ to match the original test specification by \citet{schaer2002}.
 
 \begin{figure}
 	\centering
@@ -32,3 +27,21 @@ The analytic solution at $t = \SI{10000}{\second}$ is centred at $(x_0, z_0) = (
 	$\ell_2$ (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{250}{\meter}$ using cubicFit and highOrderFit transport schemes on basic terrain-following and cut cell meshes.}
 	\label{fig:highOrderFit:schaerAdvectSmooth:convergence}
 \end{figure}
+
+The $\ell_2$ and $\ell_\infty$ errors are measured on a series of basic terrain-following meshes and cut cell meshes (figure~\ref{fig:highOrderFit:schaerAdvectSmooth:convergence}).
+The cubicFit transport scheme achieves second-order convergence on cut cell meshes, and the scheme achieves third-order convergence on basic terrain-following meshes.
+It is perhaps surprising that higher-order convergence is achieved when the mesh is distorted and flow is misaligned with the mesh.
+Further tests using very fine meshes might confirm whether third-order convergence is maintained.
+We might expect that the cubicFit scheme tends towards second-order convergence at finer mesh spacings, otherwise the cubicFit scheme would become more accurate on basic terrain-following meshes than cut cell meshes!
+
+The highOrderFit transport scheme also achieves third-order convergence on basic terrain-following meshes, with error measures very similar to those obtained with the cubicFit scheme.
+The highOrderFit scheme achieves fourth-order convergence on cut cell meshes.
+While we have not formally analysed the order of accuracy of the highOrderFit scheme, we might expect to obtain fourth-order convergence under these ideal test conditions: first, the highOrderFit scheme uses a cubic reconstruction; second, cut cell meshes are undistorted away from the lower boundary and, third, the horizontal flow is aligned with the cut cell mesh.
+
+Further numerical experiments were performed using steeper slopes represented by basic terrain-following meshes, but the highOrderFit scheme produced instabilities above the steepest slopes.
+The stabilisation procedure used in the cubicFit scheme has not been implemented in the highOrderFit scheme, but examination of the stencils reveals that, using the highOrderFit scheme, some stencil weights violate the stability conditions given in equation~\eqref{eqn:cubicFit:stability}.
+It is likely that the selective removal of some high-order terms for particularly distorted stencils could make the highOrderFit scheme stable on highly-distorted meshes.
+
+This test demonstrates that, under favourable conditions with a sufficiently smooth tracer and uniform flow, the highOrderFit scheme is capable of fourth-order and third-order convergence on undistorted and distored meshes respectively.
+This test also demonstrated a surprising result that the cubicFit scheme is seemingly capable of third-order convergence only on distorted, terrain-following meshes.
+In the next section, we evaluate the highOrderFit scheme on distorted and undistorted meshes using a more challenging, deformational flow.

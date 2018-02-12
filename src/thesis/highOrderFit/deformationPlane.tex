@@ -69,7 +69,6 @@ The classical fourth-order Runge–Kutta time-stepping scheme is used for both c
 To measure numerical convergence, a range of mesh spacings are chosen between $\Delta x = \ang{0.375}$ and $\Delta x = \ang{6}$, and $\ell_2$ and $\ell_\infty$ errors are calculated for the cubicFit and highOrderFit schemes on each mesh (figure~\ref{fig:highOrderFit:deformationPlane:convergence}).
 Similar to the results of deformational flow on a sphere in section~\ref{sec:cubicFit:deformationSphere}, both the cubicFit scheme and the highOrderFit scheme are slow to converge on coarser meshes.
 At finer mesh spacings, the cubicFit scheme achieves second-order convergence and the highOrderFit scheme achieves third-order convergence.
-\TODO{we don't see fourth-order convergence in this test, why not?}
 For both schemes, errors are slightly larger switching from a uniform mesh to a distorted mesh, but the order of convergence remains unchanged.
 For a given mesh, the highOrderFit scheme is more accurate than the cubicFit scheme except at the coarsest mesh spacings.
 
