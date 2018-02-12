@@ -6,7 +6,7 @@
 \begin{itemize}
 	\item The new highOrderFit transport scheme is third-order convergent or higher on distorted and undistorted meshes
 	\item During integration, the highOrderFit scheme has the same computational cost as the cubicFit scheme
-	\item High-order `k-exact' polynomial reconstructions are obtained by calculating high-order volume and surface moments analytically
+	\item High-order `\kexact' polynomial reconstructions are obtained by calculating high-order volume and surface moments exactly
 \end{itemize}
 \end{highlights}
 
@@ -14,36 +14,36 @@ Atmospheric models are using increasingly fine meshes to make more accurate fore
 Choosing a higher-order scheme can be more computationally efficient than choosing a finer mesh \citep{waruszewski2018}, and numerical experiments performed by \citet{ullrich2014} identify fourth-order transport schemes as the `sweet spot'  where computational efficiency is maximised.
 
 A high-order transport scheme is ordinarily defined as one with a formal accuracy greater than second-order.
-The order of convergence observed in numerical experiments may be less than the formal order of accuracy if the transported field is insufficiently smooth, and strong gradients in the form of weather fronts and temperature inversions mean that atmospheric fields are generally not smooth enough to obtain high-order convergence \citep{holdaway2008}. 
+The \emph{order of convergence} observed in numerical experiments may be less than the formal \emph{order of accuracy} if the transported field is insufficiently smooth, and strong gradients in the form of weather fronts and temperature inversions mean that atmospheric fields are generally not smooth enough to obtain high-order convergence \citep{holdaway2008}. 
 Even if high-order convergence is unattainable, high-order schemes offer other advantages over second-order schemes: high-order schemes can reduce dispersion and diffusion errors \citep{ullrich-jablonowski2012,waruszewski2018}, reduce grid imprinting \citep{mccorquodale2015}, and increase the effective resolution of the scheme \citep{ullrich2014}.
 
 High-order schemes are often formulated by introducing additional degrees of freedom within each cell.
-Such schemes are often called `compact schemes' because sub-grid reconstructions are performed within each cell, only requiring data exchange with immediately adjacent cells.
+Such schemes are called `compact schemes' because sub-grid reconstructions are performed within each cell, only requiring data exchange with immediately adjacent cells.
 Hence, compact schemes have near-optimal parallel scalability, making them attractive for massively parallel atmospheric simulations \citep{ullrich2014}.
 Discontinuous Galerkin (DG) schemes belong to the class of compact schemes, and DG schemes have been tried in some atmospheric research models \citep{nair2005,giraldo-restelli2008}.
 High-order DG schemes prognose values at Gauss points within each cell in order to approximate integral values using Gaussian quadrature.
 The position of Gauss points can be straightforwardly calculated for tetrahedral and hexahedral reference cells, but no straightforward method is available for arbitrary polyhedra \citep{costa2017}.
 Furthermore, numerical quadrature calculations in DG schemes can be expensive \citep{dumbser2007}, motivating alternative, quadrature-free DG schemes \citep{atkins-shu1998,nair2015}.
 Another quadrature-free compact scheme is the multi-moment constrained finite volume formulation which achieves high-order accuracy by storing several, prognostic moments collocated at cell centres \citep{ii-xiao2009}.
-Regardless of the particular formulation, transporting a tracer using a compact scheme usually requires the storage of multiple values per cell, and these storage requirements increase with the order of accuracy, with a fourth-order accurate DG scheme requiring the storage of up to 10 values per cell \citep{ullrich2010}.
-The transport scheme by \citet{skamarock-gassmann2011} a compact scheme that, unusually, only requires the cell average values of immediately neighbouring cells, calculating second-order derivatives to cancel errors in the Taylor series expansion.
+Transporting a tracer using a compact scheme usually requires the storage of multiple values per cell, and these storage requirements increase with the order of accuracy, with a fourth-order accurate DG scheme requiring the storage of up to 10 values per cell \citep{ullrich2010}.
+The transport scheme by \citet{skamarock-gassmann2011} is a compact scheme that, unusually, only requires the cell average values of immediately adjacent cells, using them to calculate second-order derivatives that cancel errors in the Taylor series expansion.
 The resulting scheme is high-order accurate on uniform hexagonal meshes, but it is formally only first-order accurate on non-uniform meshes.
 
 Non-compact schemes store only cell average values, and high-order reconstructions are obtained on uniform or non-uniform meshes by using a larger stencil of cells.
-A high-order polynomial reconstruction is achieved using the k-exact method \citep{barth1995}, so-called because it exactly reconstructs a polynomial of order $k$ represented by a stencil of cell average values.
-The k-exact method has been used in fully compressible finite volume models that employ Godunov-type schemes \citep{ullrich-jablonowski2012} using cubed-sphere meshes or Weighted Essentially Non-Oscillatory (WENO) schemes \citep{tsoutsanis-drikakis2016} using arbitrary polyhedral meshes.
-Godunov-type schemes and WENO schemes are well-suited for representing nonlinear dynamics with discontinuous solutions \citep{leveque2002}, but the k-exact method can be applied to the linear transport equation yielding a computationally cheaper scheme.
-\citet{sjoegreen2012} developed a third-order accurate finite volume transport scheme using the k-exact method, formulated for spherical geometry, but failed to present convergence results from numerical tests on a two-dimensional spherical shell.
-\citet{devendran2017} formulated a high-order treatment of sub-grid scale boundaries, using the k-exact method for solving Poisson's equation on cut cell meshes, and such a technique might prove useful for representing the atmosphere above complex terrain.
+A high-order polynomial reconstruction is achieved using the \kexact{} method \citep{barth1995}, so-called because it exactly reconstructs a polynomial of degree $k$ represented by a stencil of cell average values.
+The \kexact{} method has been used in fully compressible finite volume models that employ Godunov-type schemes \citep{ullrich-jablonowski2012} using cubed-sphere meshes, or Weighted Essentially Non-Oscillatory (WENO) schemes \citep{tsoutsanis-drikakis2016} using arbitrary polyhedral meshes.
+Godunov-type schemes and WENO schemes are well-suited for representing nonlinear dynamics with discontinuous solutions \citep{leveque2002}, but the \kexact{} method can be applied to the linear transport equation yielding a computationally cheaper scheme.
+\citet{sjoegreen2012} developed a third-order accurate finite volume transport scheme using the \kexact{} method, formulated for spherical geometry, but did not present convergence results from numerical tests on a two-dimensional spherical shell.
+\citet{devendran2017} formulated a high-order treatment of sub-grid scale boundaries, using the \kexact{} method for solving Poisson's equation on cut cell meshes, and such a technique might prove useful for representing the atmosphere above complex terrain.
 
-For the numerical experiments presented in chapter~\ref{ch:cubicFit}, the cubicFit transport scheme acheives only second-order convergence even though it includes high-order polynomial terms.
+For the numerical experiments presented in chapter~\ref{ch:cubicFit}, the cubicFit transport scheme achieves only second-order convergence even though it includes high-order polynomial terms.
 The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
-In this chapter, we apply the k-exact method, constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
+In this chapter, we apply the \kexact{} method, constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
 In this way, we obtain a high-order transport scheme which retains the low computational cost of the cubicFit transport scheme.
 Since it has much in common with the cubicFit scheme, we name this high-order transport scheme `highOrderFit'.
 
-In section~\ref{sec:highOrderFit:scheme}, we formulate the highOrderFit transport scheme using the k-exact method.
-We go on to perform numerical experiments to compare the order of convergence of the highOrderFit scheme and the cubicFit scheme: section~\ref{sec:highOrderFit:schaerAdvectSmooth} performs the standard test of horizontal flow over mountains using terrain-following and cut cell meshes and, following \citep{chen2017}, section~\ref{sec:highOrderFit:deformationPlane} performs a test of deformational flow on a two-dimensional Cartesian plane represented by uniform meshes and meshes with distortions similar to those of a cubed-sphere.
+In section~\ref{sec:highOrderFit:scheme}, we formulate the highOrderFit transport scheme using the \kexact{} method.
+We go on to perform numerical experiments to compare the order of convergence of the highOrderFit scheme and the cubicFit scheme: section~\ref{sec:highOrderFit:schaerAdvectSmooth} performs the standard test of horizontal flow over mountains using terrain-following and cut cell meshes and, following \citet{chen2017}, section~\ref{sec:highOrderFit:deformationPlane} performs a test of deformational flow on a two-dimensional Cartesian plane represented by uniform meshes and meshes with distortions similar to those of a cubed-sphere.
 
 \input{highOrderFit/scheme}
 \input{highOrderFit/schaerAdvectSmooth.tex}

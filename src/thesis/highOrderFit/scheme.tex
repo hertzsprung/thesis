@@ -72,7 +72,7 @@ which can be written as
 where $\vect{B}$ is the stencil matrix, which is constructed using only the mesh geometry.
 Assuming the stencil comprises at least as many cells as there are polynomial coefficients then $n \geq m$ and the matrix equation can be solved using a least-squares approach to find the unknown coefficients $\vect{a}$.
 
-To obtain a stable advection scheme, we follow the approach of the cubicFit scheme by introducing multipliers $\vect{m}$ to obtain
+To obtain a stable transport scheme, we follow the approach of the cubicFit scheme by introducing multipliers $\vect{m}$ to obtain
 \begin{align}
 	\vect{\tilde{B}} \vect{a} = \vect{m} \cdot \bm{\phi}
 \end{align}

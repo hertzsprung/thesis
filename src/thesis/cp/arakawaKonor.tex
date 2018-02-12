@@ -62,7 +62,9 @@ The sponge layer is only active on faces whose normal is vertical so that it dam
 		\includegraphics{thesis/cp/arakawaKonor/fig-theta_diff.pdf}
 	\end{subfigure}
 %
-	\caption{Differences in potential temperature for the standing waves test case.
+	\caption{
+	\TODO{What are the values that have been clipped in (f)?}
+	Differences in potential temperature for the standing waves test case.
 	On the uniform mesh and the horizontally tilted mesh,
 	(\subcaptionref{fig:cp:arakawaKonor:theta_diff:uniform:initial},
 	\subcaptionref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:initial})
@@ -129,4 +131,6 @@ Using the vertically tilted mesh, a rapid increase in total energy is observed a
 Since the generalised Charney--Phillips model variant transports potential temperature using an advective-form scheme and not a flux-form scheme, it is likely that the observed energy changes and associated potential temperature errors are due to a lack of conservation on distorted meshes.
 
 Here we have presented a new standing waves test case that has been used to clearly excite the Lorenz computational mode, and we have demonstrated that the generalised Charney--Phillips formulation is free from the Lorenz computational mode on a uniform mesh.
-The generalised Charney--Phillips model variant suffers from inaccurate or unstable solutions on distorted meshes, but we expect that a more accurate transport scheme would avoid such a severe lack of conservation and improve solutions on distorted meshes.
+The generalised Charney--Phillips model variant suffers from inaccurate or unstable solutions on distorted meshes, but we expect that a more accurate transport scheme could avoid such a severe lack of conservation and improve solutions on distorted meshes.
+
+\TODO{John asks, how do I know that it is not the implementation of top and bottom boundary conditions on the distorted mesh that results in error growth?  Answer: I don't know exactly where the errors are coming from, but the boundaries are the same for distorted and undistorted meshes.  And the errors appear everywhere, they don't start at any boundary.  What makes you suspect the boundaries?}

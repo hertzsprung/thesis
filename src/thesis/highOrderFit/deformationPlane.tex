@@ -11,8 +11,6 @@ The discrete velocity field is defined using the streamfunction,
 	\Psi = \frac{\hat{\Psi}}{T} \sin^2 \left( 2 \pi \left( \frac{x}{2\pi} - \frac{t}{T} \right) \right) \cos^2(y) \cos \left( \frac{\pi t}{T} \right) - \frac{2\pi y}{T},
 \end{align}
 where $\hat{\Psi} = 10$, and $T = 5$ is the duration of integration, after which time the analytic solution is equal to the initial condition.
-\TODO{@Hilary: in \citet{chen2017} equation 41, there is a term $\left( L_x / (2\pi) \right)^2$, but this is equal to one since $L_x = 2 \pi$!  What's that about?}
-
 The initial tracer density $\phi$ is defined as the sum of two Gaussian hills,
 \begin{align}
 	\phi = \phi_1(x,y) + \phi_2(x,y) \text{ ,}
@@ -27,6 +25,7 @@ The initial tracer field has two hills centred at
 	(x_1,y_1) &= (5 \pi /6, 0) \text{ ,} \\
 	(x_2,y_2) &= (7 \pi /6, 0) \text{ .}
 \end{align}
+
 Tests were performed using the cubicFit and highOrderFit schemes using uniform meshes and meshes with distortions similar to a cubed-sphere mesh.
 Uniform meshes comprise square cells so that $\Delta x \mathbin{:} \Delta y = 1\mathbin{:}1$.
 Distorted meshes modify the corresponding uniform mesh using a coordinate transform,

@@ -1,8 +1,7 @@
 \section{Generalising the Charney–Phillips staggering for arbitrary meshes}
 \label{sec:cp:method}
 
-\TODO{could move this additional introductory material into the chapter introduction}
-
+\TODO{include graphic showing Lorenz and Charney--Phillips staggering}
 The generalisation of the Lorenz staggering for arbitrary meshes is straightforward \citep{weller-shahrokhi2014} but this is not true for the Charney--Phillips staggering, which is only suitable for structured meshes with cells stacked in columns.
 On a finite volume mesh, variables are ordinarily placed at cell centres or cell faces.
 In the Charney--Phillips staggering, the thermodynamic variable is placed at only those cell faces that lie on the vertical coordinate surfaces, and vertically-oriented faces have no thermodynamic information.
@@ -19,7 +18,7 @@ While much of the literature concentrates on horizontal mesh refinement, some in
 \citet{mueller2013} have used conforming refinement of triangular meshes for simulating the standard rising bubble and density current test cases, and \citet{yamazaki-satomura2012} have used nonconforming block-refinement to better resolve the atmosphere immediately above idealised mountains.
 
 According to \citet{thuburn-woolings2005}, the vertical discretisation used by \citet{yamazaki-satomura2012} supports computational modes and instabilities, although these errors were not excited by the test cases performed by \citet{yamazaki-satomura2012}.
-The Charney--Phillips staggering is unsusceptible to such errors, but we are not aware of any existing literature that combines mesh refinement with a Charney--Phillips staggering.
+The Charney--Phillips staggering is not susceptible to such errors, but we are not aware of any existing literature that combines mesh refinement with a Charney--Phillips staggering.
 By allowing for any mesh structure, a generalised Charney--Phillips formulation should be suitable for any type of mesh, including conforming and non-conforming mesh refinement, terrain-following meshes, cut cell meshes and slanted cell meshes.
 
 \subsection{Generalised Charney--Phillips formulation}
@@ -33,6 +32,7 @@ By allowing for any mesh structure, a generalised Charney--Phillips formulation 
 	\label{fig:cp:staggering}
 \end{figure}
 
+\TODO{Need to make clear that this generalisation is new to the thesis, not from elsewhere.}
 The generalised Charney--Phillips model is a variant of the fully compressible Euler model with a Lorenz staggering, as documented by \citet{weller-shahrokhi2014} and summarised in section~\ref{sec:slanted:exnerFoamH}.
 The primary difference between the models is their treatment of the prognostic thermodynamic variable: the generalised Charney--Phillips formulation stores the prognostic thermodynamic variable $b_f$ at all cell faces such that $b_f = \theta_f \unitg \cdot \unitn_f$ where $f$ is a face, $\theta_f$ is the potential temperature at the face, $\unitg$ is the unit vector of gravitational acceleration and $\unitn_f$ is the unit vector that is outward normal to the face.
 This arrangement is illustrated in figure~\ref{fig:cp:staggering}.
@@ -52,7 +52,7 @@ where $\theta_C$ is the reconstructed potential temperature.  On a Cartesian mes
 
 Finally, $\theta_f$ is recalculated from $b_f$ and $\theta_C$,
 \begin{align}
-	\theta_f &= \Mag{ \unitg \cdot \unitn_f \theta_f} + \left( 1 - \Mag{\unitg \cdot \unitn_f } \right) \left( \theta_C \right)_F \text{.}
+	\theta_f &:= \Mag{ \unitg \cdot \unitn_f \theta_f} + \left( 1 - \Mag{\unitg \cdot \unitn_f } \right) \left( \theta_C \right)_F \text{.}
 \end{align}
 This ensures that values of $\theta_f$ on vertical faces is calculated from nearby $b_f$ values and is not retained across time-steps.
 
