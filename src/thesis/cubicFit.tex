@@ -43,7 +43,7 @@ The multi-moment constrained finite volume scheme \citep{ii-xiao2009} is a three
 The Multidimensional Positive Definite Advection Transport Algorithm (MPDATA) is another three-dimensional scheme that is suitable for arbitrary meshes.
 \TODO{what about its computational characteristics?}
 It has been used on triangular unstructured meshes to simulate two-dimensional nonhydrostatic flows over orography \citep{smolarkiewicz-szmelter2011}, and in three-dimensional transport tests \citep{smolarkiewicz-szmelter2005}. 
-Most recently, \citet{kuehnlein-smolarkiewicz2017} extended MPDATA to enable semi-implicit integrations of the compressible Euler equations on arbitrary meshes.
+Most recently, \citet{kuehnlein-smolarkiewicz2017} extended MPDATA to enable semi-implicit integrations of the compressible Euler equations on arbitrary meshes, and MPDATA has also been extended to achieve third-order convergence \citep{waruszewski2018}.
 The three-dimensional method-of-lines scheme developed by \citet{weller-shahrokhi2014} has been used in two-dimensional flows over orography on Cartesian $x$--$z$ planes with distorted meshes \citep{chen2017}.
 This finite volume scheme uses a moving weighted least-squares reconstruction \citep{lashley2002,thuburn2014} that makes it suitable for arbitrary meshes.
 Similar least-squares approaches have been applied previously to shallow water flows \citep{cuetofelgueroso2006}, aeronautic \citep{cuetofelgueroso2007} and porous media \citep{white2017} simulations.

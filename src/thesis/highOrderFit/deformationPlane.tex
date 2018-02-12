@@ -1,7 +1,9 @@
 \section{Deformational flow on a plane}
 \label{sec:highOrderFit:deformationPlane}
 
-\TODO{motivate and introduce test case}
+The standard test case by \citet{lauritzen2012} of deformational flow on a two-dimensional spherical shell was adapted by \citet{chen2017} for use on a two-dimensional Cartesian plane.
+Since the highOrderFit formulation described in section~\ref{sec:highOrderFit:scheme} has not been extended to spherical geometry, we use the test case by \citet{chen2017} to measure the order of convergence of the highOrderFit transport scheme in a time-varying, rotational velocity field.
+Tests are performed on uniform meshes, and meshes with distortions similar to those found on the cubed-sphere.
 
 Following \citet{chen2017}, the domain is defined on a rectangular $x$--$y$ plane that is $2\pi$ wide and $\pi$ tall.  The domain is periodic in the $x$ direction with no normal flow imposed at the upper and lower boundaries.
 The discrete velocity field is defined using the streamfunction,
@@ -44,8 +46,6 @@ Distorted meshes modify the corresponding uniform mesh using a coordinate transf
 		\tan(\ang{30}) \left( \Mag{x} - \frac{3\pi}{4} \right) & \text{otherwise.} \\
 	\end{cases}
 \end{align}
-Figure~\ref{fig:highOrderFit:deformationPlane:mesh} illustrates a resulting distorted mesh with $60 \times 30$ cells.
-The classical fourth-order Runge–Kutta time-stepping scheme is used for both cubicFit and highOrderFit transport schemes, and tests are integrated using a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
 
 \begin{figure}
 	\centering
@@ -56,6 +56,8 @@ The classical fourth-order Runge–Kutta time-stepping scheme is used for both c
 	\label{fig:highOrderFit:deformationPlane:mesh}
 \end{figure}
 
+Figure~\ref{fig:highOrderFit:deformationPlane:mesh} illustrates a resulting distorted mesh with $60 \times 30$ cells.
+The classical fourth-order Runge–Kutta time-stepping scheme is used for both cubicFit and highOrderFit transport schemes, and tests are integrated using a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
 \begin{figure}
 	\centering
 	%
@@ -70,5 +72,6 @@ To measure numerical convergence, a range of mesh spacings are chosen between $\
 Similar to the results of deformational flow on a sphere in section~\ref{sec:cubicFit:deformationSphere}, both the cubicFit scheme and the highOrderFit scheme are slow to converge on coarser meshes.
 At finer mesh spacings, the cubicFit scheme achieves second-order convergence and the highOrderFit scheme achieves third-order convergence.
 For both schemes, errors are slightly larger switching from a uniform mesh to a distorted mesh, but the order of convergence remains unchanged.
-For a given mesh, the highOrderFit scheme is more accurate than the cubicFit scheme except at the coarsest mesh spacings.
 
+Results presented in this chapter demonstrate that, assuming a sufficiently smooth tracer, the highOrderFit transport scheme achieves third-order convergence or higher, irrespective of mesh distortions or the choice of velocity field.
+Thanks to its high-order convergence, the highOrderFit scheme is more accurate than the cubicFit scheme on all but the coarsest meshes.

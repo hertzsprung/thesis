@@ -1,7 +1,14 @@
 \chapter{High-order transport for arbitrary meshes}
 \label{ch:highOrder}
 
-\TODO{existing high-order FV schemes exist, but are they more computationally expensive? or unsuitable for arbitrary meshes? identify applications of high-order FV schemes to atmospheric models}
+\begin{highlights}
+{\Large Highlights}
+\begin{itemize}
+	\item The new highOrderFit transport scheme is third-order convergent or higher on distorted and undistorted meshes
+	\item During integration, the highOrderFit scheme has the same computational cost as the cubicFit scheme
+	\item Surprisingly, the cubicFit transport scheme also appears to be third-order convergent, but only for horizontal flow on terrain-following meshes
+\end{itemize}
+\end{highlights}
 
 Atmospheric models are using increasingly fine meshes to make more accurate forecasts, but high-order numerical schemes offer another possible route to improving accuracy.
 Choosing a higher-order scheme can be more computationally efficient than choosing a finer mesh \citep{waruszewski2018}, and numerical experiments performed by \citet{ullrich2014} identify fourth-order transport schemes as the `sweet spot'  where computational efficiency is maximised.
@@ -18,32 +25,25 @@ High-order DG schemes prognose values at Gauss points within each cell in order 
 The position of Gauss points can be straightforwardly calculated for tetrahedral and hexahedral reference cells, but no straightforward method is available for arbitrary polyhedra \citep{costa2017}.
 Furthermore, numerical quadrature calculations in DG schemes can be expensive \citep{dumbser2007}, motivating alternative, quadrature-free DG schemes \citep{atkins-shu1998,nair2015}.
 Another quadrature-free compact scheme is the multi-moment constrained finite volume formulation which achieves high-order accuracy by storing several, prognostic moments collocated at cell centres \citep{ii-xiao2009}.
-Regardless of the particular formulation, transporting a tracer using a compact scheme requires the storage of multiple values per cell, and these storage requirements increase with the order of accuracy, with a fourth-order accurate DG scheme requiring the storage of up to 10 values per cell \citep{ullrich2010}.
+Regardless of the particular formulation, transporting a tracer using a compact scheme usually requires the storage of multiple values per cell, and these storage requirements increase with the order of accuracy, with a fourth-order accurate DG scheme requiring the storage of up to 10 values per cell \citep{ullrich2010}.
+The transport scheme by \citet{skamarock-gassmann2011} a compact scheme that, unusually, only requires the cell average values of immediately neighbouring cells, calculating second-order derivatives to cancel errors in the Taylor series expansion.
+The resulting scheme is high-order accurate on uniform hexagonal meshes, but it is formally only first-order accurate on non-uniform meshes.
 
-In contrast, non-compact schemes store only cell average values, and high-order reconstructions are obtained by using a larger stencil of cells.
-\TODO{Godunov-type schemes are also non-compact, high-order reconstruction over larger stencil of cell averages.  \citet{ullrich2010} is one such scheme.  Riemann solvers are needed for upwinding and matching owner/neighbour fluxes?  Are Riemann solvers computationally expensive?}
-\TODO{
-\begin{itemize}
-\item mention \citet{skamarock-gassmann2011} formulations that are 3rd/4th-order accurate on uniform meshes, but only 1st-order accurate on distorted meshes
-\item k-exact formulation \citep{barth1995} is non-compact
-\item \citet{sjoegreen2012} implements k-exact transport scheme on a spherical shell, 3rd-order upwind-biased stencil but doesn't present convergence results
-\item \citet{devendran2017} also use k-exact formulation for solving Poisson's equation
-\end{itemize}
-}
-
-%The MPDATA scheme, a multidimensional, second-order scheme for arbitrary meshes was recently extended to achieve third-order convergence \citep{waruszewski2018}.
-
-% what advantages does highOrderFit have?
-% - arbitrary meshes
-% - natural generalisation to 3D
-% - 3D multidimensional
-% - same, cheap computational cost as cubicFit
+Non-compact schemes store only cell average values, and high-order reconstructions are obtained on uniform or non-uniform meshes by using a larger stencil of cells.
+A high-order polynomial reconstruction is achieved using the k-exact method \citep{barth1995}, so-called because it exactly reconstructs a polynomial of order $k$ represented by a stencil of cell average values.
+The k-exact method has been used in fully compressible finite volume models that employ Godunov-type schemes \citep{ullrich-jablonowski2012} using cubed-sphere meshes or Weighted Essentially Non-Oscillatory (WENO) schemes \citep{tsoutsanis-drikakis2016} using arbitrary polyhedral meshes.
+Godunov-type schemes and WENO schemes are well-suited for representing nonlinear dynamics with discontinuous solutions \citep{leveque2002}, but the k-exact method can be applied to the linear transport equation yielding a computationally cheaper scheme.
+\citet{sjoegreen2012} developed a third-order accurate finite volume transport scheme using the k-exact method, formulated for spherical geometry, but failed to present convergence results from numerical tests on a two-dimensional spherical shell.
+\citet{devendran2017} formulated a high-order treatment of sub-grid scale boundaries, using the k-exact method for solving Poisson's equation on cut cell meshes, and such a technique might prove useful for representing the atmosphere above complex terrain.
 
 For the numerical experiments presented in chapter~\ref{ch:cubicFit}, the cubicFit transport scheme acheives only second-order convergence even though it includes high-order polynomial terms.
 The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
-\TODO{the k-exact technique predates \citet{devendran2017} ... } developed a high-order finite volume scheme for solving Poisson’s equation, and they achieved high-order convergence by constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
-We apply their approach to obtain a transport scheme with high-order convergence whilst retaining the low computational cost of the cubicFit transport scheme.
+In this chapter, we apply the k-exact method, constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
+In this way, we obtain a high-order transport scheme which retains the low computational cost of the cubicFit transport scheme.
 Since it has much in common with the cubicFit scheme, we name this high-order transport scheme `highOrderFit'.
+
+In section~\ref{sec:highOrderFit:scheme}, we formulate the highOrderFit transport scheme using the k-exact method.
+We go on to perform numerical experiments to compare the order of convergence of the highOrderFit scheme and the cubicFit scheme: section~\ref{sec:highOrderFit:schaerAdvectSmooth} performs the standard test of horizontal flow over mountains using terrain-following and cut cell meshes and, following \citep{chen2017}, section~\ref{sec:highOrderFit:deformationPlane} performs a test of deformational flow on a two-dimensional Cartesian plane represented by uniform meshes and meshes with distortions similar to those of a cubed-sphere.
 
 \input{highOrderFit/scheme}
 \input{highOrderFit/schaerAdvectSmooth.tex}

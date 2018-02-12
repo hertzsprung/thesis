@@ -38,6 +38,10 @@ The highOrderFit transport scheme also achieves third-order convergence on basic
 The highOrderFit scheme achieves fourth-order convergence on cut cell meshes.
 While we have not formally analysed the order of accuracy of the highOrderFit scheme, we might expect to obtain fourth-order convergence under these ideal test conditions: first, the highOrderFit scheme uses a cubic reconstruction; second, cut cell meshes are undistorted away from the lower boundary and, third, the horizontal flow is aligned with the cut cell mesh.
 
+At coarser mesh spacings, the cubicFit scheme is more accurate than the highOrderFit scheme.
+It sould be possible to increase the accuracy of the highOrderFit scheme by adjusting the multiplier values used in the least-squares fit, but this has not been explored.
+At finer mesh spacings, the highOrderFit scheme becomes more accurate than the cubicFit scheme thanks to its higher order of convergence.
+
 Further numerical experiments were performed using steeper slopes represented by basic terrain-following meshes, but the highOrderFit scheme produced instabilities above the steepest slopes.
 The stabilisation procedure used in the cubicFit scheme has not been implemented in the highOrderFit scheme, but examination of the stencils reveals that, using the highOrderFit scheme, some stencil weights violate the stability conditions given in equation~\eqref{eqn:cubicFit:stability}.
 It is likely that the selective removal of some high-order terms for particularly distorted stencils could make the highOrderFit scheme stable on highly-distorted meshes.

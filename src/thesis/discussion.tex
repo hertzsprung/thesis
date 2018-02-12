@@ -11,6 +11,7 @@
 \item put flux stabilisation from cubicFit into highOrderFit: expect that it would stabilise schaerAdvect for coarse BTF meshes
 \item an accurate transport scheme walks the line between damping and instability.  \citet{devendran2017} note that the multipliers that go into the weighted least squares fit are extra degrees of freedom that could be optimised (somehow).  We do make some attempt at this by adjusting multipliers in cubicFit stabilisation procedure, but I'm not aware of any previous research into how to optimise these weights.  We want to approach $A=1$ from below to guarantee stability with minimal damping.
 \item highOrderFit coefficients sometimes mildly violate the cubicFit stability constraints.  Could we do a new 1D stability analysis using the cell-average approach of highOrderFit instead of the point-wise approach of cubicFit that would provide slightly more permissive stability constraints?
+\item highOrderFit for spherical geometries throws up issues of calculating high-order moments for spherical polyhedra.  \citet{sjoegreen2012} might provide us with some inspiration here?  but really we need an extension of the methods of \citet{tuzikov2003}.
 \end{itemize}
 }
 
