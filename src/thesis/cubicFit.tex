@@ -13,7 +13,6 @@
 A huge variety of transport schemes have been developed for atmospheric models, but few are able to account for distortions associated with steep terrain because they treat horizontal and vertical transport separately \citep{kent2014}, resulting in numerical errors called `splitting errors'.
 Such errors can be reduced by explicitly accounting for transverse fluxes when combining fluxes \citep{leonard1996}, but splitting errors are still apparent in flows over steep terrain where meshes are highly distorted and metric terms in a terrain-following coordinate transform are large \citep{chen2017}.
 
-\TODO{I haven't stated the order of convergence for any schemes mentioned here}
 Transport schemes are often classified as dimensionally-split or multidimensional.
 Dimension\-ally-split schemes such as \citep{lin-rood1996,guo2014} calculate transport in each dimension separately before the flux contributions are combined.  Such schemes are computationally efficient and allow existing one-dimensional high-order methods to be used.
 When dimensionally-split schemes are used for horizontal transport, quadrilateral meshes are needed because the mesh dimensions are inherently separable.  Special treatment is required at the corners of cubed-sphere panels where local coordinates differ \citep{putman-lin2007,guo2014}.
@@ -41,7 +40,6 @@ This separate treatment becomes less justifiable as atmospheric models are using
 Three-dimensional schemes avoid any splitting errors over steep slopes, but only a few conservative three-dimensional schemes have been used in atmospheric models.
 The multi-moment constrained finite volume scheme \citep{ii-xiao2009} is a three-dimensional scheme that has been used to simulate nonhydrostatic flows over orography with terrain-following coordinates on a $x$--$z$ plane \citep{li2013}.  Simulations of subcritical flow around a cylinder have also been performed on a three-dimensional hexahedral-prismatic hybrid mesh \citep{xie-xiao2016}.
 The Multidimensional Positive Definite Advection Transport Algorithm (MPDATA) is another three-dimensional scheme that is suitable for arbitrary meshes.
-\TODO{what about its computational characteristics?}
 It has been used on triangular unstructured meshes to simulate two-dimensional nonhydrostatic flows over orography \citep{smolarkiewicz-szmelter2011}, and in three-dimensional transport tests \citep{smolarkiewicz-szmelter2005}. 
 Most recently, \citet{kuehnlein-smolarkiewicz2017} extended MPDATA to enable semi-implicit integrations of the compressible Euler equations on arbitrary meshes, and MPDATA has also been extended to achieve third-order convergence \citep{waruszewski2018}.
 The three-dimensional method-of-lines scheme developed by \citet{weller-shahrokhi2014} has been used in two-dimensional flows over orography on Cartesian $x$--$z$ planes with distorted meshes \citep{chen2017}.
@@ -52,8 +50,11 @@ This chapter presents a new multidimensional method-of-lines scheme, `cubicFit',
 The implementation uses stability conditions derived from a von Neumann stability analysis to select appropriate polynomial fits for stencils in highly-distorted mesh regions.
 This stabilisation procedure has similarities to the Multidimensional Optimal Order Detection (MOOD) method \citep{clain2011,diot2013}.
 However, MOOD is an \textit{a posteriori} method that detects discontinuities in the solution.  In contrast, the cubicFit stabilisation procedure is an \textit{a priori} method that depends upon the mesh geometry only, and reconstruction weights can be precomputed without knowledge of the velocity field or tracer field.
-\TODO{another alternative might be matrix regularisation... a regularised moving least squares technique suitable for poor-quality meshes is formulated by \citet{wang2018}, but hasn't been applied to a PDE, just used for surface reconstruction?}
-Hence, the computational cost of the cubicFit scheme is lower than most swept-area schemes that require a matrix-vector multiply per face per time-stage \TODO{how big is the matrix?}.  Instead, the computational cost is more comparable to dimensionally-split schemes, with the cubicFit scheme requiring only $n$ multiplies per face per time-stage where $n$ is the size of the stencil.
+\citet{wang2018} propose a different stabilisation approach that regularises ill-conditioned matrices that are associated with least-squares fits over highly-distorted mesh regions, though the technique has so far only been tried with element-free Galerkin methods.
+
+Almost all of the least-squares procedure depends upon the mesh geometry only and reconstruction weights can be precomputed without knowledge of the velocity field or tracer field.
+Hence, the computational cost of the cubicFit scheme is lower than most swept-area schemes that require a matrix-vector multiply per face per time-stage with an $m \times n$ matrix where $m$ is the size of the stencil and $n$ is associated with the order of accuracy.
+Instead, the computational cost of the cubicFit scheme is more comparable to dimensionally-split schemes, with the cubicFit scheme requiring only $m$ multiplies per face per time-stage.
 
 The remainder of this chapter is organised as follows.
 Section~\ref{sec:cubicFit:transport} starts by discretising the transport equation using a method-of-lines approach before describing the cubicFit transport scheme, and a multidimensional linear upwind transport scheme that is included in the OpenFOAM software distribution \citep{openfoam-numerics}.
