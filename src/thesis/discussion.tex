@@ -1,6 +1,8 @@
 \chapter{Discussion}
 \label{ch:discussion}
 
+\TODO{not sure whether to keep future work separate, or to keep future work items next to the conclusions for the respective chapter}
+
 Atmospheric models are using increasingly fine horizontal mesh spacings that resolve steep slopes in terrain resulting in highly-distorted meshes and increased numerical errors.
 This thesis makes four contributions to reduce numerical errors for flows over steep slopes.
 First, we presented a new multidimensional method-of-lines transport scheme, cubicFit, that enforces stability conditions derived from a von Neumann stability analysis to make the scheme stable over steep terrain on highly-distorted, arbitrary meshes.
@@ -8,19 +10,40 @@ The scheme has a low computational cost at runtime, requiring only $m$ multiplie
 Stability condition calculations are pre-computed during model initialisation since they depend upon the mesh geometry only.
 A new transport test case with a terrain-following velocity field was formulated which reveals that numerical transport errors are primarily due to misalignment of the velocity field with mesh layers and not simply mesh distortions.
 In all tests, compared to the multidimensional linear upwind scheme, the cubicFit scheme is more stable and more accurate.
-The cubicFit transport scheme is second-order convergent on two-dimensional meses over steeply sloping terrain, cubed sphere meshes and hexagonal icosahedral meshes, irrespective of the velocity field or mesh distortions.
+The cubicFit transport scheme is second-order convergent on two-dimensional meses over steeply sloping terrain, cubed sphere meshes and hexagonal-icosahedral meshes, irrespective of the velocity field or mesh distortions.
 
-\TODO{Second, highOrderFit...}
+Second, a high-order multidimensional method-of-lines transport scheme, highOrderFit, is developed.
+The highOrderFit scheme uses high-order \kexact polynomial reconstructions that are obtained by calculating high-order volume and surface moments exactly.
+All computationally expensive reconstruction calculations depend on the mesh geometry alone.
+During integration, the highOrderFit scheme requires only $m$ multiplies per face per time-stage using a stencil of $m$ cells, meaning that the highOrderFit scheme has the same computational cost at runtime as the cubicFit scheme.
+Transport tests demonstrate that the highOrderFit scheme achieves at least third-order convergence irrespective of the velocity field or mesh distortions.
 
 Third, we proposed a new type of mesh, the slanted cell mesh, for representing the atmosphere above steeply sloping terrain.
 The slanted cell mesh is designed to avoid severe mesh distortions associated with terrain-following meshes, and to avoid severe time-step constraints associated with arbitrarily small cut cells.
 In a test of a stratified atmosphere at rest, spurious circulations were reduced by switching from the highly-distorted basic terrain-following mesh to the more uniform slanted cell mesh.
 A new test case was formulated to challenge transport schemes over a steeply sloping lower boundary.
-Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over these very steep slopes, and the test reveals that the slanted cell mesh permits longer time-steps than cut cells, with time-steps comparable to terrain-following meshes.
+Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over these very steep slopes.
+The test reveals that the slanted cell mesh permits longer time-steps than those permitted on cut cell meshes, since slanted cells are always long in the direction of flow.
 
-\TODO{Fourth, C--P...}
+Finally, a two-dimensional test case was developed to excite the Lorenz computational mode, based on the original test specification by \citet{arakawa-konor1996}.
+Test results were compared using two models of fully compressible Euler equations: one variant having a Lorenz staggering, and the other model variant using a newly-formulated Charney--Phillips staggering generalised for arbitrary meshes.
+The test case verifies that the generalised Charney--Phillips model variant is free from the Lorenz computational mode, and it is hoped that the new test case might aid in the development and intercomparison of future dynamical cores.
 
-\TODO{some ideas for future work...}
+\TODO{future work... might rearrange sections and stuff...}
+
+In this research we have only presented results using uniform vertical mesh spacing.
+Operational atmospheric models have non-uniform vertical mesh spacing, using finer mesh spacing near the ground to resolve boundary layer processes \citep[p. 547]{chow2013}.
+Terrain-following meshes naturally accommodate non-uniform vertical mesh spacing, with each column having the same number of cells.
+However, to resolve boundary layer processes above elevated terrain, cut cell meshes must use fine vertical mesh spacing everywhere from sea level to the highest mountain peak, resulting in a greater computational cost compared to the equivalent terrain-following mesh \citep{walko-avissar2008b}.
+The same problem is true for slanted cell meshes.
+Fine vertical mesh spacing near the ground is also desirable for resolving diurnal flows along mountain slopes, which have a typical depth from \SIrange{1}{20}{\meter} \citep[p. 39]{chow2013}.
+Since we have established that the numerical accuracy of a transport scheme depends primarily on the alignment of flow with the mesh, we might expect terrain-following meshes to be best-suited for representing slope flows.
+The tests presented here demonstrate that a more accurate balance between the pressure gradient and gravity is achieved using cut cell meshes or slanted cell meshes (section~\ref{sec:slanted:resting}), but that transport over mountain slopes is more accurate using terrain-following meshes (section~\ref{sec:slanted:mountainAdvect}).
+Hence, future work might seek an improved mesh that blends the best features of both terrain-following and slanted cell meshes.
+
+% doi:10.5194/gmd-8-3393-2015 grid aspect ratio and PBL study
+
+\TODO{next, talk about \citet{adcroft2013} for the atmosphere ... could improve gap flows, which require very high resolution and accurate cross-sectional area in numerical simulations \citep{gohm2004}.}
 
 \textbf{cubicFit/highOrderFit}
 
@@ -34,6 +57,3 @@ Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numeric
 \end{itemize}
 }
 
-\textbf{slanted cells}
-
-\TODO{be interesting to try and get mesh refinement near lower boundary.  we've also talked about a TF/cut/slanted cell blend: use TF to capture slope flows, but get better pressure gradients and horizontal flows aloft.  Haven't given any of this much thought, though}

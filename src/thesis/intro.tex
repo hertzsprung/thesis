@@ -63,8 +63,6 @@ The Charney--Phillips staggering is free from computational modes, but the Charn
 
 \section{Research outline}
 
-\TODO{stress that all of this research generalises to 3D}
-
 With such a wide choice of horizontal and vertical meshes and numerical schemes, it is important that next-generation atmospheric models are designed so that the choice of mesh and choices of numerical schemes can be deferred until later in the development process, or changed during operation as new techniques emerge \citep{ford2013, theurich2016}.
 This thesis makes four contributions to improve numerical accuracy for flows over steep slopes:
 \begin{enumerate}
@@ -73,8 +71,12 @@ This thesis makes four contributions to improve numerical accuracy for flows ove
 \item a new vertical mesh for representing terrain,
 \item a new test case to excite the Lorenz computational mode.
 \end{enumerate}
+All numerical tests are performed using two-dimensional flows on Cartesian planes and spherical shells, but extending all four formulations to three-dimensional geometries is expected to be straightforward.
+
 Throughout the thesis, we use the OpenFOAM software package \citepalias{openfoam} to implement numerical schemes and numerical experiments, enabling like-for-like comparisons between different model variants and different types of mesh.
-\TODO{Code and data are available at zenodo etc...}
+We provide source code archives for the OpenFOAM implementation of the new transport schemes \citep{cubicFit,highOrderFit}, the AtmosFOAM atmospheric simulation software \citep{atmosfoam,atmosfoam-tools}, the ASAM cut cell mesh generator \citep{asam} and associated OpenFOAM converter \citep{gmv2openfoam}, and the hexagonal–icosahedral mesh generator \citep{geodesic-mesh}.
+For the numerical test cases presented, we also supply the source code \citep{atmostests} and result data \citep{atmostests-results}.
+For convenience, we have also pre-installed all necessary software in an executable Singularity container \citep{atmostests-singularity}.
 
 Chapter~\ref{ch:cubicFit} formulates a new finite volume transport scheme to achieve numerical stability over steep terrain represented by highly-distorted, arbitrary meshes.
 It is second-order convergent on quasi-uniform spherical meshes, terrain-following and cut cell meshes.
