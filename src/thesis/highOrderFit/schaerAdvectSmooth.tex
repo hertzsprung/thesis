@@ -2,7 +2,8 @@
 \label{sec:highOrderFit:schaerAdvectSmooth}
 
 Section~\ref{sec:cubicFit:schaerAdvect} presented a more challenging variant of the standard two-dimensional transport test formulated by \citet{schaer2002} to assess the numerical accuracy of the cubicFit scheme transporting a tracer horizontally above very steep slopes represented by highly-distorted terrain-following meshes.
-In this section, we use the original test as specified by \citet{schaer2002} that has shallower slopes.  We make only one modification to the original test, choosing a smoother initial tracer to allow high-order convergence to be achieved \citep{holdaway2008}.
+In this section, we use the original test as specified by \citet{schaer2002} that has shallower slopes than the test presented in section~\ref{sec:cubicFit:schaerAdvect}.
+We make only one modification to the original test, choosing a smoother initial tracer to allow high-order convergence to be achieved \citep{holdaway2008}.
 This test is used to measure the order of convergence of the cubicFit scheme and the highOrderFit scheme on undistorted cut cell meshes and distorted terrain-following meshes.
 
 The test follows the specification by \citet{schaer2002}, with the same domain size and boundary conditions as in section~\ref{sec:cubicFit:schaerAdvect}.
@@ -13,7 +14,7 @@ All other parameters relating to the mountain profile and velocity field are the
 The tracer density is given by equation~\eqref{eqn:cubicFit:schaerAdvect:tracer} and is centred at $(x_0, z_0) = (\SI{-50}{\kilo\meter}, \SI{9}{\kilo\meter})$.  In order to allow high-order convergence to be achieved, the exponent $\rhoexp = 4$ such that the $\cos^\rhoexp$ hill has $\rhoexp - 1$ continuous derivatives \citep{holdaway2008}.
 All other tracer parameters are the same as those given in section~\ref{sec:cubicFit:schaerAdvect}.
 
-Tests are integrated for \SI{10000}{\second} using the classical fourth-order Runge–Kutta time-stepping scheme \citep[p. 53]{durran2013} with both cubicFit and highOrderFit transport schemes, and a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
+Tests are integrated for \SI{10000}{\second} using the classical fourth-order Runge–Kutta time-stepping scheme with both cubicFit and highOrderFit transport schemes, and a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
 The analytic solution at $t = \SI{10000}{\second}$ is centred at $(x_0, z_0) = (\SI{50}{\kilo\meter}, \SI{9}{\kilo\meter})$.
 To measure the order of convergence of the cubicFit scheme and the highOrderFit scheme, tests are performed using mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{250}{\meter}$.
 The vertical mesh spacing $\Delta z$ is chosen so that $\Delta x \mathbin{:} \Delta z = 2\mathbin{:}1$ to match the original test specification by \citet{schaer2002}.
@@ -33,6 +34,7 @@ The cubicFit transport scheme achieves second-order convergence on cut cell mesh
 It is perhaps surprising that higher-order convergence is achieved when the mesh is distorted and flow is misaligned with the mesh.
 Further tests using very fine meshes might confirm whether third-order convergence is maintained.
 We might expect that the cubicFit scheme tends towards second-order convergence at finer mesh spacings, otherwise the cubicFit scheme would become more accurate on basic terrain-following meshes than cut cell meshes!
+\TODO{perhaps discuss highOrderFit before cubicFit}
 
 The highOrderFit transport scheme also achieves third-order convergence on basic terrain-following meshes, with error measures very similar to those obtained with the cubicFit scheme.
 The highOrderFit scheme achieves fourth-order convergence on cut cell meshes.

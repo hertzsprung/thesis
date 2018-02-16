@@ -5,7 +5,7 @@
 {\Large Highlights}
 \begin{itemize}
 	\item The new highOrderFit transport scheme is third-order convergent or higher on distorted and undistorted meshes
-	\item During integration, the highOrderFit scheme has the same computational cost as the cubicFit scheme
+	\item During integration, the highOrderFit scheme has the same computational cost as the cubicFit scheme, only requiring $m$ multiplies per time-stage where $m$ is the stencil size
 	\item High-order `\kexact' polynomial reconstructions are obtained by calculating high-order volume and surface moments exactly
 \end{itemize}
 \end{highlights}
@@ -26,10 +26,11 @@ The position of Gauss points can be straightforwardly calculated for tetrahedral
 Furthermore, numerical quadrature calculations in DG schemes can be expensive \citep{dumbser2007}, motivating alternative, quadrature-free DG schemes \citep{atkins-shu1998,nair2015}.
 Another quadrature-free compact scheme is the multi-moment constrained finite volume formulation which achieves high-order accuracy by storing several, prognostic moments collocated at cell centres \citep{ii-xiao2009}.
 Transporting a tracer using a compact scheme usually requires the storage of multiple values per cell, and these storage requirements increase with the order of accuracy, with a fourth-order accurate DG scheme requiring the storage of up to 10 values per cell \citep{ullrich2010}.
-The transport scheme by \citet{skamarock-gassmann2011} is a compact scheme that, unusually, only requires the cell average values of immediately adjacent cells, using them to calculate second-order derivatives that cancel errors in the Taylor series expansion.
+The transport scheme by \citet{skamarock-gassmann2011} is a compact scheme for hexagonal meshes that, unusually, only requires the cell average values of immediately adjacent cells, using them to calculate a second-order derivative that cancels low-order errors in the Taylor series expansion.
 The resulting scheme is high-order accurate on uniform hexagonal meshes, but it is formally only first-order accurate on non-uniform meshes.
 
 Non-compact schemes store only cell average values, and high-order reconstructions are obtained on uniform or non-uniform meshes by using a larger stencil of cells.
+\TODO{mention swept-area schemes here and the high cost involved in interpolating onto arbitrary points.}
 A high-order polynomial reconstruction is achieved using the \kexact{} method \citep{barth1995}, so-called because it exactly reconstructs a polynomial of degree $k$ represented by a stencil of cell average values.
 The \kexact{} method has been used in fully compressible finite volume models that employ Godunov-type schemes \citep{ullrich-jablonowski2012} using cubed-sphere meshes, or Weighted Essentially Non-Oscillatory (WENO) schemes \citep{tsoutsanis-drikakis2016} using arbitrary polyhedral meshes.
 Godunov-type schemes and WENO schemes are well-suited for representing nonlinear dynamics with discontinuous solutions \citep{leveque2002}, but the \kexact{} method can be applied to the linear transport equation yielding a computationally cheaper scheme.
@@ -39,6 +40,7 @@ Godunov-type schemes and WENO schemes are well-suited for representing nonlinear
 For the numerical experiments presented in chapter~\ref{ch:cubicFit}, the cubicFit transport scheme achieves only second-order convergence even though it includes high-order polynomial terms.
 The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
 In this chapter, we apply the \kexact{} method, constraining the polynomial fit so that the average of the polynomial integrated over a cell volume equals the cell average value.
+The computationally expensive spatial integration calculations rely on the mesh geometry alone, with just $m$ multiplies per face per time-stage where $m$ is the stencil size.
 In this way, we obtain a high-order transport scheme which retains the low computational cost of the cubicFit transport scheme.
 Since it has much in common with the cubicFit scheme, we name this high-order transport scheme `highOrderFit'.
 

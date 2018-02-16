@@ -6,6 +6,7 @@ Integrating the flux-form transport equation \eqref{eqn:advection} over a volume
 	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \int_{\partial \vol} \phi \vect{u} \cdot \unitn dA \label{eqn:highOrder:integrated-advection}
 \end{align}
 where $\unitn$ is the outward unit normal vector.
+Using the method of lines, the time derivative is discretised using the classical fourth-order Runge–Kutta time-stepping scheme \citep[p. 53]{durran2013}, and the spatial discretisation is described next.
 For a polygonal cell with faces $f$ equation~\eqref{eqn:highOrder:integrated-advection} becomes
 \begin{align}
 	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \sum_f \int_{\area_f} \phi \vect{u} \cdot \unitn d\area_f \label{eqn:highOrder:advection}
