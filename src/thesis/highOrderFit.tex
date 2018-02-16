@@ -12,9 +12,11 @@
 
 Atmospheric models are using increasingly fine meshes to make more accurate forecasts, but high-order numerical schemes offer another possible route to improving accuracy.
 Choosing a higher-order scheme can be more computationally efficient than choosing a finer mesh \citep{waruszewski2018}, and numerical experiments performed by \citet{ullrich2014} identify fourth-order transport schemes as the `sweet spot'  where computational efficiency is maximised.
+\TODO{by what measure?  doesn't it depend on the nature of the flow? smooth, slowly-varying flows would suit higher order}
 
 A high-order transport scheme is ordinarily defined as one with a formal accuracy greater than second-order.
-The \emph{order of convergence} observed in numerical experiments may be less than the formal \emph{order of accuracy} if the transported field is insufficiently smooth, and strong gradients in the form of weather fronts and temperature inversions mean that atmospheric fields are generally not smooth enough to obtain high-order convergence \citep{holdaway2008}. 
+The \emph{order of convergence} observed in numerical experiments may be less than the formal \emph{order of accuracy} if the transported field is insufficiently smooth, and strong gradients in the form of weather fronts and temperature inversions mean that atmospheric fields are generally not smooth enough to obtain high-order convergence \citep{holdaway2008}.
+\TODO{also, unsteady flows, like in the deformational flow test, will result in filamentation and less smooth fields}
 Even if high-order convergence is unattainable, high-order schemes offer other advantages over second-order schemes: high-order schemes can reduce dispersion and diffusion errors \citep{ullrich-jablonowski2012,waruszewski2018}, reduce grid imprinting \citep{mccorquodale2015}, and increase the effective resolution of the scheme \citep{ullrich2014}.
 
 High-order schemes are often formulated by introducing additional degrees of freedom within each cell.
@@ -34,6 +36,7 @@ Non-compact schemes store only cell average values, and high-order reconstructio
 A high-order polynomial reconstruction is achieved using the \kexact{} method \citep{barth1995}, so-called because it exactly reconstructs a polynomial of degree $k$ represented by a stencil of cell average values.
 The \kexact{} method has been used in fully compressible finite volume models that employ Godunov-type schemes \citep{ullrich-jablonowski2012} using cubed-sphere meshes, or Weighted Essentially Non-Oscillatory (WENO) schemes \citep{tsoutsanis-drikakis2016} using arbitrary polyhedral meshes.
 Godunov-type schemes and WENO schemes are well-suited for representing nonlinear dynamics with discontinuous solutions \citep{leveque2002}, but the \kexact{} method can be applied to the linear transport equation yielding a computationally cheaper scheme.
+\TODO{John and Hans suggest that shock-capturing schemes are unnecessary for atmospheric flows, so highOrderFit is a well-motivated alternative to existing Godunov-type and WENO schemes.}
 \citet{sjoegreen2012} developed a third-order accurate finite volume transport scheme using the \kexact{} method, formulated for spherical geometry, but did not present convergence results from numerical tests on a two-dimensional spherical shell.
 \citet{devendran2017} formulated a high-order treatment of sub-grid scale boundaries, using the \kexact{} method for solving Poisson's equation on cut cell meshes, and such a technique might prove useful for representing the atmosphere above complex terrain.
 

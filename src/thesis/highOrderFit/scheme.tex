@@ -14,23 +14,24 @@ For a polygonal cell with faces $f$ equation~\eqref{eqn:highOrder:integrated-adv
 where $\area_f$ is the area of face $f$.
 If $\phi$ is a sufficiently smooth field then it can be approximated to $P$-order accuracy by replacing $\phi$ with a polynomial interpolant $\psi$,
 \begin{align}
-	\psi = \sum_{\Mag{\vect{p}} \leq P} c_{\vect{p}} \left(\vect{x} - \vect{x}_0 \right)^\vect{p} \label{eqn:highOrder:interpolant}
+	\psi = \sum_{\Mag{\vect{p}} \leq P} a_{\vect{p}} \left(\vect{x} - \vect{x}_0 \right)^\vect{p} \label{eqn:highOrder:interpolant}
 \end{align}
-where $c_\vect{p}$ are unknown polynomial coefficients, $\vect{x}_0$ is the origin of some local coordinate system, and $P$ is the total polynomial order.
+where $a_\vect{p}$ are unknown polynomial coefficients, $\vect{x}_0$ is a fixed position, and $P$ is the total polynomial order.
 Note that we use the multi-index notation such that $\Mag{\vect{p}} = p_1 + \ldots + p_n$ and
 \begin{align}
-	c_{\vect{p}} \left( \vect{x} - \vect{x}_0 \right)^\vect{p} = c_\vect{p} \prod_{d=1}^D \left( x_d - x_{0_d} \right)^{p_d} \text{ .}
+	a_{\vect{p}} \left( \vect{x} - \vect{x}_0 \right)^\vect{p} = a_\vect{p} \prod_{d=1}^D \left( x_d - x_{0_d} \right)^{p_d} \text{ .}
 \end{align}
 where $D$ is the number of physical dimensions.
 As an example, the exponents $\vect{p}$ in two dimensions $(x, y)$ with $\Mag{\vect{p}} \leq 1$ are $(0, 0)$, $(1, 0)$ and $(0, 1)$, hence the two-dimensional polynomial interpolant for a total polynomial order $P = 1$ is
 \begin{align}
-	\psi = c_{0,0} + c_{1,0} \left( x - x_0 \right) + c_{0,1} \left( y - y_0 \right) \text{ .}
+	\psi = a_{0,0} + a_{1,0} \left( x - x_0 \right) + a_{0,1} \left( y - y_0 \right) \text{ .}
 \end{align}
 Replacing $\phi$ in \eqref{eqn:highOrder:advection} with $\psi$ in \eqref{eqn:highOrder:interpolant} we obtain an expression for the face flux,
 \begin{align}
-	\int_\area \phi \vect{u} \cdot \unitn d\area = \vect{u} \cdot \unitn \sum_{\Mag{\vect{p}} \leq P} a_{\vect{p}} \moment_\area^\vect{p} \label{eqn:highOrder:face-flux}
+	\int_\area \phi \vect{u} \cdot \unitn d\area = \uf \cdot \unitn \sum_{\Mag{\vect{p}} \leq P} a_{\vect{p}} \moment_\area^\vect{p} \label{eqn:highOrder:face-flux}
 \end{align}
 where $\moment_\area^\vect{p} = \int_\area \left( \vect{x} - \vect{x}_0 \right)^\vect{p} d \area$ is the $\vect{p}$-th moment of area $\area$.
+\TODO{here we're assuming that $\vect{u}$ is smoother than $\phi$, see \citet{methven-hoskins1999} for a justification?}
 Therefore, the face flux can be calculated by finding the the polynomial coefficients $a_\vect{p}$.
 
 Following the same approach as the cubicFit transport scheme, taking a total polynomial order $P = 3$ gives 9 polynomial terms with polynomial coefficients calculated using the same upwind-biased stencil.
@@ -44,10 +45,10 @@ For every cell in the stencil we require that the average of the polynomial inte
 \end{align}
 Using equations~\eqref{eqn:highOrder:interpolant} and \eqref{eqn:highOrder:volume-average} we can rewrite equation~\eqref{eqn:highOrder:equal-volumes} as
 \begin{align}
-	\frac{1}{\moment_\vol^\vect{0}} \sum_{\Mag{\vect{p}} \leq P} c_\vect{p} \moment_\vol^\vect{p} = \volave{\phi}
+	\frac{1}{\moment_\vol^\vect{0}} \sum_{\Mag{\vect{p}} \leq P} a_\vect{p} \moment_\vol^\vect{p} = \volave{\phi}
 \end{align}
 where $\moment_\vol^\vect{p} = \int_\vol \left( \vect{x} - \vect{x}_0 \right)^\vect{p} d\vol$ is the $\vect{p}$-th moment of volume $\vol$, and the zeroth moment $\moment_\vol^\vect{0}$ is the volume.
-For $m$ polynomial terms and a stencil with $n$ cells we can write the linear system
+For $m$ polynomial terms and a stencil with $n$ cells, we calculate a face flux by choosing $\vect{x}_0$ to be the position of the face centre, then we write the linear system
 \begin{align}
 	\begin{bmatrix}
 		\moment_{\vol_1}^{\vect{p}_1}/\moment_{\vol_1}^\vect{0} & \cdots & \moment_{\vol_1}^{\vect{p}_m}/\moment_{\vol_1}^\vect{0} \\
@@ -71,7 +72,8 @@ which can be written as
 	\vect{B} \vect{a} = \bm{\phi} \text{ .}
 \end{align}
 where $\vect{B}$ is the stencil matrix, which is constructed using only the mesh geometry.
-Assuming the stencil comprises at least as many cells as there are polynomial coefficients then $n \geq m$ and the matrix equation can be solved using a least-squares approach to find the unknown coefficients $\vect{a}$.
+The highOrderFit scheme generates stencils using the same procedure as the cubicFit scheme.
+Assuming a stencil comprises at least as many cells as there are polynomial coefficients then $n \geq m$ and the matrix equation can be solved using a least-squares approach to find the unknown coefficients $\vect{a}$.
 
 To obtain a stable transport scheme, we follow the approach of the cubicFit scheme by introducing multipliers $\vect{m}$ to obtain
 \begin{align}
