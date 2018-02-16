@@ -1,6 +1,25 @@
 \chapter{Discussion}
 \label{ch:discussion}
 
+Atmospheric models are using increasingly fine horizontal mesh spacings that resolve steep slopes in terrain resulting in highly-distorted meshes and increased numerical errors.
+This thesis makes four contributions to reduce numerical errors for flows over steep slopes.
+First, we presented a new multidimensional method-of-lines transport scheme, cubicFit, that enforces stability conditions derived from a von Neumann stability analysis to make the scheme stable over steep terrain on highly-distorted, arbitrary meshes.
+The scheme has a low computational cost at runtime, requiring only $m$ multiplies per face per time-stage using a stencil with $m$ cells.
+Stability condition calculations are pre-computed during model initialisation since they depend upon the mesh geometry only.
+A new transport test case with a terrain-following velocity field was formulated which reveals that numerical transport errors are primarily due to misalignment of the velocity field with mesh layers and not simply mesh distortions.
+In all tests, compared to the multidimensional linear upwind scheme, the cubicFit scheme is more stable and more accurate.
+The cubicFit transport scheme is second-order convergent on two-dimensional meses over steeply sloping terrain, cubed sphere meshes and hexagonal icosahedral meshes, irrespective of the velocity field or mesh distortions.
+
+\TODO{Second, highOrderFit...}
+
+Third, we proposed a new type of mesh, the slanted cell mesh, for representing the atmosphere above steeply sloping terrain.
+The slanted cell mesh is designed to avoid severe mesh distortions associated with terrain-following meshes, and to avoid severe time-step constraints associated with arbitrarily small cut cells.
+In a test of a stratified atmosphere at rest, spurious circulations were reduced by switching from the highly-distorted basic terrain-following mesh to the more uniform slanted cell mesh.
+A new test case was formulated to challenge transport schemes over a steeply sloping lower boundary.
+Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over these very steep slopes, and the test reveals that the slanted cell mesh permits longer time-steps than cut cells, with time-steps comparable to terrain-following meshes.
+
+\TODO{Fourth, C--P...}
+
 \TODO{some ideas for future work...}
 
 \textbf{cubicFit/highOrderFit}
