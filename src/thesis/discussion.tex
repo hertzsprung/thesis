@@ -49,15 +49,9 @@ We hope that if such a strategy were included in the highOrderFit scheme then mo
 
 Second, by selectively removing high-order polynomial terms for highly-distorted stencils, the cubicFit scheme achieves stable results where, on the same mesh, the highOrderFit scheme is unstable.
 We expect that a similar stabilisation procedure could be included in the highOrderFit scheme to obtain stable results on more highly-distorted meshes.
+This stabilisation procedure should also permit stable transport over arbitrary lower boundaries and, to further improve accuracy near boundaries, high-order boundary conditions might be derived following existing approaches \citep{devendran2017,schwartz2015}.
 
-\TODO{Third, spherical geometry.
-\citet{sjoegreen2012} might provide us with some inspiration here,  but really we need an extension of the methods of \citet{tuzikov2003} for spherical polynomials.
-}
-
-\TODO{
-\begin{itemize}
-\item highOrderFit coefficients sometimes mildly violate the cubicFit stability constraints.  Could we do a new 1D stability analysis using the cell-average approach of highOrderFit instead of the point-wise approach of cubicFit that would provide slightly more permissive stability constraints?
-\item I'm still unaware of mathematical theory that tells use: for a given mesh geometry, what polynomial should we attempt to use as an approximation? this all seems wrapped up with linear algebra: full-rank matrices and condition numbers etc, but also have to think in terms of the stability of the discretisation?
-\end{itemize}
-}
+Third, the highOrderFit scheme has only been tested on Cartesian planes, and further research is necessary to extend the scheme to spherical geometry.
+It is not clear that a projection from the sphere onto a local tangent plane, as used by \citet{sjoegreen2012}, will achieve high-order convergence.
+Instead, it is more likely that high-order convergence could be achieved by taking the method by \citet{tuzikov2003} for calculating exactly polyhedral surface and volume moments and extending it to spherical polyhedra.
 

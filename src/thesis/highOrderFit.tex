@@ -38,7 +38,7 @@ The \kexact{} method has been used in fully compressible finite volume models th
 Godunov-type schemes and WENO schemes are well-suited for representing nonlinear dynamics with discontinuous solutions \citep{leveque2002}, but the \kexact{} method can be applied to the linear transport equation yielding a computationally cheaper scheme.
 \TODO{John and Hans suggest that shock-capturing schemes are unnecessary for atmospheric flows, so highOrderFit is a well-motivated alternative to existing Godunov-type and WENO schemes.}
 \citet{sjoegreen2012} developed a third-order accurate finite volume transport scheme using the \kexact{} method, formulated for spherical geometry, but did not present convergence results from numerical tests on a two-dimensional spherical shell.
-\citet{devendran2017} formulated a high-order treatment of sub-grid scale boundaries, using the \kexact{} method for solving Poisson's equation on cut cell meshes, and such a technique might prove useful for representing the atmosphere above complex terrain.
+\citet{schwartz2015} formulated a high-order treatment of sub-grid scale boundaries, using the \kexact{} method for solving Poisson's equation on cut cell meshes, and such a technique might prove useful for representing the atmosphere above complex terrain.
 
 For the numerical experiments presented in chapter~\ref{ch:cubicFit}, the cubicFit transport scheme achieves only second-order convergence even though it includes high-order polynomial terms.
 The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.
