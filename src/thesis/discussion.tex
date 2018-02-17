@@ -32,8 +32,9 @@ The test case verifies that the generalised Charney--Phillips model variant is f
 
 All tests presented with $x$--$z$ meshes have used only uniform vertical mesh spacing.
 Operational atmospheric models have non-uniform vertical mesh spacing, using finer mesh spacing near the ground to resolve boundary layer processes \citep[p. 547]{chow2013}.
-Terrain-following meshes naturally accommodate non-uniform vertical mesh spacing, with each column having the same number of cells.
-However, to resolve boundary layer processes above elevated terrain, cut cell meshes must use fine vertical mesh spacing everywhere from sea level to the highest mountain peak, resulting in a greater computational cost compared to the equivalent terrain-following mesh \citep{walko-avissar2008b}.
+Terrain-following meshes naturally accommodate non-uniform vertical mesh spacing because the mesh is organised in rows of cells that are uninterrupted by mountain peaks.
+However, accommodating non-uniform vertical mesh spacing is less straightforward on cut cell meshes because mountain peaks interrupt the rows of cells nearest sea level.
+To resolve boundary layer processes above elevated terrain represented by cut cells, fine vertical mesh spacing is needed everywhere from sea level to the highest mountain peak, resulting in a greater computational cost compared to the equivalent terrain-following mesh \citep{walko-avissar2008b}.
 The same problem is true for slanted cell meshes.
 Fine vertical mesh spacing near the ground is also desirable for resolving diurnal flows along mountain slopes, which have a typical depth from \SIrange{1}{20}{\meter} \citep[p. 39]{chow2013}.
 Since we have established that the numerical accuracy of a transport scheme depends primarily on the alignment of flow with the mesh (section~\ref{sec:cubicFit:tfAdvect}), we might expect a terrain-following mesh to be better-suited than cut a cell mesh for representing slope flows.

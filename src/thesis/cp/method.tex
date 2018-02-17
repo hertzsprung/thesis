@@ -7,12 +7,7 @@ On a finite volume mesh, variables are ordinarily placed at cell centres or cell
 In the Charney--Phillips staggering, the thermodynamic variable is placed at only those cell faces that lie on the vertical coordinate surfaces, and vertically-oriented faces have no thermodynamic information.
 This existing staggering is unsuitable for arbitrary finite volume meshes because faces can have any orientation.
 
-A generalised Charney--Phillips staggering will be particularly relevant to atmospheric models that use vertical mesh refinement techniques; an area of research that has so far received little attention.
-Controlling the vertical mesh spacing near the ground is straightforward using terrain-following meshes because the mesh is organised in rows of cells that are uninterrupted by mountain peaks.
-With other mesh types such as cut cell meshes and slanted cell meshes, controlling the vertical mesh spacing is less straightforward because mountain peaks interrupt the rows of cells nearest sea level.
-On such meshes, if fine vertical mesh spacing was used near sea level and coarse mesh spacing used aloft, then the mesh above a high-altitude mountain range would have coarse spacing and boundary layer processes would be poorly resolved.
-
-\TODO{this sentence doesn't belong here, need to reorganise a bit... Mesh refinement could help to better resolve the boundary layer above high-altitude mountain ranges represented by cut cell meshes and slanted cell meshes.}
+A generalised Charney--Phillips staggering will be particularly relevant to atmospheric models that use vertical mesh refinement techniques.
 Mesh refinement has received growing attention in atmospheric modelling literature because it could enable atmospheric models to produce more accurate forecasts with less computation \citep{behrens2006,jablonowski2009}.
 While much of the literature concentrates on horizontal mesh refinement, some investigations have been made into vertical refinement on two-dimensional $x$--$z$ Cartesian planes:
 \citet{mueller2013} have used conforming refinement of triangular meshes for simulating the standard rising bubble and density current test cases, \citet{vanhooft2018} have used block-structured adaptive mesh refinement for direct numerical simulations of the atmospheric boundary layer, and \citet{yamazaki-satomura2012} have used nonconforming block-refinement to better resolve the atmosphere immediately above idealised mountains.
@@ -32,9 +27,9 @@ By allowing for any mesh structure, a generalised Charney--Phillips formulation 
 	\label{fig:cp:staggering}
 \end{figure}
 
-\TODO{Need to make clear that this generalisation is new to the thesis, not from elsewhere.}
-The generalised Charney--Phillips model is a variant of the fully compressible Euler model with a Lorenz staggering, as documented by \citet{weller-shahrokhi2014} and summarised in section~\ref{sec:slanted:exnerFoamH}.
-The primary difference between the models is their treatment of the prognostic thermodynamic variable: the generalised Charney--Phillips formulation stores the prognostic thermodynamic variable $b_f$ at all cell faces such that $b_f = \theta_f \unitg \cdot \unitn_f$ where $f$ is a face, $\theta_f$ is the potential temperature at the face, $\unitg$ is the unit vector of gravitational acceleration and $\unitn_f$ is the unit vector that is outward normal to the face.
+The generalised Charney--Phillips model is a new variant of the fully compressible Euler model with a Lorenz staggering, as documented by \citet{weller-shahrokhi2014} and summarised in section~\ref{sec:slanted:exnerFoamH}.
+The model variant uses a newly-formulated generalisation of the Charney--Phillips staggering for arbitrary meshes.
+The primary difference between the Lorenz and Charney--Phillips formulations is their treatment of the prognostic thermodynamic variable: the generalised Charney--Phillips formulation stores the prognostic thermodynamic variable $b_f$ at all cell faces such that $b_f = \theta_f \unitg \cdot \unitn_f$ where $f$ is a face, $\theta_f$ is the potential temperature at the face, $\unitg$ is the unit vector of gravitational acceleration and $\unitn_f$ is the unit vector that is outward normal to the face.
 This arrangement is illustrated in figure~\ref{fig:cp:staggering}.
 To transport the thermal field, first, potential temperature is transported in advective form using first-order time-stepping,
 \begin{align}
