@@ -23,7 +23,8 @@ A new test case was formulated to challenge transport schemes over a steeply slo
 Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over these very steep slopes.
 The test reveals that the slanted cell mesh permits longer time-steps than those permitted on cut cell meshes, since slanted cells are always long in the direction of flow.
 
-Finally, a two-dimensional test case was developed to excite the Lorenz computational mode, based on the original test specification by \citet{arakawa-konor1996}. \TODO{remind readers what motivated this new test}
+Finally, a two-dimensional test case was developed to excite the Lorenz computational mode.
+The test is based on the original specification by \citet{arakawa-konor1996} that was developed for a simplified, vertically-discrete model in pressure coordinates.
 Test results were compared using two models of fully compressible Euler equations: one variant having a Lorenz staggering, and the other model variant using a newly-formulated Charney--Phillips staggering generalised for arbitrary meshes.
 The test case verifies that the generalised Charney--Phillips model variant is free from the Lorenz computational mode, and we hope that the new test case might aid in the development and intercomparison of future dynamical cores.
 

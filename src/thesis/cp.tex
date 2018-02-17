@@ -10,7 +10,7 @@
 \end{itemize}
 \end{highlights}
 
-The Lorenz computational mode arises from having one too many degrees of freedom in the Lorenz staggering of variables, and it is often excited by thermal forcing, producing spurious, vertical, \TODO{two-grid, alternating} grid-scale waves \citep{schneider1987,arakawa-konor1996}.
+The Lorenz computational mode arises from having one too many degrees of freedom in the Lorenz staggering of variables, and it is often excited by thermal forcing, producing spurious, vertical, two-grid alternating waves \citep{schneider1987,arakawa-konor1996}.
 In the Lorenz staggering, the pressure and vertical velocity variables are staggered, with the thermodynamic variable collocated with the pressure variable \citep{lorenz1960}.
 Vertical averaging of the thermodynamic variable in calculating the vertical momentum equation means that these spurious grid-scale waves persist because they become invisible to the model \citep{arakawa-konor1996}.
 Spurious grid-scale waves have been attributed to the Lorenz computational mode in the Global Environmental Multiscale 3 model \citep{girard2014}, and the Korea Institute of Atmospheric Prediction Systems Integrated Model \citep{yi-park2017} amongst others, and these non-physical waves can lead to spurious rainfall in atmospheric models \citep{hollingsworth1995}, inaccurate simulations of idealised hurricanes \citep{zhu-smith2003}, and spurious instabilities in ocean models \citep{bell-white2017}.
@@ -29,13 +29,13 @@ Many of these hydrostatic models have worked well with Lorenz staggering (e.g. E
 
 Previous studies have used a variety of test cases to compare different model variants using Lorenz and Charney--Phillips staggering.
 One of the earliest comparisons was made by \citet{arakawa-moorthi1988} who found that, without additional diffusion, their numerical solutions of a baroclinic instability test were dominated by short-wave noise.
-Later, \citet{arakawa-konor1996} performed the same test to find that a model using a Charney--Phillips staggering did not suffer from spurious noise, with the model needing no additional diffusion.
-In the same study, \citet{arakawa-konor1996} proposed new test cases that use thermal forcing to excite the Lorenz computational mode.
-The new test cases were performed using a simplified, vertically discrete model, and the tests clearly reveal spurious grid-scale waves that grow and persist throughout the simulation.
+Later, \citet{arakawa-konor1996} performed the same test to find that a model using a Charney--Phillips staggering did not suffer from spurious noise, with the Charney--Phillips model needing no additional diffusion.
+In the same study, \citet{arakawa-konor1996} proposed new test cases that use thermal forcing to excite the Lorenz computational mode, and these tests clearly reveal spurious grid-scale waves that grow and persist throughout the simulation.
 Based on the work of \citet{arakawa-konor1996}, \citet{untch-hortal2004} developed a new test case, using thermal forcing to excite spurious grid-scale waves in a 600-day integration of a global, 3D model.
 
-\TODO{John asks, why was a new test needed? What was deficient with the old ones?}
-We propose a new, idealised two-dimensional test case, also based on the work of \citet{arakawa-konor1996}, to compare the accuracy of models using Lorenz or Charney--Phillips staggerings.  The new test case intended to aid in the development and intercomparison of modern, nonhydrostatic dynamical cores, and uses a coarse two-dimensional mesh specified in Cartesian coordinates.
+While these tests have proved useful, they are not ideally suited for dynamical core development: the test case by \citet{untch-hortal2004} is too large, and the test cases by \citet{arakawa-konor1996} were developed only for a simplified, vertically discrete model in pressure coordinates.
+Hence, we propose a new, idealised two-dimensional test case, based on the work of \citet{arakawa-konor1996}, to compare the accuracy of models using Lorenz or Charney--Phillips staggerings.
+The new test case intended to aid in the development and intercomparison of modern, nonhydrostatic dynamical cores.  The test completes quickly, using a coarse two-dimensional mesh specified in Cartesian coordinates.
 We compare test results between the fully compressible Euler model with a Lorenz staggering (section~\ref{sec:slanted:exnerFoamH}), and a variant of this same model that includes a new generalisation of the Charney--Phillips staggering for arbitrary meshes.
 
 After describing the generalised Charney--Phillips formulation in section~\ref{sec:cp:method}, we compare Lorenz and generalised Charney--Phillips model variants in section~\ref{sec:cp:schaerWaves} using the standard mountain waves test case specified by \citet{schaer2002}.
