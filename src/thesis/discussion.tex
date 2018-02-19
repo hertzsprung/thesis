@@ -1,21 +1,19 @@
-\chapter{Discussion}
+\chapter{Conclusions and future work}
 \label{ch:discussion}
-
-\vspace*{-1em}
 
 Atmospheric models are using increasingly fine horizontal mesh spacings that resolve steep slopes in terrain resulting in highly-distorted meshes and increased numerical errors.
 This thesis makes four contributions to reduce numerical errors for flows over steep slopes.
-First, we presented a new multidimensional method-of-lines transport scheme, cubicFit, that enforces stability conditions derived from a von Neumann stability analysis to make the scheme stable over steep terrain on highly-distorted, arbitrary meshes.
+First, we presented a new multidimensional method-of-lines transport scheme, cubicFit, that enforces stability conditions derived from a von Neumann stability analysis to make the scheme stable while maintaining second-order convergence over steep terrain on highly-distorted, arbitrary meshes.
 The scheme has a low computational cost at runtime, requiring only $m$ multiplies per face per time-stage using a stencil with $m$ cells.
 Stability condition calculations are pre-computed during model initialisation since they depend upon the mesh geometry only.
 A new transport test case with a terrain-following velocity field was formulated which reveals that numerical transport errors are primarily due to misalignment of the velocity field with mesh layers and not simply mesh distortions.
 In all tests, compared to the multidimensional linear upwind scheme, the cubicFit scheme is more stable and more accurate.
-The cubicFit transport scheme is second-order convergent on two-dimensional meses over steeply sloping terrain, cubed sphere meshes and hexagonal-icosahedral meshes, irrespective of the velocity field or mesh distortions.
+The cubicFit transport scheme is second-order convergent on two-dimensional meshes over steeply sloping terrain, cubed sphere meshes and hexagonal-icosahedral meshes, irrespective of the velocity field or mesh distortions.
 
 Second, a high-order multidimensional method-of-lines transport scheme, highOrderFit, was developed.
 The highOrderFit scheme uses \kexact{} polynomial reconstructions that are obtained by calculating high-order volume and surface moments exactly.
 All computationally expensive reconstruction calculations depend on the mesh geometry alone.
-During integration, the highOrderFit scheme requires only $m$ multiplies per face per time-stage using a stencil of $m$ cells, meaning that the highOrderFit scheme has the same computational cost at runtime as the cubicFit scheme.
+During integration, the highOrderFit scheme requires only $m$ multiplies per face per time-stage using a stencil of $m$ cells, meaning that, at runtime, the highOrderFit scheme has the same computational cost and storage requirements as the cubicFit scheme.
 Transport tests demonstrate that the highOrderFit scheme achieves at least third-order convergence irrespective of the velocity field or mesh distortions.
 
 The highOrderFit transport scheme offers a promising route to obtaining high-order convergence with a low computational cost, but we are aware of three improvements that could be investigated:
@@ -42,6 +40,7 @@ A new test case was formulated to challenge transport schemes over a steeply slo
 Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over these very steep slopes.
 The test reveals that the slanted cell mesh permits longer time-steps than those permitted on cut cell meshes, since slanted cells are always long in the direction of flow.
 
+\TODO{compress this down, too much detail for final chapter}
 In this thesis, all tests that represent terrain with $x$--$z$ meshes have used only uniform vertical mesh spacing.
 Operational atmospheric models have non-uniform vertical mesh spacing, using finer mesh spacing near the ground to resolve boundary layer processes \citep[p. 547]{chow2013}.
 Terrain-following meshes naturally accommodate non-uniform vertical mesh spacing because the mesh is organised in rows of cells that are uninterrupted by mountain peaks.

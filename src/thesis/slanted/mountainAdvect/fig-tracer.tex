@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[paperwidth=5.2in,paperheight=1.7in,margin=0in]{geometry}
+\usepackage[paperwidth=5.9in,paperheight=2.1in,margin=0in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[british]{babel}
 \usepackage{charter}
@@ -20,22 +20,22 @@
 
 \begin{document}
 \TPMargin{1pt}
-\begin{textblock*}{1in}(3.41in,0.2in)
+\begin{textblock*}{1in}(3.4in,0.5in)
 \begin{tikzpicture}[
   scale=0.5
 ]
-	\fill [orange!20] (0,0) rectangle (6.4,5.4);
+	\fill [orange!20] (0,0) rectangle (9.2,6);
 \end{tikzpicture}
 \end{textblock*}
-\begin{textblock*}{8em}(1.7in,0.3in)
+\begin{textblock*}{8em}(1.85in,0.3in)
 \normalsize
 $t = \SI{0}{\second}$
 \end{textblock*}
-\begin{textblock*}{8em}(2.6in,0.3in)
+\begin{textblock*}{8em}(2.9in,0.3in)
 \normalsize
 $t = \SI{5000}{\second}$
 \end{textblock*}
-\begin{textblock*}{8em}(3.7in,0.3in)
+\begin{textblock*}{8em}(4.15in,0.3in)
 \normalsize
 $t = \SI{10000}{\second}$
 \end{textblock*}
@@ -43,12 +43,12 @@ $t = \SI{10000}{\second}$
 $z$ (\si{\meter}) \raisebox{-.5\height}{
 \includegraphics{mountainAdvect-h0-btf-1000-5000m-cubicFit/10000/tracer.pdf}
 }
-\begin{textblock*}{2in}(1.907in,0.976in)
+\begin{textblock*}{2in}(2.264in,1.278in)
 	\centering
-\begin{tikzpicture}[xscale=0.05,yscale=0.14]
+\begin{tikzpicture}[xscale=0.058,yscale=0.19]
 	\draw [fill=black,line width=1.7pt,domain=-25:25,samples=200] plot (\x,{5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
 \end{tikzpicture}
 \end{textblock*}
 
-\vspace*{0.3em}\hspace*{21em}$x$ (\si{\meter})
+\vspace*{0.3em}\hspace*{23em}$x$ (\si{\meter})
 \end{document}

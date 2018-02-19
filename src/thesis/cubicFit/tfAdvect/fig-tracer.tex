@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[paperwidth=5.2in,paperheight=2.2in,margin=0in]{geometry}
+\usepackage[paperwidth=5.9in,paperheight=2.7in,margin=0in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[british]{babel}
 \usepackage{charter}
@@ -20,22 +20,22 @@
 
 \begin{document}
 \TPMargin{1pt}
-\begin{textblock*}{1in}(3in,0.46in)
+\begin{textblock*}{1in}(3.4in,0.5in)
 \begin{tikzpicture}[
   scale=0.5
 ]
-	\fill [orange!20] (0,0) rectangle (9,6.6);
+	\fill [orange!20] (0,0) rectangle (9.2,9);
 \end{tikzpicture}
 \end{textblock*}
-\begin{textblock*}{8em}(1.7in,0.3in)
+\begin{textblock*}{8em}(1.85in,0.3in)
 \normalsize
 $t = \SI{0}{\second}$
 \end{textblock*}
-\begin{textblock*}{8em}(2.6in,0.3in)
+\begin{textblock*}{8em}(2.9in,0.3in)
 \normalsize
 $t = \SI{5000}{\second}$
 \end{textblock*}
-\begin{textblock*}{8em}(3.6in,0.3in)
+\begin{textblock*}{8em}(4.15in,0.3in)
 \normalsize
 $t = \SI{10000}{\second}$
 \end{textblock*}
@@ -43,12 +43,12 @@ $t = \SI{10000}{\second}$
 $z$ (\si{\meter}) \raisebox{-.5\height}{
 \includegraphics{tfAdvect-btf-1000-cubicFit/10000/tracer.pdf}
 }
-\begin{textblock*}{2in}(1.9in,1.42in)
+\begin{textblock*}{2in}(2.264in,1.873in)
 	\centering
-\begin{tikzpicture}[xscale=0.055,yscale=0.167]
+\begin{tikzpicture}[xscale=0.058,yscale=0.19]
 	\draw [fill=black,line width=1.7pt,domain=-25:25,samples=200] plot (\x,{5*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/8))*cos(deg(\x*3.14159/50))*cos(deg(\x*3.14159/50))});
 \end{tikzpicture}
 \end{textblock*}
 
-\vspace*{0.3em}\hspace*{21em}$x$ (\si{\meter})
+\vspace*{0.3em}\hspace*{23em}$x$ (\si{\meter})
 \end{document}
