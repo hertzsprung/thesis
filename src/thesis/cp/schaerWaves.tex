@@ -37,7 +37,7 @@ The damping term \(\mu\) in the momentum equation \eqref{eqn:exnerFoam:momentum}
 \end{subequations}
 where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer, $H = \SI{30}{\kilo\meter}$ is the top of the domain, $x_0 = \SI{-150}{\kilo\meter}$ is the leftmost limit of the domain and $x_I = \SI{-140}{\kilo\meter}$ is the rightmost extent of the inlet sponge layer.
 The sponge layer is only active on faces whose normal is vertical so that it damps vertical momentum only.
-Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the purposes of generating BTF meshes, the domain height is set to \SI{20}{\kilo\meter} because the sponge layer occupies the uppermost \SI{10}{\kilo\meter}.
+Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the purposes of generating basic terrain-following meshes, the domain height is set to \SI{20}{\kilo\meter} because the sponge layer occupies the uppermost \SI{10}{\kilo\meter}.
 
 \begin{figure}
 	\centering
@@ -69,8 +69,8 @@ Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the pu
 		\raisebox{0.2in}{\includegraphics[height=1.9in]{cp/schaerWaves/melvin2010-w-mass-conserving-sisl.png}}
 	\end{subfigure}
 	\caption{Vertical velocities at the end of integration of the Sch\"{a}r mountain waves test case.
-	Results obtained using a BTF mesh and Lorenz staggering, with potential temperature and momentum transported by (\subcaptionref{fig:cp:schaerWaves:w:linearUpwind}) the linearUpwind scheme and
-	(\subcaptionref{fig:cp:schaerWaves:w:cubicFit}) the cubicFit scheme, and (\subcaptionref{fig:cp:schaerWaves:w:cp}) using a BTF mesh and generalised Charney--Phillips staggering.
+	Results obtained using a basic terrain-following mesh and Lorenz staggering, with potential temperature and momentum transported by (\subcaptionref{fig:cp:schaerWaves:w:linearUpwind}) the linearUpwind scheme and
+	(\subcaptionref{fig:cp:schaerWaves:w:cubicFit}) the cubicFit scheme, and (\subcaptionref{fig:cp:schaerWaves:w:cp}) using a basic terrain-following mesh and generalised Charney--Phillips staggering.
 	For comparison, (\subcaptionref{fig:cp:schaerWaves:w:melvin}) provides a reference solution obtained with a mass-conserving semi-implicit semi-Lagrangian model \citep{melvin2010}.
 	Contours are plotted every \SI{0.05}{\meter\per\second}.  In figures (\subcaptionref{fig:cp:schaerWaves:w:linearUpwind}), (\subcaptionref{fig:cp:schaerWaves:w:cubicFit}) and (\subcaptionref{fig:cp:schaerWaves:w:cp}), ascending velocities are marked by solid black lines and descending velocities are marked by dashed red lines.
 Only the lowest \SI{12}{\kilo\meter} in the central region of the domain is shown.  The entire domain is \SI{300}{\kilo\meter} wide and \SI{30}{\kilo\meter} high.
@@ -80,11 +80,11 @@ Only the lowest \SI{12}{\kilo\meter} in the central region of the domain is show
 
 The test is integrated forward by five hours using a time-step of \SI{8}{\second}.  At the end of the simulation, gravity waves are apparent in the contours of vertical velocity (figure~\ref{fig:cp:schaerWaves:w}).
 Results are presented for the Lorenz model variant, with momentum and potential temperature being transported using the linearUpwind scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}) and the cubicFit scheme (figure~\ref{fig:cp:schaerWaves:w:cubicFit}), and for the generalised Charney--Phillips model variant (figure~\ref{fig:cp:schaerWaves:w:cp}), and all are in general agreement with the reference solution from \citet{melvin2010}, reproduced in figure~\ref{fig:cp:schaerWaves:w:melvin}.
-All four results presented in figure~\ref{fig:cp:schaerWaves:w} were all obtained using the same BTF mesh.
+All four results presented in figure~\ref{fig:cp:schaerWaves:w} were all obtained using the same basic terrain-following mesh.
 
-Spurious distortions are visible in the vertical velocity contours using the Lorenz model variant and the linearUpwind transport scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}), and similar error structures have been found in previous studies that were attributed to numerical errors associated with BTF mesh distortions \citep{schaer2002,klemp2003}.
-In agreement with these previous findings, we find that spurious gravity wave distortions can be avoided by switching from a BTF mesh to a slanted cell mesh or cut cell mesh (results not shown).
-We also find that spurious gravity wave distortions can be avoided by transporting momentum and potential temperature on a BTF mesh using the cubicFit scheme (figure~\ref{fig:cp:schaerWaves:w:cubicFit}).
+Spurious distortions are visible in the vertical velocity contours using the Lorenz model variant and the linearUpwind transport scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}), and similar error structures have been found in previous studies that were attributed to numerical errors associated with basic terrain-following mesh distortions \citep{schaer2002,klemp2003}.
+In agreement with these previous findings, we find that spurious gravity wave distortions can be avoided by switching from a basic terrain-following mesh to a slanted cell mesh or cut cell mesh (results not shown).
+We also find that spurious gravity wave distortions can be avoided by transporting momentum and potential temperature on a basic terrain-following mesh using the cubicFit scheme (figure~\ref{fig:cp:schaerWaves:w:cubicFit}).
 Avoiding such spurious gravity waves distortions using either approach produces solutions that closely match the reference solution (figure~\ref{fig:cp:schaerWaves:w:melvin}).
 Given these results, we can attribute spurious gravity wave distortions to transport scheme errors associated with flow that is misaligned with mesh layers.
 Unlike the results obtained by \citet{shaw-weller2016} that used an older formulation of the cubicFit scheme, potential temperature errors are negligible for all types of mesh when using the most recent formulation of the cubicFit scheme documented in chapter~\ref{ch:cubicFit}.
@@ -92,9 +92,10 @@ Unlike the results obtained by \citet{shaw-weller2016} that used an older formul
 As seen in figure~\ref{fig:cp:schaerWaves:w:cp}, the generalised Charney--Phillips model variant produces gravity waves with spurious distorted structures similar to those obtained using the Lorenz model variant with the linearUpwind scheme (figure~\ref{fig:cp:schaerWaves:w:linearUpwind}).
 In addition, as evidenced by the density of vertical velocity contour lines in figure~\ref{fig:cp:schaerWaves:w:cp}, the generalised Charney--Phillips model variant produces gravity wave amplitudes that are too large compared to the reference solution.
 
-\TODO{This is not a summary of the results presented...}
-In summary, accurate gravity wave solutions were obtained using the Lorenz model variant with cut cell meshes and slanted cell meshes, and accurate solutions were also obtained by transporting momentum and potential temperature on the BTF mesh using the cubicFit scheme.
-A less accurate solution was obtained on the BTF mesh using the generalised Charney--Phillips model variant, but all results were in general agreement with the reference solution from \citet{melvin2010}.
+In summary, all solutions obtained here are in general agreement with the reference solution from \citet{melvin2010}.
+However, on the basic terrain-following mesh, numerical errors lead to spurious gravity wave distortions using the generalised Charney--Phillips model variant and using the Lorenz model variant with momentum and potential temperature transported by the linearUpwind scheme.
+Using the more accurate cubicFit scheme in the Lorenz model variant produces the correct solution on the basic terrain-following mesh that is free from any spurious gravity wave distortions.
+
 Knowing that an improved transport scheme was responsible for the improved gravity wave solution using the Lorenz model variant, we conjecture that the generalised Charney--Phillips model variant produces less accurate results because the model uses a transport scheme that is insufficiently accurate.
 In the next section we perform a further comparison between Lorenz and generalised Charney--Phillips model variants using a new test case to excite the Lorenz computational mode.
 
