@@ -30,15 +30,13 @@ The vertical mesh spacing $\Delta z$ is chosen so that $\Delta x \mathbin{:} \De
 \end{figure}
 
 The $\ell_2$ and $\ell_\infty$ errors are measured on a series of basic terrain-following meshes and cut cell meshes (figure~\ref{fig:highOrderFit:schaerAdvectSmooth:convergence}).
-The cubicFit transport scheme achieves second-order convergence on cut cell meshes, and the scheme achieves third-order convergence on basic terrain-following meshes.
+The highOrderFit transport scheme achieves third-order convergence on basic terrain-following meshes and fourth-order convergence on cut cell meshes.
+While we have not formally analysed the order of accuracy of the highOrderFit scheme, we might expect to obtain fourth-order convergence under these ideal test conditions: first, the highOrderFit scheme uses a cubic reconstruction; second, cut cell meshes are undistorted away from the lower boundary and, third, the horizontal flow is aligned with the cut cell mesh.
+
+The cubicFit transport scheme achieves second-order convergence on cut cell meshes, and the scheme achieves third-order convergence on basic terrain-following meshes, with error measures very similar to those obtained with the highOrderFit scheme.
 It is perhaps surprising that higher-order convergence is achieved when the mesh is distorted and flow is misaligned with the mesh.
 Further tests using very fine meshes might confirm whether third-order convergence is maintained.
 We might expect that the cubicFit scheme tends towards second-order convergence at finer mesh spacings, otherwise the cubicFit scheme would become more accurate on basic terrain-following meshes than cut cell meshes!
-\TODO{perhaps discuss highOrderFit before cubicFit}
-
-The highOrderFit transport scheme also achieves third-order convergence on basic terrain-following meshes, with error measures very similar to those obtained with the cubicFit scheme.
-The highOrderFit scheme achieves fourth-order convergence on cut cell meshes.
-While we have not formally analysed the order of accuracy of the highOrderFit scheme, we might expect to obtain fourth-order convergence under these ideal test conditions: first, the highOrderFit scheme uses a cubic reconstruction; second, cut cell meshes are undistorted away from the lower boundary and, third, the horizontal flow is aligned with the cut cell mesh.
 
 At coarser mesh spacings, the cubicFit scheme is more accurate than the highOrderFit scheme.
 It should be possible to increase the accuracy of the highOrderFit scheme by adjusting the multiplier values used in the least-squares fit, but this has not been explored.
