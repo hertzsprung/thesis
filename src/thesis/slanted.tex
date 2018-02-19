@@ -66,7 +66,7 @@ Many operational atmospheric models use some form of coordinate smoothing \citep
 The second approach to reducing pressure gradient errors is to improve the accuracy in calculating the horizontal pressure gradient itself.
 Instead of calculating the horizontal pressure gradient in the computational domain, the techniques proposed by \citet{klemp2011} and \citet{zaengl2012} both involve interpolation onto $z$ levels in the physical domain.  This gave them the flexibility to design more accurate horizontal pressure gradient discretizations using more appropriate stencils.
 
-Another approach is to improve the balance between pressure gradient and gravity by reducing the spurious solenoidal term using a curl-free gradient formulation \citep{thuburn-cotter2012}, and this formulation was included in the nonhydrostatic model by \citet{weller-shahrokhi2014}.
+Another approach is to improve the balance the between pressure gradient and gravity by reducing the spurious solenoidal term using a curl-free gradient formulation \citep{thuburn-cotter2012}, and this formulation was included in the nonhydrostatic model by \citet{weller-shahrokhi2014}.
 Since their model calculates gradients in the Exner function of pressure and does not calculate gradients of pressure directly, the formulation cannot be exactly curl-free.
 Nevertheless, \citet{weller-shahrokhi2014} found that switching from a horizontal gradient formulation to the curl-free gradient formulation improved idealised simulations over orography represented by terrain-following meshes.
 
