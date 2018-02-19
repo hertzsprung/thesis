@@ -113,20 +113,12 @@ The unknown coefficients $\vect{a}$ are calculated using the pseudo-inverse, $\v
 \intertext{Recall that the approximate value $\phi_F$ is equal to the constant coefficient $a_1$, which is a weighted mean of $\bm{\phi}$,} 
 %
 	a_1 = \begin{bmatrix}
-		b_{1,1}^+ \\
-		b_{1,2}^+ \\
-		\vdots \\
-		b_{1,12}^+
-	\end{bmatrix}
-	\cdot
+		b_{1,1}^+ & b_{1,2}^+ & \cdots & b_{1,12}^+
+		\end{bmatrix}
 	\begin{bmatrix}
-		\phi_1 \\
-		\phi_2 \\
-		\vdots \\
-		\phi_{12}
-	\end{bmatrix} \label{eqn:cubicFit:weighted-sum}
+		\phi_1 , \phi_2 , \cdots , \phi_{12}
+	\end{bmatrix}^\intercal \label{eqn:cubicFit:weighted-sum}
 \end{align}
-\TODO{should this be formatted differently? with the first vector being a one-row matrix instead?}
 where the weights $b_{1,1}^+ \ldots b_{1,12}^+$ are the elements of the first row of $\vect{B}^+$.
 Note that the majority of the least-squares fit procedure depends on the mesh geometry only.  An implementation may precompute the pseudo-inverse for each stencil during model initialisation, and only the first row needs to be stored.  Since each face has two possible stencils depending on the orientation of the velocity relative to the face, the implementation stores two sets of weights for each face.
 Knowledge of the values of $\bm{\phi}$ is only required to calculate the weighted mean given by equation~\eqref{eqn:cubicFit:weighted-sum}, which is evaluated once per face per time-stage.

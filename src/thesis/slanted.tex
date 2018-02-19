@@ -66,7 +66,9 @@ Many operational atmospheric models use some form of coordinate smoothing \citep
 The second approach to reducing pressure gradient errors is to improve the accuracy in calculating the horizontal pressure gradient itself.
 Instead of calculating the horizontal pressure gradient in the computational domain, the techniques proposed by \citet{klemp2011} and \citet{zaengl2012} both involve interpolation onto $z$ levels in the physical domain.  This gave them the flexibility to design more accurate horizontal pressure gradient discretizations using more appropriate stencils.
 
-\TODO{Another approach is to improve the balance between pressure gradient and gravity and reduce the spurious solenoidal term by using a curl-free gradient formulation \citep{weller-shahrokhi2014}.  I think I should describe this formulation and explain why errors can grow with increasing non-orthogonality.}
+Another approach is to improve the balance between pressure gradient and gravity by reducing the spurious solenoidal term using a curl-free gradient formulation \citep{thuburn-cotter2012}, and this formulation was included in the nonhydrostatic model by \citet{weller-shahrokhi2014}.
+Since their model calculates gradients in the Exner function of pressure and does not calculate gradients of pressure directly, the formulation cannot be exactly curl-free.
+Nevertheless, \citet{weller-shahrokhi2014} found that switching from a horizontal gradient formulation to the curl-free gradient formulation improved idealised simulations over orography represented by terrain-following meshes.
 
 Cut cell meshes are less distorted than any smoothed terrain-following mesh, and some studies have shown examples where cut cells produce more accurate results when compared to terrain-following meshes \citep{good2014,steppeler2013}.
 Although cut cell meshes are almost entirely undistorted, when explicit methods are used with cut cells, the small cell problem must be overcome in order to avoid severe time-step constraints.
