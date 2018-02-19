@@ -1,11 +1,12 @@
 # words
 
-- 'time-step', not 'timestep' or 'time step'
+- 'time-step', not 'timestep' or 'time step', same for 'time-stepping'
 - 'terrain-following', not 'terrain following'
 - 'cut cell', not 'cut-cell'
 - 'terrain', not 'orography'
 - 'transport', not 'advection'
 - 'mesh', not 'grid'
+- (numerical/time-stepping) 'scheme', not 'method'
 - 'the cubicFit transport scheme' or 'the cubicFit scheme', not just 'cubicFit'
 - 'mesh layers', not 'the mesh layers' or 'mesh surfaces' or 'model levels'
 - 'peak mountain height', not 'maximum mountain height'

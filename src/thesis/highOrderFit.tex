@@ -11,8 +11,7 @@
 \end{highlights}
 
 Atmospheric models are using increasingly fine meshes to make more accurate forecasts, but high-order numerical schemes offer another possible route to improving accuracy.
-Choosing a higher-order scheme can be more computationally efficient than choosing a finer mesh \citep{waruszewski2018}, and numerical experiments performed by \citet{ullrich2014} identify fourth-order transport schemes as the `sweet spot'  where computational efficiency is maximised.
-\TODO{by what measure?  doesn't it depend on the nature of the flow? smooth, slowly-varying flows would suit higher order}
+Choosing a higher-order scheme can be more computationally efficient than choosing a finer mesh \citep{waruszewski2018}, and numerical experiments performed by \citet{ullrich2014} to compare the effective resolution of transport schemes identify third- or fourth-order schemes as the `sweet spot' where computational efficiency is maximised.
 
 A high-order transport scheme is ordinarily defined as one with a formal accuracy greater than second-order.
 The \emph{order of convergence} observed in numerical experiments may be less than the formal \emph{order of accuracy} if the transported field is insufficiently smooth, and strong gradients in the form of weather fronts and temperature inversions mean that atmospheric fields are generally not smooth enough to obtain high-order convergence \citep{holdaway2008}.

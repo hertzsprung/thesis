@@ -28,6 +28,4 @@ h = lambda x: h0*math.exp(-(x/a)**2) * math.cos(math.pi*x/lmbda)**2
 h1 = lambda x: 0.5 * h0 * math.exp(-(x/a)**2)
 h2 = lambda x: h(x) - h1(x)
 
-# TODO: exponent n
-
 print(gamma(h1, h2, H, s1, s2))

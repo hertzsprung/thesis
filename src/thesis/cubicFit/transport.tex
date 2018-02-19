@@ -5,7 +5,7 @@ The transport of a dependent variable $\phi$ in a prescribed, non-divergent velo
 \begin{align}		
 	\frac{\partial \phi}{\partial t} + \nabla \cdot \left( \vect{u} \phi \right) = 0 \text{ .} \label{eqn:advection}		
 \end{align}
-The time derivative is discretised using an explicit, two-stage, second-order Heun method,
+The time derivative is discretised using an explicit, two-stage, second-order Heun scheme,
 \begin{subequations}
 \begin{align}
 	\phi^\star &= \phi^{(n)} + \Delta t \: g(\phi^{(n)}) \\
@@ -13,9 +13,9 @@ The time derivative is discretised using an explicit, two-stage, second-order He
 \end{align} \label{eqn:heun}%
 \end{subequations}
 \unskip where \(g(\phi^{(n)}) = - \nabla \cdot (\vect{u} \phi^{(n)})\) at time level \(n\).
-The same time-stepping method is used for both the cubicFit scheme and the multidimensional linear upwind scheme.
-Although the Heun method is unstable for a linear oscillator \citep{durran2013} and for solving the transport equation using centred, linear differencing, it is stable when it is used for transport schemes with sufficient upwinding \citep[p. 149]{hundsdorfer-verwer2013}.
-\TODO{why use this scheme as opposed to RK2?}
+This two-stage second-order time-stepping scheme is similar to the three-stage second-order time-stepping scheme used later in a model of the fully compressible Euler equations (section~\ref{sec:slanted:exnerFoamH}), which uses an additional time-stage to converge upon the semi-implicit solution.
+The two-stage second-order time-stepping scheme is used for both the cubicFit scheme and the multidimensional linear upwind scheme.
+Although the Heun scheme is unstable for a linear oscillator \citep{durran2013} and for solving the transport equation using centred, linear differencing, it is stable when it is used for transport schemes with sufficient upwinding \citep[p. 149]{hundsdorfer-verwer2013}.
 
 Using the finite volume method, the velocity field is prescribed at face centroids and the dependent variable is stored at cell centroids.  The divergence term in equation~\eqref{eqn:advection} is discretised using Gauss's theorem,
 \begin{align}
