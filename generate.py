@@ -73,6 +73,7 @@ class Thesis:
                         'src/thesis/slanted/exnerFoamH.tex',
                         'src/thesis/slanted/resting.tex',
                         'src/thesis/cp.tex',
+                        'src/thesis/cp/vertical-staggering.tex',
                         'src/thesis/cp/method.tex',
                         'src/thesis/cp/variables.tex',
                         'src/thesis/cp/schaerWaves.tex',

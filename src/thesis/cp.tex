@@ -11,12 +11,32 @@
 \end{highlights}
 
 The Lorenz computational mode arises from having one too many degrees of freedom in the Lorenz staggering of variables, and it is often excited by thermal forcing, producing spurious, vertical, two-grid alternating waves \citep{schneider1987,arakawa-konor1996}.
-In the Lorenz staggering, the pressure and vertical velocity variables are staggered, with the thermodynamic variable collocated with the pressure variable \citep{lorenz1960}.
+In the Lorenz staggering \citep{lorenz1960}, the pressure and vertical velocity variables are staggered, with the thermodynamic variable collocated with the pressure variable (figure~\ref{fig:cp:vertical-staggering:lorenz}).
 Hydrostatic models calculate the hydrostatic balance equation and nonhydrostatic models calculate the vertical momentum equation and, in both cases, vertical averaging of the thermodynamic variable means that these spurious grid-scale waves persist because they become invisible to the model \citep{arakawa-konor1996}.
 Spurious grid-scale waves have been attributed to the Lorenz computational mode in the Global Environmental Multiscale 3 model \citep{girard2014}, and the Korea Institute of Atmospheric Prediction Systems Integrated Model \citep{yi-park2017} amongst others, and these non-physical waves can lead to spurious rainfall in atmospheric models \citep{hollingsworth1995}, inaccurate simulations of idealised hurricanes \citep{zhu-smith2003}, and spurious instabilities in ocean models \citep{bell-white2017}.
 
+\begin{figure}
+	\centering
+	\begin{subfigure}{\textwidth}
+		\centering
+		\phantomsubcaption\label{fig:cp:vertical-staggering:lorenz}
+		\phantomsubcaption\label{fig:cp:vertical-staggering:cp}
+		\input{cp/vertical-staggering}
+	\end{subfigure}
+	%
+	\caption{
+	(\subcaptionref{fig:cp:vertical-staggering:lorenz})
+	Lorenz and
+	(\subcaptionref{fig:cp:vertical-staggering:cp}) Charney–Phillips vertical staggering of variables.
+	Dashed lines mark the vertical position of cell centres and solid lines mark the vertical position of horizontal faces.
+	The Lorenz staggering collocates the thermodynamic variable $\theta$ with the pressure variable $p$ and horizontal velocity $u$.
+	The Charney--Phillips staggering collocates the thermodynamic variable with the vertical velocity $w$.
+	Adapted from \citet{holdaway2013a}.}
+	\label{fig:cp:vertical-staggering}
+\end{figure}
+
 The computational mode can be at least partially controlled by using sufficient vertical diffusion \citep{chang1992,zadra2004}, or by using a higher-order vertical discretisation \citep{untch-hortal2004,guerra-ullrich2016,yi-park2017}, but the computational mode can only be properly eliminated by choosing an alternative staggering of variables that removes the extra degree of freedom.
-One such alternative is the Charney--Phillips staggering \citep{charney-phillips1953}, in which the thermodynamic variable is collocated with vertical velocity, avoiding any vertical averaging in calculating the vertical momentum equation.
+One such alternative is the Charney--Phillips staggering \citep{charney-phillips1953}, in which the thermodynamic variable is collocated with vertical velocity (figure~\ref{fig:cp:vertical-staggering:cp}), avoiding any vertical averaging in calculating the vertical momentum equation.
 Due to the errors associated with the Lorenz computational mode, the Global Environmental Multiscale model switched from a Lorenz staggering to a Charney--Phillips staggering between model versions 3 and 4 \citep{girard2014}, and a Charney--Phillips staggering is also used in the Met Office Unified Model \citep{davies2005} and the Global/Regional Assimilation and Prediction System \citep{yang2007}.
 \citet{thuburn-woolings2005} exhaustively tested different combinations of vertical coordinates, prognostic variables and their staggerings, and found that a Charney--Phillips staggering has better dispersion properties than a Lorenz staggering for any given choice of vertical coordinate and prognostic variables.
 Numerical experiments performed by \citet{cullen1997} revealed that a model with a Charney--Phillips staggering reduced spurious gravity waves and had better geostrophic adjustment compared to the same model with a Lorenz staggering.
