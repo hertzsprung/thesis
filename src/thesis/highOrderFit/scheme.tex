@@ -1,15 +1,15 @@
 \section{High-order finite volume formulation}
 \label{sec:highOrderFit:scheme}
 
-Integrating the flux-form transport equation \eqref{eqn:advection} over a volume $\vol$ and using Gauss's divergence theorem,
+Averaging the flux-form transport equation \eqref{eqn:advection} over a volume $\vol$ and using Gauss's divergence theorem,
 \begin{align}
-	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \int_{\partial \vol} \phi \vect{u} \cdot \unitn dA \label{eqn:highOrder:integrated-advection}
+	\frac{1}{\vol} \int_\vol \frac{\partial \phi}{\partial t} d\vol = - \frac{1}{\vol} \int_{\partial \vol} \phi \vect{u} \cdot \unitn dA \label{eqn:highOrder:integrated-advection}
 \end{align}
 where $\unitn$ is the outward unit normal vector.
 Using the method of lines, the time derivative is discretised using the classical fourth-order Runge–Kutta time-stepping scheme \citep[p. 53]{durran2013}, and the spatial discretisation is described next.
 For a polygonal cell with faces $f$ equation~\eqref{eqn:highOrder:integrated-advection} becomes
 \begin{align}
-	\int_\vol \frac{\partial \phi}{\partial t} d\vol = - \sum_f \int_{\area_f} \phi \vect{u} \cdot \unitn d\area_f \label{eqn:highOrder:advection}
+	\frac{1}{\vol} \int_\vol \frac{\partial \phi}{\partial t} d\vol = - \frac{1}{\vol} \sum_f \int_{\area_f} \phi \vect{u} \cdot \unitn d\area_f \label{eqn:highOrder:advection}
 \end{align}
 where $\area_f$ is the area of face $f$.
 If $\phi$ is a sufficiently smooth field then it can be approximated to $P$-order accuracy by replacing $\phi$ with a polynomial interpolant $\psi$,
@@ -26,12 +26,12 @@ As an example, the exponents $\vect{p}$ in two dimensions $(x, y)$ with $\Mag{\v
 \begin{align}
 	\psi = a_{0,0} + a_{1,0} \left( x - x_0 \right) + a_{0,1} \left( y - y_0 \right) \text{ .}
 \end{align}
-Replacing $\phi$ in \eqref{eqn:highOrder:advection} with $\psi$ in \eqref{eqn:highOrder:interpolant} we obtain an expression for the face flux,
+Replacing $\phi$ in \eqref{eqn:highOrder:advection} with $\psi$ in \eqref{eqn:highOrder:interpolant} we obtain an expression for the face flux\footnote{Equation~\eqref{eqn:highOrder:face-flux} assumes that there is little variation in the velocity field $\vect{u}$ at the grid scale, such that $\vect{u}$ can be approximated by a velocity $\uf{}$ that is constant over the face $f$.
+Such an assumption is justifiable for atmospheric flows that are predominantly large-scale \citep{methven-hoskins1999}.},
 \begin{align}
 	\int_\area \phi \vect{u} \cdot \unitn d\area = \uf \cdot \unitn \sum_{\Mag{\vect{p}} \leq P} a_{\vect{p}} \moment_\area^\vect{p} \label{eqn:highOrder:face-flux}
 \end{align}
 where $\moment_\area^\vect{p} = \int_\area \left( \vect{x} - \vect{x}_0 \right)^\vect{p} d \area$ is the $\vect{p}$-th moment of area $\area$.
-\TODO{here we're assuming that $\vect{u}$ is smoother than $\phi$, see \citet{methven-hoskins1999} for a justification?}
 Therefore, the face flux can be calculated by finding the the polynomial coefficients $a_\vect{p}$.
 
 Following the same approach as the cubicFit transport scheme, taking a total polynomial order $P = 3$ gives 9 polynomial terms with polynomial coefficients calculated using the same upwind-biased stencil.

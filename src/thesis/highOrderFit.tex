@@ -15,7 +15,6 @@ Choosing a higher-order scheme can be more computationally efficient than choosi
 
 A high-order transport scheme is ordinarily defined as one with a formal accuracy greater than second-order.
 The \emph{order of convergence} observed in numerical experiments may be less than the formal \emph{order of accuracy} if the transported field is insufficiently smooth, and strong gradients in the form of weather fronts and temperature inversions mean that atmospheric fields are generally not smooth enough to obtain high-order convergence \citep{holdaway2008}.
-\TODO{also, unsteady flows, like in the deformational flow test, will result in filamentation and less smooth fields}
 Even if high-order convergence is unattainable, high-order schemes offer other advantages over second-order schemes: high-order schemes can reduce dispersion and diffusion errors \citep{ullrich-jablonowski2012,waruszewski2018}, reduce grid imprinting \citep{mccorquodale2015}, and increase the effective resolution of the scheme \citep{ullrich2014}.
 
 High-order schemes are often formulated by introducing additional degrees of freedom within each cell.
@@ -31,13 +30,12 @@ The transport scheme by \citet{skamarock-gassmann2011} is a compact scheme for h
 The resulting scheme is high-order accurate on uniform hexagonal meshes, but it is formally only first-order accurate on non-uniform meshes.
 
 Non-compact schemes store only cell average values, and high-order reconstructions are obtained on uniform or non-uniform meshes by using a larger stencil of cells.
-\TODO{mention swept-area schemes here and the high cost involved in interpolating onto arbitrary points.}
-A high-order polynomial reconstruction is achieved using the \kexact{} method \citep{barth1995}, so-called because it exactly reconstructs a polynomial of degree $k$ represented by a stencil of cell average values.
-The \kexact{} method has been used in fully compressible finite volume models that employ Godunov-type schemes \citep{ullrich-jablonowski2012} using cubed-sphere meshes, or Weighted Essentially Non-Oscillatory (WENO) schemes \citep{tsoutsanis-drikakis2016} using arbitrary polyhedral meshes.
-Godunov-type schemes and WENO schemes are well-suited for representing nonlinear dynamics with discontinuous solutions \citep{leveque2002}, but the \kexact{} method can be applied to the linear transport equation yielding a computationally cheaper scheme.
-\TODO{John and Hans suggest that shock-capturing schemes are unnecessary for atmospheric flows, so highOrderFit is a well-motivated alternative to existing Godunov-type and WENO schemes.}
-\citet{sjoegreen2012} developed a third-order accurate finite volume transport scheme using the \kexact{} method, formulated for spherical geometry, but did not present convergence results from numerical tests on a two-dimensional spherical shell.
-\citet{schwartz2015} formulated a high-order treatment of sub-grid scale boundaries, using the \kexact{} method for solving Poisson's equation on cut cell meshes, and such a technique might prove useful for representing the atmosphere above complex terrain.
+High-order polynomial reconstructions over non-compact stencils have been used in fully compressible finite volume models that employ Godunov-type schemes \citep{ullrich-jablonowski2012} using cubed-sphere meshes, or Weighted Essentially Non-Oscillatory (WENO) schemes \citep{tsoutsanis-drikakis2016} using arbitrary polyhedral meshes.
+Godunov-type schemes and WENO schemes are well-suited for representing nonlinear dynamics with discontinuous solutions \citep{leveque2002}, but they are often computationally expensive.
+Computationally cheaper are high-order swept area schemes, which also reconstruct high-order polynomials over non-compact stencils.
+A swept area scheme calculates a face flux by Gaussian integration of the polynomial over the upstream swept area, which typically requires a matrix-vector multiply per face per time-stage \citep{thuburn2014}.
+Computationally cheaper than the swept area approach is the \kexact{} method \citep{barth1995}, which requires only one dot product of two vectors per face per time-stage.
+The \kexact{} method is so-called because it exactly reconstructs a polynomial of degree $k$ or less, represented by a non-compact stencil of cell average values.
 
 For the numerical experiments presented in chapter~\ref{ch:cubicFit}, the cubicFit transport scheme achieves only second-order convergence even though it includes high-order polynomial terms.
 The cubicFit scheme uses a sub-grid reconstruction that fits a polynomial over known values stored at cell centre points, and it is this point-wise approach that limits the scheme to second-order convergence.

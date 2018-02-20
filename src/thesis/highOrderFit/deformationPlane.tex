@@ -72,5 +72,9 @@ Similar to the results of deformational flow on a sphere in section~\ref{sec:cub
 At finer mesh spacings, the cubicFit scheme achieves second-order convergence and the highOrderFit scheme achieves third-order convergence.
 For both schemes, errors are slightly larger switching from a uniform mesh to a distorted mesh, but the order of convergence remains unchanged.
 
+Unlike the results of transporting a smooth tracer over mountains (section~\ref{sec:highOrderFit:schaerAdvectSmooth}), the highOrderFit scheme did not achieve fourth-order convergence for this deformational flow test case on a uniform mesh.
+It might be that fourth-order convergence can be obtained only with a uniform flow (J. Kent 2018, personal communication).
+Alternatively, it might be that the initial Gaussian tracer field, which is infinitely differentiable, becomes insufficiently smooth due to filamentation by the deformational velocity field.
+
 Results presented in this chapter demonstrate that, assuming a sufficiently smooth tracer, the highOrderFit transport scheme achieves third-order convergence or higher, irrespective of mesh distortions or the choice of velocity field.
 Thanks to its high-order convergence, the highOrderFit scheme is more accurate than the cubicFit scheme on all but the coarsest meshes.
