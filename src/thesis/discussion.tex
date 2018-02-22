@@ -18,7 +18,7 @@ Transport tests demonstrate that the highOrderFit scheme achieves at least third
 
 The highOrderFit transport scheme offers a promising route to obtaining high-order convergence with a low computational cost, but we are aware of three improvements that could be investigated:
 \begin{enumerate}
-\item The highOrderFit scheme achieves high-order convergence that makes it more accurate than the cubicFit scheme at finer mesh spacings but, at coarser mesh spacings, the cubicFit scheme is most accurate.
+\item The highOrderFit scheme achieves high-order convergence that makes it more accurate than the cubicFit scheme at finer mesh spacings but, at coarser mesh spacings, the cubicFit scheme is more accurate.
 For both transport schemes, the multipliers that appear in the weighted least-squares fit are used to ensure that the polynomial fits the upwind and downwind cells almost exactly, and this is necessary to achieve stability on highly-distorted meshes.
 On less distorted meshes, however, more accurate results can be obtained by modifying the multiplier values so that the polynomial has a less exact fit through the upwind and downwind cell values, but has better least-squares fit to the stencil overall.
 \citet{devendran2017} note that these multipliers introduce extra degrees of freedom into the system, and a strategy for optimising these values is the subject of future work.
@@ -41,16 +41,16 @@ Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numeric
 The test reveals that the slanted cell mesh permits longer time-steps than those permitted on cut cell meshes, since slanted cells are always long in the direction of flow.
 
 In this thesis, all tests that represent terrain with $x$--$z$ meshes have used only uniform vertical mesh spacing.
-Operational atmospheric models have non-uniform vertical mesh spacing, using finer mesh spacing near the ground to resolve boundary layer processes \citep[p. 547]{chow2013}.
+Operational atmospheric models have non-uniform vertical mesh spacing, using finer mesh spacing near the ground to resolve boundary layer processes.
 Fine vertical mesh spacing near the ground is also desirable for resolving diurnal flows along mountain slopes, which have a typical depth from \SIrange{1}{20}{\meter} \citep[p. 39]{chow2013}.
 Since we have established that the numerical accuracy of a transport scheme depends primarily on the alignment of flow with the mesh (section~\ref{sec:cubicFit:tfAdvect}), we might expect a terrain-following mesh to be better-suited than cut a cell mesh for representing slope flows.
 The tests presented here demonstrate that transport over mountain slopes is more accurate using terrain-following meshes (section~\ref{sec:slanted:mountainAdvect}), but that a more accurate balance between the pressure gradient and gravity is achieved using cut cell meshes or slanted cell meshes (section~\ref{sec:slanted:resting}).
 Hence, future work might seek an improved mesh that blends the best features of both terrain-following and slanted cell meshes.
 
 Finally, a two-dimensional test case was developed to excite the Lorenz computational mode.
-The test is based on the original specification by \citet{arakawa-konor1996} that was developed for a simplified, vertically-discrete model in pressure coordinates.
+The test is based on the original specification by \citet{arakawa-konor1996}, developed for a simplified, vertically-discrete model in pressure coordinates.
 Test results were compared using two models of fully compressible Euler equations: one variant having a Lorenz staggering, and the other model variant using a newly-formulated Charney--Phillips staggering generalised for arbitrary meshes.
 The test case verifies that the generalised Charney--Phillips model variant is free from the Lorenz computational mode, and we hope that the new test case might aid in the development and intercomparison of future dynamical cores.
 
-The research presented in this thesis creates new opportunities for accurate atmospheric transport with low computational cost and improved numerical balance between pressure gradient and gravity, and we have provided a series of new, idealised test cases for evaluating dynamical cores.
+The research presented in this thesis creates new opportunities for accurate atmospheric transport with low computational cost and improved numerical balance between the pressure gradient and gravity, and we have provided a series of new, idealised test cases for evaluating dynamical cores.
 In combination, the slanted cell mesh, the highOrderFit transport scheme and numerical stabilisation techniques from the cubicFit scheme offer a route to more accurate numerical simulations of the atmosphere in the vicinity of steeply sloping terrain.

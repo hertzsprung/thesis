@@ -1,4 +1,10 @@
 \makechapterstyle{mysouthall}{%
+% https://tex.stackexchange.com/a/309189/23339
+\newlength{\aftertocskip}
+\setlength{\aftertocskip}{2.7\baselineskip}% Space after ToC title
+\renewcommand*{\aftertoctitle}{%
+\par\vspace{\baselineskip}%
+\hrulefill \par\nobreak\noindent \vskip\aftertocskip}
 \setlength{\afterchapskip}{5\baselineskip}
 \setlength{\beforechapskip}{36pt}
 \setlength{\midchapskip}{\textwidth}
