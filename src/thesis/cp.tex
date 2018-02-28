@@ -5,7 +5,7 @@
 {\Large Highlights}
 \begin{itemize}
 	\item A new idealised two-dimensional test case reveals spurious grid-scale waves excited by the Lorenz computational mode
-	\item The Charney--Phillips staggering is generalised for arbitrary meshes that reduces to classical Charney--Phillips on traditional meshes
+	\item The Charney--Phillips staggering is generalised for arbitrary meshes, reducing to the classical Charney--Phillips staggering on traditional meshes
 	\item A new fully compressible Euler model that implements the generalised Charney--Phillips formulation is free from spurious grid-scale waves
 \end{itemize}
 \end{highlights}
@@ -42,7 +42,7 @@ Due to the errors associated with the Lorenz computational mode, the Global Envi
 Numerical experiments performed by \citet{cullen1997} revealed that a model with a Charney--Phillips staggering reduced spurious gravity waves and had better geostrophic adjustment compared to the same model with a Lorenz staggering.
 
 While the Charney--Phillips staggering avoids vertical averaging of the thermodynamic variable in calculating the vertical momentum equation, \citet{davies2005} notes that horizontal pressure gradient calculations can involve vertical averaging of the thermodynamic variable which is inaccurate in the lowest layers where there are strong temperature gradients.
-\citet{holdaway2013a} note that, in calculating the Richardson number for boundary layer schemes, averaging that is necessary with the Charney--Phillips staggering that is avoided by using a Lorenz staggering.
+\citet{holdaway2013a} note that, in calculating the Richardson number for boundary layer schemes, averaging that is necessary with the Charney--Phillips staggering is avoided by using a Lorenz staggering.
 
 Previous studies have used a variety of test cases to compare different model variants using Lorenz and Charney--Phillips staggering.
 One of the earliest comparisons was made by \citet{arakawa-moorthi1988} who found that, without additional diffusion, their numerical solutions of a baroclinic instability test were dominated by short-wave noise.
@@ -52,7 +52,7 @@ Based on the work of \citet{arakawa-konor1996}, \citet{untch-hortal2004} develop
 
 While these tests have proved useful, they are not ideally suited for dynamical core development: the test case by \citet{untch-hortal2004} is too large, and the test cases by \citet{arakawa-konor1996} were developed only for a simplified, vertically discrete model in pressure coordinates.
 Hence, we propose a new, idealised two-dimensional test case, based on the work of \citet{arakawa-konor1996}, to compare the accuracy of models using Lorenz or Charney--Phillips staggerings.
-The new test case intended to aid in the development and intercomparison of modern, nonhydrostatic dynamical cores.  The test completes quickly, using a coarse two-dimensional mesh specified in Cartesian coordinates.
+The new test case intended to aid the development and intercomparison of modern, nonhydrostatic dynamical cores.  The test completes quickly, using a coarse two-dimensional mesh specified in Cartesian coordinates.
 We compare test results between the fully compressible Euler model with a Lorenz staggering (section~\ref{sec:slanted:exnerFoamH}), and a variant of this same model that includes a new generalisation of the Charney--Phillips staggering for arbitrary meshes.
 
 After describing the generalised Charney--Phillips formulation in section~\ref{sec:cp:method}, we compare Lorenz and generalised Charney--Phillips model variants in section~\ref{sec:cp:schaerWaves} using the standard mountain waves test case specified by \citet{schaer2002}.
