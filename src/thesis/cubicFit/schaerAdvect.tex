@@ -11,16 +11,16 @@ The domain is defined on a rectangular $x$--$z$ plane that is \SI{300}{\kilo\met
 Boundary conditions are imposed on the tracer density $\phi$ such that $\phi = \SI{0}{\kilo\gram\per\meter\cubed}$ at the inlet boundary, and a zero normal gradient
 $\partial \phi / \partial n = \SI{0}{\kilo\gram\per\meter\tothe{4}}$ is imposed at the outlet boundary.  There is no normal flow at the lower and upper boundaries.
 
-The terrain is wave-shaped, specified by the surface elevation $h$ such that
+The terrain is wave-shaped, specified by the terrain height $h$ such that
 \begin{subequations}
 \begin{align}
-   h(x) &= h^\star \cos^2 ( \alpha x )
+h(x) &= h^\star \cos^2 ( \alpha x ) \text{ ,}
 %
 \shortintertext{where}
 %
    h^\star(x) &= \left\{ \begin{array}{l l}
-       h_0 \cos^2 ( \beta x ) & \enskip \text{if $| x | < a$} \\
-	0 & \enskip \text{otherwise}
+       h_0 \cos^2 ( \beta x ) & \enskip \text{if $| x | < a$,} \\
+	0 & \enskip \text{otherwise,}
     \end{array} \right.
 \end{align}
 \label{eqn:cubicFit:schaerAdvect:mountain}%
@@ -30,7 +30,7 @@ where $a = \SI{25}{\kilo\meter}$ is the mountain envelope half-width, $h_0 = \SI
 A basic terrain-following (BTF) mesh is constructed by using the terrain profile to modify the uniform rectangular mesh.
 The BTF method uses a linear decay function so that mesh layers become horizontal at the top of the model domain \citep{galchen-somerville1975a},
 \begin{equation}
-	z(x) = \left( H - h(x) \right) \left( z^\star / H \right) + h(x) \label{eqn:btf}
+	z(x) = \left( H - h(x) \right) \left( z^\star / H \right) + h(x) \text{ ,} \label{eqn:btf}
 \end{equation}
 where $z$ is the geometric height, $H$ is the height of the domain, $h(x)$ is the surface elevation and $z^\star$ is the computational height of a mesh layer.  If there were no terrain then $h = 0$ and $z = z^\star$.
 
@@ -44,7 +44,7 @@ A velocity field is prescribed with uniform horizontal flow aloft and zero flow 
 	\label{eqn:cubicFit:schaerAdvect:velocity}
 \end{align}
 where $u_0 = \SI{10}{\meter\per\second}$, $z_1 = \SI{7}{\kilo\meter}$ and $z_2 = \SI{8}{\kilo\meter}$.
-This results in a constant wind above $z_2$, and zero flow at \SI{7}{\kilo\meter} and below.
+This results in uniform horizontal flow above \SI{8}{\kilo\meter} and zero flow at \SI{7}{\kilo\meter} and below.
 
 The discrete velocity field is defined using a streamfunction, \(\Psi\).  Given that \(u = -\partial \Psi / \partial z\), the streamfunction is found by vertical integration of the velocity profile,
 \begin{align}
@@ -70,7 +70,7 @@ A tracer with density $\phi$ is positioned upstream above the height of the terr
 	r &= \sqrt{
 		\left( \frac{x - x_0}{A_x} \right)^2 + 
 		\left( \frac{z - z_0}{A_z} \right)^2
-	}
+	} \text{ ,}
 \end{align} \label{eqn:cubicFit:schaerAdvect:tracer}%
 \end{subequations}
 where $A_x = \SI{25}{\kilo\meter}$, $A_z = \SI{3}{\kilo\meter}$ are the horizontal and vertical half-widths respectively, $\phi_0 = \SI{1}{\kilogram\per\meter\cubed}$ is the maximum density of the tracer, and the exponent $\rhoexp = 2$.  At $t = \SI{0}{\second}$, the tracer is centred at $(x_0, z_0) = (\SI{-50}{\kilo\meter}, \SI{12}{\kilo\meter})$ so that the tracer is upwind of the mountain, in the region of uniform flow above $z_2$.
@@ -97,11 +97,11 @@ The analytic solution at $t = \SI{10000}{\second}$ is centred at $(x_0, z_0) = (
 \end{figure}
 
 To measure numerical convergence, a range of mesh spacings are chosen so that $\Delta x \mathbin{:} \Delta z = 2\mathbin{:}1$ to match the original test specification by \citet{schaer2002}.
-Tests were performed using the linearUpwind and cubicFit schemes using BTF meshes and cut cell meshes with mesh spacings between $\Delta x = \SI{250}{\meter}$ and $\Delta x = \SI{5000}{\meter}$.
+Tests were performed using the linearUpwind and cubicFit schemes on BTF meshes and cut cell meshes with mesh spacings between $\Delta x = \SI{250}{\meter}$ and $\Delta x = \SI{5000}{\meter}$.
 Error norms are calculated by subtracting the analytic solution from the numerical solution,
 \begin{align}
-	\ell_2 &= \sqrt{\frac{\sum_c \left(\phi - \phi_T \right)^2 \vol_c}{\sum_c \left(\phi_T^2 \vol_c \right)}} \label{eqn:l2-error} \\
-	\ell_\infty &= \frac{\max_c \Mag{\phi - \phi_T}}{\max_c \Mag{\phi_T}} \label{eqn:linf-error}
+	\ell_2 &= \sqrt{\frac{\sum_c \left(\phi - \phi_T \right)^2 \vol_c}{\sum_c \left(\phi_T^2 \vol_c \right)}} \text{ ,} \label{eqn:l2-error} \\
+	\ell_\infty &= \frac{\max_c \Mag{\phi - \phi_T}}{\max_c \Mag{\phi_T}} \text{ ,} \label{eqn:linf-error}
 \end{align}
 where $\phi$ is the numerical value, $\phi_T$ is the analytic value, $\sum_c$ denotes a summation over all cells $c$ in the domain, and $\max_c$ denotes a maximum value of any cell.
 The linearUpwind and cubicFit schemes are second-order convergent in the $\ell_2$ norm (figure~\ref{fig:cubicFit:schaerAdvect:convergence:l2}) and $\ell_\infty$ norm (figure~\ref{fig:cubicFit:schaerAdvect:convergence}) at all but the coarsest mesh spacings where errors are saturated for both schemes.
@@ -139,7 +139,7 @@ Hence, for a given $\ell_2$ error, the computational cost of the cubicFit scheme
 	\label{fig:cubicFit:schaerAdvect:error}
 \end{figure}
 
-Next, we examine the structure of numerical errors with test results using the linearUpwind and cubicFit transport schemes on BTF and cut cell meshes with $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.
+Next, we examine the structure of numerical errors using the linearUpwind and cubicFit transport schemes on BTF and cut cell meshes with $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.
 To obtain a maximum Courant number of about \num{0.4}, we choose $\Delta t = \inputval{schaerAdvect-cutCell-1000-linearUpwind/dt}$ on the cut cell mesh where the flow is aligned with mesh layers and there are no fluxes through upper and lower cell faces.
 Since there is no flow below $z = \SI{7}{\kilo\meter}$, the time-step is not constrained by small, cut cells next to the lower boundary.
 On the BTF mesh, $\Delta t$ is only \inputval{schaerAdvect-btf-1000-linearUpwind/dt} because the flow is misaligned with mesh layers, with fluxes through all four faces of cells above sloping terrain.

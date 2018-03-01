@@ -3,7 +3,7 @@
 
 The tests presented so far have used flows that are mostly uniform on meshes that are based on rectangular cells.
 To ensure that the cubicFit transport scheme is suitable for complex flows on a variety of meshes, we use a standard test of deformational flow on a spherical Earth, as specified by \citet{lauritzen2012}.  
-Results are compared between linearUpwind and cubicFit schemes using hexagonal-icosahedral meshes and cubed-sphere meshes.
+Results are compared between the linearUpwind and cubicFit schemes using hexagonal-icosahedral meshes and cubed-sphere meshes.
 Hexagonal-icosahedral meshes are constructed by successive refinement of a regular icosahedron following the approach by \citet{thuburn2014,heikes-randall1995a,heikes-randall1995b} without any mesh twisting.
 Cubed-sphere meshes are constructed using an equi-distant gnomic projection of a cube having a uniform Cartesian mesh on each panel \citep{staniforth-thuburn2012}.
 
@@ -39,9 +39,9 @@ The initial tracer density $\phi$ is defined as the sum of two Gaussian hills,
 \end{align}
 An individual hill $\phi_i$ is given by
 \begin{align}
-	\phi_i(\lambda, \theta) = \phi_0 \exp\left( -b \left( \frac{\Mag{\vect{x} - \vect{x}_i}}{R_e} \right)^2 \right)
+	\phi_i(\lambda, \theta) = \phi_\mathrm{max} \exp\left( -b \left( \frac{\Mag{\vect{x} - \vect{x}_i}}{R_e} \right)^2 \right)
 \end{align}
-where $\phi_0 = \SI{0.95}{\kilo\gram\per\meter\cubed}$ and $b = 5$.  The Cartesian position vector $\vect{x} = (x,y,z)$ is related to the spherical coordinates $(\lambda, \theta)$ by
+where $\phi_\mathrm{max} = \SI{0.95}{\kilo\gram\per\meter\cubed}$ and $b = 5$.  The Cartesian position vector $\vect{x} = (x,y,z)$ is related to the spherical coordinates $(\lambda, \theta)$ by
 \begin{align}
 	(x,y,z) = (R_e \cos \theta \cos \lambda, R_e \cos \theta \sin \lambda, R_e \sin \theta) \label{eqn:cubicFit:spherical-cartesian} \text{ .}
 \end{align}
@@ -102,11 +102,23 @@ A slightly more challenging variant of the same test is performed using a quasi-
 	\begin{cases}
 		b + c \phi_1(\lambda, \theta) & \enskip \text{if $r_1 < r$,} \\
 		b + c \phi_2(\lambda, \theta) & \enskip \text{if $r_2 < r$,} \\
-		b			      & \enskip \text{otherwise.} \\
+		b			      & \enskip \text{otherwise,} \\
 	\end{cases}
 \end{align}
-The velocity field is the same as before.  This test is used to determine the ``minimal'' resolution, $\Delta \lambda_m$, which is specified by \citet{lauritzen2012} as the coarsest mesh spacing for which $\ell_2 \approx 0.033$.
-Hence, a transport scheme that achieves a larger minimal resolution is more accurate than one that a achieves a smaller minimal resolution.
+where $b = \num{0.1}$, $c = \num{0.9}$, $r = R_e / 2$ and an individual hill $\phi_i$ is given by
+\begin{align}
+	\phi_i =
+	\begin{cases}
+		\frac{\phi_\mathrm{max}}{2} \left( 1 + \cos \left( \frac{\pi r_i}{r} \right) \right) & \enskip \text{if $r_i < r$,} \\
+		0 & \enskip \text{otherwise,}
+	\end{cases}
+\end{align}
+where $\phi_\mathrm{max} = 1$ and $r_i$ is the great circle distance between the centre point $\left( \lambda_i, \theta_i\right)$ and point $\left( \lambda, \theta \right)$ such that
+\begin{align}
+	r_i(\lambda, \theta) = R_e \arccos\left( \sin \theta_i \sin \theta + \cos \theta_i \cos \theta \cos \left( \lambda - \lambda_i \right) \right) \text{ .}
+\end{align}
+The velocity field is the same as before.  This test is used to determine the ``minimal'' resolution $\Delta \lambda_m$, which is specified by \citet{lauritzen2012} as the coarsest mesh spacing for which $\ell_2 \approx 0.033$.
+Hence, a transport scheme that achieves a larger minimal resolution is more accurate than one that achieves a smaller minimal resolution.
 
 \begin{table}
 	\robustify\itshape

@@ -3,8 +3,8 @@
 
 In the horizontal transport test, results were least accurate on the BTF mesh where the mesh was most distorted and flow was misaligned with mesh layers.
 Here, we formulate a new tracer transport test in which the velocity field is everywhere tangential to the basic terrain-following mesh layers.
-The flow is then aligned with the BTF mesh layers, but the points in the linearUpwind and cubicFit stencils are not uniformly distributed because the BTF mesh is distorted.
-Conversely, the flow is misaligned with the cut cell mesh layers but, except in cut cells next to the ground, the cut cell mesh is undistorted.
+The flow is then aligned with the BTF mesh layers, but the cells in the linearUpwind and cubicFit stencils are not uniformly distributed because the BTF mesh is distorted.
+Conversely, the flow is misaligned with the cut cell mesh layers but, except for cut cells next to the ground, the cut cell mesh is undistorted.
 This test determines whether the primary source of numerical error is due to mesh distortions or misalignment of the flow with mesh layers.
 
 The domain size, mountain profile, initial tracer profile and boundary conditions are the same as those in the horizontal transport test in section~\ref{sec:cubicFit:schaerAdvect}.
