@@ -17,7 +17,7 @@ If $\phi$ is a sufficiently smooth field then it can be approximated to $P$-orde
 	\psi = \sum_{\Mag{\vect{p}} \leq P} a_{\vect{p}} \left(\vect{x} - \vect{x}_0 \right)^\vect{p} \label{eqn:highOrder:interpolant}
 \end{align}
 where $a_\vect{p}$ are unknown polynomial coefficients, $\vect{x}_0$ is a fixed position, and $P$ is the total polynomial order.
-Note that we use the multi-index notation such that $\Mag{\vect{p}} = p_1 + \ldots + p_n$ and
+Note that we use multi-index notation such that $\Mag{\vect{p}} = p_1 + \ldots + p_n$ and
 \begin{align}
 	a_{\vect{p}} \left( \vect{x} - \vect{x}_0 \right)^\vect{p} = a_\vect{p} \prod_{d=1}^D \left( x_d - x_{0_d} \right)^{p_d} \text{ .}
 \end{align}
@@ -86,6 +86,6 @@ The calculation of high-order cell volume moments and surface moments are requir
 We follow their method but, in order to avoid any degenerate triangles, we introduce a centre point shared by all triangles instead of triangulating polygons with only existing vertices.
 
 While the highOrderFit transport scheme uses a total polynomial order $P = 3$ for stencils in the domain interior, a total polynomial order $P = 1$ is used for stencils near the boundary having fewer than 12 cells.
-This reduction in total polynomial order ensures that matrix equations are never underconstrained.
+This reduction in total polynomial order ensures that matrix equations are not underconstrained.
 This thesis does not assess the accuracy of the highOrderFit scheme near boundaries, and so the more sophisticated boundary treatment implemented in the cubicFit scheme has not been implemented in the highOrderFit scheme.
 

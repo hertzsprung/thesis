@@ -14,7 +14,7 @@ All other parameters relating to the mountain profile and velocity field are the
 The tracer density is given by equation~\eqref{eqn:cubicFit:schaerAdvect:tracer} and is centred at $(x_0, z_0) = (\SI{-50}{\kilo\meter}, \SI{9}{\kilo\meter})$.  In order to allow high-order convergence to be achieved, the exponent $\rhoexp = 4$ such that the $\cos^\rhoexp$ hill has $\rhoexp - 1$ continuous derivatives \citep{holdaway2008}.
 All other tracer parameters are the same as those given in section~\ref{sec:cubicFit:schaerAdvect}.
 
-Tests are integrated for \SI{10000}{\second} using the classical fourth-order Runge–Kutta time-stepping scheme with both cubicFit and highOrderFit transport schemes, and a time-step chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
+Tests are integrated for \SI{10000}{\second} using the classical fourth-order Runge–Kutta time-stepping scheme with both cubicFit and highOrderFit transport schemes, and a time-step is chosen for each mesh so that the maximum Courant number is about \num{0.4}.  
 The analytic solution at $t = \SI{10000}{\second}$ is centred at $(x_0, z_0) = (\SI{50}{\kilo\meter}, \SI{9}{\kilo\meter})$.
 To measure the order of convergence of the cubicFit scheme and the highOrderFit scheme, tests are performed using mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{250}{\meter}$.
 The vertical mesh spacing $\Delta z$ is chosen so that $\Delta x \mathbin{:} \Delta z = 2\mathbin{:}1$ to match the original test specification by \citet{schaer2002}.
@@ -44,7 +44,7 @@ At finer mesh spacings, the highOrderFit scheme becomes more accurate than the c
 
 Further numerical experiments were performed using steeper slopes represented by basic terrain-following meshes, but the highOrderFit scheme produced instabilities above the steepest slopes.
 The stabilisation procedure used in the cubicFit scheme has not been implemented in the highOrderFit scheme, but examination of the stencils reveals that, using the highOrderFit scheme, some stencil weights violate the stability conditions given in equation~\eqref{eqn:cubicFit:stability}.
-It is likely that the selective removal of some high-order terms for particularly distorted stencils could make the highOrderFit scheme stable on highly-distorted meshes.
+It is likely that the selective removal of some high-order terms for particularly distorted stencils could stabilise the highOrderFit scheme on highly-distorted meshes.
 
 This series of horizontal transport tests demonstrates that, under favourable conditions with a sufficiently smooth tracer and uniform flow, the highOrderFit scheme is capable of fourth-order and third-order convergence on undistorted and distored meshes respectively.
 The tests also demonstrated a surprising result that the cubicFit scheme is seemingly capable of third-order convergence only on distorted, terrain-following meshes.

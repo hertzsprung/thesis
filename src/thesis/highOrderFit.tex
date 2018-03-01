@@ -24,7 +24,7 @@ Discontinuous Galerkin (DG) schemes belong to the class of compact schemes, and 
 High-order DG schemes prognose values at Gauss points within each cell in order to approximate integral values using Gaussian quadrature.
 The position of Gauss points can be straightforwardly calculated for tetrahedral and hexahedral reference cells, but no straightforward method is available for arbitrary polyhedra \citep{costa2017}.
 Furthermore, numerical quadrature calculations in DG schemes can be expensive \citep{dumbser2007}, motivating alternative, quadrature-free DG schemes \citep{atkins-shu1998,nair2015}.
-Another quadrature-free compact scheme is the multi-moment constrained finite volume formulation which achieves high-order accuracy by storing several, prognostic moments collocated at cell centres \citep{ii-xiao2009}.
+Another quadrature-free compact scheme is the multi-moment constrained finite volume formulation which achieves high-order accuracy by storing several prognostic moments collocated at cell centres \citep{ii-xiao2009}.
 Transporting a tracer using a compact scheme usually requires the storage of multiple values per cell, and these storage requirements increase with the order of accuracy, with a fourth-order accurate DG scheme requiring the storage of up to 10 values per cell \citep{ullrich2010}.
 The transport scheme by \citet{skamarock-gassmann2011} is a compact scheme for hexagonal meshes that, unusually, only requires the cell average values of immediately adjacent cells, using them to calculate a second-order derivative that cancels low-order errors in the Taylor series expansion.
 The resulting scheme is high-order accurate on uniform hexagonal meshes, but it is formally only first-order accurate on non-uniform meshes.
