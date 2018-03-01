@@ -6,13 +6,13 @@
 \begin{itemize}
 	\item The new slanted cell mesh permits longer time-steps than those permited by the cut cell mesh, with time-steps comparable to terrain-following meshes
 	\item Resting atmosphere simulations are more accurate using the new slanted cell method compared to terrain-following methods
-	\item Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over very steep slopes
+	\item Unlike the multidimensional linear upwind scheme, the cubicFit scheme is numerically stable over very steep slopes represented by slanted cell meshes
 \end{itemize}
 \end{highlights}
 
 Two sources of numerical error receive particular attention in atmospheric models: errors associated with transport terms and errors associated with the pressure gradient term.
-The previous chapter developed the cubicFit transport scheme that reduces numerical errors associated with transport over mountains.
-This chapter seeks to reduce errors associated with the balance between the pressure gradient and gravity by representing the atmosphere above terrain by introducing a new type of mesh, the `slanted cell' mesh.
+The previous two chapters developed transport schemes that reduce numerical errors associated with transport over mountains.
+This chapter seeks to reduce errors associated with the balance between the pressure gradient and gravity by representing the atmosphere above terrain with a new type of mesh, the `slanted cell' mesh.
 
 Pressure gradient errors result in spurious flows that are especially apparent for diurnal valley flows where synoptic-scale winds are weak \citep{fast2003}, and even small velocity errors can produce large errors in derived quantities such as relative vorticity and potential vorticity \citep{hoinka-zaengl2004}.
 These numerical errors are particularly large using terrain-following meshes with steeply sloping terrain \citep{zaengl2012}.
@@ -48,10 +48,10 @@ These terms tend to be large and of opposite sign over steep terrain, and cancel
 
 There are two common approaches to reducing errors associated with terrain-following meshes.
 The first approach reduces the influence of the terrain on the mesh by choosing a vertical decay function that smooths mesh layers rapidly with height.
-The Smooth Level Vertical (SLEVE) decay function formulated by \citet{schaer2002}, later improved by \citet{leuenberger2010}, is one such approach.
+The Smooth Level Vertical (SLEVE) decay function formulated by \citet{schaer2002} and later improved by \citet{leuenberger2010}, is one such approach.
 The SLEVE method achieves a less distorted terrain-following mesh in the middle and top of the domain than the BTF method.
 The difference is illustrated in figure~\ref{fig:slanted:resting:meshes}, in which the SLEVE mesh (figure~\ref{fig:slanted:resting:meshes:sleve}) is noticeably smoother than the equivalent BTF mesh (figure~\ref{fig:slanted:resting:meshes:btf}).
-The terrain height is split into coarse-scale and fine-scale components, \(h_1\) and \(h_2\), such that \(h = h_1 + h_2\), with each component having a different exponential decay.
+The SLEVE method partitions the terrain height $h$ into coarse-scale and fine-scale components, \(h_1\) and \(h_2\), such that \(h = h_1 + h_2\), with each component having a different exponential decay.
 The transformation is defined as \citep{leuenberger2010}
 \begin{align}
 	z &= z^\star + h_1 b_1 + h_2 b_2
@@ -74,7 +74,7 @@ Cut cell meshes are less distorted than any smoothed terrain-following mesh, and
 Although cut cell meshes are almost entirely undistorted, when explicit methods are used with cut cells, the small cell problem must be overcome in order to avoid severe time-step constraints.
 
 We seek a new type of mesh that improves the balance between the pressure gradient and gravity compared to terrain-following methods, and avoids the severe time-step constraints associated with arbitrarily small cut cells.  Section~\ref{sec:slanted:method} describes the slanted cell method which is designed to satisfy these criteria.
-Section~\ref{sec:slanted:mountainAdvect} presents a new two-dimensional test that challanges transport schemes by transporting a tracer along the ground through slanted cells, and this test is used to measure time-step constraints for terrain-following, cut cell and slanted cell meshes.
+Section~\ref{sec:slanted:mountainAdvect} presents a new two-dimensional test that challenges transport schemes by transporting a tracer along the ground through slanted cells, and this test is used to measure time-step constraints for terrain-following, cut cell and slanted cell meshes.
 Section~\ref{sec:slanted:exnerFoamH} outlines the discretisation of the fully compressible model taken from \citet{weller-shahrokhi2014} which includes a curl-free pressure gradient formulation.
 In section~\ref{sec:slanted:resting}, the fully compressible model is used to simulate a standard resting atmosphere test case \citep{klemp2011}, comparing results using terrain-following, cut cell and slanted cell meshes.
 

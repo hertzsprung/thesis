@@ -1,11 +1,11 @@
 \section{Transport over a mountainous lower boundary}
 \label{sec:slanted:mountainAdvect}
 
-The two-dimensional tests performed in chapter~\ref{ch:cubicFit} transported tracers positioned well above the terrain surface.  Here we formulate a new test, positioning the tracer at the ground in order to assess the accuracy of transport schemes immediately above a mountainous lower boundary.  Results using the cubicFit scheme are compared with the linearUpwind scheme on basic terrain-following, cut cell and slanted cell meshes.
+The two-dimensional tests performed in chapter~\ref{ch:cubicFit} transported tracers positioned well above the terrain surface.  Here we formulate a new test, positioning the tracer at the ground in order to assess the accuracy of transport schemes immediately above a mountainous lower boundary.  Results are compared between the cubicFit scheme and the linearUpwind scheme on basic terrain-following, cut cell and slanted cell meshes.
 The test presents a particular challenge to transport schemes as they must transport the tracer through arbitrarily small cut cells and distorted slanted cells.
 
-The domain size and mountain profile is the same as those in the horizontal tracer transport test in section~\ref{sec:cubicFit:schaerAdvect}, with a mesh spacing of $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.
-In order to present the most challenging test on slanted cell meshes, and so thin cells remain near mountain peaks.
+The domain size and mountain profile are the same as those in the horizontal tracer transport test in section~\ref{sec:cubicFit:schaerAdvect}, with a mesh spacing of $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.
+In order to present the most challenging test on slanted cell meshes vertices are not moved downwards, and so thin cells remain near mountain peaks.
 Cell edges in the central region of the domain are shown in figure~\ref{fig:slanted:mountainAdvect:meshes} for each of the three mesh types.
 Cells in the BTF mesh are highly distorted over steep slopes (figure~\ref{fig:slanted:mountainAdvect:meshes:btf}) while the cut cell mesh (figure~\ref{fig:slanted:mountainAdvect:meshes:cutCell}) and slanted cell mesh (figure~\ref{fig:slanted:mountainAdvect:meshes:slantedCell}) are orthogonal everywhere except for cells nearest the ground.
 
@@ -57,11 +57,11 @@ Since the cubicFit transport scheme uses values at boundaries with Dirichlet bou
 	\label{fig:slanted:mountainAdvect:tracer}
 \end{figure}
 
-Three series of tests were performed using similar configurations.  The first series uses a peak mountain height of $h_0 = \SI{5}{\kilo\meter}$ to examine errors on different mesh types using the two transport schemes.
-The second series varies the peak mountain height to examine the sensitivity of the transport schemes to mesh distortions.
+Three series of tests were performed using similar configurations.  The first series uses a peak mountain height of $h_0 = \SI{5}{\kilo\meter}$ to examine errors on different mesh types using the linearUpwind and cubicFit transport schemes.
+The second series varies the peak mountain height to examine the sensitivity of the two transport schemes to mesh distortions.
 The third series verifies accuracy at Courant numbers close to the limit of stability, and examines the longest stable time-step for different mesh types.
 
-\subsection{A comparison of numerical accuracy between mesh types and transport schemes}
+\subsection{Comparison of numerical accuracy between mesh types and transport schemes}
 For the first series of tests with $h_0 = \SI{5}{\kilo\meter}$, tracer contours at the initial time $t=\SI{0}{\second}$, half-way time $t=\SI{5000}{\second}$, and end time $t=\SI{10000}{\second}$ are shown in figure~\ref{fig:slanted:mountainAdvect:tracer} using the cubicFit scheme on the BTF mesh.  As apparent at $t=\SI{5000}{\second}$, the tracer is distorted by the terrain-following velocity field as it passes over the mountain as expected, and its original shape is restored once it has cleared the mountain by $t=\SI{10000}{\second}$.
 Slight errors are apparent at $t = \SI{10000}{\second}$ when the numerical solution marked with solid contour lines is compared with the analytic solution marked with dotted contour lines.
 
