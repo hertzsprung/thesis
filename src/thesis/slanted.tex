@@ -34,6 +34,7 @@ These terms tend to be large and of opposite sign over steep terrain, and cancel
 		\phantomsubcaption\label{fig:slanted:resting:meshes:sleve}
 		\phantomsubcaption\label{fig:slanted:resting:meshes:cutCell}
 		\phantomsubcaption\label{fig:slanted:resting:meshes:slantedCell}
+		\centering
 		\includegraphics{thesis/slanted/resting/fig-meshes.pdf}
 	\end{subfigure}
 %
@@ -48,7 +49,7 @@ These terms tend to be large and of opposite sign over steep terrain, and cancel
 
 There are two common approaches to reducing errors associated with terrain-following meshes.
 The first approach reduces the influence of the terrain on the mesh by choosing a vertical decay function that smooths mesh layers rapidly with height.
-The Smooth Level Vertical (SLEVE) decay function formulated by \citet{schaer2002} and later improved by \citet{leuenberger2010}, is one such approach.
+The smooth level vertical (SLEVE) decay function formulated by \citet{schaer2002} and later improved by \citet{leuenberger2010}, is one such approach.
 The SLEVE method achieves a less distorted terrain-following mesh in the middle and top of the domain than the BTF method.
 The difference is illustrated in figure~\ref{fig:slanted:resting:meshes}, in which the SLEVE mesh (figure~\ref{fig:slanted:resting:meshes:sleve}) is noticeably smoother than the equivalent BTF mesh (figure~\ref{fig:slanted:resting:meshes:btf}).
 The SLEVE method partitions the terrain height $h$ into coarse-scale and fine-scale components, \(h_1\) and \(h_2\), such that \(h = h_1 + h_2\), with each component having a different exponential decay.

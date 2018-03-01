@@ -13,7 +13,7 @@ The time derivative is discretised using an explicit, two-stage, second-order He
 \end{align} \label{eqn:heun}%
 \end{subequations}
 \unskip where \(g(\phi^{(n)}) = - \nabla \cdot (\vect{u} \phi^{(n)})\) at time level \(n\).
-This two-stage second-order time-stepping scheme is similar to the three-stage second-order time-stepping scheme used later in a model of the fully compressible Euler equations (section~\ref{sec:slanted:exnerFoamH}), which uses an additional time-stage to converge upon the semi-implicit solution.
+This two-stage second-order time-stepping scheme is similar to the three-stage second-order time-stepping scheme used later in a model of the fully compressible Euler equations (section~\ref{sec:slanted:exnerFoamH}), which needs an additional time-stage to converge upon the semi-implicit solution.
 The two-stage second-order time-stepping scheme is used for both the cubicFit scheme and the multidimensional linear upwind scheme.
 Although the Heun scheme is unstable for a linear oscillator \citep{durran2013} and for solving the transport equation using centred, linear differencing, it is stable when it is used for transport schemes with sufficient upwinding \citep[p. 149]{hundsdorfer-verwer2013}.
 

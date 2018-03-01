@@ -14,7 +14,7 @@ set label "BTF, cubicFit" at 6.15,0.033 textcolor rgb "dark-violet"
 set label "\\textit{Cut cells, linearUpwind}" at 6.15,0.15 textcolor rgb "#009e73"
 set label "Cut cells, cubicFit" at 6.15,0.055 textcolor rgb "#009e73"
 set label "\\textit{Slanted cells, linearUpwind}" at 5.2,0.22 textcolor rgb "#1a8acb"
-set label "Slanted cells, cubicFit" at 6.15,0.097 textcolor rgb "#1a8acb"
+set label "Slanted cells, cubicFit" at 6.15,0.1 textcolor rgb "#1a8acb"
 
 unset key
 

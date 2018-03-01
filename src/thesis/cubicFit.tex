@@ -6,7 +6,7 @@
 \begin{itemize}
 	\item The new cubicFit transport scheme is second-order convergent regardless of mesh distortions or the choice of velocity field
 	\item Sub-grid reconstructions are mostly precomputed depending on the mesh geometry alone
-	\item Misalignment of the velocity field with mesh layers is the primary source of numerical error, not simply mesh distortions
+	\item Misalignment of the velocity field with mesh layers is the primary source of numerical error and not simply mesh distortions
 \end{itemize}
 \end{highlights}
 
@@ -14,7 +14,7 @@ A huge variety of transport schemes have been developed for atmospheric models, 
 Such errors can be reduced by explicitly accounting for transverse fluxes when combining fluxes \citep{leonard1996}, but splitting errors are still apparent in flows over steep terrain where meshes are highly distorted and metric terms in a terrain-following coordinate transform are large \citep{chen2017}.
 
 Transport schemes are often classified as dimensionally-split or multidimensional.
-Dimension\-ally-split schemes such as \citep{lin-rood1996,guo2014} calculate transport in each dimension separately before the flux contributions are combined.  Such schemes are computationally efficient and allow existing one-dimensional high-order methods to be used.
+Dimension\-ally-split schemes such as \citet{lin-rood1996,guo2014} calculate transport in each dimension separately before the flux contributions are combined.  Such schemes are computationally efficient and allow existing one-dimensional high-order methods to be used.
 When dimensionally-split schemes are used for horizontal transport, quadrilateral meshes are needed because the mesh dimensions are inherently separable.  Special treatment is required at the corners of cubed-sphere panels where local coordinates differ \citep{putman-lin2007,guo2014}.
 Dimensional splitting is often used for vertical transport and, for similar reasons, dimensionally-split schemes have only been used with terrain-following coordinate transforms and not cut cells.
 Perhaps confusingly, dimensionally-split schemes are sometimes called multidimensional, too, because they use one-dimensional techniques for multidimensional transport.
@@ -24,11 +24,11 @@ There are several subclasses of multidimensional schemes that include
 semi-Lagrangian finite volume schemes (also called conservative mesh remapping),
 swept-area schemes (also called flux-form semi-Lagrangian, incremental remapping, or forward-in-time),
 and method-of-lines schemes (also called Eulerian schemes).
-Two-dimensional semi-Lagrangian finite volume schemes such as \citep{iske-kaeser2004,lauritzen2010} integrate over departure cells that are found by tracing backward the trajectories of cell vertices.  These schemes are conservative because departure cells are constructed so that there are no overlaps or gaps, which requires that cell areas are simply-connected domains \citep{lauritzen2011book}.
+Two-dimensional semi-Lagrangian finite volume schemes such as \citet{iske-kaeser2004,lauritzen2010} integrate over departure cells that are found by tracing backward the trajectories of cell vertices.  These schemes are conservative because departure cells are constructed so that there are no overlaps or gaps, which requires that cell areas are simply-connected domains \citep{lauritzen2011book}.
 SLICE-3D is a three-dimensional semi-Lagrangian finite volume scheme for latitude-longitude meshes that applies separate conservative remappings in each dimension \citep{zerroukat-allen2012}.
-Swept-area schemes such as \citep{lashley2002,skamarock-menchaca2010,lauritzen2011,thuburn2014} calculate the flux through a cell face by integrating over the upstream area that is swept out over one time-step.  Such schemes differ in their choice of area approximation, sub-grid reconstruction, and spatial integration method.
+Swept-area schemes such as \citet{lashley2002,skamarock-menchaca2010,lauritzen2011,thuburn2014} calculate the flux through a cell face by integrating over the upstream area that is swept out over one time-step.  Such schemes differ in their choice of area approximation, sub-grid reconstruction, and spatial integration method.
 Because swept-area schemes integrate over the reconstructed field, they typically require a matrix-vector multiply per face per time-stage \citep{thuburn2014,skamarock-menchaca2010}.
-Method-of-lines schemes such as \citep{weller2009,skamarock-gassmann2011} use a spatial discretisation to reduce the transport PDE to an ODE that is typically solved using a multi-stage time-stepping method.
+Method-of-lines schemes such as \citet{weller2009,skamarock-gassmann2011} use a spatial discretisation to reduce the transport PDE to an ODE that is typically solved using a multi-stage time-stepping method.
 A method-of-lines scheme using a spectral element reconstruction was recently developed to achieve accurate solutions near the surface of cut cell meshes \citep{steppeler-klemp2017}.
 Unlike semi-Lagrangian finite volume schemes, swept-area and method-of-lines schemes achieve conservation for small-scale rotational flows.
 Such flows can twist the departure domain to such an extent that the domain intersects itself \citep{lauritzen2011}.  In two dimensions, a self-intersecting departure domain has a bowtie or hourglass shape.
@@ -52,9 +52,9 @@ This stabilisation procedure has similarities to the Multidimensional Optimal Or
 However, MOOD is an \textit{a posteriori} method that detects discontinuities in the solution.  In contrast, the cubicFit stabilisation procedure is an \textit{a priori} method that depends upon the mesh geometry only, and reconstruction weights can be precomputed without knowledge of the velocity field or tracer field.
 \citet{wang2018} propose a different stabilisation approach that regularises ill-conditioned matrices that are associated with least-squares fits over highly-distorted mesh regions, though the technique has so far only been tried with element-free Galerkin methods.
 
-Almost all of the least-squares procedure depends upon the mesh geometry only and reconstruction weights can be precomputed without knowledge of the velocity field or tracer field.
+For the cubicFit transport scheme, almost all of the least-squares procedure depends upon the mesh geometry only and reconstruction weights can be precomputed without knowledge of the velocity field or tracer field.
 Hence, the computational cost of the cubicFit scheme is lower than most swept-area schemes that require a matrix-vector multiply per face per time-stage with an $m \times n$ matrix where $m$ is the size of the stencil and $n$ is associated with the order of accuracy.
-Instead, the computational cost of the cubicFit scheme is more comparable to dimensionally-split schemes, with the cubicFit scheme requiring only $m$ multiplies per face per time-stage.
+Instead, the computational cost of the cubicFit scheme is more comparable to dimensionally-split schemes, requiring only $m$ multiplies per face per time-stage.
 
 The remainder of this chapter is organised as follows.
 Section~\ref{sec:cubicFit:transport} starts by discretising the transport equation using a method-of-lines approach before describing the cubicFit transport scheme, and a multidimensional linear upwind transport scheme that is included in the OpenFOAM software distribution \citep{openfoam-numerics}.

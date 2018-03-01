@@ -17,7 +17,7 @@ Pressure gradient errors near steep slopes result in spurious circulations that 
 Comparing model simulations with field campaign observations in the Salt Lake valley, \citet{fast2003} found that simulated winds were too strong at night, when observed winds were weak and cold air pools formed.
 \citet{zaengl2004a} performed a model intercomparison using an idealised test with a stratified atmosphere initially at rest above an isolated mountain with steep slopes.
 After one simulated day, pressure gradient errors produced maximum spurious vertical velocities between \SI{0.4}{\meter\per\second} and \SI{3}{\meter\per\second} across different models.
-Pressure gradient errors are also problematic using terrain-following meshes to represent steep ocean bathymetry.  
+Pressure gradient errors are also problematic using terrain-following meshes to represent steep ocean bathymetry:  
 \citet{luo2002} simulated an ocean initially at rest above an isolated seamount, and found that spurious vertical velocities increased with steeper seamount slopes.
 
 To improve the accuracy of transport schemes and pressure gradient calculations, terrain-following mesh layers can be smoothed so that mesh distortions are reduced.
@@ -44,12 +44,12 @@ Another alternative method for representing terrain is the Eta coordinate \citep
 
 \section{Horizontal meshes to represent a spherical Earth}
 
-We have seen that increasingly fine vertical mesh spacing poses problems for traditional terrain-following meshes and traditional numerical methods, but further numerical and computational issues also arise with finer horizontal meshes.
+We have seen that increasingly fine mesh spacing poses problems for traditional terrain-following meshes and traditional numerical methods, but further numerical and computational issues also arise with finer meshes.
 Traditionally, global atmospheric models have used uniform latitude-longitude meshes to represent a spherical Earth but, with increasingly fine horizontal mesh spacing, the cells of latitude-longitude meshes become very small near the Earth’s poles, causing a bottleneck in parallel computation \citep{staniforth-thuburn2012} and placing severe time-step constraints on explicit methods.
 In addition to the small cell problem near the poles, computer storage and computation time increase dramatically when horizontal mesh spacing is reduced uniformly over a latitude-longitude mesh: halving the horizontal mesh spacing results in four times as many cells and simulations require a smaller time-step.
 
 In response to these problems, a variety of alternative horizontal representations have been proposed.
-Alternative, quasi-uniform meshes avoid small cells near the poles of latitude-longitude meshes \citep{staniforth-thuburn2012}, and some models are already using quasi-uniform meshes: the ICON model uses an icosahedral mesh \citep{zaengl2015}, the Global Environmental Multiscale model uses a yin-yang mesh comprising two overlapping sections arranged like a tennis ball \citep{qaddouri-lee2011}, and the Met Office are preferring a cubed-sphere mesh for their next-generation GungHo model (N. Wood 2017, personal communication).
+Alternative, quasi-uniform meshes avoid small cells near the poles of latitude-longitude meshes \citep{staniforth-thuburn2012}, and some models are already using quasi-uniform meshes: the ICON model uses an icosahedral mesh \citep{zaengl2015}, the Global Environmental Multiscale model uses a Yin-Yang mesh comprising two overlapping sections arranged like a tennis ball \citep{qaddouri-lee2011}, and the Met Office are preferring a cubed-sphere mesh for their next-generation GungHo model (N. Wood 2017, personal communication).
 To improve the scalability of computational resources with finer mesh spacing, static mesh refinement and dynamic adaptive mesh techniques create meshes with fewer cells while retaining the numerical accuracy achieved with a uniformly fine mesh \citep{jablonowski2009}.
 
 These alternative meshes alleviate many of the computational and numerical problems that arise due to finer horizontal mesh spacing, but they introduce problems of their own. 
@@ -83,7 +83,7 @@ It is second-order convergent on quasi-uniform spherical meshes, terrain-followi
 Chapter~\ref{ch:highOrder} proposes a modification to the formulation, using the \kexact{} method \citep{barth1995} to achieve higher than second-order convergence in the interior of distorted meshes without increasing the computational cost during integration.
 Chapter~\ref{ch:slanted} introduces a new type of vertical mesh that simulateously avoids severe mesh distortions associated with traditional terrain-following meshes, while avoiding arbitrarily small cells associated with cut cell meshes.
 Numerical experiments verify that a more accurate balance is achieved between the pressure gradient and gravity, and we find that the new mesh permits maximum time-steps comparable to those permitted by terrain-following meshes.
-Chapter~\ref{ch:cp} extends the work of \citep{arakawa-konor1996} to create a new two-dimensional test case that excites the Lorenz computational mode, enabling a more straightforward assessment of models using collocated variables, a Lorenz staggering or a Charney--Phillips staggering.
+Chapter~\ref{ch:cp} extends the work of \citet{arakawa-konor1996} to create a new two-dimensional test case that excites the Lorenz computational mode, enabling a more straightforward assessment of models using Lorenz or Charney--Phillips staggerings.
 Motivated by the emerging need for vertical mesh refinement and mesh adaptivity, the Charney--Phillips staggering is generalised for arbitrary meshes, and the formulation is assessed using the new two-dimensional test case.
 Closing remarks are made in chapter~\ref{ch:discussion}.
 

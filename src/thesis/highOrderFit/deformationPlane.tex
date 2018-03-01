@@ -8,12 +8,12 @@ Tests are performed on uniform meshes, and meshes with distortions similar to th
 Following \citet{chen2017}, the domain is defined on a rectangular $x$--$y$ plane that is $2\pi$ wide and $\pi$ tall.  The domain is periodic in the $x$ direction with no normal flow imposed at the upper and lower boundaries.
 The discrete velocity field is defined using the streamfunction,
 \begin{align}
-	\Psi = \frac{\hat{\Psi}}{T} \sin^2 \left( 2 \pi \left( \frac{x}{2\pi} - \frac{t}{T} \right) \right) \cos^2(y) \cos \left( \frac{\pi t}{T} \right) - \frac{2\pi y}{T},
+	\Psi = \frac{\hat{\Psi}}{T} \sin^2 \left( 2 \pi \left( \frac{x}{2\pi} - \frac{t}{T} \right) \right) \cos^2(y) \cos \left( \frac{\pi t}{T} \right) - \frac{2\pi y}{T}
 \end{align}
 where $\hat{\Psi} = 10$, and $T = 5$ is the duration of integration, after which time the analytic solution is equal to the initial condition.
 The initial tracer density $\phi$ is defined as the sum of two Gaussian hills,
 \begin{align}
-	\phi = \phi_1(x,y) + \phi_2(x,y) \text{ ,}
+	\phi = \phi_1(x,y) + \phi_2(x,y)
 \end{align}
 where an individual hill $\phi_i$ is given by
 \begin{align}
@@ -63,7 +63,7 @@ The classical fourth-order Runge–Kutta time-stepping scheme is used for both c
 	\input{highOrderFit/deformationPlane/convergence}
 	%
 	\caption{Numerical convergence of the deformational flow test on a Cartesian plane.
-	$\ell_2$ (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \ang{6} and \ang{0.375} using cubicFit and highOrderFit transport schemes on uniform and distorted meshes.}
+	$\ell_2$ errors (equation~\ref{eqn:l2-error}) and $\ell_\infty$ errors (equation~\ref{eqn:linf-error}) are marked at mesh spacings between \ang{6} and \ang{0.375} using cubicFit and highOrderFit transport schemes on uniform and distorted meshes.}
 	\label{fig:highOrderFit:deformationPlane:convergence}
 \end{figure}
 

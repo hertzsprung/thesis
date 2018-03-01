@@ -108,11 +108,11 @@ A two-dimensional stencil is also used for the tests on spherical meshes in sect
 
 The unknown coefficients $\vect{a}$ are calculated using the pseudo-inverse, $\vect{B}^+$, found by singular value decomposition,
 \begin{align}
-	\vect{a} = \vect{B}^+ \bm{\phi} \text{ .}
+	\vect{a} &= \vect{B}^+ \bm{\phi} \text{ .}
 %
 \intertext{Recall that the approximate value $\phi_F$ is equal to the constant coefficient $a_1$, which is a weighted mean of $\bm{\phi}$,} 
 %
-	a_1 = \begin{bmatrix}
+	a_1 &= \begin{bmatrix}
 		b_{1,1}^+ & b_{1,2}^+ & \cdots & b_{1,12}^+
 		\end{bmatrix}
 	\begin{bmatrix}
@@ -236,7 +236,7 @@ For stability we need $|A| \leq 1$ and, imposing the additional constraints that
 %
 \alpha_u - \alpha_d \geq 0 \text{ .} \label{eqn:vonNeumann:twopoint-lower}
 \end{align}
-Additionally, we do not want more damping than a first-order upwind scheme (where $\alpha_u = \beta_u = 1$, $\alpha_d = \beta_d = 0$), having an amplification factor, $A_\mathrm{up}$, so we need $\left\lvert A \right\rvert \geq \left\lvert A_\mathrm{up} \right\rvert$, hence
+Additionally, we do not want more damping than a first-order upwind scheme (where $\alpha_u = \beta_u = 1$, $\alpha_d = \beta_d = 0$), having an amplification factor, $A_\mathrm{up}$, so we need $\Mag{A} \geq \Mag{A_\mathrm{up}}$, hence
 \begin{align}
 	\exp \left( -c \left(\alpha_u - \alpha_d\right) \left( 1 - \cos k\Delta x \right) \right) &\geq \exp \left( -c \left(1 - \cos k\Delta x \right) \right) \quad \forall k\Delta x
 %
@@ -356,5 +356,5 @@ The procedure for generating candidate polynomials described in section~\ref{sec
 The stabilisation procedure described in section~\ref{sec:cubicFit:stabilisation} requires further numerical experiments to verify that it is sufficient for three-dimensional flows and arbitrary polyhedral meshes.
 An initial three-dimensional test with uniform flow and a uniform Cartesian mesh obtained a numerically stable result.
 For stencils in the interior of the domain, the least squares fit includes all polynomial terms in equation~\eqref{eqn:cubicFit:fullPoly3D} with $m_u = m_d = 2^{10}$.
-The stabilisation procedure does not modify the least squares fit for these stencils, but we have not explored the three-dimensional extension of cubicFit any further.
+The stabilisation procedure does not modify the least squares fit for these stencils, but we have not explored the three-dimensional extension of the cubicFit scheme any further.
 

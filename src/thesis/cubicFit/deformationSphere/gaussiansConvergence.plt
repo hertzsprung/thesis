@@ -5,7 +5,7 @@ set logscale
 set format x "$10^{%L}$"
 set format y "$10^{%L}$"
 
-set key tmargin
+set key tmargin center
 
 set xlabel "$\\Delta \\lambda$ (\\si{\\degree})" offset 0,0.5
 
