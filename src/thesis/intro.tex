@@ -60,7 +60,7 @@ Some recent studies have applied mesh refinement and adaptive mesh techniques to
 The vertical discretisation used by \citet{yamazaki-satomura2012} supports a computational mode \citep{thuburn-woolings2005} that can be avoided by using an alternative staggering of variables.
 The Charney--Phillips staggering is free from computational modes, but the Charney--Phillips staggering has yet to be generalised for arbitrary vertical meshes.
 
-\section{Research outline}
+\section{Aims and research outline}
 
 With such a wide choice of horizontal and vertical meshes and numerical schemes, it is important that next-generation atmospheric models are designed so that the choice of mesh and choices of numerical schemes can be deferred until later in the development process, or changed during operation as new techniques emerge \citep{ford2013, theurich2016}.
 This thesis makes four contributions to improve numerical accuracy for flows over steep slopes:
@@ -68,7 +68,7 @@ This thesis makes four contributions to improve numerical accuracy for flows ove
 \item a new approach for stabilising finite volume transport schemes on arbitrary meshes,
 \item a high-order finite volume formulation for transport on arbitrary meshes,
 \item a new vertical mesh for representing terrain,
-\item a new test case to excite the Lorenz computational mode.
+\item a new test case to excite the Lorenz computational mode on a two-dimensional $x$--$z$ Cartesian plane.
 \end{enumerate}
 All numerical tests are performed using two-dimensional flows on Cartesian planes and spherical shells, but there is nothing precluding the extension of all four formulations to three-dimensional geometries.
 

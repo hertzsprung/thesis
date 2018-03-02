@@ -14,19 +14,19 @@ Second, a high-order multidimensional method-of-lines transport scheme, highOrde
 The highOrderFit scheme uses \kexact{} polynomial reconstructions that are obtained by calculating high-order volume and surface moments exactly.
 All computationally expensive reconstruction calculations depend upon the mesh geometry alone.
 During integration, the highOrderFit scheme requires only $m$ multiplies per face per time-stage using a stencil of $m$ cells, meaning that, at runtime, the highOrderFit scheme has the same computational cost and storage requirements as the cubicFit scheme.
-Transport tests demonstrate that the highOrderFit scheme achieves at least third-order convergence irrespective of the velocity field or mesh distortions.
+Transport tests demonstrate that the highOrderFit scheme achieves at least third-order convergence in the domain interior irrespective of the velocity field or mesh distortions.
 
 The highOrderFit transport scheme offers a promising route to obtaining high-order convergence with a low computational cost, but we are aware of three improvements that could be investigated:
 \begin{enumerate}
+\item By selectively removing high-order polynomial terms for highly-distorted stencils, the cubicFit scheme achieves stable results where, on the same mesh, the highOrderFit scheme is unstable.
+We expect that a similar stabilisation procedure could be included in the highOrderFit scheme to obtain stable results on more highly-distorted meshes.
+This stabilisation procedure should also permit stable transport over arbitrary lower boundaries and, to further improve accuracy near boundaries, high-order boundary conditions might be derived following existing approaches \citep{devendran2017,schwartz2015}.
+%
 \item The highOrderFit scheme achieves high-order convergence that makes it more accurate than the cubicFit scheme at finer mesh spacings but, at coarser mesh spacings, the cubicFit scheme is more accurate.
 For both transport schemes, the multipliers that appear in the weighted least-squares fit are used to ensure that the polynomial fits the upwind and downwind cells almost exactly, and this is necessary to achieve stability on highly-distorted meshes.
 On less distorted meshes, however, more accurate results can be obtained by modifying the multiplier values so that the polynomial has a less exact fit through the upwind and downwind cells, but has better least-squares fit to the stencil overall.
 \citet{devendran2017} note that these multipliers introduce extra degrees of freedom into the system, and a strategy for optimising these values is the subject of future work.
 We hope that if such a strategy were included in the highOrderFit scheme then more accurate results could be obtained on coarser meshes.
-%
-\item By selectively removing high-order polynomial terms for highly-distorted stencils, the cubicFit scheme achieves stable results where, on the same mesh, the highOrderFit scheme is unstable.
-We expect that a similar stabilisation procedure could be included in the highOrderFit scheme to obtain stable results on more highly-distorted meshes.
-This stabilisation procedure should also permit stable transport over arbitrary lower boundaries and, to further improve accuracy near boundaries, high-order boundary conditions might be derived following existing approaches \citep{devendran2017,schwartz2015}.
 %
 \item The highOrderFit scheme has only been tested on Cartesian planes, and further research is necessary to extend the scheme to spherical geometry.
 It is not clear that a projection from the sphere onto a local tangent plane, as used by \citet{sjoegreen2012}, will achieve high-order convergence.
