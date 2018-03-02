@@ -9,9 +9,9 @@ This thesis makes three contributions to improve atmospheric simulations, partic
 
 First, a multidimensional finite volume transport scheme is formulated to obtain accurate solutions on arbitrary, highly-distorted meshes.
 Stability conditions derived from a von Neumann stability analysis are imposed during model initialisation to obtain stability and improve accuracy near steeply-sloping lower boundaries.
-Reconstruction calculations depend upon the mesh only, needing just one vector multiply per face per time-stage irrespective of the velocity field.
+Reconstruction calculations depend upon the mesh only, needing just one vector multiply per face per time-stage.
 The scheme achieves second-order convergence across a series of tests using highly-distorted terrain-following meshes and cut cell meshes.
-The scheme is extended to achieve third-order convergence on distorted meshes without increasing the computational cost during integration.
+The scheme is extended using the \kexact{} method to achieve third-order convergence on distorted meshes without increasing the computational cost during integration.
 
 Second, a new type of mesh is designed to avoid severe mesh distortions associated with terrain-following meshes and avoids severe time-step constraints associated with cut cells.
 Numerical experiments compare the new mesh with terrain-following and cut cell meshes, revealing that the new mesh simultaneously achieves an accurate balance between the pressure gradient and gravity, and avoids severe time-step constraints. 

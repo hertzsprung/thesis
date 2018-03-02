@@ -20,7 +20,7 @@ After one simulated day, pressure gradient errors produced maximum spurious vert
 Pressure gradient errors are also problematic using terrain-following meshes to represent steep ocean bathymetry:  
 \citet{luo2002} simulated an ocean initially at rest above an isolated seamount, and found that spurious vertical velocities increased with steeper seamount slopes.
 
-To improve the accuracy of transport schemes and pressure gradient calculations, terrain-following mesh layers can be smoothed so that mesh distortions are reduced.
+To improve the accuracy of transport schemes and pressure gradient calculations, terrain-following mesh layers can be smoothed so that mesh distortions further above the lower boundary are reduced.
 While the layers of a basic terrain-following mesh are distorted throughout the domain, the layers of a hybrid terrain-following mesh are gradually flattened and become purely horizontal at a specified height below the domain top \citep{simmons-burridge1981}.
 Compared to the basic terrain-following mesh, the hybrid terrain-following mesh has been found to improve forecasts, particularly in the stratosphere where hybrid terrain-following mesh layers are horizontal \citep{eckermann2014}.
 Variants of the hybrid terrain-following mesh have become widely adopted in atmospheric models \citep{davies2005,donner2011} as well as some ocean models \citep{burchard-petersen1997,halliwell2004}.
