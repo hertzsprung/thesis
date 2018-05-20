@@ -1,5 +1,5 @@
 Bootstrap:docker
-From:ubuntu:17.04
+From:ubuntu:17.10
 
 %environment
 	export GMTU=/usr/share/gmtFoam
@@ -50,7 +50,7 @@ From:ubuntu:17.04
 	sh -c "wget -O - http://dl.openfoam.org/gpg.key | apt-key add -"
 	add-apt-repository "http://dl.openfoam.org/ubuntu dev" -y
 	add-apt-repository "http://atmosfoam-apt.s3-website-eu-west-1.amazonaws.com dev" -y
-	apt-get update -qq
+	apt-get update -qq --allow-insecure-repositories
 
 	DEBIAN_FRONTEND=noninteractive \
         apt-get install -y --no-install-recommends \

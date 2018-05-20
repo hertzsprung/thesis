@@ -104,6 +104,7 @@ which can be written as
 The rectangular matrix $\vect{B}$ has one row for each cell in the stencil and one column for each term in the polynomial.  $\vect{B}$ is called the \textit{stencil matrix}, and it is constructed using only the mesh geometry.
 A local coordinate system is established in which $x$ is normal to the face $f$ and $y$ is perpendicular to $x$.
 The coordinates $(x_i, y_i)$ give the position of the centroid of the $i$th cell in the stencil.
+\TODO{document the coordinate rescaling, too}
 A two-dimensional stencil is also used for the tests on spherical meshes in section~\ref{sec:cubicFit:deformationSphere}.  In these tests, cell centres are projected perpendicular to a tangent plane at the face centre.  Previous studies found that results were largely insensitive to the projection method \citep{skamarock-gassmann2011,lashley2002}.
 
 The unknown coefficients $\vect{a}$ are calculated using the pseudo-inverse, $\vect{B}^+$, found by singular value decomposition,
@@ -131,6 +132,7 @@ We assign an integer \textit{multiplier} to each cell in the stencil, $\vect{m} 
 	\vect{\tilde{B}} \vect{a} = \vect{m} \cdot \bm{\phi}
 \end{align}
 where $\vect{\tilde{B}} = \vect{M} \vect{B}$ and $\vect{M} = \mathrm{diag}(\vect{m})$.
+\TODO{Think about the notation used in here: a simple $\vect{M} \phi$ (for some diagonal matrix $\vect{M}$) might be clearer.}
 The constant coefficient $a_1$ is then calculated from the pseudo-inverse, $\vect{\tilde{B}}^+$,
 \begin{align}
 	a_1 = \vect{\tilde{b}_1^+} \cdot \vect{m} \cdot \bm{\phi} \label{eqn:cubicFit:weightedPinv}
@@ -236,7 +238,7 @@ For stability we need $|A| \leq 1$ and, imposing the additional constraints that
 %
 \alpha_u - \alpha_d \geq 0 \text{ .} \label{eqn:vonNeumann:twopoint-lower}
 \end{align}
-Additionally, we do not want more damping than a first-order upwind scheme (where $\alpha_u = \beta_u = 1$, $\alpha_d = \beta_d = 0$), having an amplification factor, $A_\mathrm{up}$, so we need $\Mag{A} \geq \Mag{A_\mathrm{up}}$, hence
+Additionally, we do not want more damping than a first-order upwind scheme (where $\alpha_u = \beta_u = 1$, $\alpha_d = \beta_d = 0$), having an amplification factor $A_\mathrm{up}$, so we need $\Mag{A} \geq \Mag{A_\mathrm{up}}$, hence
 \begin{align}
 	\exp \left( -c \left(\alpha_u - \alpha_d\right) \left( 1 - \cos k\Delta x \right) \right) &\geq \exp \left( -c \left(1 - \cos k\Delta x \right) \right) \quad \forall k\Delta x
 %
@@ -268,7 +270,8 @@ If $k\Delta x = \pi$ then $\cos k\Delta x = -1$ and $\cos 2k\Delta x = 1$ and $\
 \begin{align}
 	\alpha_u - \alpha_d &\geq \left\lvert\alpha_{uu}\right\rvert \label{eqn:vonNeumann:uuConstraint} \text{ .}
 %
-	\intertext{When the same analysis is performed with four cells, $\alpha_{uuu}$, $\alpha_{uu}$, $\alpha_u$ and $\alpha_d$, by varying $k \Delta x$ we find that equation~\eqref{eqn:vonNeumann:uuConstraint} holds replacing $\left\lvert \alpha_{uu} \right\rvert$ with $\max(\left\lvert\alpha_{uu}\right\rvert, \left\lvert\alpha_{uuu}\right\rvert)$.  Hence, we generalise equation~\eqref{eqn:vonNeumann:uuConstraint} to obtain the final stability condition}
+	\intertext{\TODO{Please explain the derivation of the stability constraints more fully.  Also consider the case $k \Delta x \rightarrow 0$, and correct the constraints if necessary.}
+	When the same analysis is performed with four cells, $\alpha_{uuu}$, $\alpha_{uu}$, $\alpha_u$ and $\alpha_d$, by varying $k \Delta x$ we find that equation~\eqref{eqn:vonNeumann:uuConstraint} holds replacing $\left\lvert \alpha_{uu} \right\rvert$ with $\max(\left\lvert\alpha_{uu}\right\rvert, \left\lvert\alpha_{uuu}\right\rvert)$.  Hence, we generalise equation~\eqref{eqn:vonNeumann:uuConstraint} to obtain the final stability condition}
 %
 	\alpha_u - \alpha_d &\geq \max_{p\:\in\:P} |\alpha_p|
 \end{align}
@@ -329,7 +332,7 @@ For stencils in the interior of a uniform rectangular mesh, the least squares fi
 \end{figure}
 
 To illustrate the stabilisation procedure, figure~\ref{fig:cubicFit:oscillatory1D:cubic} presents a one-dimensional example of a cubic polynomial fitted through five points, with the weight at each point printed beside it.
-The stabilisation procedure only uses the $x$ positions of these points and does not use the values of $\phi$ themselves.  The $\phi$ values are included here for illustration only.
+The stabilisation procedure \rev{uses only} the $x$ positions of these points and does not use the values of $\phi$ themselves.  The $\phi$ values are included here for illustration only.
 Hence, for a given set of $x$ positions, the same set of weights are chosen irrespective of the $\phi$ values.
 
 For a one-dimensional cubic polynomial fit, the list of candidate polynomials in preference order is

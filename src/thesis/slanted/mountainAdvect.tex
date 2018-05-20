@@ -25,6 +25,7 @@ Cells in the BTF mesh are highly distorted over steep slopes (figure~\ref{fig:sl
 	(\subcaptionref{fig:slanted:mountainAdvect:meshes:slantedCell}) slanted cell methods, used for the tracer transport tests in section~\ref{sec:slanted:mountainAdvect}.  Cell edges are marked by thin black lines.  The peak mountain height $h_0 = \SI{5}{\kilo\meter}$.
 The velocity field is the same for all mesh types with streamlines marked on each panel by thick red lines.
 The velocity field (equation~\ref{eqn:streamfunc-btf}) follows the lower boundary and becomes entirely horizontal above $H_1 = \SI{10}{\kilo\meter}$.
+	\rev{The mesh spacing is $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.}
 Only the lowest \SI{10}{\kilo\meter} for the central region of the domain is shown.  The entire domain is \SI{300}{\kilo\meter} wide and \SI{25}{\kilo\meter} high.}
 	\label{fig:slanted:mountainAdvect:meshes}
 \end{figure}
@@ -55,6 +56,7 @@ Since the cubicFit transport scheme uses values at boundaries with Dirichlet bou
 	\includegraphics{thesis/slanted/mountainAdvect/fig-tracer.pdf}
 	%
 	\caption{Evolution of the tracer in the two-dimensional transport test over a mountainous lower boundary.  The tracer is transported to the right over the wave-shaped terrain.  Tracer contours are every \SI{0.1}{\kilo\gram\per\meter\cubed}.  The result obtained using the cubicFit scheme on the basic terrain-following mesh is shown at $t=\SI{0}{\second}$, $t=\SI{5000}{\second}$ and $t=\SI{10000}{\second}$ with solid black contours. The analytic solution at $t=\SI{10000}{\second}$ is shown with dotted contours.
+	\rev{The mesh spacing is $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.}
 	The shaded box indicates the region that is plotted in figure~\ref{fig:slanted:mountainAdvect:errors}.}
 	\label{fig:slanted:mountainAdvect:tracer}
 \end{figure}
@@ -81,7 +83,9 @@ Slight errors are apparent at $t = \SI{10000}{\second}$ when the numerical solut
 	\end{subfigure}
 
 	\caption{Tracer contours at $t=\SI{10000}{\second}$ for the two-dimensional tracer transport tests over a mountainous lower boundary.  A region in the lee of the mountain is plotted corresponding to the shaded area in figure~\ref{fig:slanted:mountainAdvect:tracer}.
-	Results are presented on BTF, cut cell and slanted cell meshes (shown in figure~\ref{fig:slanted:mountainAdvect:meshes}) using the linearUpwind and cubicFit transport schemes.  The numerical solutions are marked by solid black lines.  The analytic solution is marked by dotted lines.  Contours are every \SI{0.1}{\kilo\gram\per\meter\cubed}.}
+	Results are presented on BTF, cut cell and slanted cell meshes (shown in figure~\ref{fig:slanted:mountainAdvect:meshes}) using the linearUpwind and cubicFit transport schemes.  The numerical solutions are marked by solid black lines.  The analytic solution is marked by dotted lines.  Contours are every \SI{0.1}{\kilo\gram\per\meter\cubed}.
+	\rev{The mesh spacing is $\Delta x = \SI{1000}{\meter}$ and $\Delta z = \SI{500}{\meter}$.}
+	}
 	\label{fig:slanted:mountainAdvect:errors}
 \end{figure}
 
@@ -124,12 +128,14 @@ The cubicFit scheme yields stable results in all tests, and cubicFit is more acc
 	\end{subfigure}
 	%
 	\caption{(\subcaptionref{fig:slanted:mountainAdvect:maxdt:dt}) Longest stable time-steps, $\Delta t_\mathrm{max}$, and 
-	(\subcaptionref{fig:slanted:mountainAdvect:maxdt:co}) largest stable maximum Courant numbers, $\max(\mathrm{Co})$, for the two-dimensional tracer transport test over a mountainous lower boundary.  Results were obtained on basic terrain-following, cut cell and slanted cell meshes at mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{250}{\meter}$.  The largest stable maximum Courant numbers were calculated from the corresponding longest stable time-steps using equation~\eqref{eqn:co}.}
+	(\subcaptionref{fig:slanted:mountainAdvect:maxdt:co}) largest stable maximum Courant numbers, $\max(\mathrm{Co})$, for the two-dimensional tracer transport test over a mountainous lower boundary.  Results were obtained on basic terrain-following, cut cell and slanted cell meshes at mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{250}{\meter}$.  The largest stable maximum Courant numbers were calculated from the corresponding longest stable time-steps using equation~\eqref{eqn:co}.
+	\rev{The peak mountain height $h_0 = \SI{6}{\kilo\meter}$.}}
 	\label{fig:slanted:mountainAdvect:maxdt}
 \end{figure}
 
 A final series of tests were performed to determine the stability limit of the cubicFit scheme with the two-stage Heun time-stepping scheme (equation~\ref{eqn:heun}).
 The tracer was transported on BTF, slanted cell and cut cell meshes with a variety of mesh spacings between $\Delta x = \SI{5000}{\meter}$ and $\Delta x = \SI{125}{\meter}$.  $\Delta z$ was chosen so that a constant aspect ratio is preserved such that $\Delta x \mathbin{:} \Delta z = 2 \mathbin{:} 1$.
+\rev{The peak mountain height $h_0 = \SI{6}{\kilo\meter}$.}
 For each test, the time-step was adjusted in order to find the largest stable time-step, $\Delta t_\mathrm{max}$ (figure~\ref{fig:slanted:mountainAdvect:maxdt:dt}).
 BTF meshes permit the longest time-steps of all three mesh types since cells are almost uniform in volume.  As expected, the longest stable time-step scales linearly with BTF mesh spacing.
 There is no such linear scaling on cut cell meshes because these meshes can have arbitrarily small cells.  The time-step constraints on cut cell meshes are the most severe of the three mesh types.  Slanted cell meshes have a slightly more stringent time-step constraint than BTF meshes but still exhibit similar linear scaling with mesh spacing.

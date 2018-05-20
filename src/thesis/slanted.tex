@@ -24,7 +24,7 @@ Terrain-following meshes are typically implemented using a coordinate transform 
 	\frac{\partial p}{\partial z^\star} \label{eqn:slanted:dpdx}
 \end{align}
 where $\left. \partial / \partial x \right|_z$ denotes a horizontal derivative at a fixed height in the physical domain, and $\left. \partial / \partial x \right|_{z^\star}$ denotes a horizontal derivative at a fixed model level in the computational domain, with $z^\star$ held constant.
-The first term on the right hand side of equation~\eqref{eqn:slanted:dpdx} is the change in pressure along the terrain-following coordinate surfacee, and the second term corrects for the vertical contribution in the first.
+The first term on the right hand side of equation~\eqref{eqn:slanted:dpdx} is the change in pressure along the terrain-following coordinate \rev{surface}, and the second term corrects for the vertical contribution in the first.
 These terms tend to be large and of opposite sign over steep terrain, and cancellation errors between the two terms result in pressure gradients errors that drive spurious flows.
 
 \begin{figure}
@@ -73,6 +73,7 @@ Nevertheless, \citet{weller-shahrokhi2014} found that switching from a horizonta
 
 Cut cell meshes are less distorted than any smoothed terrain-following mesh, and some studies have shown examples where cut cells produce more accurate results when compared to terrain-following meshes \citep{good2014,steppeler2013}.
 Although cut cell meshes are almost entirely undistorted, when explicit methods are used with cut cells, the small cell problem must be overcome in order to avoid severe time-step constraints.
+\TODO{mention \citet{adcroft1997} and shaved cells again}
 
 We seek a new type of mesh that improves the balance between the pressure gradient and gravity compared to terrain-following methods, and avoids the severe time-step constraints associated with arbitrarily small cut cells.  Section~\ref{sec:slanted:method} describes the slanted cell method which is designed to satisfy these criteria.
 Section~\ref{sec:slanted:mountainAdvect} presents a new two-dimensional test that challenges transport schemes by transporting a tracer along the ground through slanted cells, and this test is used to measure time-step constraints for terrain-following, cut cell and slanted cell meshes.

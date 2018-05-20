@@ -42,7 +42,8 @@ Potential temperature at the cell centre is reconstructed from bordering faces,
 \begin{align}
 	\theta_C &= \unitg \cdot \left( \sum_{f \in c} \unitn_f \Sf \right)^{-1} \cdot \sum_{f \in c} \Sf b_f \label{eqn:cp:reconstruct}
 \end{align}
-where $\theta_C$ is the reconstructed potential temperature.  On a Cartesian mesh with no diagonal faces, $\theta_C$ is simply a linear interpolation from the face values immediately above and below the cell centre.
+where $\theta_C$ is the reconstructed potential temperature.
+\rev{On a rectangular Cartesian mesh with no diagonal faces, $\theta_C$ is simply a linear interpolation from the face values immediately above and below the cell centre, and the generalised Charney--Phillips formulation reduces to the standard Charney--Phillips formulation.}
 
 Finally, $\theta_f$ is recalculated from $b_f$ and $\theta_C$,
 \begin{align}
