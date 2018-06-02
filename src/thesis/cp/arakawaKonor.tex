@@ -35,7 +35,7 @@ Using the Lorenz model variant, potential temperature is transported using the l
 Using the Charney--Phillips model variant, potential temperature is transported in advective form (equation~\ref{eqn:cp:advection}).
 
 At the upper and lower boundaries zero gradients are imposed on the potential temperature field for the Lorenz model variant; for the Charney--Phillips model variant, fixed potential temperature values are prescribed using equation~\ref{eqn:cp:schaerWaves:thermal-profile}.
-The Exner function of pressure is calculated so that it is in discrete hydrostatic balance.
+The Exner function of pressure is calculated so that it is in discrete hydrostatic balance \rev{with the perturbed potential temperature field}.
 
 A sponge layer is added to the upper \SI{10}{\kilo\meter}.  The damping function is given by
 \begin{align}

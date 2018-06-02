@@ -127,13 +127,12 @@ Knowledge of the values of $\bm{\phi}$ is only required to calculate the weighte
 In the least-squares fit presented above, all stencil values contributed equally to the polynomial fit.
 It is necessary for numerical stability that the polynomial fits the cells connected to face $f$ more closely than other cells in the stencil, as shown by \citet{lashley2002,skamarock-menchaca2010}.
 To achieve this, we allow each cell to make an unequal contribution to the least-squares fit.
-We assign an integer \textit{multiplier} to each cell in the stencil, $\vect{m} = m_1 \ldots m_{12}$, and multiply equation~\eqref{eqn:cubicFit:unweightedLeastSquares} to obtain
+We assign an integer \textit{multiplier} to each cell in the stencil, $\vect{m} = m_1 \ldots m_{12}$, and multiply equation~\eqref{eqn:cubicFit:unweightedLeastSquares} \rev{by $\vect{M} = \mathrm{diag}(\vect{m})$ to obtain}
 \begin{align}
-	\vect{\tilde{B}} \vect{a} = \vect{m} \cdot \bm{\phi}
+	\vect{\tilde{B}} \vect{a} = \vect{M} \bm{\phi}
 \end{align}
-where $\vect{\tilde{B}} = \vect{M} \vect{B}$ and $\vect{M} = \mathrm{diag}(\vect{m})$.
-\TODO{Think about the notation used in here: a simple $\vect{M} \phi$ (for some diagonal matrix $\vect{M}$) might be clearer.}
-The constant coefficient $a_1$ is then calculated from the pseudo-inverse, $\vect{\tilde{B}}^+$,
+where $\vect{\tilde{B}} = \vect{M} \vect{B}$.
+The constant coefficient $a_1$ is then calculated from the pseudo-inverse $\vect{\tilde{B}}^+$,
 \begin{align}
 	a_1 = \vect{\tilde{b}_1^+} \cdot \vect{m} \cdot \bm{\phi} \label{eqn:cubicFit:weightedPinv}
 \end{align}
