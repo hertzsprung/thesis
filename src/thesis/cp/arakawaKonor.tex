@@ -45,8 +45,7 @@ A sponge layer is added to the upper \SI{10}{\kilo\meter}.  The damping function
 	\end{cases}
 \end{align}
 where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer and $H = \SI{30}{\kilo\meter}$ is the top of the domain.
-The sponge layer is only active on faces whose normal is vertical so that it damps vertical momentum only.
-\TODO{clarify what is meant by faces whose normal is vertical.}
+The sponge layer is active \rev{only on entirely horizontal faces so that only vertical momentum is damped}.
 
 
 \begin{figure}

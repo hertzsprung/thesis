@@ -34,7 +34,7 @@ Despite their associated numerical errors, terrain-following meshes are attracti
 Nevertheless, terrain-following meshes cannot avoid distortions near the surface, and terrain-following cell volumes approach zero as sloping terrain approaches a \ang{90} cliff.
 The cut cell mesh is an alternative in which the mesh does not follow the terrain but, instead, cells that lie entirely below the terrain are removed, and those that intersect the surface are modified in shape so that they more closely fit the terrain.
 The resulting mesh is entirely undistorted except for cells that have been cut.
-\TODO{mention that cut cells are also called shaved cells \citep{adcroft1997}.}
+\rev{Cut cells are also known as shaved cells \citep{adcroft1997,adcroft2013} or embedded boundaries \citep{schwartz2015, devendran2017}.}
 
 The cut cell method can create arbitrarily small cells that severely constrain the maximum time-step for explicit methods \citep{klein2009}, and several approaches have been tried in order to alleviate the problem.
 \citet{yamazaki-satomura2010} combine small cells with horizontally or vertically adjacent cells.
