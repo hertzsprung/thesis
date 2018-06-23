@@ -267,10 +267,24 @@ A = \exp\left( -c \left[ \alpha_{uu} \left( e^{-ik\Delta x} - e^{-2ik\Delta x} \
 If $k\Delta x = \pi$ then $\cos k\Delta x = -1$ and $\cos 2k\Delta x = 1$ and $\alpha_u - \alpha_d \geq \alpha_{uu}$.  If $k\Delta x = \pi / 2$ then $\cos k\Delta x = 0$ and $\cos 2k\Delta x = -1$ and $\alpha_u - \alpha_d \geq -\alpha_{uu}$.  Hence we find that
 \begin{align}
 	\alpha_u - \alpha_d &\geq \left\lvert\alpha_{uu}\right\rvert \label{eqn:vonNeumann:uuConstraint} \text{ .}
-%
-	\intertext{\TODO{Please explain the derivation of the stability constraints more fully.  Also consider the case $k \Delta x \rightarrow 0$, and correct the constraints if necessary.}
-	When the same analysis is performed with four cells, $\alpha_{uuu}$, $\alpha_{uu}$, $\alpha_u$ and $\alpha_d$, by varying $k \Delta x$ we find that equation~\eqref{eqn:vonNeumann:uuConstraint} holds replacing $\left\lvert \alpha_{uu} \right\rvert$ with $\max(\left\lvert\alpha_{uu}\right\rvert, \left\lvert\alpha_{uuu}\right\rvert)$.  Hence, we generalise equation~\eqref{eqn:vonNeumann:uuConstraint} to obtain the final stability condition}
-%
+\end{align}
+When the same analysis is performed with four cells, $\alpha_{uuu}$, $\alpha_{uu}$, $\alpha_u$ and $\alpha_d$, \rev{the stability constraint $\Mag{A} \leq 1$ gives}
+\begin{align}
+\alpha_u - \alpha_d + (\alpha_{uu} - \alpha_u + \alpha_d) \cos k \Delta x
+	+ (\alpha_{uuu} - \alpha_{uu}) \cos 2k \Delta x - \alpha_{uuu} \cos 3k \Delta x \geq 0 \text{ .}
+\end{align}
+\rev{By considering four values for $k \Delta x$ then we obtain four constraints,}
+\begin{align}
+\alpha_u - \alpha_d \geq 
+\begin{cases}
+	\alpha_{uu} - \alpha_{uuu} & \enskip \text{when $k \Delta x = \pi$,} \\
+	- (\alpha_{uu} - \alpha_{uuu}) & \enskip \text{when $k \Delta x = \pi/2$,} \\
+	- (\alpha_{uuu} + 2 \alpha_{uu}) & \enskip \text{when $k \Delta x = \pi/3$,} \\
+	\alpha_{uuu} & \enskip \text{when $k \Delta x = 2\pi/3$.}
+\end{cases} \label{eqn:vonNeumann:uuuConstraint}
+\end{align}
+\rev{Guided by equations~\eqref{eqn:vonNeumann:uuConstraint} and \eqref{eqn:vonNeumann:uuuConstraint}, we choose the final stability condition}
+\begin{align}
 	\alpha_u - \alpha_d &\geq \max_{p\:\in\:P} |\alpha_p|
 \end{align}
 where the peripheral cells $P$ is the set of all stencil cells except for the upwind cell and downwind cell, and $\alpha_p$ is the weight for a given peripheral cell $p$.
@@ -285,7 +299,7 @@ The three stability conditions (equations~\ref{eqn:vonNeumann:upwind}, \ref{eqn:
 \end{subequations}
 where $w_u$ and $w_d$ are the weights for the upwind and downwind cells respectively.  The \textit{peripheral points} $P$ are the cells in the stencil that are not the upwind or downwind cells, and $w_p$ is the weight for a given peripheral point $p$.
  The upwind, downwind and peripheral weights sum to one such that $w_u + w_d + \sum_{p \in P} w_p = 1$.
-We hypothesise that the stability conditions given by equation~\eqref{eqn:cubicFit:stability} are necessary but not sufficient for a transport scheme on arbitrary meshes.
+\rev{Inspection of stencil weights for stable and unstable numerical experiments confirms that equation~\eqref{eqn:cubicFit:stability} provides suitable stability conditions to achieve a stable transport scheme on arbitrary meshes.}
 
 The stability of the one-dimensional transport equation discretised in space and time could be analysed using existing techniques \citep{baldauf2008}, but we have only analysed the spatial stability of the cubicFit scheme.  Numerical experiments presented in section~\ref{sec:slanted:mountainAdvect} demonstrate that the cubicFit scheme is generally insensitive to the time-step, provided that it is below a stability limit.
 
