@@ -70,13 +70,32 @@ From:ubuntu:17.10
 	       git \
 	       ca-certificates \
 	       python3-setuptools \
-	       python3-pip
+	       python3-pip \
+	       gettext-base \
+	       subversion \
+	       build-essential \
+	       cmake \
+	       libcurl4-gnutls-dev \
+	       libnetcdf-dev \
+	       libgdal-dev \
+	       libfftw3-dev \
+	       libpcre3-dev \
+	       liblapack-dev \
+	       libblas-dev
 
 	git clone https://github.com/hertzsprung/ninjaopenfoam.git
 	pip3 install ninjaopenfoam/
+
+	svn checkout svn://gmtserver.soest.hawaii.edu/gmt/tags/5.4.3 gmt-5.4.3
+        cd gmt-5.4.3
+        cp cmake/ConfigUserTemplate.cmake cmake/ConfigUser.cmake
+        mkdir build && cd build
+        cmake ..
+        make
+        make install
 
 	DEBIAN_FRONTEND=noninteractive \
 	apt-get install openfoam-dev -y --no-install-recommends
 
 	DEBIAN_FRONTEND=noninteractive \
-	apt-get install atmosfoam-tools -y --allow-unauthenticated
+	apt-get install atmosfoam-tools -y --no-install-recommends --allow-unauthenticated
