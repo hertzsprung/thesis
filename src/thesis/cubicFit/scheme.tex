@@ -264,31 +264,44 @@ A = \exp\left( -c \left[ \alpha_{uu} \left( e^{-ik\Delta x} - e^{-2ik\Delta x} \
 %
 \alpha_u - \alpha_d + \left( \alpha_{uu} - \alpha_u + \alpha_d \right) \cos k\Delta x - \alpha_{uu} \cos 2k\Delta x \geq 0 \text{ .}
 \end{align}
-If $k\Delta x = \pi$ then $\cos k\Delta x = -1$ and $\cos 2k\Delta x = 1$ and $\alpha_u - \alpha_d \geq \alpha_{uu}$.  If $k\Delta x = \pi / 2$ then $\cos k\Delta x = 0$ and $\cos 2k\Delta x = -1$ and $\alpha_u - \alpha_d \geq -\alpha_{uu}$.  Hence we find that
+\rev{Let $y = \cos k \Delta x$ then}
 \begin{align}
-	\alpha_u - \alpha_d &\geq \left\lvert\alpha_{uu}\right\rvert \label{eqn:vonNeumann:uuConstraint} \text{ .}
+	\alpha_u - \alpha_d + (\alpha_{uu} - \alpha_u + \alpha_d) y - \alpha_{uu} (2 y^2 - 1) \geq 0 \text{.} \label{eq:vonNeumann:3point:y}
 \end{align}
-When the same analysis is performed with four cells, $\alpha_{uuu}$, $\alpha_{uu}$, $\alpha_u$ and $\alpha_d$, \rev{the stability constraint $\Mag{A} \leq 1$ gives}
+\rev{For stability, equation~\eqref{eq:vonNeumann:3point:y} should hold for $y \in [-1, 1]$.
+The minumum is either in the interval $-1 < y < 1$, or it is at $y = -1$ or $y = 1$.
+When $y = 1$ then, trivially, $0 \geq 0$.
+When $y = -1$ then}
 \begin{align}
-\alpha_u - \alpha_d + (\alpha_{uu} - \alpha_u + \alpha_d) \cos k \Delta x
-	+ (\alpha_{uuu} - \alpha_{uu}) \cos 2k \Delta x - \alpha_{uuu} \cos 3k \Delta x \geq 0 \text{ .}
+	\alpha_u - \alpha_d \geq \alpha_{uu} \label{eqn:vonNeumann:uuMinusOne}
 \end{align}
-\rev{By considering four values for $k \Delta x$ then we obtain four constraints,}
+\rev{If the minimum is in the interval $-1 < y < 1$ then the turning points of equation~\eqref{eq:vonNeumann:3point:y} can be found by differentiation such that}
 \begin{align}
-\alpha_u - \alpha_d \geq 
-\begin{cases}
-	\alpha_{uu} - \alpha_{uuu} & \enskip \text{when $k \Delta x = \pi$,} \\
-	- (\alpha_{uu} - \alpha_{uuu}) & \enskip \text{when $k \Delta x = \pi/2$,} \\
-	- (\alpha_{uuu} + 2 \alpha_{uu}) & \enskip \text{when $k \Delta x = \pi/3$,} \\
-	\alpha_{uuu} & \enskip \text{when $k \Delta x = 2\pi/3$.}
-\end{cases} \label{eqn:vonNeumann:uuuConstraint}
+	\alpha_{uu} (1 - 4y) - \alpha_u + \alpha_d = 0
+%
+\intertext{hence}
+%
+	y = \frac{1}{4} - \frac{\alpha_u - \alpha_d}{4\alpha_{uu}} \text{ .}
 \end{align}
-\rev{Guided by equations~\eqref{eqn:vonNeumann:uuConstraint} and \eqref{eqn:vonNeumann:uuuConstraint}, we choose the final stability condition}
+\rev{Since $-1 < y < 1$ then}
 \begin{align}
-	\alpha_u - \alpha_d &\geq \max_{p\:\in\:P} |\alpha_p|
+	- 3 \alpha_{uu} < - (\alpha_u - \alpha_d) < 5 \alpha_{uu}
+%
+\intertext{so that}
+%
+	\alpha_u - \alpha_d > -3 \alpha_{uu} \text{ and } \alpha_u - \alpha_d < 5 \alpha_{uu} \text { .}
+\end{align}
+\rev{Since the left-hand side of equation~\eqref{eq:vonNeumann:3point:y} is zero when $y=1$, then any minimum in the interval $-1 < y < 1$ must be less than zero, making the scheme unstable.  Hence, the minimum of equation~\eqref{eq:vonNeumann:3point:y} must occur for $y \leq 1$ or $y \geq 1$, so}
+\begin{align}
+	\alpha_u - \alpha_d < -3 \alpha_{uu} \text{ or } \alpha_u - \alpha_d > 5 \alpha_{uu} \label{eqn:vonNeumann:uuBounds} \text{.}
+\end{align}
+\rev{Guided by equations~\eqref{eqn:vonNeumann:twopoint-lower}, \eqref{eqn:vonNeumann:uuMinusOne} and \eqref{eqn:vonNeumann:uuBounds}, we choose the final stability condition}
+\begin{align}
+	\alpha_u - \alpha_d &\geq \max_{p\:\in\:P} |\alpha_p| \label{eqn:vonNeumann:pConstraint}
 \end{align}
 where the peripheral cells $P$ is the set of all stencil cells except for the upwind cell and downwind cell, and $\alpha_p$ is the weight for a given peripheral cell $p$.
-The three stability conditions (equations~\ref{eqn:vonNeumann:upwind}, \ref{eqn:vonNeumann:downwind} and \ref{eqn:vonNeumann:uuConstraint}) are used to impose three stability conditions on the weights $\vect{w}$,
+
+The three stability conditions (equations~\ref{eqn:vonNeumann:upwind}, \ref{eqn:vonNeumann:downwind} and \ref{eqn:vonNeumann:pConstraint}) are used to impose three stability conditions on the weights $\vect{w}$,
 \begin{subequations}
 \label{eqn:cubicFit:stability}
 \begin{align}
