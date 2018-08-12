@@ -281,21 +281,19 @@ When $y = -1$ then}
 %
 \intertext{hence}
 %
-	y = \frac{1}{4} - \frac{\alpha_u - \alpha_d}{4\alpha_{uu}} \text{ .}
+	y = \frac{\alpha_{uu} - \alpha_u + \alpha_d}{4\alpha_{uu}} \text{ .}
 \end{align}
-\rev{Since $-1 < y < 1$ then}
+\rev{Since $-1 < y < 1$ and the quadratic equation~\eqref{eq:vonNeumann:3point:y} must have $\alpha_{uu} < 0$ for the turning point to be a minimum, then}
 \begin{align}
-	- 3 \alpha_{uu} < - (\alpha_u - \alpha_d) < 5 \alpha_{uu}
-%
-\intertext{so that}
-%
-	\alpha_u - \alpha_d > -3 \alpha_{uu} \text{ and } \alpha_u - \alpha_d < 5 \alpha_{uu} \text { .}
+	5 \alpha_{uu} < \alpha_u - \alpha_d < -3 \alpha_{uu} \text { .}
 \end{align}
-\rev{Since the left-hand side of equation~\eqref{eq:vonNeumann:3point:y} is zero when $y=1$, then any minimum in the interval $-1 < y < 1$ must be less than zero, making the scheme unstable.  Hence, the minimum of equation~\eqref{eq:vonNeumann:3point:y} must occur for $y \leq 1$ or $y \geq 1$, so}
+\rev{The left-hand side of equation~\eqref{eq:vonNeumann:3point:y} is zero when $y=1$, and so any minimum in the interval $-1 < y < 1$ must be less than zero, making the scheme unstable.
+Hence, the minimum of equation~\eqref{eq:vonNeumann:3point:y} must occur for $y \leq 1$ or $y \geq 1$, so}
 \begin{align}
-	\alpha_u - \alpha_d < -3 \alpha_{uu} \text{ or } \alpha_u - \alpha_d > 5 \alpha_{uu} \label{eqn:vonNeumann:uuBounds} \text{.}
+	\alpha_u - \alpha_d \geq -3 \alpha_{uu} \label{eqn:vonNeumann:uuBounds} \text{.}
 \end{align}
-\rev{Guided by equations~\eqref{eqn:vonNeumann:twopoint-lower}, \eqref{eqn:vonNeumann:uuMinusOne} and \eqref{eqn:vonNeumann:uuBounds}, we choose the final stability condition}
+\rev{which is more permissive than the alternative, $\alpha_u - \alpha_d \leq 5 \alpha_{uu}$.
+Guided by equations~\eqref{eqn:vonNeumann:twopoint-lower}, \eqref{eqn:vonNeumann:uuMinusOne} and \eqref{eqn:vonNeumann:uuBounds}, we choose the final stability condition}
 \begin{align}
 	\alpha_u - \alpha_d &\geq \max_{p\:\in\:P} |\alpha_p| \label{eqn:vonNeumann:pConstraint}
 \end{align}
