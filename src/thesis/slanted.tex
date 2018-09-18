@@ -24,7 +24,7 @@ Terrain-following meshes are typically implemented using a coordinate transform 
 	\frac{\partial p}{\partial z^\star} \label{eqn:slanted:dpdx}
 \end{align}
 where $\left. \partial / \partial x \right|_z$ denotes a horizontal derivative at a fixed height in the physical domain, and $\left. \partial / \partial x \right|_{z^\star}$ denotes a horizontal derivative at a fixed model level in the computational domain, with $z^\star$ held constant.
-The first term on the right hand side of equation~\eqref{eqn:slanted:dpdx} is the change in pressure along the terrain-following coordinate \rev{surface}, and the second term corrects for the vertical contribution in the first.
+The first term on the right hand side of equation~\eqref{eqn:slanted:dpdx} is the change in pressure along the terrain-following coordinate surface, and the second term corrects for the vertical contribution in the first.
 These terms tend to be large and of opposite sign over steep terrain, and cancellation errors between the two terms result in pressure gradients errors that drive spurious flows.
 
 \begin{figure}
@@ -71,7 +71,7 @@ Another approach is to improve the balance the between pressure gradient and gra
 Since their model calculates gradients in the Exner function of pressure and does not calculate gradients of pressure directly, the formulation cannot be exactly curl-free.
 Nevertheless, \citet{weller-shahrokhi2014} found that switching from a horizontal gradient formulation to the curl-free gradient formulation improved idealised simulations over orography represented by terrain-following meshes.
 
-Cut cell meshes \rev{(also known as shaved cell meshes or embedded boundary meshes)} are less distorted than any smoothed terrain-following mesh, and some studies have shown examples where cut cells produce more accurate results when compared to terrain-following meshes \citep{good2014,steppeler2013}.
+Cut cell meshes (also known as shaved cell meshes or embedded boundary meshes) are less distorted than any smoothed terrain-following mesh, and some studies have shown examples where cut cells produce more accurate results when compared to terrain-following meshes \citep{good2014,steppeler2013}.
 Although cut cell meshes are almost entirely undistorted, when explicit methods are used with cut cells, the small cell problem must be overcome in order to avoid severe time-step constraints.
 
 We seek a new type of mesh that improves the balance between the pressure gradient and gravity compared to terrain-following methods, and avoids the severe time-step constraints associated with arbitrarily small cut cells.  Section~\ref{sec:slanted:method} describes the slanted cell method which is designed to satisfy these criteria.

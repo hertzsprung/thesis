@@ -35,7 +35,7 @@ Using the Lorenz model variant, potential temperature is transported using the l
 Using the Charney--Phillips model variant, potential temperature is transported in advective form (equation~\ref{eqn:cp:advection}).
 
 At the upper and lower boundaries zero gradients are imposed on the potential temperature field for the Lorenz model variant; for the Charney--Phillips model variant, fixed potential temperature values are prescribed using equation~\ref{eqn:cp:schaerWaves:thermal-profile}.
-The Exner function of pressure is calculated so that it is in discrete hydrostatic balance \rev{with the perturbed potential temperature field}.
+The Exner function of pressure is calculated so that it is in discrete hydrostatic balance with the perturbed potential temperature field.
 
 A sponge layer is added to the upper \SI{10}{\kilo\meter}.  The damping function is given by
 \begin{align}
@@ -45,7 +45,7 @@ A sponge layer is added to the upper \SI{10}{\kilo\meter}.  The damping function
 	\end{cases}
 \end{align}
 where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer and $H = \SI{30}{\kilo\meter}$ is the top of the domain.
-The sponge layer is active \rev{only on entirely horizontal faces so that only vertical momentum is damped}.
+The sponge layer is active only on entirely horizontal faces so that only vertical momentum is damped.
 
 
 \begin{figure}
@@ -104,8 +104,8 @@ Since they are produced only by an initial grid-scale potential temperature pert
 
 To assess the suitability of the generalised Charney--Phillips formulation for arbitrary vertical meshes, we perform the same standing waves test case on rectangular domains with tilted horizontal surfaces (figure~\ref{fig:cp:arakawaKonor:edgeGradedMesh:h}) and tilted vertical surfaces (figure~\ref{fig:cp:arakawaKonor:edgeGradedMesh:v}).
 To allow for periodic lateral boundaries, each mesh is split into left and right blocks of equal size, with the right block mirroring the left.
-For the left-hand block of the horizontally tilted mesh, horizontal surfaces are distorted such that the ratio of \rev{minimum} and maximum vertical edge lengths at $x = \SI{-300}{\kilo\meter}$ is $1 \mathbin{:} 16$, and the ratio at $x = \SI{0}{\kilo\meter}$ is $16 \mathbin{:} 1$.
-The vertically tilted mesh is \rev{constructed in a} similar manner, with a ratio of minimum and maximum horizontal edge lengths at $z = \SI{0}{\kilo\meter}$ of $81 \mathbin{:} 100$, and a ratio at $z = \SI{30}{\kilo\meter}$ of $100 \mathbin{:} 81$.
+For the left-hand block of the horizontally tilted mesh, horizontal surfaces are distorted such that the ratio of minimum and maximum vertical edge lengths at $x = \SI{-300}{\kilo\meter}$ is $1 \mathbin{:} 16$, and the ratio at $x = \SI{0}{\kilo\meter}$ is $16 \mathbin{:} 1$.
+The vertically tilted mesh is constructed in a similar manner, with a ratio of minimum and maximum horizontal edge lengths at $z = \SI{0}{\kilo\meter}$ of $81 \mathbin{:} 100$, and a ratio at $z = \SI{30}{\kilo\meter}$ of $100 \mathbin{:} 81$.
 
 Using the horizontally tilted mesh, large-scale responses are produced by both the Lorenz model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}) and generalised Charney--Phillips model variant (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:cp}), and these large-scale responses are very different from the small-scale gravity waves produced by the Lorenz and generalised Charney--Phillips models using the uniform mesh (figures~\ref{fig:cp:arakawaKonor:theta_diff:uniform:lorenz} and \ref{fig:cp:arakawaKonor:theta_diff:uniform:cp} respectively).
 Using the Lorenz model variant and the horizontally tilted mesh, a vertical tripole structure is seen in the final potential temperature field, with some grid-scale features visible near the centre of the domain throughout the depth of the atmosphere (figure~\ref{fig:cp:arakawaKonor:theta_diff:hEdgeGrading:lorenz}).

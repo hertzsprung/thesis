@@ -36,7 +36,7 @@ The damping term \(\mu\) in the momentum equation \eqref{eqn:exnerFoam:momentum}
 \end{align}%
 \end{subequations}
 where $\overline{\mu} = \SI{1.2}{\per\second}$ is the damping coefficient, $z_B = \SI{20}{\kilo\meter}$ is the bottom of the sponge layer, $H = \SI{30}{\kilo\meter}$ is the top of the domain, $x_0 = \SI{-150}{\kilo\meter}$ is the leftmost limit of the domain and $x_I = \SI{-140}{\kilo\meter}$ is the rightmost extent of the inlet sponge layer.
-The sponge layer is active \rev{only on entirely horizontal faces so that only vertical momentum is damped}.
+The sponge layer is active only on entirely horizontal faces so that only vertical momentum is damped.
 Note that, while the domain itself is \SI{30}{\kilo\meter} in height, for the purposes of generating basic terrain-following meshes, the domain height is set to \SI{20}{\kilo\meter} because the sponge layer occupies the uppermost \SI{10}{\kilo\meter}.
 
 \begin{figure}

@@ -1,7 +1,7 @@
 \chapter{Introduction}
 
 Atmospheric models are using increasingly fine mesh spacing to resolve small-scale processes and improve weather and climate forecasts \citep{wedi2014}.
-These finer meshes resolve small-scale, steeply sloping terrain that is poorly represented by traditional terrain-following meshes and traditional numerical methods \citep{schaer2002}, motivating research into \rev{alternative} vertical meshes including improved terrain-following meshes \citep{schaer2002,klemp2011} and cut-cell meshes \citep{jaehn2015,yamazaki2016}, and improved numerical methods \citep{zaengl2012,steppeler-klemp2017}.
+These finer meshes resolve small-scale, steeply sloping terrain that is poorly represented by traditional terrain-following meshes and traditional numerical methods \citep{schaer2002}, motivating research into alternative vertical meshes including improved terrain-following meshes \citep{schaer2002,klemp2011} and cut-cell meshes \citep{jaehn2015,yamazaki2016}, and improved numerical methods \citep{zaengl2012,steppeler-klemp2017}.
 
 Traditional terrain-following meshes become highly distorted over steeply sloping terrain, resulting in increased numerical errors: transport across distorted terrain-following mesh layers can produce spurious numerical diffusion and grid-scale oscillations \citep{hoinka-zaengl2004,schaer2002}, and spurious flows result from errors in the calculation of the pressure gradient where terrain-following mesh layers are not perpendicular to gravity \citep{klemp2011,zaengl2012}.
 Cut cell meshes can reduce numerical errors associated with transport and pressure gradient calculations \citep{good2014}, but the cut cell method creates meshes with arbitrarily small cut cells that impose severe time-step constraints on explicit transport schemes \citep{klein2009}.
@@ -33,7 +33,7 @@ Despite their associated numerical errors, terrain-following meshes are attracti
 Nevertheless, terrain-following meshes cannot avoid distortions near the surface, and terrain-following cell volumes approach zero as sloping terrain approaches a \ang{90} cliff.
 The cut cell mesh is an alternative in which the mesh does not follow the terrain but, instead, cells that lie entirely below the terrain are removed, and those that intersect the surface are modified in shape so that they more closely fit the terrain.
 The resulting mesh is entirely undistorted except for cells that have been cut.
-\rev{Cut cells are also known as shaved cells \citep{adcroft1997,adcroft2013} or embedded boundaries \citep{schwartz2015, devendran2017}.}
+Cut cells are also known as shaved cells \citep{adcroft1997,adcroft2013} or embedded boundaries \citep{schwartz2015, devendran2017}.
 
 The cut cell method can create arbitrarily small cells that severely constrain the maximum time-step for explicit methods \citep{klein2009}, and several approaches have been tried in order to alleviate the problem.
 \citet{yamazaki-satomura2010} combine small cells with horizontally or vertically adjacent cells.
@@ -78,7 +78,7 @@ All numerical tests are performed using two-dimensional flows on Cartesian plane
 
 Throughout the thesis, we use the OpenFOAM software package \citepalias{openfoam} to implement numerical schemes and numerical experiments, enabling like-for-like comparisons between different model variants and different types of mesh.
 We provide source code archives for the OpenFOAM implementation of the new transport schemes \citep{atmosfoam,highOrderFit} and supporting tools \citep{atmosfoam-tools,ninjaopenfoam}, the ASAM cut cell mesh generator \citep{asam_grid} and associated OpenFOAM converter \citep{gmv2openfoam}, and the hexagonal–icosahedral mesh generator \citep{geodesic-mesh}.
-For the numerical test cases presented, we also supply the source code \citep{atmostests} and \rev{resulting} data \citep{atmostests-results}.
+For the numerical test cases presented, we also supply the source code \citep{atmostests} and resulting data \citep{atmostests-results}.
 For convenience, we have pre-installed all necessary software in an executable Singularity container \citep{atmostests-singularity}.
 The source code for the thesis itself is also available \citep{thesis}.
 
